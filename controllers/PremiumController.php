@@ -23,7 +23,7 @@ class PremiumController extends Controller
         $user = $this->user();
         if (!$user || $user['role'] !== 'supplier') {
             $this->setFlash('error', 'Only suppliers can upgrade to premium');
-            $this->redirect('/build_mate/supplier/dashboard');
+            $this->redirect('/supplier/dashboard');
             return;
         }
         
@@ -32,7 +32,7 @@ class PremiumController extends Controller
         
         if (!$supplier) {
             $this->setFlash('error', 'Supplier profile not found');
-            $this->redirect('/build_mate/supplier/dashboard');
+            $this->redirect('/supplier/dashboard');
             return;
         }
         
@@ -52,7 +52,7 @@ class PremiumController extends Controller
     public function initializePayment(): void
     {
         if (!$this->isAjax()) {
-            $this->redirect('/build_mate/supplier/premium/upgrade');
+            $this->redirect('/supplier/premium/upgrade');
             return;
         }
         
@@ -142,7 +142,7 @@ class PremiumController extends Controller
         
         if (empty($reference) || !str_starts_with($reference, 'PREMIUM-')) {
             $this->setFlash('error', 'Invalid payment reference');
-            $this->redirect('/build_mate/supplier/premium/upgrade');
+            $this->redirect('/supplier/premium/upgrade');
             return;
         }
         
@@ -190,7 +190,7 @@ class PremiumController extends Controller
                     }
                     
                     $this->setFlash('success', 'Premium subscription activated successfully!');
-                    $this->redirect('/build_mate/supplier/dashboard');
+                    $this->redirect('/supplier/dashboard');
                     return;
                 }
             }
@@ -201,7 +201,7 @@ class PremiumController extends Controller
             $this->setFlash('error', 'Payment processing error');
         }
         
-        $this->redirect('/build_mate/supplier/premium/upgrade');
+        $this->redirect('/supplier/premium/upgrade');
     }
     
     /**
@@ -210,7 +210,7 @@ class PremiumController extends Controller
     public function status(): void
     {
         if (!$this->isAjax()) {
-            $this->redirect('/build_mate/supplier/dashboard');
+            $this->redirect('/supplier/dashboard');
             return;
         }
         

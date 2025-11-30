@@ -24,7 +24,7 @@ class AdvertisementController extends Controller
         $user = $this->user();
         if (!$user || $user['role'] !== 'supplier') {
             $this->setFlash('error', 'Only suppliers can create advertisements');
-            $this->redirect('/build_mate/supplier/dashboard');
+            $this->redirect('/supplier/dashboard');
             return;
         }
         
@@ -33,7 +33,7 @@ class AdvertisementController extends Controller
         
         if (!$supplier) {
             $this->setFlash('error', 'Supplier profile not found');
-            $this->redirect('/build_mate/supplier/dashboard');
+            $this->redirect('/supplier/dashboard');
             return;
         }
         
@@ -60,7 +60,7 @@ class AdvertisementController extends Controller
         $user = $this->user();
         if (!$user || $user['role'] !== 'supplier') {
             $this->setFlash('error', 'Only suppliers can create advertisements');
-            $this->redirect('/build_mate/supplier/dashboard');
+            $this->redirect('/supplier/dashboard');
             return;
         }
         
@@ -69,7 +69,7 @@ class AdvertisementController extends Controller
         
         if (!$supplier) {
             $this->setFlash('error', 'Supplier profile not found');
-            $this->redirect('/build_mate/supplier/dashboard');
+            $this->redirect('/supplier/dashboard');
             return;
         }
         
@@ -77,7 +77,7 @@ class AdvertisementController extends Controller
         $paymentReference = $_POST['payment_reference'] ?? '';
         if (empty($paymentReference)) {
             $this->setFlash('error', 'Payment is required to create an advertisement. Please complete payment first.');
-            $this->redirect('/build_mate/supplier/advertisements/create');
+            $this->redirect('/supplier/advertisements/create');
             return;
         }
         
@@ -87,7 +87,7 @@ class AdvertisementController extends Controller
             $verification = $paystackService->verifyTransaction($paymentReference);
             if (!$verification['status'] || $verification['data']['status'] !== 'success') {
                 $this->setFlash('error', 'Payment verification failed. Please try again.');
-                $this->redirect('/build_mate/supplier/advertisements/create');
+                $this->redirect('/supplier/advertisements/create');
                 return;
             }
             
@@ -97,13 +97,13 @@ class AdvertisementController extends Controller
             $checkStmt->execute([$paymentReference]);
             if ($checkStmt->fetch()) {
                 $this->setFlash('error', 'This payment has already been used to create an advertisement.');
-                $this->redirect('/build_mate/supplier/advertisements/create');
+                $this->redirect('/supplier/advertisements/create');
                 return;
             }
         } catch (\Exception $e) {
             error_log("Advertisement payment verification error: " . $e->getMessage());
             $this->setFlash('error', 'Payment verification error. Please contact support.');
-            $this->redirect('/build_mate/supplier/advertisements/create');
+            $this->redirect('/supplier/advertisements/create');
             return;
         }
         
@@ -152,7 +152,7 @@ class AdvertisementController extends Controller
                 $uploadResult = $uploadService->upload($file);
                 
                 if ($uploadResult['success']) {
-                    $mediaUrl = '/build_mate/storage/uploads/advertisements/' . $uploadResult['filename'];
+                    $mediaUrl = '/storage/uploads/advertisements/' . $uploadResult['filename'];
                 } else {
                     $this->setFlash('error', 'File upload failed: ' . implode(', ', $uploadResult['errors']));
                     $this->redirectBack();
@@ -185,7 +185,7 @@ class AdvertisementController extends Controller
             $this->setFlash('error', 'Failed to create advertisement');
         }
         
-        $this->redirect('/build_mate/supplier/advertisements');
+        $this->redirect('/supplier/advertisements');
     }
     
     /**
@@ -195,7 +195,7 @@ class AdvertisementController extends Controller
     {
         $user = $this->user();
         if (!$user || $user['role'] !== 'supplier') {
-            $this->redirect('/build_mate/supplier/dashboard');
+            $this->redirect('/supplier/dashboard');
             return;
         }
         
@@ -203,7 +203,7 @@ class AdvertisementController extends Controller
         $supplier = $supplierModel->findByUserId($user['id']);
         
         if (!$supplier) {
-            $this->redirect('/build_mate/supplier/dashboard');
+            $this->redirect('/supplier/dashboard');
             return;
         }
         
@@ -222,7 +222,7 @@ class AdvertisementController extends Controller
     public function initializePayment(): void
     {
         if (!$this->isAjax()) {
-            $this->redirect('/build_mate/supplier/advertisements/create');
+            $this->redirect('/supplier/advertisements/create');
             return;
         }
         
@@ -291,7 +291,7 @@ class AdvertisementController extends Controller
         
         if (empty($reference) || !str_starts_with($reference, 'AD-')) {
             $this->setFlash('error', 'Invalid payment reference');
-            $this->redirect('/build_mate/supplier/advertisements/create');
+            $this->redirect('/supplier/advertisements/create');
             return;
         }
         
@@ -311,18 +311,18 @@ class AdvertisementController extends Controller
                     $_SESSION['ad_payment_verified'] = true;
                     
                     $this->setFlash('success', 'Payment successful! You can now create your advertisement.');
-                    $this->redirect('/build_mate/supplier/advertisements/create?payment=success&ref=' . urlencode($reference));
+                    $this->redirect('/supplier/advertisements/create?payment=success&ref=' . urlencode($reference));
                     return;
                 }
             }
             
             // If verification failed or status is not success
             $this->setFlash('error', 'Payment verification failed. Please try again or contact support.');
-            $this->redirect('/build_mate/supplier/advertisements/create');
+            $this->redirect('/supplier/advertisements/create');
         } catch (\Exception $e) {
             error_log("Advertisement payment callback error: " . $e->getMessage());
             $this->setFlash('error', 'An error occurred during payment verification. Please contact support.');
-            $this->redirect('/build_mate/supplier/advertisements/create');
+            $this->redirect('/supplier/advertisements/create');
         }
     }
 }

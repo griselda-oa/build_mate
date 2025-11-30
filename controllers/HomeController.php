@@ -51,7 +51,7 @@ class HomeController extends Controller
         
         // Redirect suppliers to their supplier dashboard
         if ($user && $user['role'] === 'supplier') {
-            $this->redirect('/build_mate/supplier/dashboard');
+            $this->redirect('/supplier/dashboard');
             return;
         }
         

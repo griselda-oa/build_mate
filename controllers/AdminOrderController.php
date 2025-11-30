@@ -22,7 +22,7 @@ class AdminOrderController extends Controller
     {
         $user = $this->user();
         if (!$user || $user['role'] !== 'admin') {
-            $this->redirect('/build_mate/login');
+            $this->redirect('/login');
             return;
         }
         
@@ -201,7 +201,7 @@ class AdminOrderController extends Controller
     {
         $user = $this->user();
         if (!$user || $user['role'] !== 'admin') {
-            $this->redirect('/build_mate/login');
+            $this->redirect('/login');
             return;
         }
         
@@ -215,7 +215,7 @@ class AdminOrderController extends Controller
             if ($id <= 0) {
                 error_log("AdminOrderController::show - Invalid order ID: {$id}");
                 $this->setFlash('error', 'Invalid order ID');
-                $this->redirect('/build_mate/admin/orders');
+                $this->redirect('/admin/orders');
                 return;
             }
             
@@ -232,7 +232,7 @@ class AdminOrderController extends Controller
                 if (!$order) {
                     error_log("AdminOrderController::show - Order not found even with direct model lookup");
                     $this->setFlash('error', 'Order not found');
-                    $this->redirect('/build_mate/admin/orders');
+                    $this->redirect('/admin/orders');
                     return;
                 }
                 
@@ -271,7 +271,7 @@ class AdminOrderController extends Controller
             error_log("Stack trace: " . $e->getTraceAsString());
             error_log("File: " . $e->getFile() . " Line: " . $e->getLine());
             $this->setFlash('error', 'Error loading order details: ' . $e->getMessage());
-            $this->redirect('/build_mate/admin/orders');
+            $this->redirect('/admin/orders');
             return;
         }
     }

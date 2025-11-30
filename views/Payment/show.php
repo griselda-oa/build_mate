@@ -3,7 +3,7 @@
     <!-- Header -->
     <div class="payment-header-modern mb-5">
         <div class="container">
-            <a href="/build_mate/checkout" class="back-button-modern">
+            <a href="<?= \App\View::url('/checkout') ?>" class="back-button-modern">
                 <i class="bi bi-arrow-left"></i>
                 <span>Back to Checkout</span>
             </a>

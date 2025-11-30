@@ -57,7 +57,7 @@ class SupplierController extends Controller
         if (!$supplier) {
             $this->setFlash('error', 'Supplier profile not found');
             // Redirect to KYC/setup page instead of redirecting to the same dashboard page
-            $this->redirect('/build_mate/supplier/kyc');
+            $this->redirect('/supplier/kyc');
         }
         
         $products = $supplierModel->getRecentProducts($supplier['id'], 5);
@@ -119,7 +119,7 @@ class SupplierController extends Controller
         
         if (!$supplier) {
             $this->setFlash('error', 'Supplier profile not found');
-            $this->redirect('/build_mate/supplier/kyc');
+            $this->redirect('/supplier/kyc');
         }
         
         $config = require __DIR__ . '/../settings/config.php';
@@ -143,7 +143,7 @@ class SupplierController extends Controller
         
         if (empty($filesToUpload)) {
             $this->setFlash('error', 'Please upload at least one document');
-            $this->redirect('/build_mate/supplier/kyc');
+            $this->redirect('/supplier/kyc');
             return;
         }
         
@@ -157,19 +157,19 @@ class SupplierController extends Controller
                     ? $uniqueErrors[0] 
                     : implode('. ', $uniqueErrors);
                 $this->setFlash('error', $errorMessage);
-                $this->redirect('/build_mate/supplier/kyc');
+                $this->redirect('/supplier/kyc');
                 return;
             }
         } catch (\Exception $e) {
             $this->setFlash('error', 'Upload error: ' . $e->getMessage());
-            $this->redirect('/build_mate/supplier/kyc');
+            $this->redirect('/supplier/kyc');
             return;
         }
         
         // Only proceed if we have successfully uploaded files
         if (empty($uploadResult['results'])) {
             $this->setFlash('error', 'No files were successfully uploaded. Please try again.');
-            $this->redirect('/build_mate/supplier/kyc');
+            $this->redirect('/supplier/kyc');
             return;
         }
         
@@ -201,7 +201,7 @@ class SupplierController extends Controller
         
         Security::log('kyc_submitted', $user['id'], ['supplier_id' => $supplier['id']]);
         $this->setFlash('success', 'Application submitted successfully! Your supplier profile is under review.');
-        $this->redirect('/build_mate/supplier/pending');
+        $this->redirect('/supplier/pending');
     }
     
     /**
@@ -215,7 +215,7 @@ class SupplierController extends Controller
         
         if (!$supplier) {
             $this->setFlash('error', 'Supplier profile not found');
-            $this->redirect('/build_mate/supplier/kyc');
+            $this->redirect('/supplier/kyc');
         }
         
         $productModel = new Product();
@@ -257,7 +257,7 @@ class SupplierController extends Controller
         
         if (!$supplier) {
             $this->setFlash('error', 'Supplier profile not found');
-            $this->redirect('/build_mate/supplier/kyc');
+            $this->redirect('/supplier/kyc');
         }
         
         $name = Validator::sanitize($_POST['name'] ?? '', 255);
@@ -283,14 +283,14 @@ class SupplierController extends Controller
             
             if ($uploadResult['success']) {
                 // Generate URL path for uploaded file
-                $imageUrl = '/build_mate/storage/uploads/products/' . $uploadResult['filename'];
+                $imageUrl = '/storage/uploads/products/' . $uploadResult['filename'];
                 
                 // Verify file actually exists
                 $fullPath = $uploadPath . '/' . $uploadResult['filename'];
                 if (!file_exists($fullPath)) {
                     error_log("ERROR: Uploaded file does not exist at: {$fullPath}");
                     $this->setFlash('error', 'Image was uploaded but file not found. Please try again.');
-                    $this->redirect('/build_mate/supplier/products');
+                    $this->redirect('/supplier/products');
                     return;
                 }
                 
@@ -299,7 +299,7 @@ class SupplierController extends Controller
                 $errorMsg = implode(', ', $uploadResult['errors']);
                 error_log("ERROR: Image upload failed: {$errorMsg}");
                 $this->setFlash('error', 'Image upload failed: ' . $errorMsg);
-                $this->redirect('/build_mate/supplier/products');
+                $this->redirect('/supplier/products');
                 return;
             }
         } else {
@@ -360,7 +360,7 @@ class SupplierController extends Controller
         
         if (empty($name) || $categoryId <= 0 || $priceCents <= 0) {
             $this->setFlash('error', 'Please fill all required fields');
-            $this->redirect('/build_mate/supplier/products');
+            $this->redirect('/supplier/products');
         }
         
         $productModel = new Product();
@@ -400,7 +400,7 @@ class SupplierController extends Controller
         
         Security::log('product_created', $user['id'], ['supplier_id' => $supplier['id']]);
         $this->setFlash('success', 'Product created successfully');
-        $this->redirect('/build_mate/supplier/products');
+        $this->redirect('/supplier/products');
     }
     
     /**
@@ -417,7 +417,7 @@ class SupplierController extends Controller
         
         if (!$product || $product['supplier_id'] !== $supplier['id']) {
             $this->setFlash('error', 'Product not found');
-            $this->redirect('/build_mate/supplier/products');
+            $this->redirect('/supplier/products');
         }
         
         // Handle image: file upload takes priority over URL
@@ -435,14 +435,14 @@ class SupplierController extends Controller
             
             if ($uploadResult['success']) {
                 // Generate URL path for uploaded file
-                $imageUrl = '/build_mate/storage/uploads/products/' . $uploadResult['filename'];
+                $imageUrl = '/storage/uploads/products/' . $uploadResult['filename'];
                 
                 // Verify file actually exists
                 $fullPath = $uploadPath . '/' . $uploadResult['filename'];
                 if (!file_exists($fullPath)) {
                     error_log("ERROR: Uploaded file does not exist at: {$fullPath}");
                     $this->setFlash('error', 'Image was uploaded but file not found. Please try again.');
-                    $this->redirect('/build_mate/supplier/products');
+                    $this->redirect('/supplier/products');
                     return;
                 }
                 
@@ -451,7 +451,7 @@ class SupplierController extends Controller
                 $errorMsg = implode(', ', $uploadResult['errors']);
                 error_log("ERROR: Image upload failed: {$errorMsg}");
                 $this->setFlash('error', 'Image upload failed: ' . $errorMsg);
-                $this->redirect('/build_mate/supplier/products');
+                $this->redirect('/supplier/products');
                 return;
             }
         } elseif (!empty($_POST['image_url'])) {
@@ -537,7 +537,7 @@ class SupplierController extends Controller
         
         Security::log('product_updated', $user['id'], ['product_id' => $id]);
         $this->setFlash('success', 'Product updated successfully');
-        $this->redirect('/build_mate/supplier/products');
+        $this->redirect('/supplier/products');
     }
     
     /**
@@ -554,14 +554,14 @@ class SupplierController extends Controller
         
         if (!$product || $product['supplier_id'] !== $supplier['id']) {
             $this->setFlash('error', 'Product not found');
-            $this->redirect('/build_mate/supplier/products');
+            $this->redirect('/supplier/products');
         }
         
         $productModel->delete($id);
         
         Security::log('product_deleted', $user['id'], ['product_id' => $id]);
         $this->setFlash('success', 'Product deleted successfully');
-        $this->redirect('/build_mate/supplier/products');
+        $this->redirect('/supplier/products');
     }
     
     /**
@@ -631,7 +631,7 @@ class SupplierController extends Controller
                 Response::json(['success' => false, 'message' => 'Supplier not found'], 403);
             } else {
                 $this->setFlash('error', 'Supplier profile not found');
-                $this->redirect('/build_mate/supplier/orders');
+                $this->redirect('/supplier/orders');
             }
             return;
         }
@@ -661,7 +661,7 @@ class SupplierController extends Controller
                 Response::json(['success' => false, 'message' => 'Order not found'], 404);
             } else {
                 $this->setFlash('error', 'Order not found');
-                $this->redirect('/build_mate/supplier/orders');
+                $this->redirect('/supplier/orders');
             }
             return;
         }
@@ -674,7 +674,7 @@ class SupplierController extends Controller
                 Response::json(['success' => false, 'message' => 'Status is required'], 400);
             } else {
                 $this->setFlash('error', 'Status is required');
-                $this->redirect('/build_mate/supplier/orders');
+                $this->redirect('/supplier/orders');
             }
             return;
         }
@@ -698,7 +698,7 @@ class SupplierController extends Controller
                 ], 403);
             } else {
                 $this->setFlash('error', 'Suppliers cannot mark orders as "Out for Delivery" or "Delivered". Only admin/logistics can do that.');
-                $this->redirect('/build_mate/supplier/orders');
+                $this->redirect('/supplier/orders');
             }
             return;
         }
@@ -734,7 +734,7 @@ class SupplierController extends Controller
                 ], 400);
             } else {
                 $this->setFlash('error', $errorMsg);
-                $this->redirect('/build_mate/supplier/orders');
+                $this->redirect('/supplier/orders');
             }
             return;
         }
@@ -753,7 +753,7 @@ class SupplierController extends Controller
                     ], 500);
                 } else {
                     $this->setFlash('error', 'Failed to update order status: ' . $e->getMessage());
-                    $this->redirect('/build_mate/supplier/orders');
+                    $this->redirect('/supplier/orders');
                 }
                 return;
             }
@@ -775,7 +775,7 @@ class SupplierController extends Controller
                 ]);
             } else {
                 $this->setFlash('success', 'Order status updated successfully');
-                $this->redirect('/build_mate/supplier/orders');
+                $this->redirect('/supplier/orders');
                 }
             } else {
                 // Log the failure for debugging
@@ -788,7 +788,7 @@ class SupplierController extends Controller
                     ], 500);
                 } else {
                     $this->setFlash('error', 'Failed to update order status. Please try again or contact support.');
-                    $this->redirect('/build_mate/supplier/orders');
+                    $this->redirect('/supplier/orders');
                 }
             }
         } catch (\Exception $e) {
@@ -800,7 +800,7 @@ class SupplierController extends Controller
                 ], 500);
             } else {
                 $this->setFlash('error', 'An error occurred while updating order status');
-                $this->redirect('/build_mate/supplier/orders');
+                $this->redirect('/supplier/orders');
             }
         }
     }
@@ -819,7 +819,7 @@ class SupplierController extends Controller
                 Response::json(['success' => false, 'message' => 'Supplier not found'], 403);
             } else {
                 $this->setFlash('error', 'Supplier profile not found');
-                $this->redirect('/build_mate/supplier/orders');
+                $this->redirect('/supplier/orders');
             }
             return;
         }
@@ -843,7 +843,7 @@ class SupplierController extends Controller
                 Response::json(['success' => false, 'message' => 'Order not found'], 404);
             } else {
                 $this->setFlash('error', 'Order not found');
-                $this->redirect('/build_mate/supplier/orders');
+                $this->redirect('/supplier/orders');
             }
             return;
         }
@@ -855,7 +855,7 @@ class SupplierController extends Controller
                 Response::json(['success' => false, 'message' => 'Order must be paid before marking ready'], 400);
             } else {
                 $this->setFlash('error', 'Order must be paid before marking ready');
-                $this->redirect('/build_mate/supplier/orders');
+                $this->redirect('/supplier/orders');
             }
             return;
         }
@@ -869,7 +869,7 @@ class SupplierController extends Controller
                 Response::json(['success' => false, 'message' => 'Delivery record not found'], 404);
             } else {
                 $this->setFlash('error', 'Delivery record not found');
-                $this->redirect('/build_mate/supplier/orders');
+                $this->redirect('/supplier/orders');
             }
             return;
         }
@@ -880,7 +880,7 @@ class SupplierController extends Controller
                 Response::json(['success' => false, 'message' => 'Order is not in pending pickup status'], 400);
             } else {
                 $this->setFlash('error', 'Order is not in pending pickup status');
-                $this->redirect('/build_mate/supplier/orders');
+                $this->redirect('/supplier/orders');
             }
             return;
         }
@@ -907,7 +907,7 @@ class SupplierController extends Controller
                     Response::json(['success' => true, 'message' => 'Order marked as ready for pickup']);
                 } else {
                     $this->setFlash('success', 'Order marked as ready for pickup');
-                    $this->redirect('/build_mate/supplier/orders');
+                    $this->redirect('/supplier/orders');
                 }
             } else {
                 $db->rollBack();
@@ -915,7 +915,7 @@ class SupplierController extends Controller
                     Response::json(['success' => false, 'message' => 'Failed to update status'], 500);
                 } else {
                     $this->setFlash('error', 'Failed to update status');
-                    $this->redirect('/build_mate/supplier/orders');
+                    $this->redirect('/supplier/orders');
                 }
             }
         } catch (\Exception $e) {
@@ -925,7 +925,7 @@ class SupplierController extends Controller
                 Response::json(['success' => false, 'message' => 'An error occurred'], 500);
             } else {
                 $this->setFlash('error', 'An error occurred');
-                $this->redirect('/build_mate/supplier/orders');
+                $this->redirect('/supplier/orders');
             }
         }
     }
@@ -946,7 +946,7 @@ class SupplierController extends Controller
     {
         // Order acceptance logic
         $this->setFlash('success', 'Order accepted');
-        $this->redirect('/build_mate/supplier/orders');
+        $this->redirect('/supplier/orders');
     }
     
     /**
@@ -963,7 +963,7 @@ class SupplierController extends Controller
             $this->setFlash('success', 'Order dispatched');
         }
         
-        $this->redirect('/build_mate/supplier/orders');
+        $this->redirect('/supplier/orders');
     }
     
     /**
@@ -977,7 +977,7 @@ class SupplierController extends Controller
         
         if (!$supplier) {
             $this->setFlash('error', 'Supplier profile not found');
-            $this->redirect('/build_mate/supplier/dashboard');
+            $this->redirect('/supplier/dashboard');
             return;
         }
         
@@ -1039,7 +1039,7 @@ class SupplierController extends Controller
             $paymentReference,
             $user['email'],
             $user['name'],
-            '/build_mate/supplier/upgrade/callback',
+            '/supplier/upgrade/callback',
             [
                 'subscription_id' => $subscriptionId,
                 'supplier_id' => $supplier['id'],
@@ -1067,7 +1067,7 @@ class SupplierController extends Controller
         
         if (empty($reference)) {
             $this->setFlash('error', 'Invalid payment reference');
-            $this->redirect('/build_mate/supplier/upgrade');
+            $this->redirect('/supplier/upgrade');
             return;
         }
         
@@ -1076,7 +1076,7 @@ class SupplierController extends Controller
         
         if (!$subscription) {
             $this->setFlash('error', 'Subscription not found');
-            $this->redirect('/build_mate/supplier/upgrade');
+            $this->redirect('/supplier/upgrade');
             return;
         }
         
@@ -1098,10 +1098,10 @@ class SupplierController extends Controller
             ]);
             
             $this->setFlash('success', 'Premium subscription activated successfully! Your products will now appear with priority placement.');
-            $this->redirect('/build_mate/supplier/dashboard');
+            $this->redirect('/supplier/dashboard');
         } else {
             $this->setFlash('error', 'Payment verification failed. Please contact support if payment was deducted.');
-            $this->redirect('/build_mate/supplier/upgrade');
+            $this->redirect('/supplier/upgrade');
         }
     }
     
@@ -1116,7 +1116,7 @@ class SupplierController extends Controller
         
         if (!$supplier) {
             $this->setFlash('error', 'Supplier profile not found');
-            $this->redirect('/build_mate/supplier/dashboard');
+            $this->redirect('/supplier/dashboard');
             return;
         }
         

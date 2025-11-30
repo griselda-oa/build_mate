@@ -23,12 +23,12 @@ class CartController extends Controller
         if ($user) {
             if ($user['role'] === 'supplier') {
             $this->setFlash('error', 'Suppliers cannot purchase products. Please create a buyer account to make purchases.');
-            $this->redirect('/build_mate/catalog');
+            $this->redirect('/catalog');
             return;
             }
             if ($user['role'] === 'admin') {
                 $this->setFlash('error', 'Admins cannot purchase products. Please use a buyer account to make purchases.');
-                $this->redirect('/build_mate/catalog');
+                $this->redirect('/catalog');
                 return;
             }
         }
@@ -73,7 +73,7 @@ class CartController extends Controller
             }
             
             $this->setFlash('error', 'Suppliers cannot purchase products. Please create a buyer account to make purchases.');
-            $this->redirect('/build_mate/catalog');
+            $this->redirect('/catalog');
             return;
             }
             if ($user['role'] === 'admin') {
@@ -91,7 +91,7 @@ class CartController extends Controller
                 }
                 
                 $this->setFlash('error', 'Admins cannot purchase products. Please use a buyer account to make purchases.');
-                $this->redirect('/build_mate/catalog');
+                $this->redirect('/catalog');
                 return;
             }
         }
@@ -112,7 +112,7 @@ class CartController extends Controller
                     return;
                 }
                 $this->setFlash('error', 'Product not found');
-                $this->redirect('/build_mate/cart');
+                $this->redirect('/cart');
                 return;
             }
         } catch (\Exception $e) {
@@ -121,7 +121,7 @@ class CartController extends Controller
                 return;
             }
             $this->setFlash('error', 'Database connection failed. Please set up your database first.');
-            $this->redirect('/build_mate/catalog');
+            $this->redirect('/catalog');
             return;
         }
         
@@ -150,7 +150,7 @@ class CartController extends Controller
         }
         
         $this->setFlash('success', 'Product added to cart');
-        $this->redirect('/build_mate/cart');
+        $this->redirect('/cart');
     }
     
     /**
@@ -163,12 +163,12 @@ class CartController extends Controller
         if ($user) {
             if ($user['role'] === 'supplier') {
             $this->setFlash('error', 'Suppliers cannot purchase products. Please create a buyer account to make purchases.');
-            $this->redirect('/build_mate/catalog');
+            $this->redirect('/catalog');
             return;
             }
             if ($user['role'] === 'admin') {
                 $this->setFlash('error', 'Admins cannot purchase products. Please use a buyer account to make purchases.');
-                $this->redirect('/build_mate/catalog');
+                $this->redirect('/catalog');
                 return;
             }
         }
@@ -185,7 +185,7 @@ class CartController extends Controller
             Cart::updateItem($_SESSION['cart'], $productId, $qty);
         }
         
-        $this->redirect('/build_mate/cart');
+        $this->redirect('/cart');
     }
     
     /**
@@ -198,12 +198,12 @@ class CartController extends Controller
         if ($user) {
             if ($user['role'] === 'supplier') {
             $this->setFlash('error', 'Suppliers cannot purchase products. Please create a buyer account to make purchases.');
-            $this->redirect('/build_mate/catalog');
+            $this->redirect('/catalog');
             return;
             }
             if ($user['role'] === 'admin') {
                 $this->setFlash('error', 'Admins cannot purchase products. Please use a buyer account to make purchases.');
-                $this->redirect('/build_mate/catalog');
+                $this->redirect('/catalog');
                 return;
             }
         }
@@ -212,7 +212,7 @@ class CartController extends Controller
             Cart::removeItem($_SESSION['cart'], $id);
         }
         
-        $this->redirect('/build_mate/cart');
+        $this->redirect('/cart');
     }
 }
 

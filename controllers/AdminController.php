@@ -88,7 +88,7 @@ class AdminController extends Controller
         
         if (!$supplier) {
             $this->setFlash('error', 'Supplier not found');
-            $this->redirect('/build_mate/admin/suppliers');
+            $this->redirect('/admin/suppliers');
             return;
         }
         
@@ -118,7 +118,7 @@ class AdminController extends Controller
         
         if (!$supplier) {
             $this->setFlash('error', 'Supplier not found');
-            $this->redirect('/build_mate/admin/suppliers');
+            $this->redirect('/admin/suppliers');
         }
         
         $supplierModel->update($id, [
@@ -143,7 +143,7 @@ class AdminController extends Controller
             $message .= " and {$productsUpdated} product(s) auto-verified";
         }
         $this->setFlash('success', $message);
-        $this->redirect('/build_mate/admin/suppliers');
+        $this->redirect('/admin/suppliers');
     }
     
     /**
@@ -156,7 +156,7 @@ class AdminController extends Controller
         
         if (!$supplier) {
             $this->setFlash('error', 'Supplier not found');
-            $this->redirect('/build_mate/admin/suppliers');
+            $this->redirect('/admin/suppliers');
         }
         
         $supplierModel->update($id, [
@@ -166,7 +166,7 @@ class AdminController extends Controller
         
         Security::log('supplier_rejected', $this->user()['id'], ['supplier_id' => $id]);
         $this->setFlash('success', 'Supplier rejected');
-        $this->redirect('/build_mate/admin/suppliers');
+        $this->redirect('/admin/suppliers');
     }
     
     /**
@@ -179,7 +179,7 @@ class AdminController extends Controller
         
         if (!$supplier) {
             $this->setFlash('error', 'Supplier not found');
-            $this->redirect('/build_mate/admin/suppliers');
+            $this->redirect('/admin/suppliers');
             return;
         }
         
@@ -199,7 +199,7 @@ class AdminController extends Controller
         
         if ($orderCount > 0) {
             $this->setFlash('error', "Cannot delete supplier: This supplier has products in {$orderCount} order(s) ({$itemCount} item(s)). Products that are part of orders cannot be deleted to maintain order history integrity.");
-            $this->redirect('/build_mate/admin/suppliers');
+            $this->redirect('/admin/suppliers');
             return;
         }
         
@@ -230,7 +230,7 @@ class AdminController extends Controller
             if ($remainingCount > 0) {
                 $db->rollBack();
                 $this->setFlash('error', "Cannot delete supplier: {$remainingCount} product(s) are still referenced in orders and cannot be deleted.");
-                $this->redirect('/build_mate/admin/suppliers');
+                $this->redirect('/admin/suppliers');
                 return;
             }
             
@@ -254,7 +254,7 @@ class AdminController extends Controller
             ]);
             
             $this->setFlash('success', "Supplier deleted successfully. {$productsDeleted} product(s) were also removed.");
-            $this->redirect('/build_mate/admin/suppliers');
+            $this->redirect('/admin/suppliers');
             
         } catch (\Exception $e) {
             $db->rollBack();
@@ -270,7 +270,7 @@ class AdminController extends Controller
             }
             
             $this->setFlash('error', $errorMsg);
-            $this->redirect('/build_mate/admin/suppliers');
+            $this->redirect('/admin/suppliers');
         }
     }
     
@@ -444,7 +444,7 @@ class AdminController extends Controller
         
         if (!$supplier) {
             $this->setFlash('error', 'Supplier not found');
-            $this->redirect('/build_mate/admin/premium');
+            $this->redirect('/admin/premium');
             return;
         }
         
@@ -458,7 +458,7 @@ class AdminController extends Controller
             $this->setFlash('error', 'Failed to downgrade supplier');
         }
         
-        $this->redirect('/build_mate/admin/premium');
+        $this->redirect('/admin/premium');
     }
     
     /**
@@ -471,7 +471,7 @@ class AdminController extends Controller
         
         if (!$ad) {
             $this->setFlash('error', 'Advertisement not found');
-            $this->redirect('/build_mate/admin/premium');
+            $this->redirect('/admin/premium');
             return;
         }
         
@@ -485,7 +485,7 @@ class AdminController extends Controller
             $this->setFlash('error', 'Failed to approve advertisement');
         }
         
-        $this->redirect('/build_mate/admin/premium');
+        $this->redirect('/admin/premium');
     }
     
     /**
@@ -498,7 +498,7 @@ class AdminController extends Controller
         
         if (!$ad) {
             $this->setFlash('error', 'Advertisement not found');
-            $this->redirect('/build_mate/admin/premium');
+            $this->redirect('/admin/premium');
             return;
         }
         
@@ -512,7 +512,7 @@ class AdminController extends Controller
             $this->setFlash('error', 'Failed to reject advertisement');
         }
         
-        $this->redirect('/build_mate/admin/premium');
+        $this->redirect('/admin/premium');
     }
     
     /**

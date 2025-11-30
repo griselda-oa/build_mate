@@ -26,7 +26,7 @@ if ($orderStatus === 'placed' && ($order['status'] ?? '') === 'shipped') {
 <div class="admin-order-details-page">
 <div class="container">
     <div class="mb-4">
-        <a href="/build_mate/admin/orders" class="admin-back-btn">
+        <a href="<?= \App\View::url('/admin/orders') ?>" class="admin-back-btn">
             <i class="bi bi-arrow-left"></i> Back to Orders
         </a>
     </div>

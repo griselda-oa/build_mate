@@ -13,7 +13,7 @@ $advertisements = $advertisements ?? [];
                 $adImage = $ad['image_url'] ?? $ad['product_image'] ?? '';
                 // Make path absolute if relative
                 if (!empty($adImage) && !preg_match('/^https?:\/\//', $adImage)) {
-                    if (strpos($adImage, '/build_mate/') !== 0) {
+                    if (strpos($adImage, \App\View::basePath() . '/') !== 0) {
                         $adImage = '/build_mate' . (strpos($adImage, '/') === 0 ? '' : '/') . $adImage;
                     }
                 }

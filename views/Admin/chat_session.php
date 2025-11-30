@@ -15,7 +15,7 @@ $title = $title ?? 'Chat Session Details';
                 Session: <code><?= \App\View::e($session['session_id'] ?? 'N/A') ?></code>
             </p>
         </div>
-        <a href="/build_mate/admin/chat" class="btn btn-outline-secondary">
+        <a href="<?= \App\View::url('/admin/chat') ?>" class="btn btn-outline-secondary">
             <i class="bi bi-arrow-left"></i> Back to Chat Management
         </a>
     </div>

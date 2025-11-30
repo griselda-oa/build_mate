@@ -3,7 +3,7 @@
     <!-- Hero Header -->
     <div class="order-detail-hero">
         <div class="container">
-            <a href="/build_mate/orders" class="back-btn-hero">
+            <a href="<?= \App\View::url('/orders') ?>" class="back-btn-hero">
                 <i class="bi bi-arrow-left"></i>
                 <span>Back to Orders</span>
             </a>
@@ -48,7 +48,7 @@
                                         <?php if (!empty($item['image_path'])): ?>
                                             <img src="<?= \App\View::e($item['image_path']) ?>" 
                                                  alt="<?= \App\View::e($item['product_name']) ?>"
-                                                 onerror="this.src='/build_mate/assets/images/placeholder.png'">
+                                                 onerror="this.src='<?= \App\View::asset('''assets/images/placeholder.png''') ?>'">
                                         <?php else: ?>
                                             <div class="item-placeholder">
                                                 <i class="bi bi-image"></i>
@@ -57,7 +57,7 @@
                                     </div>
                                     <div class="item-details">
                                         <h4 class="item-name">
-                                            <a href="/build_mate/product/<?= \App\View::e($item['product_slug'] ?? '') ?>">
+                                            <a href="<?= \App\View::url('/product/<?= \App\View::e($item['product_slug'] ?? '') ?>') ?>">
                                                 <?= \App\View::e($item['product_name']) ?>
                                             </a>
                                         </h4>
@@ -294,7 +294,7 @@
                         </div>
                         <div class="order-card-body">
                             <p>Please confirm that you have received your order. This will release Paystack funds to the supplier.</p>
-                            <form method="POST" action="/build_mate/orders/<?= $order['id'] ?>/confirm-delivery/">
+                            <form method="POST" action="<?= \App\View::url('/orders/<?= $order['id'] ?>/confirm-delivery/') ?>">
                                 <?= \App\Csrf::field() ?>
                                 <button type="submit" class="btn-action-primary">
                                     <i class="bi bi-check-circle"></i>
@@ -362,7 +362,7 @@
                             </div>
                         <?php endif; ?>
                         <div class="summary-actions">
-                            <a href="/build_mate/orders/<?= $order['id'] ?>/invoice.pdf" class="btn-action-outline">
+                            <a href="<?= \App\View::url('/orders/<?= $order['id'] ?>/invoice.pdf') ?>" class="btn-action-outline">
                                 <i class="bi bi-download"></i>
                                 Download Invoice
                             </a>
@@ -374,7 +374,7 @@
                 <div class="support-card">
                     <h4><i class="bi bi-headset"></i> Need Help?</h4>
                     <p>Have questions about your order?</p>
-                    <a href="/build_mate/contact" class="btn-action-outline">
+                    <a href="<?= \App\View::url('/contact') ?>" class="btn-action-outline">
                         <i class="bi bi-envelope"></i>
                         Contact Support
                     </a>

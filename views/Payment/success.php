@@ -53,7 +53,7 @@
                 </div>
                 <div class="delivery-tracking-body-modern">
                     <p>Your order is being prepared and will be delivered to your address. You can track the delivery status and see driver information once your order is dispatched.</p>
-                    <a href="/build_mate/orders/<?= $order['id'] ?>/track-delivery" class="btn-track-delivery-modern">
+                    <a href="<?= \App\View::url('/orders/<?= $order['id'] ?>/track-delivery') ?>" class="btn-track-delivery-modern">
                         <i class="bi bi-truck"></i>
                         <span>Track Delivery Now</span>
                         <i class="bi bi-arrow-right"></i>
@@ -62,15 +62,15 @@
             </div>
             
             <div class="success-actions-modern">
-                <a href="/build_mate/orders/<?= $order['id'] ?>" class="btn-primary-modern">
+                <a href="<?= \App\View::url('/orders/<?= $order['id'] ?>') ?>" class="btn-primary-modern">
                     <i class="bi bi-eye"></i>
                     View Order Details
                 </a>
-                <a href="/build_mate/orders/<?= $order['id'] ?>/track-delivery" class="btn-secondary-modern">
+                <a href="<?= \App\View::url('/orders/<?= $order['id'] ?>/track-delivery') ?>" class="btn-secondary-modern">
                     <i class="bi bi-truck"></i>
                     Track Delivery
                 </a>
-                <a href="/build_mate/catalog" class="btn-outline-modern">
+                <a href="<?= \App\View::url('/catalog') ?>" class="btn-outline-modern">
                     <i class="bi bi-arrow-left"></i>
                     Continue Shopping
                 </a>

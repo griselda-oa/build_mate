@@ -69,7 +69,7 @@ class LogisticsController extends Controller
         
         if (!$delivery || $delivery['logistics_id'] !== $user['id']) {
             $this->setFlash('error', 'Invalid delivery assignment');
-            $this->redirect('/build_mate/logistics/assignments');
+            $this->redirect('/logistics/assignments');
         }
         
         $db = \App\DB::getInstance();
@@ -86,12 +86,12 @@ class LogisticsController extends Controller
             
             Security::log('delivery_picked_up', $user['id'], ['delivery_id' => $id]);
             $this->setFlash('success', 'Order picked up successfully');
-            $this->redirect('/build_mate/logistics/assignments');
+            $this->redirect('/logistics/assignments');
         } catch (\Exception $e) {
             $db->rollBack();
             error_log("Error picking up delivery: " . $e->getMessage());
             $this->setFlash('error', 'Failed to update delivery status');
-            $this->redirect('/build_mate/logistics/assignments');
+            $this->redirect('/logistics/assignments');
         }
     }
     
@@ -106,7 +106,7 @@ class LogisticsController extends Controller
         
         if (!$delivery || $delivery['logistics_id'] !== $user['id']) {
             $this->setFlash('error', 'Invalid delivery assignment');
-            $this->redirect('/build_mate/logistics/assignments');
+            $this->redirect('/logistics/assignments');
         }
         
         $db = \App\DB::getInstance();
@@ -123,12 +123,12 @@ class LogisticsController extends Controller
             
             Security::log('delivery_in_transit', $user['id'], ['delivery_id' => $id]);
             $this->setFlash('success', 'Delivery marked as in transit');
-            $this->redirect('/build_mate/logistics/assignments');
+            $this->redirect('/logistics/assignments');
         } catch (\Exception $e) {
             $db->rollBack();
             error_log("Error marking in transit: " . $e->getMessage());
             $this->setFlash('error', 'Failed to update delivery status');
-            $this->redirect('/build_mate/logistics/assignments');
+            $this->redirect('/logistics/assignments');
         }
     }
     
@@ -143,7 +143,7 @@ class LogisticsController extends Controller
         
         if (!$delivery || $delivery['logistics_id'] !== $user['id']) {
             $this->setFlash('error', 'Invalid delivery assignment');
-            $this->redirect('/build_mate/logistics/assignments');
+            $this->redirect('/logistics/assignments');
         }
         
         $config = require __DIR__ . '/../settings/config.php';
@@ -181,12 +181,12 @@ class LogisticsController extends Controller
             
             Security::log('delivery_completed', $user['id'], ['delivery_id' => $id]);
             $this->setFlash('success', 'Delivery marked as completed');
-            $this->redirect('/build_mate/logistics/assignments');
+            $this->redirect('/logistics/assignments');
         } catch (\Exception $e) {
             $db->rollBack();
             error_log("Error marking delivery as delivered: " . $e->getMessage());
             $this->setFlash('error', 'Failed to update delivery status');
-            $this->redirect('/build_mate/logistics/assignments');
+            $this->redirect('/logistics/assignments');
         }
     }
 }

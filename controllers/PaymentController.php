@@ -26,7 +26,7 @@ class PaymentController extends Controller
     {
         $user = $this->user();
         if (!$user) {
-            $this->redirect('/build_mate/login');
+            $this->redirect('/login');
         }
         
         $orderModel = new Order();
@@ -34,12 +34,12 @@ class PaymentController extends Controller
         
         if (!$order || $order['buyer_id'] !== $user['id']) {
             $this->setFlash('error', 'Order not found or unauthorized');
-            $this->redirect('/build_mate/orders');
+            $this->redirect('/orders');
         }
         
         if ($order['status'] !== 'pending') {
             $this->setFlash('info', 'This order has already been processed');
-            $this->redirect('/build_mate/orders/' . $orderId);
+            $this->redirect('/orders/' . $orderId);
         }
         
         $paystackService = new PaystackService();
@@ -155,7 +155,7 @@ class PaymentController extends Controller
         if (empty($reference)) {
             error_log("PaymentController::callback() - No reference found");
             $this->setFlash('error', 'Invalid payment reference');
-            $this->redirect('/build_mate/orders');
+            $this->redirect('/orders');
             return;
         }
         
@@ -178,16 +178,16 @@ class PaymentController extends Controller
                     $this->processPaymentSuccess($orderId, $reference, $verification['data']);
                 } else {
                     $this->setFlash('error', 'Order ID not found');
-                    $this->redirect('/build_mate/orders');
+                    $this->redirect('/orders');
                 }
             } else {
                 $this->setFlash('error', 'Payment verification failed');
-                $this->redirect('/build_mate/orders');
+                $this->redirect('/orders');
             }
         } catch (\Exception $e) {
             error_log("Paystack callback error: " . $e->getMessage());
             $this->setFlash('error', 'Payment processing error: ' . $e->getMessage());
-            $this->redirect('/build_mate/orders');
+            $this->redirect('/orders');
         }
     }
     
@@ -213,7 +213,7 @@ class PaymentController extends Controller
                 // Already processed
                 $db->commit();
                 $this->setFlash('info', 'Payment already processed');
-                $this->redirect('/build_mate/orders/' . $orderId);
+                $this->redirect('/orders/' . $orderId);
                 return;
             }
             
@@ -261,7 +261,7 @@ class PaymentController extends Controller
                 if (in_array('payment_reference', $columns)) {
                     $updateData['payment_reference'] = $reference;
                 } else {
-                    error_log("payment_reference column not found. Run migration: /build_mate/run_payment_columns_migration_web.php");
+                    error_log("payment_reference column not found. Run migration: /run_payment_columns_migration_web.php");
                 }
                 
                 // Only add payment_method if column exists
@@ -495,14 +495,14 @@ class PaymentController extends Controller
             session_start();
             
             // Redirect to order detail page (which includes tracking)
-            error_log("Redirecting to order detail page: /build_mate/orders/{$orderId}. Final cart check: " . (empty($_SESSION['cart']) ? 'EMPTY ✓' : 'NOT EMPTY ✗'));
-            header("Location: /build_mate/orders/{$orderId}", true, 302);
+            error_log("Redirecting to order detail page: /orders/{$orderId}. Final cart check: " . (empty($_SESSION['cart']) ? 'EMPTY ✓' : 'NOT EMPTY ✗'));
+            header("Location: /orders/{$orderId}", true, 302);
             exit;
         } catch (\Exception $e) {
             $db->rollBack();
             error_log("Payment processing error: " . $e->getMessage());
             $this->setFlash('error', 'Payment processing failed: ' . $e->getMessage());
-            $this->redirect('/build_mate/orders');
+            $this->redirect('/orders');
         }
     }
     
@@ -517,14 +517,14 @@ class PaymentController extends Controller
         
         if (!$order) {
             $this->setFlash('error', 'Order not found');
-            $this->redirect('/build_mate/');
+            $this->redirect('/');
             return;
         }
         
         // If user is logged in, verify they own the order
         if ($user && $order['buyer_id'] !== $user['id']) {
             $this->setFlash('error', 'Unauthorized access');
-            $this->redirect('/build_mate/orders');
+            $this->redirect('/orders');
             return;
         }
         
@@ -551,7 +551,7 @@ class PaymentController extends Controller
             ]);
         } else {
             $this->setFlash('error', 'Order not found');
-            $this->redirect('/build_mate/orders');
+            $this->redirect('/orders');
         }
     }
 }

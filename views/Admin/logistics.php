@@ -5,7 +5,7 @@
     <div class="container">
         <!-- Back Button -->
         <div class="mb-4">
-            <a href="/build_mate/admin/dashboard" class="back-button">
+            <a href="<?= \App\View::url('/admin/dashboard') ?>" class="back-button">
                 <i class="bi bi-arrow-left"></i>
                 <span>Back to Dashboard</span>
             </a>
@@ -182,7 +182,7 @@
                                     <?php endif; ?>
                                     <?php if ($delivery['delivery_photo']): ?>
                                         <div class="mt-2">
-                                            <a href="/build_mate/storage/uploads/deliveries/<?= $delivery['delivery_photo'] ?>" 
+                                            <a href="<?= \App\View::url('/storage/uploads/deliveries/<?= $delivery['delivery_photo'] ?>') ?>" 
                                                target="_blank" 
                                                class="btn btn-sm btn-outline-primary">
                                                 <i class="bi bi-image"></i> View Delivery Photo

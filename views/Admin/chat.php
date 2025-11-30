@@ -7,7 +7,7 @@ $title = $title ?? 'Chat Management';
 
 <div class="container-fluid py-4">
     <div class="mb-3">
-        <a href="/build_mate/admin/dashboard" class="back-button">
+        <a href="<?= \App\View::url('/admin/dashboard') ?>" class="back-button">
             <i class="bi bi-arrow-left"></i>
             <span>Back to Dashboard</span>
         </a>
@@ -162,7 +162,7 @@ $title = $title ?? 'Chat Management';
                                         </span>
                                     </td>
                                     <td>
-                                        <a href="/build_mate/admin/chat/session/<?= urlencode($session['session_id']) ?>" class="btn btn-sm btn-primary">
+                                        <a href="<?= \App\View::url('/admin/chat/session/<?= urlencode($session['session_id']) ?>') ?>" class="btn btn-sm btn-primary">
                                             <i class="bi bi-eye"></i> View
                                         </a>
                                     </td>

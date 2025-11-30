@@ -24,19 +24,19 @@ class OrderController extends Controller
     {
         $user = $this->user();
         if (!$user) {
-            $this->redirect('/build_mate/login');
+            $this->redirect('/login');
             return;
         }
         
         // Prevent suppliers and admins from accessing checkout (only buyers can purchase)
         if ($user['role'] === 'supplier') {
             $this->setFlash('error', 'Suppliers cannot purchase products. Please create a buyer account to make purchases.');
-            $this->redirect('/build_mate/catalog');
+            $this->redirect('/catalog');
             return;
         }
         if ($user['role'] === 'admin') {
             $this->setFlash('error', 'Admins cannot purchase products. Please use a buyer account to make purchases.');
-            $this->redirect('/build_mate/catalog');
+            $this->redirect('/catalog');
             return;
         }
         
@@ -44,7 +44,7 @@ class OrderController extends Controller
         
         if (empty($cart)) {
             $this->setFlash('error', 'Your cart is empty');
-            $this->redirect('/build_mate/cart');
+            $this->redirect('/cart');
             return;
         }
         
@@ -74,7 +74,7 @@ class OrderController extends Controller
         $user = $this->user();
         if (!$user) {
             error_log("User not authenticated, redirecting to login");
-            $this->redirect('/build_mate/login');
+            $this->redirect('/login');
             return;
         }
         
@@ -82,13 +82,13 @@ class OrderController extends Controller
         if ($user['role'] === 'supplier') {
             error_log("Supplier attempted checkout, redirecting");
             $this->setFlash('error', 'Suppliers cannot purchase products. Please create a buyer account to make purchases.');
-            $this->redirect('/build_mate/catalog');
+            $this->redirect('/catalog');
             return;
         }
         if ($user['role'] === 'admin') {
             error_log("Admin attempted checkout, redirecting");
             $this->setFlash('error', 'Admins cannot purchase products. Please use a buyer account to make purchases.');
-            $this->redirect('/build_mate/catalog');
+            $this->redirect('/catalog');
             return;
         }
         
@@ -97,7 +97,7 @@ class OrderController extends Controller
         if (empty($cart)) {
             error_log("Cart is empty, redirecting to cart");
             $this->setFlash('error', 'Your cart is empty');
-            $this->redirect('/build_mate/cart');
+            $this->redirect('/cart');
             return;
         }
         
@@ -119,14 +119,14 @@ class OrderController extends Controller
         if (empty($address['region']) || !in_array($address['region'], $allowedRegions)) {
             error_log("Invalid region: " . $address['region']);
             $this->setFlash('error', 'We currently only deliver to Greater Accra and Ashanti Region. Stay tuned for expansion!');
-            $this->redirect('/build_mate/checkout');
+            $this->redirect('/checkout');
             return;
         }
         
         if (empty($address['street']) || empty($address['city']) || empty($address['phone'])) {
             error_log("Missing required fields - street: " . ($address['street'] ? 'yes' : 'no') . ", city: " . ($address['city'] ? 'yes' : 'no') . ", phone: " . ($address['phone'] ? 'yes' : 'no'));
             $this->setFlash('error', 'Please provide complete delivery address and phone number');
-            $this->redirect('/build_mate/checkout');
+            $this->redirect('/checkout');
             return;
         }
         
@@ -177,8 +177,8 @@ class OrderController extends Controller
             }
             
             // Redirect to payment page
-            error_log("🔄 Redirecting to payment page: /build_mate/payment/" . $orderId);
-            header("Location: /build_mate/payment/" . $orderId, true, 302);
+            error_log("🔄 Redirecting to payment page: /payment/" . $orderId);
+            header("Location: /payment/" . $orderId, true, 302);
             exit;
         } catch (\Exception $e) {
             error_log("❌ ERROR in processCheckout: " . $e->getMessage());
@@ -191,7 +191,7 @@ class OrderController extends Controller
                 ob_end_clean();
             }
             
-            header("Location: /build_mate/checkout", true, 302);
+            header("Location: /checkout", true, 302);
             exit;
         }
     }
@@ -204,7 +204,7 @@ class OrderController extends Controller
         $orderId = $_SESSION['pending_order_id'] ?? null;
         
         if (!$orderId) {
-            $this->redirect('/build_mate/checkout');
+            $this->redirect('/checkout');
         }
         
         $orderModel = new Order();
@@ -212,7 +212,7 @@ class OrderController extends Controller
         
         if (!$order || $order['buyer_id'] !== $this->user()['id']) {
             $this->setFlash('error', 'Invalid order');
-            $this->redirect('/build_mate/orders');
+            $this->redirect('/orders');
         }
         
         // Process payment (mock or sandbox)
@@ -291,11 +291,11 @@ class OrderController extends Controller
             Security::log('order_created', $this->user()['id'], ['order_id' => $orderId]);
             
             $this->setFlash('success', 'Order placed successfully! Payment held securely by Paystack.');
-            $this->redirect('/build_mate/orders/' . $orderId);
+            $this->redirect('/orders/' . $orderId);
         } catch (\Exception $e) {
             $db->rollBack();
             $this->setFlash('error', 'Payment processing failed: ' . $e->getMessage());
-            $this->redirect('/build_mate/orders');
+            $this->redirect('/orders');
         }
     }
     
@@ -306,7 +306,7 @@ class OrderController extends Controller
     {
         $user = $this->user();
         if (!$user) {
-            $this->redirect('/build_mate/login');
+            $this->redirect('/login');
         }
         
         $orderModel = new Order();
@@ -314,7 +314,7 @@ class OrderController extends Controller
         
         if (!$order || $order['buyer_id'] !== $user['id']) {
             $this->setFlash('error', 'Order not found');
-            $this->redirect('/build_mate/orders');
+            $this->redirect('/orders');
         }
         
         // Get delivery record for confirmation form
@@ -512,7 +512,7 @@ class OrderController extends Controller
                 Response::json(['success' => false, 'message' => 'Order not found'], 404);
             } else {
                 $this->setFlash('error', 'Order not found');
-                $this->redirect('/build_mate/orders');
+                $this->redirect('/orders');
             }
             return;
         }
@@ -525,7 +525,7 @@ class OrderController extends Controller
                 Response::json(['success' => false, 'message' => 'Delivery record not found'], 404);
             } else {
                 $this->setFlash('error', 'Delivery record not found');
-                $this->redirect('/build_mate/orders');
+                $this->redirect('/orders');
             }
             return;
         }
@@ -536,7 +536,7 @@ class OrderController extends Controller
                 Response::json(['success' => false, 'message' => 'Invalid delivery code'], 400);
             } else {
                 $this->setFlash('error', 'Invalid delivery code');
-                $this->redirect('/build_mate/orders/' . $id . '/track-delivery');
+                $this->redirect('/orders/' . $id . '/track-delivery');
             }
             return;
         }
@@ -557,14 +557,14 @@ class OrderController extends Controller
                 ]);
             } else {
                 $this->setFlash('success', 'Delivery confirmed! Payment has been released to supplier.');
-                $this->redirect('/build_mate/orders/' . $id);
+                $this->redirect('/orders/' . $id);
             }
         } else {
             if ($isAjax) {
                 Response::json(['success' => false, 'message' => 'Failed to confirm delivery'], 500);
             } else {
                 $this->setFlash('error', 'Failed to confirm delivery');
-                $this->redirect('/build_mate/orders/' . $id . '/track-delivery');
+                $this->redirect('/orders/' . $id . '/track-delivery');
             }
         }
     }
@@ -580,14 +580,14 @@ class OrderController extends Controller
         
         if (!$order || $order['buyer_id'] !== $user['id']) {
             $this->setFlash('error', 'Invalid order');
-            $this->redirect('/build_mate/orders');
+            $this->redirect('/orders');
         }
         
         $issueText = $_POST['issue_text'] ?? '';
         
         if (empty($issueText)) {
             $this->setFlash('error', 'Please describe the issue');
-            $this->redirect('/build_mate/orders/' . $id);
+            $this->redirect('/orders/' . $id);
         }
         
         $deliveryModel = new Delivery();
@@ -601,7 +601,7 @@ class OrderController extends Controller
         
         Security::log('order_disputed', $user['id'], ['order_id' => $id, 'issue' => $issueText]);
         $this->setFlash('success', 'Dispute submitted. Admin will review.');
-        $this->redirect('/build_mate/orders/' . $id);
+        $this->redirect('/orders/' . $id);
     }
     
     /**

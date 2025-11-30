@@ -3,7 +3,7 @@
     <!-- Header Section -->
     <div class="checkout-header-modern mb-5">
         <div class="container">
-            <a href="/build_mate/cart" class="back-button-modern">
+            <a href="<?= \App\View::url('/cart') ?>" class="back-button-modern">
                 <i class="bi bi-arrow-left"></i>
                 <span>Back to Cart</span>
             </a>
@@ -52,7 +52,7 @@
                         </div>
                     </div>
                     <div class="checkout-card-body-modern">
-                        <form method="POST" action="/build_mate/checkout" id="checkoutForm" novalidate>
+                        <form method="POST" action="<?= \App\View::url('/checkout') ?>" id="checkoutForm" novalidate>
                             <?= \App\Csrf::field() ?>
                             
                             <!-- Hidden fields for coordinates -->

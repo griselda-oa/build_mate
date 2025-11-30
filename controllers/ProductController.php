@@ -204,7 +204,7 @@ class ProductController extends Controller
     {
         if (!Auth::check()) {
             $this->setFlash('error', 'Please login to submit a review');
-            $this->redirect('/build_mate/login');
+            $this->redirect('/login');
             return;
         }
         
@@ -403,7 +403,7 @@ class ProductController extends Controller
             if (!$tableExists) {
                 Response::json([
                     'success' => false, 
-                    'message' => 'Wishlist table does not exist. Please run the migration: <a href="/build_mate/run_wishlist_migration_web.php" target="_blank">Run Migration</a>'
+                    'message' => 'Wishlist table does not exist. Please run the migration: <a href="/run_wishlist_migration_web.php" target="_blank">Run Migration</a>'
                 ], 500);
                 return;
             }
@@ -454,7 +454,7 @@ class ProductController extends Controller
     public function wishlist(): void
     {
         if (!Auth::check()) {
-            $this->redirect('/build_mate/login');
+            $this->redirect('/login');
             return;
         }
         
@@ -468,7 +468,7 @@ class ProductController extends Controller
             $tableExists = $stmt->rowCount() > 0;
             
             if (!$tableExists) {
-                $this->setFlash('warning', 'Wishlist table does not exist. Please run the migration: <a href="/build_mate/run_wishlist_migration_web.php" target="_blank">Run Migration</a>');
+                $this->setFlash('warning', 'Wishlist table does not exist. Please run the migration: <a href="/run_wishlist_migration_web.php" target="_blank">Run Migration</a>');
                 $wishlistItems = [];
             } else {
                 $wishlistItems = $wishlistModel->getByUser($user['id']);

@@ -59,7 +59,7 @@
                         </button>
                     </div>
                     
-                    <form method="GET" action="/build_mate/catalog" id="filterForm">
+                    <form method="GET" action="<?= \App\View::url('/catalog') ?>" id="filterForm">
                         <!-- Search -->
                         <div class="filter-section-modern">
                             <label class="filter-label-modern">
@@ -175,7 +175,7 @@
                                 
                                 // If it's a relative path, make it absolute
                                 if (!empty($adImage) && !preg_match('/^https?:\/\//', $adImage)) {
-                                    if (strpos($adImage, '/build_mate/') !== 0) {
+                                    if (strpos($adImage, \App\View::basePath() . '/') !== 0) {
                                         $adImage = '/build_mate' . (strpos($adImage, '/') === 0 ? '' : '/') . $adImage;
                                     }
                                 }
@@ -354,7 +354,7 @@
                                         
                                         <!-- Quick Actions -->
                                         <div class="product-actions-sleek">
-                                            <button class="action-btn-sleek" onclick="event.preventDefault(); window.location.href='/build_mate/product/<?= \App\View::e($product['slug']) ?>'">
+                                            <button class="action-btn-sleek" onclick="event.preventDefault(); window.location.href=window.buildUrl('/product/<?= \App\View::e($product['slug']) ?>')">
                                                 <i class="bi bi-eye"></i>
                                             </button>
                                             <?php 
@@ -413,7 +413,7 @@
 // Wishlist toggle for catalog
 async function toggleWishlistCatalog(productId, btn) {
     <?php if (!\App\Auth::check()): ?>
-        window.location.href = '/build_mate/login';
+        window.location.href = window.buildUrl('/login');
         return;
     <?php endif; ?>
     
