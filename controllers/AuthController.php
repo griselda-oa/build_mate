@@ -140,8 +140,8 @@ class AuthController extends Controller
     public function showRegister(): void
     {
         if (Auth::check()) {
-            header('Location: /build_mate/');
-            exit;
+            $this->redirect('/');
+            return;
         }
         
         // Render register page using view system
