@@ -216,10 +216,21 @@ if (session_status() === PHP_SESSION_NONE) {
                (!empty($_SERVER['REQUEST_SCHEME']) && $_SERVER['REQUEST_SCHEME'] === 'https') ||
                (!empty($_SERVER['SERVER_PORT']) && (int)$_SERVER['SERVER_PORT'] === 443);
 
+    // Detect base path dynamically for session cookie
+    $requestUri = $_SERVER['REQUEST_URI'] ?? '/';
+    $basePath = '';
+    if (preg_match('#^/~[^/]+/build_mate#', $requestUri)) {
+        $basePath = preg_replace('#^(/~[^/]+/build_mate).*#', '$1', $requestUri);
+    } elseif (strpos($requestUri, '/build_mate') === 0) {
+        $basePath = '/build_mate';
+    } elseif (preg_match('#^/~[^/]+#', $requestUri)) {
+        $basePath = preg_replace('#^(/~[^/]+).*#', '$1', $requestUri);
+    }
+    
     session_set_cookie_params([
         'lifetime' => 0, // Session cookie (expires when browser closes)
-        // Use path without trailing slash to avoid mismatch when requesting '/build_mate'
-        'path' => '/build_mate',
+        // Use detected base path
+        'path' => $basePath ?: '/',
         'domain' => '',
         'secure' => ($isProduction && $isHttps),
         'httponly' => true,

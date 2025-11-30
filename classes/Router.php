@@ -65,13 +65,22 @@ class Router
         $method = $_SERVER['REQUEST_METHOD'];
         $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
         
-        // Remove /build_mate from URI if present
-        if (strpos($uri, '/build_mate') === 0) {
+        // Remove base path from URI dynamically
+        // Handle server path: /~griselda.owusu/build_mate
+        if (preg_match('#^/~[^/]+/build_mate(/.*)?$#', $uri, $matches)) {
+            $uri = $matches[1] ?? '/';
+        }
+        // Handle localhost path: /build_mate
+        elseif (strpos($uri, '/build_mate') === 0) {
             $uri = substr($uri, strlen('/build_mate'));
+        }
+        // Handle server root: /~griselda.owusu
+        elseif (preg_match('#^/~[^/]+(/.*)?$#', $uri, $matches)) {
+            $uri = $matches[1] ?? '/';
         }
         
         // Handle /index.php as root
-        if ($uri === '/index.php' || $uri === '/build_mate/index.php') {
+        if ($uri === '/index.php' || strpos($uri, '/index.php') !== false) {
             $uri = '/';
         }
         

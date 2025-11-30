@@ -10,10 +10,10 @@ return [
     
     'db' => [
         'host' => $_ENV['DB_HOST'] ?? 'localhost',
-        'port' => (int)($_ENV['DB_PORT'] ?? 3307), // XAMPP uses 3307 on macOS
+        'port' => (int)($_ENV['DB_PORT'] ?? 3306), // Default MySQL port (3306 for server, 3307 for XAMPP)
         'name' => $_ENV['DB_NAME'] ?? 'buildmate_db',
-        'user' => $_ENV['DB_USER'] ?? 'root',
-        'pass' => $_ENV['DB_PASS'] ?? '',
+        'user' => $_ENV['DB_USER'] ?? 'griselda.owusu', // Server username
+        'pass' => $_ENV['DB_PASS'] ?? '', // Will be set in .env
     ],
     
     'payment' => [

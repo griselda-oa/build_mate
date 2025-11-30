@@ -4,23 +4,44 @@ DirectoryIndex index.php
 # Route ALL requests to index.php
 <IfModule mod_rewrite.c>
     RewriteEngine On
-    RewriteBase /build_mate/
+    
+    # Detect base path dynamically
+    # For server: /~griselda.owusu/build_mate or /~griselda.owusu
+    # For localhost: /build_mate
+    RewriteCond %{REQUEST_URI} ^/~([^/]+)(/build_mate)?(/.*)?$
+    RewriteRule ^ - [E=BASE_PATH:/~%1/build_mate]
+    
+    RewriteCond %{REQUEST_URI} ^/build_mate(/.*)?$
+    RewriteRule ^ - [E=BASE_PATH:/build_mate]
+    
+    RewriteCond %{ENV:BASE_PATH} ^$
+    RewriteRule ^ - [E=BASE_PATH:]
+    
+    # Set RewriteBase dynamically
+    RewriteCond %{ENV:BASE_PATH} ^(/[^/]+/build_mate)$
+    RewriteRule ^ - [E=REWRITE_BASE:%1/]
+    
+    RewriteCond %{ENV:BASE_PATH} ^(/build_mate)$
+    RewriteRule ^ - [E=REWRITE_BASE:%1/]
+    
+    RewriteCond %{ENV:REWRITE_BASE} ^$
+    RewriteRule ^ - [E=REWRITE_BASE:/]
     
     # Allow assets (CSS, JS, images) to be served directly
-    RewriteCond %{REQUEST_URI} ^/build_mate/assets/
+    RewriteCond %{REQUEST_URI} ^(/~[^/]+)?(/build_mate)?/assets/
     RewriteRule ^(.*)$ - [L]
     
     # Allow storage/uploads to be served directly (for uploaded images/files)
-    RewriteCond %{REQUEST_URI} ^/build_mate/storage/uploads/
+    RewriteCond %{REQUEST_URI} ^(/~[^/]+)?(/build_mate)?/storage/uploads/
+    RewriteRule ^(.*)$ - [L]
+    
+    # Allow storage/invoices to be served directly
+    RewriteCond %{REQUEST_URI} ^(/~[^/]+)?(/build_mate)?/storage/invoices/
     RewriteRule ^(.*)$ - [L]
     
     # If file exists, serve it
     RewriteCond %{REQUEST_FILENAME} -f
     RewriteRule ^(.*)$ - [L]
-    
-    # Skip login and admin directories - let router handle them
-    RewriteCond %{REQUEST_URI} ^/build_mate/(login|admin)(/|$)
-    RewriteRule ^(.*)$ index.php [L,QSA]
     
     # If directory exists, serve it
     RewriteCond %{REQUEST_FILENAME} -d
