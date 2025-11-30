@@ -4,7 +4,7 @@
         <div class="container">
             <!-- Back Button - Positioned in hero section -->
             <div class="catalog-back-button">
-                <a href="/build_mate/" class="back-button back-button-hero">
+                <a href="<?= \App\View::url('/') ?>" class="back-button back-button-hero">
                     <i class="bi bi-arrow-left"></i>
                     <span>Back to Home</span>
                 </a>
@@ -183,7 +183,7 @@
                                 $isVideo = !empty($adImage) && preg_match('/\.(mp4|mov|webm)$/i', $adImage);
                                 ?>
                                 <div class="sponsored-card-modern">
-                                    <a href="/build_mate/product/<?= \App\View::e($product['slug']) ?>" class="sponsored-link-modern">
+                                    <a href="<?= \App\View::url('/product/' . $product['slug']) ?>" class="sponsored-link-modern">
                                         <div class="sponsored-image-modern">
                                             <?php if (!empty($adImage)): ?>
                                                 <?php if ($isVideo): ?>
@@ -297,7 +297,7 @@
                             $isVideo = $adData && !empty($adData['image_url']) && preg_match('/\.(mp4|mov|webm)$/i', $adData['image_url']);
                             ?>
                             <div class="product-card-sleek <?= $isAdvertised ? 'advertised-product' : '' ?>">
-                                <a href="/build_mate/product/<?= \App\View::e($product['slug']) ?>" class="product-link-sleek">
+                                <a href="<?= \App\View::url('/product/' . $product['slug']) ?>" class="product-link-sleek">
                                     <div class="product-image-sleek">
                                     <?php if (!empty($displayImage)): ?>
                                         <?php if ($isVideo): ?>

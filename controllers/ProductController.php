@@ -89,12 +89,18 @@ class ProductController extends Controller
             } else {
                 // Use premium ranking: Active Ads > Premium > High Sentiment > Freemium > Newest
                 // Exclude advertised products from regular list (they're shown in sponsored section)
-                $allProducts = $productModel->getRanked($query, $categoryId, $minPrice, $maxPrice, $verifiedOnly);
-                $sponsoredProductIds = array_column($sponsoredProducts, 'id');
-                $products = array_filter($allProducts, function($product) use ($sponsoredProductIds) {
-                    return !in_array($product['id'], $sponsoredProductIds);
-                });
-                $products = array_values($products); // Re-index array
+                try {
+                    $allProducts = $productModel->getRanked($query, $categoryId, $minPrice, $maxPrice, $verifiedOnly);
+                    $sponsoredProductIds = array_column($sponsoredProducts, 'id');
+                    $products = array_filter($allProducts, function($product) use ($sponsoredProductIds) {
+                        return !in_array($product['id'], $sponsoredProductIds);
+                    });
+                    $products = array_values($products); // Re-index array
+                } catch (\Exception $e) {
+                    // Fallback to regular search if getRanked fails (e.g., if premium tables don't exist)
+                    error_log("getRanked failed, using search fallback: " . $e->getMessage());
+                    $products = $productModel->search($query, $categoryId, $minPrice, $maxPrice, $verifiedOnly);
+                }
             }
             $categories = $categoryModel->findAll('name ASC');
         } catch (\Exception $e) {
