@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="/build_mate/assets/css/admin-suppliers.css">
+<link rel="stylesheet" href="<?= \App\View::asset('assets/css/admin-suppliers.css">
 
 <div class="admin-suppliers-page">
     <div class="admin-suppliers-container">

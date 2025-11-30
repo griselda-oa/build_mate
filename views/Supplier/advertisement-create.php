@@ -1,6 +1,6 @@
 <!-- Create Advertisement Page -->
-<link rel="stylesheet" href="/build_mate/assets/css/supplier-dashboard.css">
-<link rel="stylesheet" href="/build_mate/assets/css/advertisement-form.css">
+<link rel="stylesheet" href="<?= \App\View::asset('assets/css/supplier-dashboard.css">
+<link rel="stylesheet" href="<?= \App\View::asset('assets/css/advertisement-form.css">
 
 <div class="supplier-dashboard-page">
     <div class="container">
@@ -128,7 +128,7 @@
     </div>
 </div>
 
-<script src="/build_mate/assets/js/advertisement-form.js"></script>
+<script src="<?= \App\View::asset('assets/js/advertisement-form.js') ?>"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     // Check if payment was successful (from callback)

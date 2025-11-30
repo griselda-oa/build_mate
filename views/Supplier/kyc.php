@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="/build_mate/assets/css/kyc-application.css">
+<link rel="stylesheet" href="<?= \App\View::asset('assets/css/kyc-application.css">
 
 <div class="kyc-application-form">
     <!-- Form Header -->
@@ -522,4 +522,4 @@
     </div>
 </div>
 
-<script src="/build_mate/assets/js/kyc-form.js"></script>
+<script src="<?= \App\View::asset('assets/js/kyc-form.js') ?>"></script>

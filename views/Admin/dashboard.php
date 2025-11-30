@@ -1,5 +1,5 @@
-<link rel="stylesheet" href="/build_mate/assets/css/admin-dashboard.css">
-<link rel="stylesheet" href="/build_mate/assets/css/ad-banner.css">
+<link rel="stylesheet" href="<?= \App\View::asset('assets/css/admin-dashboard.css">
+<link rel="stylesheet" href="<?= \App\View::asset('assets/css/ad-banner.css">
 
 <div class="admin-dashboard-page">
     <div class="admin-dashboard-container">

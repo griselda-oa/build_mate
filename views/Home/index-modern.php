@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="/build_mate/assets/css/homepage-modern.css">
+<link rel="stylesheet" href="<?= \App\View::asset('assets/css/homepage-modern.css">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
 
 <!-- Hero Slideshow -->
@@ -328,5 +328,5 @@
     <i class="bi bi-arrow-up"></i>
 </button>
 
-<script src="/build_mate/assets/js/homepage-modern.js"></script>
+<script src="<?= \App\View::asset('assets/js/homepage-modern.js') ?>"></script>
 

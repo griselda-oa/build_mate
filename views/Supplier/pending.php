@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="/build_mate/assets/css/pending-dashboard.css">
+<link rel="stylesheet" href="<?= \App\View::asset('assets/css/pending-dashboard.css">
 
 <div class="pending-dashboard">
     <!-- Hero Section -->
@@ -184,4 +184,4 @@
     </section>
 </div>
 
-<script src="/build_mate/assets/js/pending-animations.js"></script>
+<script src="<?= \App\View::asset('assets/js/pending-animations.js') ?>"></script>

@@ -407,7 +407,7 @@
 </div>
 
 <!-- Include Catalog JavaScript -->
-<script src="/build_mate/assets/js/catalog.js?v=<?= time() ?>"></script>
+<script src="<?= \App\View::asset('assets/js/catalog.js?v=<?= time() ?>') ?>"></script>
 
 <script>
 // Wishlist toggle for catalog
@@ -493,4 +493,4 @@ function showNotification(message, type) {
 </script>
 
 <!-- Catalog Styles -->
-<link rel="stylesheet" href="/build_mate/assets/css/catalog.css">
+<link rel="stylesheet" href="<?= \App\View::asset('assets/css/catalog.css') ?>">

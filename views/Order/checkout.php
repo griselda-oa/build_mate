@@ -243,7 +243,7 @@
 </div>
 
 <!-- Custom Styles -->
-<link rel="stylesheet" href="/build_mate/assets/css/checkout-modern.css?v=<?= filemtime(__DIR__ . '/../../assets/css/checkout-modern.css') ?>">
+<link rel="stylesheet" href="<?= \App\View::asset('assets/css/checkout-modern.css?v=<?= filemtime(__DIR__ . '/../../assets/css/checkout-modern.css') ?>">
 
 <!-- Form validation -->
 <script>

@@ -1246,6 +1246,6 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 <!-- Include Catalog CSS for consistent styling -->
-<link rel="stylesheet" href="/build_mate/assets/css/catalog.css?v=<?= filemtime(__DIR__ . '/../../assets/css/catalog.css') ?>">
-<link rel="stylesheet" href="/build_mate/assets/css/ad-banner.css">
+<link rel="stylesheet" href="<?= \App\View::asset('assets/css/catalog.css?v=<?= filemtime(__DIR__ . '/../../assets/css/catalog.css') ?>">
+<link rel="stylesheet" href="<?= \App\View::asset('assets/css/ad-banner.css">
 

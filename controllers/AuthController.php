@@ -42,8 +42,8 @@ class AuthController extends Controller
         if (empty($email) || empty($password)) {
             error_log("LOGIN - Empty email or password");
             $this->setFlash('error', 'Email and password are required');
-            header('Location: /build_mate/login', true, 302);
-            exit;
+            $this->redirect('/login');
+            return;
         }
         
         $userModel = new User();
@@ -60,8 +60,8 @@ class AuthController extends Controller
         if (!$attempted) {
             error_log("LOGIN - Invalid credentials");
             $this->setFlash('error', 'Invalid credentials');
-            header('Location: /build_mate/login', true, 302);
-            exit;
+            $this->redirect('/login');
+            return;
         }
 
         // Grab the canonical session user
@@ -72,8 +72,8 @@ class AuthController extends Controller
         if (!isset($_SESSION['user']) || $_SESSION['user']['id'] !== $user['id']) {
             error_log("LOGIN ERROR - Session not set correctly after login!");
             $this->setFlash('error', 'Login failed - please try again');
-            header('Location: /build_mate/login', true, 302);
-            exit;
+            $this->redirect('/login');
+            return;
         }
         
         // Log login (don't let this block redirect if it fails)
@@ -90,16 +90,16 @@ class AuthController extends Controller
             // Redirect to role-specific dashboard
             switch ($user['role']) {
                 case 'supplier':
-                    $redirect = '/build_mate/supplier/dashboard';
+                    $redirect = '/supplier/dashboard';
                     break;
                 case 'logistics':
-                    $redirect = '/build_mate/logistics/dashboard';
+                    $redirect = '/logistics/dashboard';
                     break;
                 case 'admin':
-                    $redirect = '/build_mate/admin/dashboard';
+                    $redirect = '/admin/dashboard';
                     break;
                 default:
-                    $redirect = '/build_mate/dashboard'; // Buyer goes to dashboard
+                    $redirect = '/dashboard'; // Buyer goes to dashboard
                     break;
             }
         }
@@ -110,8 +110,8 @@ class AuthController extends Controller
         if (!isset($_SESSION['user']) || $_SESSION['user']['id'] !== $user['id']) {
             error_log("LOGIN ERROR - Session lost before redirect! User ID: " . $user['id']);
             $this->setFlash('error', 'Session error - please try again');
-            header('Location: /build_mate/login', true, 302);
-            exit;
+            $this->redirect('/login');
+            return;
         }
         
         error_log("LOGIN - Redirecting to: $redirect (role: " . $user['role'] . ", session user: " . ($user['email'] ?? 'NOT SET') . ", session_id: " . session_id() . ")");
@@ -120,8 +120,8 @@ class AuthController extends Controller
         if (!isset($_SESSION['user']) || $_SESSION['user']['id'] !== $user['id']) {
             error_log("LOGIN CRITICAL ERROR - Session lost right before redirect!");
             $this->setFlash('error', 'Session error - please try again');
-            header('Location: /build_mate/login', true, 302);
-            exit;
+            $this->redirect('/login');
+            return;
         }
         
         // Clean output buffer - session is already written by Auth::login()

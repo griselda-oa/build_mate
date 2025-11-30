@@ -79,7 +79,7 @@
     </div>
 </div>
 
-<link rel="stylesheet" href="/build_mate/assets/css/payment-modern.css?v=<?= time() ?>">
+<link rel="stylesheet" href="<?= \App\View::asset('assets/css/payment-modern.css?v=<?= time() ?>">
 
 <script>
 // Auto-redirect to tracking page after 5 seconds (give user time to see success message)

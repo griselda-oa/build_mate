@@ -437,7 +437,7 @@
 </div>
 
 <!-- Include Product Detail Styles -->
-<link rel="stylesheet" href="/build_mate/assets/css/product-detail.css">
+<link rel="stylesheet" href="<?= \App\View::asset('assets/css/product-detail.css">
 
 <script>
 // Quantity Controls

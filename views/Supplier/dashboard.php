@@ -1,6 +1,6 @@
 <!-- Modern Supplier Dashboard -->
-<link rel="stylesheet" href="/build_mate/assets/css/supplier-dashboard.css">
-<link rel="stylesheet" href="/build_mate/assets/css/ad-banner.css">
+<link rel="stylesheet" href="<?= \App\View::asset('assets/css/supplier-dashboard.css">
+<link rel="stylesheet" href="<?= \App\View::asset('assets/css/ad-banner.css">
 
 <div class="supplier-dashboard-page">
     <div class="container">

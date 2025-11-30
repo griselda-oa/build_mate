@@ -385,10 +385,10 @@
 </div>
 
 <!-- Order Detail Styles -->
-<link rel="stylesheet" href="/build_mate/assets/css/order-detail.css?v=<?= time() ?>">
-<link rel="stylesheet" href="/build_mate/assets/css/delivery-tracker.css?v=<?= time() ?>">
-<link rel="stylesheet" href="/build_mate/assets/css/order-tracking.css?v=<?= time() ?>">
-<script src="/build_mate/assets/js/delivery-tracker.js?v=<?= time() ?>"></script>
+<link rel="stylesheet" href="<?= \App\View::asset('assets/css/order-detail.css?v=<?= time() ?>">
+<link rel="stylesheet" href="<?= \App\View::asset('assets/css/delivery-tracker.css?v=<?= time() ?>">
+<link rel="stylesheet" href="<?= \App\View::asset('assets/css/order-tracking.css?v=<?= time() ?>">
+<script src="<?= \App\View::asset('assets/js/delivery-tracker.js?v=<?= time() ?>') ?>"></script>
 <script>
 // Initialize tracker with current order status
 document.addEventListener('DOMContentLoaded', function() {

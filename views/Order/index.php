@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="/build_mate/assets/css/buyer-orders.css">
+<link rel="stylesheet" href="<?= \App\View::asset('assets/css/buyer-orders.css">
 
 <div class="buyer-orders-page">
     <div class="buyer-orders-container">

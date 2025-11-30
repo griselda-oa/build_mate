@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="/build_mate/assets/css/ad-banner.css">
+<link rel="stylesheet" href="<?= \App\View::asset('assets/css/ad-banner.css">
 
 <div class="mb-3">
     <a href="/build_mate/" class="back-button">

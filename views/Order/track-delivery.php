@@ -479,14 +479,14 @@ function initDeliveryMapUltra() {
 <?php endif; ?>
 
 <!-- Modern Delivery Tracker Styles -->
-<link rel="stylesheet" href="/build_mate/assets/css/delivery-tracker.css?v=<?= time() ?>">
+<link rel="stylesheet" href="<?= \App\View::asset('assets/css/delivery-tracker.css?v=<?= time() ?>">
 <!-- Order Tracking Timeline Styles -->
-<link rel="stylesheet" href="/build_mate/assets/css/order-tracking.css?v=<?= time() ?>">
+<link rel="stylesheet" href="<?= \App\View::asset('assets/css/order-tracking.css?v=<?= time() ?>">
 <!-- Ultra Modern Tracking Styles -->
-<link rel="stylesheet" href="/build_mate/assets/css/tracking-ultra.css?v=<?= time() ?>">
+<link rel="stylesheet" href="<?= \App\View::asset('assets/css/tracking-ultra.css?v=<?= time() ?>">
 
 <!-- Delivery Tracker JavaScript -->
-<script src="/build_mate/assets/js/delivery-tracker.js?v=<?= time() ?>"></script>
+<script src="<?= \App\View::asset('assets/js/delivery-tracker.js?v=<?= time() ?>') ?>"></script>
 <script>
 // Initialize tracker with current order status
 document.addEventListener('DOMContentLoaded', function() {
