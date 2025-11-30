@@ -1,0 +1,26 @@
+/vendor/
+.env
+.env.bak
+/storage/uploads/*
+/storage/invoices/*
+/storage/logs/*
+/storage/sessions/*
+!/storage/uploads/.gitkeep
+!/storage/invoices/.gitkeep
+!/storage/logs/.gitkeep
+!/storage/sessions/.gitkeep
+.htaccess.local
+.DS_Store
+
+# Temporary/utility scripts (not part of MVC structure)
+analyze_existing_reviews.php
+check_order_payment.php
+fix_payment_status.php
+mark_payment_complete.php
+quick_fix_payment.php
+create_reviews_table.php
+run_*.php
+
+# Development files
+dev/
+

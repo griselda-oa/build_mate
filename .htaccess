@@ -1,0 +1,41 @@
+# Set index file
+DirectoryIndex index.php
+
+# Route ALL requests to index.php
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /build_mate/
+    
+    # Allow assets (CSS, JS, images) to be served directly
+    RewriteCond %{REQUEST_URI} ^/build_mate/assets/
+    RewriteRule ^(.*)$ - [L]
+    
+    # Allow storage/uploads to be served directly (for uploaded images/files)
+    RewriteCond %{REQUEST_URI} ^/build_mate/storage/uploads/
+    RewriteRule ^(.*)$ - [L]
+    
+    # If file exists, serve it
+    RewriteCond %{REQUEST_FILENAME} -f
+    RewriteRule ^(.*)$ - [L]
+    
+    # Skip login and admin directories - let router handle them
+    RewriteCond %{REQUEST_URI} ^/build_mate/(login|admin)(/|$)
+    RewriteRule ^(.*)$ index.php [L,QSA]
+    
+    # If directory exists, serve it
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^(.*)$ - [L]
+    
+    # Everything else goes to index.php
+    RewriteRule ^(.*)$ index.php [L,QSA]
+</IfModule>
+
+# Prevent directory listing
+Options -Indexes
+
+# Security headers
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set X-XSS-Protection "1; mode=block"
+</IfModule>

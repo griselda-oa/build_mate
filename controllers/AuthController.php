@@ -1,0 +1,230 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App;
+
+use App\Controller;
+use App\Auth;
+use App\User;
+use App\Validator;
+use App\Security;
+
+/**
+ * Authentication controller
+ */
+class AuthController extends Controller
+{
+    /**
+     * Show login form
+     */
+    public function showLogin(): void
+    {
+        if (Auth::check()) {
+            header('Location: /build_mate/');
+            exit;
+        }
+        
+        // Render login page using view system
+        echo $this->view->render('Auth/login', [
+            'flash' => $this->getFlash()
+        ], 'auth');
+    }
+    
+    /**
+     * Process login
+     */
+    public function login(): void
+    {
+        $email = Validator::normalizeEmail($_POST['email'] ?? '');
+        $password = $_POST['password'] ?? '';
+        
+        if (empty($email) || empty($password)) {
+            error_log("LOGIN - Empty email or password");
+            $this->setFlash('error', 'Email and password are required');
+            header('Location: /build_mate/login', true, 302);
+            exit;
+        }
+        
+        $userModel = new User();
+
+        // Fetch user record so we can check role before attempting a login
+        $maybeUser = $userModel->findByEmail($email);
+
+        // Allow admin login - removed restrictive check
+        // Admin users can log in if they have the correct credentials
+
+        // Centralized attempt: verifies credentials and performs login on success
+        $attempted = Auth::attempt($email, $password);
+
+        if (!$attempted) {
+            error_log("LOGIN - Invalid credentials");
+            $this->setFlash('error', 'Invalid credentials');
+            header('Location: /build_mate/login', true, 302);
+            exit;
+        }
+
+        // Grab the canonical session user
+        $user = Auth::user();
+        error_log("LOGIN - User logged in, session: " . print_r($_SESSION['user'], true));
+        
+        // Verify session is set correctly
+        if (!isset($_SESSION['user']) || $_SESSION['user']['id'] !== $user['id']) {
+            error_log("LOGIN ERROR - Session not set correctly after login!");
+            $this->setFlash('error', 'Login failed - please try again');
+            header('Location: /build_mate/login', true, 302);
+            exit;
+        }
+        
+        // Log login (don't let this block redirect if it fails)
+        try {
+            Security::log('login_success', $user['id']);
+        } catch (\Exception $e) {
+            error_log("LOGIN - Security log failed: " . $e->getMessage());
+        }
+        
+        // Determine redirect based on user role BEFORE cleaning buffer
+        $redirect = $_SESSION['redirect_after_login'] ?? null;
+        
+        if (!$redirect) {
+            // Redirect to role-specific dashboard
+            switch ($user['role']) {
+                case 'supplier':
+                    $redirect = '/build_mate/supplier/dashboard';
+                    break;
+                case 'logistics':
+                    $redirect = '/build_mate/logistics/dashboard';
+                    break;
+                case 'admin':
+                    $redirect = '/build_mate/admin/dashboard';
+                    break;
+                default:
+                    $redirect = '/build_mate/dashboard'; // Buyer goes to dashboard
+                    break;
+            }
+        }
+        
+        unset($_SESSION['redirect_after_login']);
+        
+        // Verify session one more time before redirect
+        if (!isset($_SESSION['user']) || $_SESSION['user']['id'] !== $user['id']) {
+            error_log("LOGIN ERROR - Session lost before redirect! User ID: " . $user['id']);
+            $this->setFlash('error', 'Session error - please try again');
+            header('Location: /build_mate/login', true, 302);
+            exit;
+        }
+        
+        error_log("LOGIN - Redirecting to: $redirect (role: " . $user['role'] . ", session user: " . ($user['email'] ?? 'NOT SET') . ", session_id: " . session_id() . ")");
+        
+        // Verify session one final time
+        if (!isset($_SESSION['user']) || $_SESSION['user']['id'] !== $user['id']) {
+            error_log("LOGIN CRITICAL ERROR - Session lost right before redirect!");
+            $this->setFlash('error', 'Session error - please try again');
+            header('Location: /build_mate/login', true, 302);
+            exit;
+        }
+        
+        // Clean output buffer - session is already written by Auth::login()
+        while (ob_get_level() > 0) {
+            ob_end_clean();
+        }
+
+        // (debug header removed)
+        header('Location: ' . $redirect, true, 302);
+        exit;
+    }
+    
+    /**
+     * Show register form
+     */
+    public function showRegister(): void
+    {
+        if (Auth::check()) {
+            header('Location: /build_mate/');
+            exit;
+        }
+        
+        // Render register page using view system
+        echo $this->view->render('Auth/register', [
+            'flash' => $this->getFlash()
+        ], 'auth');
+    }
+    
+    /**
+     * Process registration
+     */
+    public function register(): void
+    {
+        $name = Validator::sanitize($_POST['name'] ?? '', 255);
+        $email = Validator::normalizeEmail($_POST['email'] ?? '');
+        $password = $_POST['password'] ?? '';
+        $role = $_POST['role'] ?? 'buyer';
+        
+        // Validate
+        $errors = [];
+        
+        if (empty($name) || strlen($name) < 2) {
+            $errors[] = 'Name must be at least 2 characters';
+        }
+        
+        if (!Validator::email($email)) {
+            $errors[] = 'Invalid email address';
+        }
+        
+        if (!Validator::password($password)) {
+            $errors[] = 'Password must be at least 8 characters';
+        }
+        
+        if (!in_array($role, ['buyer', 'supplier', 'logistics'])) {
+            $errors[] = 'Invalid role selected';
+        }
+        
+        if (!empty($errors)) {
+            $this->setFlash('error', implode(', ', $errors));
+            $this->redirect('/build_mate/register');
+        }
+        
+        $userModel = new User();
+        
+        // Check if email exists
+        if ($userModel->findByEmail($email)) {
+            $this->setFlash('error', 'Email already registered');
+            $this->redirect('/build_mate/register');
+        }
+        
+        // Create user
+        $userId = $userModel->createUser([
+            'name' => $name,
+            'email' => $email,
+            'password' => $password,
+            'role' => $role
+        ]);
+        
+        // Create supplier record if role is supplier
+        if ($role === 'supplier') {
+            $supplierModel = new \App\Supplier();
+            $supplierModel->create([
+                'user_id' => $userId,
+                'business_name' => $name,
+                'kyc_status' => 'pending'
+            ]);
+        }
+        
+        Security::log('user_registered', $userId, ['role' => $role]);
+        
+        $this->setFlash('success', 'Registration successful. Please login.');
+        $this->redirect('/build_mate/login');
+    }
+    
+    /**
+     * Logout
+     */
+    public function logout(): void
+    {
+        $userId = Auth::user()['id'] ?? null;
+        Security::log('logout', $userId);
+        Auth::logout();
+        $this->redirect('/build_mate/');
+    }
+}
+

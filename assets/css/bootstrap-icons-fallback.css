@@ -1,0 +1,53 @@
+/* Bootstrap Icons Fallback CSS
+ * This is a minimal fallback when the CDN fails to load.
+ * It provides basic icon support using Unicode characters and CSS.
+ */
+
+/* Note: This is a minimal fallback. For full icon support, 
+ * the Bootstrap Icons font should be loaded from CDN or locally.
+ * This file prevents 404 errors but icons may not display correctly.
+ */
+
+.bi::before,
+[class^="bi-"]::before,
+[class*=" bi-"]::before {
+    display: inline-block;
+    font-family: "bootstrap-icons" !important;
+    font-style: normal;
+    font-weight: normal !important;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    vertical-align: -.125em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* If font doesn't load, hide icons to prevent broken display */
+@font-face {
+    font-family: "bootstrap-icons";
+    src: url("data:application/x-font-woff;charset=utf-8;base64,") format("woff2");
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Fallback: Use Unicode symbols for common icons */
+.bi-arrow-left::before { content: "←"; }
+.bi-arrow-right::before { content: "→"; }
+.bi-arrow-up::before { content: "↑"; }
+.bi-arrow-down::before { content: "↓"; }
+.bi-check::before { content: "✓"; }
+.bi-x::before { content: "×"; }
+.bi-plus::before { content: "+"; }
+.bi-dash::before { content: "−"; }
+.bi-star::before { content: "★"; }
+.bi-star-fill::before { content: "★"; }
+.bi-heart::before { content: "♥"; }
+.bi-heart-fill::before { content: "♥"; }
+.bi-cart::before { content: "🛒"; }
+.bi-eye::before { content: "👁"; }
+.bi-gear::before { content: "⚙"; }
+.bi-truck::before { content: "🚚"; }
+.bi-check-circle::before { content: "✓"; }
+.bi-check-circle-fill::before { content: "✓"; }
+

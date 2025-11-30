@@ -1,0 +1,408 @@
+/* Modern Buyer Orders Page Styles */
+
+.buyer-orders-page {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+    padding: 2rem 0;
+}
+
+.buyer-orders-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+/* Back Button */
+.buyer-back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background: white;
+    color: #8B4513;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    margin-bottom: 2rem;
+    border: 2px solid transparent;
+}
+
+.buyer-back-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(139, 69, 19, 0.2);
+    background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
+    color: white;
+    border-color: #8B4513;
+}
+
+/* Header Section */
+.buyer-orders-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}
+
+.buyer-orders-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 0;
+}
+
+/* Filter Tabs */
+.buyer-filter-tabs {
+    display: flex;
+    gap: 0.5rem;
+    background: white;
+    padding: 0.5rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.buyer-filter-tab {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    background: transparent;
+    color: #6B7280;
+    font-weight: 600;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    font-size: 0.95rem;
+}
+
+.buyer-filter-tab:hover {
+    background: rgba(139, 69, 19, 0.1);
+    color: #8B4513;
+}
+
+.buyer-filter-tab.active {
+    background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
+    color: white;
+    box-shadow: 0 2px 8px rgba(139, 69, 19, 0.3);
+}
+
+/* Orders Card */
+.buyer-orders-card {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.buyer-orders-card:hover {
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+/* Table Styles */
+.buyer-orders-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0;
+}
+
+.buyer-orders-table thead {
+    background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
+}
+
+.buyer-orders-table thead th {
+    padding: 1.25rem 1.5rem;
+    text-align: left;
+    color: white;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border: none;
+}
+
+.buyer-orders-table tbody tr {
+    border-bottom: 1px solid rgba(139, 69, 19, 0.1);
+    transition: all 0.3s ease;
+}
+
+.buyer-orders-table tbody tr:hover {
+    background: rgba(139, 69, 19, 0.03);
+    transform: scale(1.01);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.buyer-orders-table tbody tr:last-child {
+    border-bottom: none;
+}
+
+.buyer-orders-table tbody td {
+    padding: 1.5rem 1.5rem;
+    vertical-align: middle;
+}
+
+/* Date Column */
+.buyer-order-date {
+    font-weight: 600;
+    color: #1F2937;
+    font-size: 1rem;
+}
+
+/* Items Column */
+.buyer-order-items {
+    color: #6B7280;
+    font-size: 0.95rem;
+}
+
+/* Total Column */
+.buyer-order-total {
+    font-weight: 700;
+    color: #8B4513;
+    font-size: 1.125rem;
+}
+
+/* Status Badge */
+.buyer-status-badge {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.buyer-status-badge.pending {
+    background: linear-gradient(135deg, #FCD34D 0%, #FBBF24 100%);
+    color: #92400E;
+}
+
+.buyer-status-badge.paid,
+.buyer-status-badge.payment_confirmed {
+    background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+    color: white;
+}
+
+.buyer-status-badge.processing {
+    background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
+    color: white;
+}
+
+.buyer-status-badge.out_for_delivery,
+.buyer-status-badge.shipped,
+.buyer-status-badge.in_transit {
+    background: linear-gradient(135deg, #6366F1 0%, #4F46E5 100%);
+    color: white;
+}
+
+.buyer-status-badge.delivered,
+.buyer-status-badge.completed {
+    background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+    color: white;
+}
+
+.buyer-status-badge.cancelled {
+    background: linear-gradient(135deg, #EF4444 0%, #DC2626 100%);
+    color: white;
+}
+
+/* Action Buttons */
+.buyer-order-actions {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.buyer-action-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.625rem 1.25rem;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    white-space: nowrap;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.buyer-action-btn.view {
+    background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
+    color: white;
+}
+
+.buyer-action-btn.view:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(139, 69, 19, 0.3);
+    background: linear-gradient(135deg, #A0522D 0%, #8B4513 100%);
+}
+
+.buyer-action-btn.track {
+    background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+    color: white;
+}
+
+.buyer-action-btn.track:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+    background: linear-gradient(135deg, #059669 0%, #10B981 100%);
+}
+
+.buyer-action-btn i {
+    font-size: 1rem;
+}
+
+/* Empty State */
+.buyer-empty-state {
+    background: white;
+    border-radius: 20px;
+    padding: 4rem 2rem;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.buyer-empty-state-icon {
+    font-size: 4rem;
+    color: #D1D5DB;
+    margin-bottom: 1.5rem;
+}
+
+.buyer-empty-state-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #1F2937;
+    margin-bottom: 0.75rem;
+}
+
+.buyer-empty-state-text {
+    color: #6B7280;
+    margin-bottom: 1.5rem;
+}
+
+.buyer-empty-state-link {
+    display: inline-block;
+    padding: 0.75rem 2rem;
+    background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(139, 69, 19, 0.2);
+}
+
+.buyer-empty-state-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(139, 69, 19, 0.3);
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    .buyer-orders-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .buyer-orders-title {
+        font-size: 2rem;
+    }
+    
+    .buyer-filter-tabs {
+        width: 100%;
+        flex-wrap: wrap;
+    }
+    
+    .buyer-filter-tab {
+        flex: 1;
+        min-width: 100px;
+        text-align: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .buyer-orders-page {
+        padding: 1rem 0;
+    }
+    
+    .buyer-orders-container {
+        padding: 0 1rem;
+    }
+    
+    .buyer-orders-table {
+        font-size: 0.9rem;
+    }
+    
+    .buyer-orders-table thead th,
+    .buyer-orders-table tbody td {
+        padding: 1rem;
+    }
+    
+    .buyer-orders-table thead {
+        display: none;
+    }
+    
+    .buyer-orders-table tbody tr {
+        display: block;
+        margin-bottom: 1.5rem;
+        border: 1px solid rgba(139, 69, 19, 0.2);
+        border-radius: 12px;
+        padding: 1rem;
+        background: white;
+    }
+    
+    .buyer-orders-table tbody td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.75rem 0;
+        border-bottom: 1px solid rgba(139, 69, 19, 0.1);
+    }
+    
+    .buyer-orders-table tbody td:last-child {
+        border-bottom: none;
+    }
+    
+    .buyer-orders-table tbody td::before {
+        content: attr(data-label);
+        font-weight: 600;
+        color: #8B4513;
+        text-transform: uppercase;
+        font-size: 0.8rem;
+        letter-spacing: 0.5px;
+    }
+    
+    .buyer-order-actions {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .buyer-action-btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 576px) {
+    .buyer-orders-title {
+        font-size: 1.75rem;
+    }
+    
+    .buyer-filter-tabs {
+        flex-direction: column;
+    }
+    
+    .buyer-filter-tab {
+        width: 100%;
+    }
+}
+

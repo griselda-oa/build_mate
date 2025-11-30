@@ -1,0 +1,591 @@
+/* Modern Payment Page Styles */
+
+.payment-page-modern {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #f5f5f5 0%, #fafafa 100%);
+    padding: 2rem 0 4rem;
+}
+
+/* Payment Header */
+.payment-header-modern {
+    background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary-dark)) 100%);
+    color: white;
+    padding: 3rem 0;
+    margin-bottom: 0;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.payment-title-modern {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: white;
+}
+
+.payment-subtitle-modern {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    margin: 0;
+    color: white;
+}
+
+/* Payment Card */
+.payment-card-modern {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+}
+
+.payment-card-header-modern {
+    background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary-dark)) 100%);
+    color: white;
+    padding: 2rem;
+}
+
+.payment-icon-wrapper-modern {
+    width: 60px;
+    height: 60px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1rem;
+    font-size: 1.5rem;
+}
+
+.payment-card-title-modern {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: white;
+}
+
+.payment-card-subtitle-modern {
+    font-size: 0.9rem;
+    opacity: 0.9;
+    color: white;
+}
+
+.payment-card-body-modern {
+    padding: 2.5rem;
+}
+
+/* Order Summary in Payment */
+.payment-order-summary-modern {
+    background: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 12px;
+}
+
+.payment-items-modern {
+    margin-bottom: 1rem;
+}
+
+.payment-item-modern {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.payment-item-modern:last-child {
+    border-bottom: none;
+}
+
+.payment-item-name-modern {
+    flex: 1;
+    font-weight: 500;
+}
+
+.payment-item-qty-modern {
+    margin: 0 1rem;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.payment-item-price-modern {
+    font-weight: 600;
+    color: hsl(var(--primary));
+}
+
+.payment-total-modern {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1rem;
+    margin-top: 1rem;
+    border-top: 2px solid hsl(var(--primary));
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+/* Paystack Button */
+.paystack-button-modern {
+    width: 100%;
+    padding: 1.5rem 2rem;
+    background: linear-gradient(135deg, #00d9ff 0%, #0099cc 100%);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    box-shadow: 0 4px 15px rgba(0, 217, 255, 0.3);
+    margin-bottom: 1.5rem;
+}
+
+.paystack-button-modern:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 217, 255, 0.4);
+}
+
+.paystack-button-modern:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+/* Security Badges */
+.payment-security-modern {
+    text-align: center;
+}
+
+.security-badges-modern {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.security-badge-modern {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: #f0f0f0;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    color: #666;
+}
+
+.security-badge-modern i {
+    color: hsl(var(--primary));
+}
+
+/* Order Details Card */
+.order-details-card-modern {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    position: sticky;
+    top: 20px;
+}
+
+.order-details-header-modern {
+    background: linear-gradient(135deg, hsl(var(--secondary)) 0%, hsl(var(--secondary-dark)) 100%);
+    color: white;
+    padding: 2rem;
+}
+
+.order-details-body-modern {
+    padding: 2rem;
+}
+
+.order-info-item-modern {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.order-info-item-modern:last-child {
+    border-bottom: none;
+}
+
+.order-info-label-modern {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #666;
+    font-weight: 500;
+}
+
+.order-info-value-modern {
+    font-weight: 600;
+    color: #333;
+}
+
+.order-total-highlight-modern {
+    color: hsl(var(--primary));
+    font-size: 1.3rem;
+}
+
+.order-divider-modern {
+    height: 2px;
+    background: linear-gradient(90deg, transparent 0%, #e0e0e0 50%, transparent 100%);
+    margin: 1.5rem 0;
+}
+
+.payment-notice-modern {
+    background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+    border-left: 4px solid hsl(var(--success));
+    padding: 1.25rem;
+    border-radius: 12px;
+    display: flex;
+    gap: 1rem;
+}
+
+.payment-notice-icon-modern {
+    font-size: 2rem;
+    color: hsl(var(--success));
+    flex-shrink: 0;
+}
+
+.payment-notice-content-modern strong {
+    display: block;
+    color: #2e7d32;
+    margin-bottom: 0.5rem;
+}
+
+.payment-notice-content-modern p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #555;
+    line-height: 1.5;
+}
+
+/* Payment Success Page */
+.payment-success-page-modern {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #f5f5f5 0%, #fafafa 100%);
+    padding: 4rem 0;
+    display: flex;
+    align-items: center;
+}
+
+.payment-success-card-modern {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    padding: 3rem;
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.success-icon-wrapper-modern {
+    margin-bottom: 2rem;
+}
+
+.success-checkmark-modern {
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(135deg, hsl(var(--success)) 0%, #20c997 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    font-size: 3rem;
+    color: white;
+    animation: scaleIn 0.5s ease-out;
+}
+
+@keyframes scaleIn {
+    from {
+        transform: scale(0);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.success-title-modern {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: hsl(var(--primary));
+    margin-bottom: 0.5rem;
+}
+
+.success-subtitle-modern {
+    font-size: 1.2rem;
+    color: #666;
+    margin-bottom: 2rem;
+}
+
+.success-details-modern {
+    background: #f8f9fa;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.success-detail-item-modern {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.success-detail-item-modern:last-child {
+    border-bottom: none;
+}
+
+.success-detail-item-modern i {
+    font-size: 1.5rem;
+    color: hsl(var(--primary));
+    width: 30px;
+}
+
+.detail-label-modern {
+    display: block;
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 0.25rem;
+}
+
+.detail-value-modern {
+    display: block;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #333;
+}
+
+.success-badge-modern {
+    display: inline-block;
+    background: hsl(var(--success));
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+}
+
+.success-message-modern {
+    background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+    border-left: 4px solid hsl(var(--info));
+    padding: 1.25rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    text-align: left;
+}
+
+.success-message-modern i {
+    font-size: 1.5rem;
+    color: hsl(var(--info));
+    flex-shrink: 0;
+}
+
+.success-message-modern p {
+    margin: 0;
+    color: #555;
+}
+
+.success-actions-modern {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn-primary-modern,
+.btn-secondary-modern,
+.btn-outline-modern {
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.btn-primary-modern {
+    background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary-dark)) 100%);
+    color: white;
+}
+
+.btn-primary-modern:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px hsla(var(--primary), 0.3);
+    color: white;
+}
+
+.btn-secondary-modern {
+    background: linear-gradient(135deg, hsl(var(--secondary)) 0%, hsl(var(--secondary-dark)) 100%);
+    color: white;
+}
+
+.btn-secondary-modern:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px hsla(var(--secondary), 0.3);
+    color: white;
+}
+
+.btn-outline-modern {
+    background: white;
+    color: hsl(var(--primary));
+    border: 2px solid hsl(var(--primary));
+}
+
+.btn-outline-modern:hover {
+    background: hsl(var(--primary));
+    color: white;
+}
+
+/* Delivery Tracking Card on Success Page */
+.delivery-tracking-card-modern {
+    background: linear-gradient(135deg, hsl(var(--info) / 0.1) 0%, hsl(var(--info) / 0.05) 100%);
+    border: 2px solid hsl(var(--info) / 0.3);
+    border-radius: 16px;
+    padding: 2rem;
+    margin: 2rem 0;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.delivery-tracking-header-modern {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.delivery-tracking-header-modern i {
+    font-size: 2.5rem;
+    color: hsl(var(--info));
+}
+
+.delivery-tracking-header-modern h4 {
+    color: hsl(var(--foreground));
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
+.delivery-tracking-header-modern p {
+    color: hsl(var(--muted-foreground));
+    font-size: 0.95rem;
+    margin: 0;
+}
+
+.delivery-tracking-body-modern p {
+    color: hsl(var(--muted-foreground));
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.btn-track-delivery-modern {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 2rem;
+    background: linear-gradient(135deg, hsl(var(--info)) 0%, hsl(var(--info) / 0.8) 100%);
+    color: white;
+    text-decoration: none;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px hsl(var(--info) / 0.3);
+}
+
+.btn-track-delivery-modern:hover {
+    background: linear-gradient(135deg, hsl(var(--info) / 0.8) 0%, hsl(var(--info)) 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px hsl(var(--info) / 0.4);
+    color: white;
+}
+
+.btn-track-delivery-modern i:last-child {
+    margin-left: auto;
+    transition: transform 0.3s ease;
+}
+
+.btn-track-delivery-modern:hover i:last-child {
+    transform: translateX(5px);
+}
+
+.auto-redirect-notice-modern {
+    background: hsl(var(--info) / 0.1);
+    border: 1px solid hsl(var(--info) / 0.3);
+    border-radius: 8px;
+    padding: 1rem;
+    margin-top: 1.5rem;
+    text-align: center;
+    color: hsl(var(--muted-foreground));
+    font-size: 0.95rem;
+}
+
+.auto-redirect-notice-modern i {
+    color: hsl(var(--info));
+    margin-right: 0.5rem;
+}
+
+.auto-redirect-notice-modern #countdown {
+    font-weight: 700;
+    color: hsl(var(--info));
+}
+
+.order-summary-card-modern {
+    background: white;
+    border: 1px solid hsl(var(--border));
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-top: 1rem;
+}
+
+.order-summary-card-modern h5 {
+    color: hsl(var(--primary));
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .payment-header-modern {
+        padding: 2rem 0;
+    }
+    
+    .payment-title-modern {
+        font-size: 2rem;
+    }
+    
+    .payment-card-body-modern {
+        padding: 1.5rem;
+    }
+    
+    .order-details-card-modern {
+        position: static;
+        margin-top: 2rem;
+    }
+    
+    .success-actions-modern {
+        flex-direction: column;
+    }
+    
+    .btn-primary-modern,
+    .btn-secondary-modern,
+    .btn-outline-modern {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
