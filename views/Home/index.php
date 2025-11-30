@@ -17,7 +17,7 @@ if (file_exists($modernHomepage)) {
             <h1>Faster, Fairer, and More Affordable Building</h1>
             <p>Ghana's trusted marketplace connecting buyers and verified suppliers in one transparent ecosystem.</p>
             <div class="hero-actions">
-                <a href="<?= \App\View::url('/') ?>catalog" class="btn btn-light btn-lg">
+                <a href="<?= \App\View::url('/catalog') ?>" class="btn btn-light btn-lg">
                     <i class="bi bi-cart"></i> Shop Now
                 </a>
                 <a href="<?= \App\View::url('/register') ?>" class="btn btn-outline-light btn-lg">
@@ -33,7 +33,7 @@ if (file_exists($modernHomepage)) {
             <h1>Verified Suppliers, Trusted Quality</h1>
             <p>All suppliers are thoroughly vetted. Shop with confidence knowing you're dealing with trusted partners.</p>
             <div class="hero-actions">
-                <a href="<?= \App\View::url('/') ?>catalog" class="btn btn-light btn-lg">
+                <a href="<?= \App\View::url('/catalog') ?>" class="btn btn-light btn-lg">
                     <i class="bi bi-shield-check"></i> Browse Verified Products
                 </a>
             </div>
@@ -46,7 +46,7 @@ if (file_exists($modernHomepage)) {
             <h1>Secure Payments, Tracked Delivery</h1>
             <p>Your payment is held securely by Paystack until delivery. Real-time tracking from purchase to your door.</p>
             <div class="hero-actions">
-                <a href="<?= \App\View::url('/') ?>catalog" class="btn btn-light btn-lg">
+                <a href="<?= \App\View::url('/catalog') ?>" class="btn btn-light btn-lg">
                     <i class="bi bi-truck"></i> Start Shopping
                 </a>
             </div>
