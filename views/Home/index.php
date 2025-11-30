@@ -7,7 +7,7 @@ if (file_exists($modernHomepage)) {
 }
 ?>
 
-<link rel="stylesheet" href="<?= \App\View::asset('assets/css/home-modern.css">
+<link rel="stylesheet" href="<?= \App\View::asset('assets/css/home-modern.css') ?>">
 
 <!-- Hero Slideshow -->
 <section class="hero-slideshow">
