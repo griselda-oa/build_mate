@@ -118,26 +118,40 @@ class View
         $scriptName = $_SERVER['SCRIPT_NAME'] ?? '/index.php';
         $scriptDir = dirname($scriptName);
         
-        // Handle server path: /~username/build_mate
+        // Priority 1: Check REQUEST_URI for server path: /~username/build_mate
         if (preg_match('#^/~[^/]+/build_mate#', $requestUri)) {
             $basePath = preg_replace('#^(/~[^/]+/build_mate).*#', '$1', $requestUri);
         }
-        // Handle localhost path: /build_mate
+        // Priority 2: Check REQUEST_URI for localhost path: /build_mate
         elseif (strpos($requestUri, '/build_mate') === 0) {
             $basePath = '/build_mate';
         }
-        // Handle server root: /~username (fallback)
+        // Priority 3: Check SCRIPT_NAME for server path (more reliable for redirects)
+        elseif (preg_match('#^/~[^/]+/build_mate#', $scriptName)) {
+            $basePath = preg_replace('#^(/~[^/]+/build_mate).*#', '$1', $scriptName);
+        }
+        // Priority 4: Check SCRIPT_NAME for localhost path
+        elseif (strpos($scriptName, '/build_mate') !== false) {
+            $basePath = '/build_mate';
+        }
+        // Priority 5: Use script directory if it contains build_mate
+        elseif ($scriptDir !== '/' && $scriptDir !== '.' && strpos($scriptDir, 'build_mate') !== false) {
+            $basePath = $scriptDir;
+        }
+        // Priority 6: Handle server root: /~username (fallback)
         elseif (preg_match('#^/~[^/]+#', $requestUri)) {
             $basePath = preg_replace('#^(/~[^/]+).*#', '$1', $requestUri) . '/build_mate';
         }
-        // Use script directory as fallback
+        // Priority 7: Use script directory as fallback
         elseif ($scriptDir !== '/' && $scriptDir !== '.') {
             $basePath = $scriptDir;
         }
-        // Default fallback
+        // Priority 8: Default fallback
         else {
             $basePath = '/build_mate';
         }
+        
+        error_log("View::basePath() detected: '{$basePath}' from REQUEST_URI: '{$requestUri}', SCRIPT_NAME: '{$scriptName}'");
         
         return $basePath;
     }
