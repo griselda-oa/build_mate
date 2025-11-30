@@ -14,7 +14,7 @@ function sendSecurityHeaders(): void
            "script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; " .
            "style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; " .
            "img-src 'self' data: https:; " .
-           "font-src 'self' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; " .
+           "font-src 'self' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com data:; " .
            "connect-src 'self' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; " .
            "frame-ancestors 'none';";
     
