@@ -70,7 +70,9 @@ PAYSTACK_SECRET_KEY=your_paystack_secret_key
 OPENAI_API_KEY=your_openai_key
 ```
 
-## Step 6: Create Database in phpMyAdmin
+## Step 6: Create Database
+
+**If you CAN create databases in phpMyAdmin:**
 
 1. Go to: http://169.239.251.102:442/phpmyadmin
 2. Login with:
@@ -81,12 +83,45 @@ OPENAI_API_KEY=your_openai_key
 5. Collation: `utf8mb4_unicode_ci`
 6. Click "Create"
 
+**If you CANNOT create databases (permission denied):**
+
+### Option A: Ask Administrator to Create Database
+Contact your administrator (FIs, Lecturers, or CSIS coordinators) and ask them to:
+- Create database: `buildmate_db`
+- Grant full privileges to user: `griselda.owusu`
+- Collation: `utf8mb4_unicode_ci`
+
+### Option B: Try Creating via SSH (Command Line)
+```bash
+# SSH into server first
+ssh -C griselda.owusu@169.239.251.102 -p 422
+
+# Try creating database via MySQL command line
+mysql -u griselda.owusu -p'Jytc1101$' -e "CREATE DATABASE IF NOT EXISTS buildmate_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
+```
+
+### Option C: Use Existing Database (if one exists)
+If you already have a database, you can:
+1. Check what databases you have access to in phpMyAdmin
+2. Use an existing database name
+3. Update `.env` file with that database name instead of `buildmate_db`
+
 ## Step 7: Import Database
 
-1. In phpMyAdmin, select `buildmate_db` database
+**IMPORTANT:** Use the file `db/complete_database_no_create.sql` (NOT `complete_database.sql`) because it doesn't try to create the database.
+
+1. In phpMyAdmin, select `buildmate_db` database (or your database name)
 2. Click "Import" tab
-3. Choose file: `db/complete_database.sql`
+3. Choose file: `db/complete_database_no_create.sql`
 4. Click "Go"
+
+**If the file is too large and times out:**
+- Try importing in smaller chunks
+- Or use SSH to import:
+```bash
+cd ~/public_html/build_mate
+mysql -u griselda.owusu -p'Jytc1101$' buildmate_db < db/complete_database_no_create.sql
+```
 
 **Then import additional migrations (in order):**
 1. `db/add_premium_system.sql`
