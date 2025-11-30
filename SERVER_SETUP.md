@@ -163,10 +163,29 @@ mysql -u griselda.owusu -p'Jytc1101$' ecommerce_2025A_griselda_owusu < db/comple
 ```
 
 **Then import additional migrations (in order):**
-1. `db/add_premium_system.sql`
-2. `db/add_ad_payment_reference.sql`
-3. `db/add_sentiment_to_reviews.sql`
-4. `db/add_reviews_waitlist.sql`
+
+Run these commands one by one:
+
+```bash
+cd ~/public_html/build_mate
+
+# 1. Premium system
+mysql -u griselda.owusu -p'Jytc1101$' ecommerce_2025A_griselda_owusu < db/add_premium_system.sql
+
+# 2. Advertisement payment
+mysql -u griselda.owusu -p'Jytc1101$' ecommerce_2025A_griselda_owusu < db/add_ad_payment_reference.sql
+
+# 3. Sentiment analysis
+mysql -u griselda.owusu -p'Jytc1101$' ecommerce_2025A_griselda_owusu < db/add_sentiment_to_reviews.sql
+
+# 4. Reviews and waitlist
+mysql -u griselda.owusu -p'Jytc1101$' ecommerce_2025A_griselda_owusu < db/add_reviews_waitlist.sql
+```
+
+**Or import via phpMyAdmin:**
+1. Select `ecommerce_2025A_griselda_owusu` database
+2. Click "Import" tab
+3. Import each file one by one
 
 ## Step 8: Set Permissions
 
