@@ -43,7 +43,26 @@ class User extends Model
     {
         $user = $this->findByEmail($email);
         
-        if (!$user || !Auth::verifyPassword($password, $user['password_hash'])) {
+        if (!$user) {
+            error_log("verifyLogin: User not found for email: {$email}");
+            return null;
+        }
+        
+        // Check if password_hash column exists and has value
+        if (empty($user['password_hash'])) {
+            error_log("verifyLogin: User found but password_hash is empty for email: {$email}");
+            return null;
+        }
+        
+        $passwordValid = Auth::verifyPassword($password, $user['password_hash']);
+        
+        if (!$passwordValid) {
+            error_log("verifyLogin: Password verification failed for email: {$email}");
+            error_log("verifyLogin: Hash in DB: " . substr($user['password_hash'], 0, 20) . "...");
+            // Try to verify with a test hash to see if password_verify is working
+            $testHash = Auth::hashPassword('test');
+            $testVerify = Auth::verifyPassword('test', $testHash);
+            error_log("verifyLogin: password_verify function test: " . ($testVerify ? 'WORKING' : 'NOT WORKING'));
             return null;
         }
         
