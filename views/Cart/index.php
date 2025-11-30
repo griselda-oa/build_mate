@@ -1,5 +1,5 @@
 <div class="mb-3">
-    <a href="/build_mate/catalog" class="back-button">
+    <a href="<?= \App\View::url('/catalog') ?>" class="back-button">
         <i class="bi bi-arrow-left"></i>
         <span>Continue Shopping</span>
     </a>
@@ -9,7 +9,7 @@
 
 <?php if (empty($products)): ?>
     <div class="alert alert-info">
-        <p>Your cart is empty. <a href="/build_mate/catalog">Browse products</a></p>
+        <p>Your cart is empty. <a href="<?= \App\View::url('/catalog') ?>">Browse products</a></p>
     </div>
 <?php else: ?>
     <div class="row">
@@ -28,7 +28,7 @@
                     <?php foreach ($products as $product): ?>
                         <tr>
                             <td>
-                                <a href="/build_mate/product/<?= \App\View::e($product['slug']) ?>">
+                                <a href="<?= \App\View::url('/product/<?= \App\View::e($product['slug']) ?>') ?>">
                                     <?= \App\View::e($product['name']) ?>
                                 </a>
                             </td>
@@ -62,7 +62,7 @@
                     <h5>Order Summary</h5>
                     <hr>
                     <p><strong>Total:</strong> <span data-price-cents="<?= $total ?>" data-currency="GHS"><?= \App\Money::format($total, 'GHS') ?></span></p>
-                    <a href="/build_mate/checkout" class="btn btn-primary w-100">Proceed to Checkout</a>
+                    <a href="<?= \App\View::url('/checkout') ?>" class="btn btn-primary w-100">Proceed to Checkout</a>
                 </div>
             </div>
         </div>

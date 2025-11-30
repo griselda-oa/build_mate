@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="<?= \App\View::asset('assets/css/ad-banner.css">
 
 <div class="mb-3">
-    <a href="/build_mate/" class="back-button">
+    <a href="<?= \App\View::url('/') ?>" class="back-button">
         <i class="bi bi-arrow-left"></i>
         <span>Back to Home</span>
     </a>
@@ -63,7 +63,7 @@
                     <td><?= $delivery['started_at'] ? date('M d, Y', strtotime($delivery['started_at'])) : '-' ?></td>
                     <td><?= $delivery['delivered_at'] ? date('M d, Y', strtotime($delivery['delivered_at'])) : '-' ?></td>
                     <td>
-                        <a href="/build_mate/logistics/assignments" class="btn btn-sm btn-primary">View</a>
+                        <a href="<?= \App\View::url('/logistics/assignments') ?>" class="btn btn-sm btn-primary">View</a>
                     </td>
                 </tr>
             <?php endforeach; ?>

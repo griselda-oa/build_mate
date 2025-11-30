@@ -6,7 +6,7 @@
     <div class="container">
         <!-- Back Button -->
         <div class="mb-4">
-            <a href="/build_mate/supplier/dashboard" class="back-button">
+            <a href="<?= \App\View::url('/supplier/dashboard') ?>" class="back-button">
                 <i class="bi bi-arrow-left"></i>
                 <span>Back to Dashboard</span>
             </a>
@@ -118,7 +118,7 @@
                         <i class="bi bi-lightning-fill"></i>
                         <span>Create Advertisement</span>
                     </button>
-                    <a href="/build_mate/supplier/dashboard" class="ad-btn ad-btn-secondary">
+                    <a href="<?= \App\View::url('/supplier/dashboard') ?>" class="ad-btn ad-btn-secondary">
                         <i class="bi bi-x-circle"></i>
                         <span>Cancel</span>
                     </a>

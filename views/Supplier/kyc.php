@@ -5,7 +5,7 @@
     <header class="form-header">
         <div class="container">
             <div class="header-content">
-                <a href="/build_mate/" class="logo-link">
+                <a href="<?= \App\View::url('/') ?>" class="logo-link">
                     <i class="bi bi-hammer"></i> Build Mate
                 </a>
                 <div class="progress-indicator" id="progressIndicator">
@@ -409,7 +409,7 @@
                                                name="terms_agreement" 
                                                required>
                                         <label for="terms_agreement" class="checkbox-label">
-                                            I agree to Build Mate's <a href="/build_mate/terms" target="_blank">Terms of Service</a> and <a href="/build_mate/privacy" target="_blank">Privacy Policy</a>
+                                            I agree to Build Mate's <a href="<?= \App\View::url('/terms') ?>" target="_blank">Terms of Service</a> and <a href="<?= \App\View::url('/privacy') ?>" target="_blank">Privacy Policy</a>
                                             <span class="required">*</span>
                                         </label>
                                     </div>
@@ -498,7 +498,7 @@
                             <h3>
                                 <i class="bi bi-question-circle"></i> Need help?
                             </h3>
-                            <a href="/build_mate/contact" class="btn-sidebar">
+                            <a href="<?= \App\View::url('/contact') ?>" class="btn-sidebar">
                                 <i class="bi bi-chat-dots"></i> Chat with Support
                             </a>
                 </div>

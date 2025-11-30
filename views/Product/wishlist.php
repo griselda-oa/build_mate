@@ -3,7 +3,7 @@
         <h1 class="h3 mb-0">
             <i class="bi bi-heart-fill text-danger"></i> My Wishlist
         </h1>
-        <a href="/build_mate/catalog" class="btn btn-outline-primary">
+        <a href="<?= \App\View::url('/catalog') ?>" class="btn btn-outline-primary">
             <i class="bi bi-arrow-left"></i> Continue Shopping
         </a>
     </div>
@@ -24,7 +24,7 @@
             <i class="bi bi-heart" style="font-size: 4rem; color: #ccc; margin-bottom: 1rem;"></i>
             <h3 class="text-muted">Your wishlist is empty</h3>
             <p class="text-muted">Start adding products you love to your wishlist!</p>
-            <a href="/build_mate/catalog" class="btn btn-primary mt-3">
+            <a href="<?= \App\View::url('/catalog') ?>" class="btn btn-primary mt-3">
                 <i class="bi bi-search"></i> Browse Products
             </a>
         </div>
@@ -53,7 +53,7 @@
                         </div>
                         <div class="card-body d-flex flex-column">
                             <h5 class="card-title">
-                                <a href="/build_mate/product/<?= \App\View::e($item['slug']) ?>" class="text-decoration-none">
+                                <a href="<?= \App\View::url('/product/<?= \App\View::e($item['slug']) ?>') ?>" class="text-decoration-none">
                                     <?= \App\View::e($item['name']) ?>
                                 </a>
                             </h5>
@@ -75,7 +75,7 @@
                                     <?php endif; ?>
                                 </div>
                                 <div class="d-grid gap-2">
-                                    <a href="/build_mate/product/<?= \App\View::e($item['slug']) ?>" class="btn btn-primary">
+                                    <a href="<?= \App\View::url('/product/<?= \App\View::e($item['slug']) ?>') ?>" class="btn btn-primary">
                                         <i class="bi bi-eye"></i> View Details
                                     </a>
                                     <?php if ($item['stock'] > 0): ?>

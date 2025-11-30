@@ -2,15 +2,15 @@
     <div class="container">
         <!-- Back Button and Breadcrumb Container -->
         <div class="product-navigation-header">
-            <a href="/build_mate/catalog" class="back-button">
+            <a href="<?= \App\View::url('/catalog') ?>" class="back-button">
                 <i class="bi bi-arrow-left"></i>
                 <span>Back to Catalog</span>
             </a>
             <nav aria-label="breadcrumb" class="product-breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="/build_mate/">Home</a></li>
-                    <li class="breadcrumb-item"><a href="/build_mate/catalog">Catalog</a></li>
-                    <li class="breadcrumb-item"><a href="/build_mate/catalog?cat=<?= $product['category_id'] ?>"><?= \App\View::e($product['category_name'] ?? '') ?></a></li>
+                    <li class="breadcrumb-item"><a href="<?= \App\View::url('/') ?>">Home</a></li>
+                    <li class="breadcrumb-item"><a href="<?= \App\View::url('/catalog') ?>">Catalog</a></li>
+                    <li class="breadcrumb-item"><a href="<?= \App\View::url('/catalog?cat=<?= $product['category_id'] ?>') ?>"><?= \App\View::e($product['category_name'] ?? '') ?></a></li>
                     <li class="breadcrumb-item active" aria-current="page"><?= \App\View::e($product['name']) ?></li>
                 </ol>
             </nav>

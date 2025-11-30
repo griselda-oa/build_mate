@@ -21,7 +21,7 @@ $advertisements = $advertisements ?? [];
                 $productSlug = $ad['product_slug'] ?? '';
                 ?>
                 <div class="ad-banner-slide <?= $index === 0 ? 'active' : '' ?>" data-slide="<?= $index ?>">
-                    <a href="/build_mate/product/<?= \App\View::e($productSlug) ?>" class="ad-banner-link-modern">
+                    <a href="<?= \App\View::url('/product/<?= \App\View::e($productSlug) ?>') ?>" class="ad-banner-link-modern">
                         <div class="ad-banner-content-modern">
                             <?php if (!empty($adImage)): ?>
                                 <?php if ($isVideo): ?>

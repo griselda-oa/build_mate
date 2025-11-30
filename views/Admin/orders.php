@@ -4,23 +4,23 @@
     <div class="container">
         <div class="admin-orders-header">
             <h2><i class="bi bi-list-ul"></i> All Orders</h2>
-            <a href="/build_mate/admin/dashboard" class="btn btn-outline-secondary">
+            <a href="<?= \App\View::url('/admin/dashboard') ?>" class="btn btn-outline-secondary">
                 <i class="bi bi-arrow-left"></i> Back to Dashboard
             </a>
         </div>
 
         <!-- Status Filter Tabs -->
         <div class="status-filter-tabs">
-            <a class="nav-link <?= !$statusFilter ? 'active' : '' ?>" href="/build_mate/admin/orders">
+            <a class="nav-link <?= !$statusFilter ? 'active' : '' ?>" href="<?= \App\View::url('/admin/orders') ?>">
                 All Orders
             </a>
-            <a class="nav-link <?= $statusFilter === 'pending' ? 'active' : '' ?>" href="/build_mate/admin/orders?status=pending">
+            <a class="nav-link <?= $statusFilter === 'pending' ? 'active' : '' ?>" href="<?= \App\View::url('/admin/orders?status=pending') ?>">
                 Pending
             </a>
-            <a class="nav-link <?= $statusFilter === 'processing' ? 'active' : '' ?>" href="/build_mate/admin/orders?status=processing">
+            <a class="nav-link <?= $statusFilter === 'processing' ? 'active' : '' ?>" href="<?= \App\View::url('/admin/orders?status=processing') ?>">
                 Processing
             </a>
-            <a class="nav-link <?= $statusFilter === 'delivered' ? 'active' : '' ?>" href="/build_mate/admin/orders?status=delivered">
+            <a class="nav-link <?= $statusFilter === 'delivered' ? 'active' : '' ?>" href="<?= \App\View::url('/admin/orders?status=delivered') ?>">
                 Delivered
             </a>
         </div>
@@ -64,7 +64,7 @@
                                     ?>
                                 </td>
                                 <td>
-                                    <a href="/build_mate/admin/orders/<?= $order['id'] ?>" class="btn-view-update" onclick="event.stopPropagation(); return true;">
+                                    <a href="<?= \App\View::url('/admin/orders/<?= $order['id'] ?>') ?>" class="btn-view-update" onclick="event.stopPropagation(); return true;">
                                         <i class="bi bi-eye"></i> View & Update
                                     </a>
                                 </td>

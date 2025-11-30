@@ -1,5 +1,5 @@
 <div class="mb-3">
-    <a href="/build_mate/supplier/dashboard" class="back-button">
+    <a href="<?= \App\View::url('/supplier/dashboard') ?>" class="back-button">
         <i class="bi bi-arrow-left"></i>
         <span>Back to Dashboard</span>
     </a>

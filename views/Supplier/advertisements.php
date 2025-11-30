@@ -5,7 +5,7 @@
     <div class="container">
         <!-- Back Button -->
         <div class="mb-4">
-            <a href="/build_mate/supplier/dashboard" class="back-button">
+            <a href="<?= \App\View::url('/supplier/dashboard') ?>" class="back-button">
                 <i class="bi bi-arrow-left"></i>
                 <span>Back to Dashboard</span>
             </a>
@@ -19,7 +19,7 @@
 
         <!-- Create New Button -->
         <div style="margin-bottom: 2rem;">
-            <a href="/build_mate/supplier/advertisements/create" class="btn" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; padding: 0.75rem 2rem; border-radius: 8px; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem;">
+            <a href="<?= \App\View::url('/supplier/advertisements/create') ?>" class="btn" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; padding: 0.75rem 2rem; border-radius: 8px; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem;">
                 <i class="bi bi-plus-circle"></i> Create New Advertisement
             </a>
         </div>
@@ -31,7 +31,7 @@
                     <i class="bi bi-megaphone" style="font-size: 4rem; color: #D1D5DB; margin-bottom: 1rem;"></i>
                     <h3 style="color: #1F2937; margin-bottom: 0.5rem;">No Advertisements Yet</h3>
                     <p style="color: #6B7280; margin-bottom: 1.5rem;">Create your first advertisement to promote your products</p>
-                    <a href="/build_mate/supplier/advertisements/create" class="btn" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; padding: 0.75rem 2rem; border-radius: 8px; font-weight: 600; text-decoration: none;">
+                    <a href="<?= \App\View::url('/supplier/advertisements/create') ?>" class="btn" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; padding: 0.75rem 2rem; border-radius: 8px; font-weight: 600; text-decoration: none;">
                         <i class="bi bi-plus-circle"></i> Create Advertisement
                     </a>
                 </div>
@@ -54,7 +54,7 @@
                                             <?= \App\View::e($ad['title'] ?? $ad['product_name'] ?? 'Untitled Ad') ?>
                                         </div>
                                         <div style="color: #6B7280; font-size: 0.875rem; margin-bottom: 0.5rem;">
-                                            Product: <a href="/build_mate/product/<?= \App\View::e($ad['product_slug'] ?? '') ?>" style="color: #667eea; text-decoration: none;"><?= \App\View::e($ad['product_name'] ?? 'N/A') ?></a>
+                                            Product: <a href="<?= \App\View::url('/product/<?= \App\View::e($ad['product_slug'] ?? '') ?>') ?>" style="color: #667eea; text-decoration: none;"><?= \App\View::e($ad['product_name'] ?? 'N/A') ?></a>
                                         </div>
                                         <div class="item-date-modern">
                                             <i class="bi bi-calendar"></i>
