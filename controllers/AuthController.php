@@ -21,8 +21,8 @@ class AuthController extends Controller
     public function showLogin(): void
     {
         if (Auth::check()) {
-            header('Location: /build_mate/');
-            exit;
+            $this->redirect('/');
+            return;
         }
         
         // Render login page using view system

@@ -49,13 +49,37 @@ class View
         } elseif (strpos(strtolower($view), 'admin/') === 0) {
             // Admin views are in Admin/ folder (case-insensitive check, but preserve case for path)
             $file = $this->basePath . '/' . $view . '.php';
+        } elseif (strpos(strtolower($view), 'layouts/') === 0) {
+            // Layouts folder - handle case-insensitive matching
+            $layoutName = substr($view, 8); // Remove 'Layouts/'
+            // Try capitalized first letter (Auth.php, Main.php, etc.)
+            $file = $this->basePath . '/Layouts/' . ucfirst(strtolower($layoutName)) . '.php';
+            if (!file_exists($file)) {
+                // Try original case
+                $file = $this->basePath . '/Layouts/' . $layoutName . '.php';
+            }
         } else {
             $file = $this->basePath . '/' . $view . '.php';
         }
         
         if (!file_exists($file)) {
             error_log("View file not found: {$file} (view: {$view})");
-            throw new \RuntimeException("View not found: {$view} (looked for: {$file})");
+            // Try case-insensitive search as last resort
+            $dir = dirname($file);
+            $basename = basename($file);
+            if (is_dir($dir)) {
+                $files = scandir($dir);
+                foreach ($files as $f) {
+                    if (strcasecmp($f, $basename) === 0) {
+                        $file = $dir . '/' . $f;
+                        error_log("Found view file with case-insensitive match: {$file}");
+                        break;
+                    }
+                }
+            }
+            if (!file_exists($file)) {
+                throw new \RuntimeException("View not found: {$view} (looked for: {$file})");
+            }
         }
         
         try {

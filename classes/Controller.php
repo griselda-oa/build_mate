@@ -18,9 +18,14 @@ abstract class Controller
     
     /**
      * Redirect to URL
+     * Automatically handles base path for relative URLs
      */
     protected function redirect(string $url, int $code = 302): void
     {
+        // If URL is relative (starts with / but not //), prepend base path
+        if (strpos($url, '/') === 0 && strpos($url, '//') !== 0) {
+            $url = View::url($url);
+        }
         header("Location: {$url}", true, $code);
         exit;
     }

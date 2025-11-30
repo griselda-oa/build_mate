@@ -360,28 +360,28 @@ class PaymentController extends Controller
             $shouldDecrementStock = in_array($order['status'] ?? '', ['placed', 'pending']);
             
             if ($shouldDecrementStock) {
-                foreach ($order['items'] as $item) {
-                    $productId = (int)($item['product_id'] ?? 0);
-                    // Check both 'quantity' and 'qty' fields
-                    $quantity = (int)($item['quantity'] ?? $item['qty'] ?? 1);
-                    
-                    if ($productId > 0 && $quantity > 0) {
-                        try {
-                            $success = $productModel->decrementStock($productId, $quantity);
-                            if ($success) {
+            foreach ($order['items'] as $item) {
+                $productId = (int)($item['product_id'] ?? 0);
+                // Check both 'quantity' and 'qty' fields
+                $quantity = (int)($item['quantity'] ?? $item['qty'] ?? 1);
+                
+                if ($productId > 0 && $quantity > 0) {
+                    try {
+                        $success = $productModel->decrementStock($productId, $quantity);
+                        if ($success) {
                                 error_log("✓ Successfully decremented stock for product {$productId} by {$quantity} in PaymentController");
-                            } else {
-                                error_log("✗ ERROR: Failed to decrement stock for product {$productId} by {$quantity}");
-                                throw new \Exception("Failed to decrement stock for product {$productId}");
-                            }
-                        } catch (\Exception $e) {
-                            error_log("EXCEPTION during stock decrement: " . $e->getMessage());
-                            throw $e; // Re-throw to rollback transaction
+                        } else {
+                            error_log("✗ ERROR: Failed to decrement stock for product {$productId} by {$quantity}");
+                            throw new \Exception("Failed to decrement stock for product {$productId}");
                         }
-                    } else {
-                        error_log("✗ ERROR: Invalid product_id ({$productId}) or quantity ({$quantity}) for order item: " . json_encode($item));
-                        throw new \Exception("Invalid order item data");
+                    } catch (\Exception $e) {
+                        error_log("EXCEPTION during stock decrement: " . $e->getMessage());
+                        throw $e; // Re-throw to rollback transaction
                     }
+                } else {
+                    error_log("✗ ERROR: Invalid product_id ({$productId}) or quantity ({$quantity}) for order item: " . json_encode($item));
+                    throw new \Exception("Invalid order item data");
+                }
                 }
             } else {
                 error_log("⚠ Stock already decremented or order already processed. Skipping stock decrement. Order status: " . ($order['status'] ?? 'unknown'));

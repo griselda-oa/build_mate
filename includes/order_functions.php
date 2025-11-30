@@ -41,8 +41,8 @@ function mapStatusFromDatabase(string $status): string
 function updateOrderStatus(int $orderId, string $newStatus, int $userId, string $notes = ''): bool
 {
     try {
-        $db = DB::getInstance();
-        
+    $db = DB::getInstance();
+    
         // Map status for database compatibility
         $dbStatus = mapStatusForDatabase($newStatus);
         
@@ -118,7 +118,7 @@ function updateOrderStatus(int $orderId, string $newStatus, int $userId, string 
         error_log("updateOrderStatus Params: " . json_encode($updateParams));
         
         try {
-            $stmt = $db->prepare($sql);
+    $stmt = $db->prepare($sql);
             $result = $stmt->execute($updateParams);
             
             if (!$result) {
@@ -126,8 +126,8 @@ function updateOrderStatus(int $orderId, string $newStatus, int $userId, string 
                 $errorMsg = "PDO Error: " . json_encode($errorInfo) . " | SQL: {$sql} | Params: " . json_encode($updateParams);
                 error_log("updateOrderStatus PDO Error: " . $errorMsg);
                 throw new \Exception("Database update failed: " . ($errorInfo[2] ?? 'Unknown error'));
-            }
-            
+    }
+    
             $rowsAffected = $stmt->rowCount();
             error_log("updateOrderStatus: Updated {$rowsAffected} rows for order {$orderId}, status: {$dbStatus}");
             
@@ -182,7 +182,7 @@ function getOrderDetails(int $orderId): ?array
 {
     try {
         error_log("getOrderDetails: Looking for order ID: {$orderId}");
-        $db = DB::getInstance();
+    $db = DB::getInstance();
         $stmt = $db->prepare("
             SELECT o.*,
                    u.name as customer_name,
