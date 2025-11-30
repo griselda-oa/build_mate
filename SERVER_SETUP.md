@@ -196,9 +196,58 @@ chmod -R 755 vendor
 chmod 644 .env
 ```
 
-## Step 9: Test the Application
+## Step 9: Verify File Structure
 
-Visit: http://169.239.251.102:442/~griselda.owusu/build_mate
+Make sure your files are in the correct location:
+
+```bash
+cd ~/public_html/build_mate
+ls -la
+```
+
+You should see:
+- `index.php` (main entry point)
+- `.htaccess` (Apache rewrite rules)
+- `composer.json` (dependencies)
+- `classes/`, `controllers/`, `views/` directories
+- `.env` file
+
+**If files are missing:**
+```bash
+cd ~/public_html
+git pull origin main
+```
+
+## Step 10: Test the Application
+
+**IMPORTANT:** Use the correct URL format:
+
+Visit: **http://169.239.251.102:442/~griselda.owusu/build_mate**
+
+**NOT:** `http://169.239.251.102:442` (this will give 404)
+
+**If you still get 404, check:**
+
+1. **Verify .htaccess exists:**
+   ```bash
+   cd ~/public_html/build_mate
+   ls -la .htaccess
+   ```
+
+2. **Check if mod_rewrite is enabled:**
+   ```bash
+   apache2ctl -M | grep rewrite
+   ```
+   (If not enabled, ask admin to enable it)
+
+3. **Check Apache error logs:**
+   ```bash
+   tail -f /var/log/apache2/error.log
+   ```
+
+4. **Try accessing index.php directly:**
+   Visit: `http://169.239.251.102:442/~griselda.owusu/build_mate/index.php`
+   (If this works, .htaccess rewrite is the issue)
 
 **Default Admin Login:**
 - Email: `admin@buildmate.com`
