@@ -20,7 +20,7 @@ if (file_exists($modernHomepage)) {
                 <a href="<?= \App\View::url('/') ?>catalog" class="btn btn-light btn-lg">
                     <i class="bi bi-cart"></i> Shop Now
                 </a>
-                <a href="<?= \App\View::url('/') ?>register" class="btn btn-outline-light btn-lg">
+                <a href="<?= \App\View::url('/register') ?>" class="btn btn-outline-light btn-lg">
                     <i class="bi bi-person-plus"></i> Sign Up
                 </a>
             </div>
