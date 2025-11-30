@@ -86,9 +86,9 @@
                                         $cannotPurchase = $isSupplier || $isAdmin;
                                         ?>
                                         <?php if (!$cannotPurchase): ?>
-                                            <button class="btn btn-outline-primary" onclick="addToCartFromWishlist(<?= $item['product_id'] ?>)">
-                                                <i class="bi bi-cart-plus"></i> Add to Cart
-                                            </button>
+                                        <button class="btn btn-outline-primary" onclick="addToCartFromWishlist(<?= $item['product_id'] ?>)">
+                                            <i class="bi bi-cart-plus"></i> Add to Cart
+                                        </button>
                                         <?php else: ?>
                                             <button class="btn btn-outline-secondary" disabled title="<?= $isAdmin ? 'Admins cannot purchase products' : 'Suppliers cannot purchase products' ?>">
                                                 <i class="bi bi-cart-x"></i> Not Available

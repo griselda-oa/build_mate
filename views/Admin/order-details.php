@@ -38,7 +38,7 @@ if ($orderStatus === 'placed' && ($order['status'] ?? '') === 'shipped') {
         </div>
     <?php endif; ?>
 
-    <!-- Order Info Card -->
+            <!-- Order Info Card -->
     <div class="admin-order-card">
         <div class="admin-order-header">
             <h4><i class="bi bi-receipt"></i> Order #<?= $order['id'] ?></h4>
@@ -93,40 +93,40 @@ if ($orderStatus === 'placed' && ($order['status'] ?? '') === 'shipped') {
                             <?= ucwords(str_replace('_', ' ', $orderStatus ?? 'placed')) ?>
                         </span>
                     </div>
-                </div>
-            </div>
+                        </div>
+                    </div>
 
-            <!-- Order Items -->
+                    <!-- Order Items -->
             <h5 style="margin-bottom: 1.5rem; font-weight: 700; color: var(--admin-text);">Order Items</h5>
             <table class="admin-items-table">
-                <thead>
-                    <tr>
-                        <th>Product</th>
-                        <th>Quantity</th>
-                        <th>Price</th>
-                        <th>Subtotal</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($order['items'] as $item): ?>
-                        <tr>
-                            <td><?= \App\View::e($item['product_name']) ?></td>
-                            <td><?= $item['qty'] ?? $item['quantity'] ?></td>
-                            <td><?= \App\Money::format($item['price_cents'], 'GHS') ?></td>
-                            <td><?= \App\Money::format(($item['qty'] ?? $item['quantity']) * $item['price_cents'], 'GHS') ?></td>
-                        </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
-        </div>
-    </div>
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>Quantity</th>
+                                <th>Price</th>
+                                <th>Subtotal</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($order['items'] as $item): ?>
+                                <tr>
+                                    <td><?= \App\View::e($item['product_name']) ?></td>
+                                    <td><?= $item['qty'] ?? $item['quantity'] ?></td>
+                                    <td><?= \App\Money::format($item['price_cents'], 'GHS') ?></td>
+                                    <td><?= \App\Money::format(($item['qty'] ?? $item['quantity']) * $item['price_cents'], 'GHS') ?></td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
 
     <!-- Editable Delivery Tracker -->
     <div class="admin-tracker-card">
         <div class="admin-tracker-header">
             <i class="bi bi-truck"></i>
             <h5>Order Tracking (Admin - Click to Update)</h5>
-        </div>
+                </div>
         <div class="admin-tracker-body">
             <?php
             // If an order exists, payment was successful (orders are only created after payment)
@@ -151,12 +151,12 @@ if ($orderStatus === 'placed' && ($order['status'] ?? '') === 'shipped') {
                     <div class="tracker-step step completed locked">
                         <div class="tracker-step-icon">
                             <i class="bi bi-cart-check-fill"></i>
-                        </div>
+                                </div>
                         <div class="tracker-step-label">Order Placed</div>
                         <div class="tracker-step-time">
                             <?= date('M d, Y', strtotime($order['created_at'])) ?>
-                        </div>
-                    </div>
+                                </div>
+                            </div>
                     
                     <!-- Step 2: Payment Successful (Always completed - order exists = payment successful) -->
                     <div class="tracker-step step completed locked">
@@ -196,7 +196,7 @@ if ($orderStatus === 'placed' && ($order['status'] ?? '') === 'shipped') {
                          title="Supplier Processing - Only suppliers can update this step">
                         <div class="tracker-step-icon">
                             <i class="bi bi-gear-fill"></i>
-                        </div>
+                </div>
                         <div class="tracker-step-label">Supplier Processing</div>
                         <div class="tracker-step-time">
                             <?php if ($isProcessing): ?>
@@ -207,9 +207,9 @@ if ($orderStatus === 'placed' && ($order['status'] ?? '') === 'shipped') {
                             <?php else: ?>
                                 Waiting for supplier
                             <?php endif; ?>
-                        </div>
-                    </div>
-                    
+            </div>
+        </div>
+
                     <!-- Step 4: Out for Delivery (Editable for admin) -->
                     <?php
                     // Check both status and current_status - 'shipped' in status means 'out_for_delivery'
@@ -244,20 +244,20 @@ if ($orderStatus === 'placed' && ($order['status'] ?? '') === 'shipped') {
                          <?= $canClickOutForDelivery ? 'title="Click to mark as Out for Delivery"' : 'title="Out for Delivery"' ?>>
                         <div class="tracker-step-icon">
                             <i class="bi bi-truck"></i>
-                        </div>
+                </div>
                         <div class="tracker-step-label">Out for Delivery</div>
                         <div class="tracker-step-time">
                             <?php if ($isOutForDelivery): ?>
-                                <?php 
+                                <?php
                                 $deliveryTime = $order['out_for_delivery_at'] ?? $order['updated_at'] ?? $order['created_at'];
                                 echo date('M d, Y', strtotime($deliveryTime));
                                 ?>
                             <?php else: ?>
                                 <?= $canClickOutForDelivery ? 'Click when ready' : 'Pending' ?>
                             <?php endif; ?>
+                            </div>
                         </div>
-                    </div>
-                    
+
                     <!-- Step 5: Delivered (Editable for admin) -->
                     <?php
                     // Check both status and current_status for delivered
@@ -290,33 +290,33 @@ if ($orderStatus === 'placed' && ($order['status'] ?? '') === 'shipped') {
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
+                </div>
+            </div>
 
-    <!-- Delivery Address -->
-    <?php
-    $addressJson = $order['address_json'] ?? null;
-    $address = null;
-    if (!empty($addressJson)) {
-        $address = json_decode($addressJson, true);
-    }
-    if ($address):
-    ?>
+            <!-- Delivery Address -->
+            <?php
+            $addressJson = $order['address_json'] ?? null;
+            $address = null;
+            if (!empty($addressJson)) {
+                $address = json_decode($addressJson, true);
+            }
+            if ($address):
+            ?>
         <div class="admin-address-card">
             <div class="admin-address-header">
                 <h6><i class="bi bi-geo-alt"></i> Delivery Address</h6>
-            </div>
+                    </div>
             <div class="admin-address-body">
-                <p class="mb-1"><?= \App\View::e($address['street']) ?></p>
-                <p class="mb-1"><?= \App\View::e($address['city']) ?>, <?= \App\View::e($address['region']) ?></p>
-                <?php if (!empty($address['phone'])): ?>
-                    <p class="mb-0"><strong>Phone:</strong> <?= \App\View::e($address['phone']) ?></p>
-                <?php endif; ?>
-            </div>
+                        <p class="mb-1"><?= \App\View::e($address['street']) ?></p>
+                        <p class="mb-1"><?= \App\View::e($address['city']) ?>, <?= \App\View::e($address['region']) ?></p>
+                        <?php if (!empty($address['phone'])): ?>
+                            <p class="mb-0"><strong>Phone:</strong> <?= \App\View::e($address['phone']) ?></p>
+                        <?php endif; ?>
+                    </div>
+                </div>
+            <?php endif; ?>
         </div>
-    <?php endif; ?>
-</div>
-</div>
+    </div>
 
 <link rel="stylesheet" href="/build_mate/assets/css/admin-order-details.css?v=<?= time() ?>">
 <link rel="stylesheet" href="/build_mate/assets/css/delivery-tracker.css?v=<?= time() ?>">
@@ -365,7 +365,7 @@ document.addEventListener('DOMContentLoaded', function() {
             try {
                 const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || 
                                  document.querySelector('input[name="csrf_token"]')?.value || '';
-                
+    
                 if (!csrfToken) {
                     throw new Error('CSRF token not found');
                 }
@@ -375,12 +375,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 formData.append('status', newStatus);
 
                 const response = await fetch(`/build_mate/admin/orders/${orderId}/update-status`, {
-                    method: 'POST',
-                    headers: {
+        method: 'POST',
+        headers: {
                         'X-CSRF-TOKEN': csrfToken,
                         'X-Requested-With': 'XMLHttpRequest'
-                    },
-                    body: formData
+        },
+        body: formData
                 });
 
                 // Check if response is ok
@@ -400,7 +400,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     throw new Error('Invalid response from server');
                 }
 
-                if (data.success) {
+        if (data.success) {
                     // Mark step as completed
                     this.classList.remove('pending');
                     this.classList.add('completed', 'locked');
@@ -422,7 +422,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         sessionStorage.setItem('orderUpdateReloading', 'true');
                         setTimeout(() => {
                             sessionStorage.removeItem('orderUpdateReloading');
-                            location.reload();
+            location.reload();
                         }, 1000);
                     } else {
                         // If we're already reloading, just remove the flag and don't reload again

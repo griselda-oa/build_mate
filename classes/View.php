@@ -77,5 +77,70 @@ class View
     {
         return htmlspecialchars((string)$value, ENT_QUOTES, 'UTF-8');
     }
+    
+    /**
+     * Get base path for assets and links
+     * Detects /~username/build_mate or /build_mate dynamically
+     */
+    public static function basePath(): string
+    {
+        static $basePath = null;
+        
+        if ($basePath !== null) {
+            return $basePath;
+        }
+        
+        $requestUri = $_SERVER['REQUEST_URI'] ?? '/';
+        $scriptName = $_SERVER['SCRIPT_NAME'] ?? '/index.php';
+        $scriptDir = dirname($scriptName);
+        
+        // Handle server path: /~username/build_mate
+        if (preg_match('#^/~[^/]+/build_mate#', $requestUri)) {
+            $basePath = preg_replace('#^(/~[^/]+/build_mate).*#', '$1', $requestUri);
+        }
+        // Handle localhost path: /build_mate
+        elseif (strpos($requestUri, '/build_mate') === 0) {
+            $basePath = '/build_mate';
+        }
+        // Handle server root: /~username (fallback)
+        elseif (preg_match('#^/~[^/]+#', $requestUri)) {
+            $basePath = preg_replace('#^(/~[^/]+).*#', '$1', $requestUri) . '/build_mate';
+        }
+        // Use script directory as fallback
+        elseif ($scriptDir !== '/' && $scriptDir !== '.') {
+            $basePath = $scriptDir;
+        }
+        // Default fallback
+        else {
+            $basePath = '/build_mate';
+        }
+        
+        return $basePath;
+    }
+    
+    /**
+     * Generate asset URL (CSS, JS, images)
+     */
+    public static function asset(string $path): string
+    {
+        $base = self::basePath();
+        // Remove leading slash from path if present
+        $path = ltrim($path, '/');
+        return rtrim($base, '/') . '/' . $path;
+    }
+    
+    /**
+     * Generate URL for routes
+     */
+    public static function url(string $path = '/'): string
+    {
+        $base = self::basePath();
+        // Remove leading slash from path if present
+        $path = ltrim($path, '/');
+        if ($path === '') {
+            return rtrim($base, '/') . '/';
+        }
+        return rtrim($base, '/') . '/' . $path;
+    }
 }
 

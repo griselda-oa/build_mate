@@ -622,19 +622,19 @@ class SupplierController extends Controller
         }
         
         try {
-            $user = $this->user();
-            $supplierModel = new Supplier();
-            $supplier = $supplierModel->findByUserId($user['id']);
-            
-            if (!$supplier) {
+        $user = $this->user();
+        $supplierModel = new Supplier();
+        $supplier = $supplierModel->findByUserId($user['id']);
+        
+        if (!$supplier) {
                 if ($isAjax) {
-                    Response::json(['success' => false, 'message' => 'Supplier not found'], 403);
-                } else {
-                    $this->setFlash('error', 'Supplier profile not found');
-                    $this->redirect('/build_mate/supplier/orders');
-                }
-                return;
+                Response::json(['success' => false, 'message' => 'Supplier not found'], 403);
+            } else {
+                $this->setFlash('error', 'Supplier profile not found');
+                $this->redirect('/build_mate/supplier/orders');
             }
+            return;
+        }
         
         $orderModel = new Order();
         // Use getWithItems to ensure we get payment fields if they exist
@@ -656,89 +656,89 @@ class SupplierController extends Controller
             }
         }
         
-            if (!$order || !$belongsToSupplier) {
+        if (!$order || !$belongsToSupplier) {
                 if ($isAjax) {
-                    Response::json(['success' => false, 'message' => 'Order not found'], 404);
-                } else {
-                    $this->setFlash('error', 'Order not found');
-                    $this->redirect('/build_mate/supplier/orders');
-                }
-                return;
+                Response::json(['success' => false, 'message' => 'Order not found'], 404);
+            } else {
+                $this->setFlash('error', 'Order not found');
+                $this->redirect('/build_mate/supplier/orders');
             }
-            
-            // Get new status from request
-            $newStatus = $_POST['status'] ?? $_GET['status'] ?? null;
-            
-            if (!$newStatus) {
+            return;
+        }
+        
+        // Get new status from request
+        $newStatus = $_POST['status'] ?? $_GET['status'] ?? null;
+        
+        if (!$newStatus) {
                 if ($isAjax) {
-                    Response::json(['success' => false, 'message' => 'Status is required'], 400);
-                } else {
-                    $this->setFlash('error', 'Status is required');
-                    $this->redirect('/build_mate/supplier/orders');
-                }
-                return;
+                Response::json(['success' => false, 'message' => 'Status is required'], 400);
+            } else {
+                $this->setFlash('error', 'Status is required');
+                $this->redirect('/build_mate/supplier/orders');
             }
-            
-            // Validate status transition
-            // Suppliers can ONLY: any pre-processing status → processing
-            // They CANNOT mark as 'out_for_delivery' or 'delivered' (only admin/logistics can)
+            return;
+        }
+        
+        // Validate status transition
+        // Suppliers can ONLY: any pre-processing status → processing
+        // They CANNOT mark as 'out_for_delivery' or 'delivered' (only admin/logistics can)
             $currentStatus = $order['current_status'] ?? $order['status'] ?? 'placed';
             
             // Map 'shipped' to 'out_for_delivery' for consistency
             if ($currentStatus === 'shipped') {
                 $currentStatus = 'out_for_delivery';
             }
-            
-            // Suppliers cannot mark as out_for_delivery or delivered
-            if (in_array($newStatus, ['out_for_delivery', 'delivered'])) {
+        
+        // Suppliers cannot mark as out_for_delivery or delivered
+        if (in_array($newStatus, ['out_for_delivery', 'delivered'])) {
                 if ($isAjax) {
-                    Response::json([
-                        'success' => false, 
-                        'message' => 'Suppliers cannot mark orders as "Out for Delivery" or "Delivered". Only admin/logistics can do that.'
-                    ], 403);
-                } else {
-                    $this->setFlash('error', 'Suppliers cannot mark orders as "Out for Delivery" or "Delivered". Only admin/logistics can do that.');
-                    $this->redirect('/build_mate/supplier/orders');
-                }
-                return;
+                Response::json([
+                    'success' => false, 
+                    'message' => 'Suppliers cannot mark orders as "Out for Delivery" or "Delivered". Only admin/logistics can do that.'
+                ], 403);
+            } else {
+                $this->setFlash('error', 'Suppliers cannot mark orders as "Out for Delivery" or "Delivered". Only admin/logistics can do that.');
+                $this->redirect('/build_mate/supplier/orders');
             }
-            
-            // Define pre-processing statuses (any status before processing)
+            return;
+        }
+        
+        // Define pre-processing statuses (any status before processing)
             // Include all possible paid/placed statuses
-            $preProcessingStatuses = ['placed', 'pending', 'paid', 'paid_escrow', 'paid_paystack_secure', 'payment_confirmed'];
-            
-            // Check if transition is allowed
-            $isAllowed = false;
-            
-            // Rule: Suppliers can only go to 'processing' from pre-processing statuses
+        $preProcessingStatuses = ['placed', 'pending', 'paid', 'paid_escrow', 'paid_paystack_secure', 'payment_confirmed'];
+        
+        // Check if transition is allowed
+        $isAllowed = false;
+        
+        // Rule: Suppliers can only go to 'processing' from pre-processing statuses
             // IMPORTANT: If order exists, payment was successful (order wouldn't exist otherwise)
-            if ($newStatus === 'processing') {
+        if ($newStatus === 'processing') {
                 // Allow if current status is pre-processing OR if order has payment reference (payment successful)
                 if (in_array($currentStatus, $preProcessingStatuses) || !empty($order['payment_reference'])) {
-                    $isAllowed = true;
-                }
+                $isAllowed = true;
+            }
+        }
+        
+        if (!$isAllowed) {
+            $errorMsg = "Invalid status transition: Cannot change from '{$currentStatus}' to '{$newStatus}'";
+            if ($newStatus === 'processing') {
+                    $errorMsg .= ". Order must be in a pre-processing status (placed, paid, etc.)";
             }
             
-            if (!$isAllowed) {
-                $errorMsg = "Invalid status transition: Cannot change from '{$currentStatus}' to '{$newStatus}'";
-                if ($newStatus === 'processing') {
-                    $errorMsg .= ". Order must be in a pre-processing status (placed, paid, etc.)";
-                }
-                
                 error_log("SupplierController::updateOrderStatus - Status transition denied. Current: {$currentStatus}, New: {$newStatus}, Payment ref: " . ($order['payment_reference'] ?? 'none'));
                 
                 if ($isAjax) {
-                    Response::json([
-                        'success' => false, 
-                        'message' => $errorMsg
-                    ], 400);
-                } else {
-                    $this->setFlash('error', $errorMsg);
-                    $this->redirect('/build_mate/supplier/orders');
-                }
-                return;
+                Response::json([
+                    'success' => false, 
+                    'message' => $errorMsg
+                ], 400);
+            } else {
+                $this->setFlash('error', $errorMsg);
+                $this->redirect('/build_mate/supplier/orders');
             }
-            
+            return;
+        }
+        
             // Update order status using the proper function that handles current_status and timestamps
             require_once __DIR__ . '/../includes/order_functions.php';
             
@@ -759,23 +759,23 @@ class SupplierController extends Controller
             }
             
             if ($success) {
-                // Log the status change
-                Security::log('order_status_updated', $user['id'], [
-                    'order_id' => $orderId,
-                    'old_status' => $order['status'],
+            // Log the status change
+            Security::log('order_status_updated', $user['id'], [
+                'order_id' => $orderId,
+                'old_status' => $order['status'],
                     'new_status' => $newStatus,
                     'updated_by' => 'supplier'
-                ]);
-                
+            ]);
+            
                 if ($isAjax) {
-                    Response::json([
-                        'success' => true, 
-                        'message' => 'Order status updated successfully',
-                        'new_status' => $newStatus
-                    ]);
-                } else {
-                    $this->setFlash('success', 'Order status updated successfully');
-                    $this->redirect('/build_mate/supplier/orders');
+                Response::json([
+                    'success' => true, 
+                    'message' => 'Order status updated successfully',
+                    'new_status' => $newStatus
+                ]);
+            } else {
+                $this->setFlash('success', 'Order status updated successfully');
+                $this->redirect('/build_mate/supplier/orders');
                 }
             } else {
                 // Log the failure for debugging

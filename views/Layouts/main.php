@@ -9,21 +9,16 @@
     <noscript>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
     </noscript>
-    <link rel="stylesheet" href="/build_mate/assets/css/main.css">
-    <link rel="stylesheet" href="/build_mate/assets/css/chat-widget.css">
+    <link rel="stylesheet" href="<?= \App\View::asset('assets/css/main.css') ?>">
+    <link rel="stylesheet" href="<?= \App\View::asset('assets/css/chat-widget.css') ?>">
     <meta name="csrf-token" content="<?= \App\Csrf::token() ?>">
     <!-- Fallback: Check if CSS loads -->
     <script>
         window.addEventListener('load', function() {
-            var link = document.querySelector('link[href="/build_mate/assets/css/main.css"]');
+            var link = document.querySelector('link[href*="assets/css/main.css"]');
             if (link) {
                 link.onerror = function() {
-                    console.error('CSS failed to load: /build_mate/assets/css/main.css');
-                    // Try alternative path
-                    var fallback = document.createElement('link');
-                    fallback.rel = 'stylesheet';
-                    fallback.href = 'assets/css/main.css';
-                    document.head.appendChild(fallback);
+                    console.error('CSS failed to load');
                 };
             }
         });
@@ -32,7 +27,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
         <div class="container">
-            <a class="navbar-brand" href="/build_mate/">
+            <a class="navbar-brand" href="<?= \App\View::url('/') ?>">
                 <i class="bi bi-hammer"></i> Build Mate Ghana
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -41,10 +36,10 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="/build_mate/">Home</a>
+                        <a class="nav-link" href="<?= \App\View::url('/') ?>">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/build_mate/catalog">Catalog</a>
+                        <a class="nav-link" href="<?= \App\View::url('/catalog') ?>">Catalog</a>
                     </li>
                     <?php if (isset($_SESSION['user'])): ?>
                         <?php if ($_SESSION['user']['role'] === 'supplier'): ?>
@@ -179,8 +174,8 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="/build_mate/assets/js/main.js?v=<?= time() ?>"></script>
-    <script src="/build_mate/assets/js/chat-widget.js?v=<?= time() ?>"></script>
+    <script src="<?= \App\View::asset('assets/js/main.js') ?>?v=<?= time() ?>"></script>
+    <script src="<?= \App\View::asset('assets/js/chat-widget.js') ?>?v=<?= time() ?>"></script>
     <script>
         // Currency conversion (client-side for demo)
         const usdToGhsRate = <?php 
