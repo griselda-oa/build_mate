@@ -112,8 +112,13 @@ abstract class Controller
      */
     protected function redirectBack(): void
     {
-        $referer = $_SERVER['HTTP_REFERER'] ?? '/build_mate/';
-        $this->redirect($referer);
+        $referer = $_SERVER['HTTP_REFERER'] ?? View::url('/');
+        // If referer is from same domain, use it as-is, otherwise redirect to home
+        if (!empty($referer) && strpos($referer, $_SERVER['HTTP_HOST'] ?? '') !== false) {
+            $this->redirect($referer);
+        } else {
+            $this->redirect('/');
+        }
     }
     
     /**
