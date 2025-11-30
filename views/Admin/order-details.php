@@ -318,8 +318,8 @@ if ($orderStatus === 'placed' && ($order['status'] ?? '') === 'shipped') {
         </div>
     </div>
 
-<link rel="stylesheet" href="<?= \App\View::asset('assets/css/admin-order-details.css?v=<?= time() ?>">
-<link rel="stylesheet" href="<?= \App\View::asset('assets/css/delivery-tracker.css?v=<?= time() ?>">
+<link rel="stylesheet" href="<?= \App\View::asset('assets/css/admin-order-details.css') ?>?v=<?= time() ?>">
+<link rel="stylesheet" href="<?= \App\View::asset('assets/css/delivery-tracker.css') ?>?v=<?= time() ?>">
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {

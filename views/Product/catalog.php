@@ -407,7 +407,7 @@
 </div>
 
 <!-- Include Catalog JavaScript -->
-<script src="<?= \App\View::asset('assets/js/catalog.js?v=<?= time() ?>') ?>"></script>
+<script src="<?= \App\View::asset('assets/js/catalog.js') ?>?v=<?= time() ?>"></script>
 
 <script>
 // Wishlist toggle for catalog

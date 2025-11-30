@@ -486,7 +486,7 @@ function initDeliveryMapUltra() {
 <link rel="stylesheet" href="<?= \App\View::asset('assets/css/tracking-ultra.css?v=<?= time() ?>">
 
 <!-- Delivery Tracker JavaScript -->
-<script src="<?= \App\View::asset('assets/js/delivery-tracker.js?v=<?= time() ?>') ?>"></script>
+<script src="<?= \App\View::asset('assets/js/delivery-tracker.js') ?>?v=<?= time() ?> ?>"></script>
 <script>
 // Initialize tracker with current order status
 document.addEventListener('DOMContentLoaded', function() {

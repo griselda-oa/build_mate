@@ -22,9 +22,9 @@ class CartController extends Controller
         $user = $this->user();
         if ($user) {
             if ($user['role'] === 'supplier') {
-                $this->setFlash('error', 'Suppliers cannot purchase products. Please create a buyer account to make purchases.');
-                $this->redirect('/build_mate/catalog');
-                return;
+            $this->setFlash('error', 'Suppliers cannot purchase products. Please create a buyer account to make purchases.');
+            $this->redirect('/build_mate/catalog');
+            return;
             }
             if ($user['role'] === 'admin') {
                 $this->setFlash('error', 'Admins cannot purchase products. Please use a buyer account to make purchases.');
@@ -59,22 +59,22 @@ class CartController extends Controller
         $user = $this->user();
         if ($user) {
             if ($user['role'] === 'supplier') {
-                $isAjax = !empty($_SERVER['HTTP_X_REQUESTED_WITH']) && 
-                          strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest';
-                $isJson = !empty($_SERVER['CONTENT_TYPE']) && 
-                          strpos($_SERVER['CONTENT_TYPE'], 'application/json') !== false;
-                
-                if ($isAjax || $isJson) {
-                    Response::json([
-                        'success' => false, 
-                        'message' => 'Suppliers cannot purchase products. Please create a buyer account to make purchases.'
-                    ], 403);
-                    return;
-                }
-                
-                $this->setFlash('error', 'Suppliers cannot purchase products. Please create a buyer account to make purchases.');
-                $this->redirect('/build_mate/catalog');
+            $isAjax = !empty($_SERVER['HTTP_X_REQUESTED_WITH']) && 
+                      strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest';
+            $isJson = !empty($_SERVER['CONTENT_TYPE']) && 
+                      strpos($_SERVER['CONTENT_TYPE'], 'application/json') !== false;
+            
+            if ($isAjax || $isJson) {
+                Response::json([
+                    'success' => false, 
+                    'message' => 'Suppliers cannot purchase products. Please create a buyer account to make purchases.'
+                ], 403);
                 return;
+            }
+            
+            $this->setFlash('error', 'Suppliers cannot purchase products. Please create a buyer account to make purchases.');
+            $this->redirect('/build_mate/catalog');
+            return;
             }
             if ($user['role'] === 'admin') {
                 $isAjax = !empty($_SERVER['HTTP_X_REQUESTED_WITH']) && 
@@ -162,9 +162,9 @@ class CartController extends Controller
         $user = $this->user();
         if ($user) {
             if ($user['role'] === 'supplier') {
-                $this->setFlash('error', 'Suppliers cannot purchase products. Please create a buyer account to make purchases.');
-                $this->redirect('/build_mate/catalog');
-                return;
+            $this->setFlash('error', 'Suppliers cannot purchase products. Please create a buyer account to make purchases.');
+            $this->redirect('/build_mate/catalog');
+            return;
             }
             if ($user['role'] === 'admin') {
                 $this->setFlash('error', 'Admins cannot purchase products. Please use a buyer account to make purchases.');
@@ -197,9 +197,9 @@ class CartController extends Controller
         $user = $this->user();
         if ($user) {
             if ($user['role'] === 'supplier') {
-                $this->setFlash('error', 'Suppliers cannot purchase products. Please create a buyer account to make purchases.');
-                $this->redirect('/build_mate/catalog');
-                return;
+            $this->setFlash('error', 'Suppliers cannot purchase products. Please create a buyer account to make purchases.');
+            $this->redirect('/build_mate/catalog');
+            return;
             }
             if ($user['role'] === 'admin') {
                 $this->setFlash('error', 'Admins cannot purchase products. Please use a buyer account to make purchases.');
