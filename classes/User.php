@@ -16,13 +16,27 @@ class User extends Model
     protected string $table = 'users';
     
     /**
-     * Find by email
+     * Find by email (case-insensitive)
      */
     public function findByEmail(string $email): ?array
     {
-        $stmt = $this->db->prepare("SELECT * FROM {$this->table} WHERE email = ? LIMIT 1");
+        // Normalize email to lowercase for comparison
+        $email = strtolower(trim($email));
+        $stmt = $this->db->prepare("SELECT * FROM {$this->table} WHERE LOWER(TRIM(email)) = ? LIMIT 1");
         $stmt->execute([$email]);
         $result = $stmt->fetch();
+        
+        if (!$result) {
+            error_log("findByEmail: No user found for email: {$email}");
+            // Try exact match as fallback
+            $stmt2 = $this->db->prepare("SELECT * FROM {$this->table} WHERE email = ? LIMIT 1");
+            $stmt2->execute([$email]);
+            $result = $stmt2->fetch();
+            if ($result) {
+                error_log("findByEmail: Found user with exact match (case-sensitive)");
+            }
+        }
+        
         return $result ?: null;
     }
     
