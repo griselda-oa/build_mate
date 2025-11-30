@@ -121,10 +121,24 @@ Some hosting providers have a control panel (cPanel, Plesk, etc.) where you can 
 
 **IMPORTANT:** Use the file `db/complete_database_no_create.sql` (NOT `complete_database.sql`) because it doesn't try to create the database.
 
-1. In phpMyAdmin, select `buildmate_db` database (or your database name)
-2. Click "Import" tab
-3. Choose file: `db/complete_database_no_create.sql`
-4. Click "Go"
+**CRITICAL:** You MUST select a database first before importing!
+
+### How to Select Database in phpMyAdmin:
+
+1. Go to: http://169.239.251.102:442/phpmyadmin
+2. Log in with: `griselda.owusu` / `Jytc1101$`
+3. **Look at the LEFT SIDEBAR** - you should see a list of databases
+4. **Click on a database name** to select it (it will turn blue/highlighted)
+   - If `buildmate_db` exists, click it
+   - If you see another database (like `griselda_owusu_buildmate` or similar), click that one
+   - If NO databases are listed, you need to ask admin to create one first
+5. Once a database is selected, click the **"Import"** tab at the top
+6. Click "Choose File" and select: `db/complete_database_no_create.sql`
+7. Scroll down and click **"Go"** button
+
+**If you see "No database selected" error:**
+- You forgot to click a database in the left sidebar first
+- Go back and click a database name, then try importing again
 
 **If the file is too large and times out:**
 - Try importing in smaller chunks
