@@ -83,28 +83,39 @@ OPENAI_API_KEY=your_openai_key
 5. Collation: `utf8mb4_unicode_ci`
 6. Click "Create"
 
-**If you CANNOT create databases (permission denied):**
+**If you CANNOT create databases (permission denied - ERROR 1044):**
 
-### Option A: Ask Administrator to Create Database
+This is normal on shared hosting. Your MySQL user doesn't have CREATE DATABASE privileges.
+
+### Option A: Ask Administrator to Create Database (RECOMMENDED)
 Contact your administrator (FIs, Lecturers, or CSIS coordinators) and ask them to:
 - Create database: `buildmate_db`
 - Grant full privileges to user: `griselda.owusu`
 - Collation: `utf8mb4_unicode_ci`
 
-### Option B: Try Creating via SSH (Command Line)
-```bash
-# SSH into server first
-ssh -C griselda.owusu@169.239.251.102 -p 422
+**Email/Message Template:**
+```
+Hello,
 
-# Try creating database via MySQL command line
-mysql -u griselda.owusu -p'Jytc1101$' -e "CREATE DATABASE IF NOT EXISTS buildmate_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
+I need a MySQL database created for my Build Mate project.
+
+Database Name: buildmate_db
+Database User: griselda.owusu
+Collation: utf8mb4_unicode_ci
+Privileges: ALL (SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, ALTER, INDEX)
+
+Thank you!
 ```
 
-### Option C: Use Existing Database (if one exists)
-If you already have a database, you can:
-1. Check what databases you have access to in phpMyAdmin
-2. Use an existing database name
-3. Update `.env` file with that database name instead of `buildmate_db`
+### Option B: Check for Existing Database
+1. In phpMyAdmin, look at the left sidebar
+2. Check if you already have a database (might be named `griselda_owusu_buildmate` or similar)
+3. If one exists, use that name in your `.env` file instead of `buildmate_db`
+
+### Option C: Check for Database Creation Tool
+Some hosting providers have a control panel (cPanel, Plesk, etc.) where you can create databases. Check:
+- http://169.239.251.102:442/ (for control panel)
+- Or ask your administrator about database creation tools
 
 ## Step 7: Import Database
 
