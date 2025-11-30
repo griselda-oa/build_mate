@@ -23,7 +23,7 @@
                 </div>
             <?php endif; ?>
 
-            <form method="POST" action="/build_mate/register" class="auth-form">
+            <form method="POST" action="<?= \App\View::url('/register') ?>" class="auth-form">
                 <?= \App\Csrf::field() ?>
                 
                 <div class="form-group">
