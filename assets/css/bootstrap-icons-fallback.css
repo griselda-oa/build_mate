@@ -39,4 +39,25 @@
 .bi-truck::before { content: "🚚"; }
 .bi-check-circle::before { content: "✓"; }
 .bi-check-circle-fill::before { content: "✓"; }
+.bi-chevron-left::before { content: "‹"; }
+.bi-chevron-right::before { content: "›"; }
+.bi-x-circle::before { content: "✕"; }
+.bi-cart-plus::before { content: "🛒+"; }
+.bi-cart-x::before { content: "🛒×"; }
+.bi-exclamation-circle::before { content: "⚠"; }
+.bi-info-circle::before { content: "ℹ"; }
+.bi-envelope::before { content: "✉"; }
+.bi-lock::before { content: "🔒"; }
+.bi-person::before { content: "👤"; }
+.bi-person-plus::before { content: "👤+"; }
+.bi-box-arrow-in-right::before { content: "→"; }
+.bi-hammer::before { content: "🔨"; }
+.bi-shield-check::before { content: "🛡"; }
+.bi-search::before { content: "🔍"; }
+.bi-hourglass-split::before { content: "⏳"; }
+.bi-headset::before { content: "🎧"; }
+.bi-credit-card::before { content: "💳"; }
+.bi-wallet2::before { content: "💼"; }
+.bi-lightning::before { content: "⚡"; }
+.bi-lightning-fill::before { content: "⚡"; }
 
