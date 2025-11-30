@@ -44,15 +44,15 @@
                     <?php if (isset($_SESSION['user'])): ?>
                         <?php if ($_SESSION['user']['role'] === 'supplier'): ?>
                             <li class="nav-item">
-                                <a class="nav-link" href="/build_mate/supplier/dashboard">Supplier Portal</a>
+                                <a class="nav-link" href="<?= \App\View::url('/supplier/dashboard') ?>">Supplier Portal</a>
                             </li>
                         <?php elseif ($_SESSION['user']['role'] === 'logistics'): ?>
                             <li class="nav-item">
-                                <a class="nav-link" href="/build_mate/logistics/dashboard">Logistics</a>
+                                <a class="nav-link" href="<?= \App\View::url('/logistics/dashboard') ?>">Logistics</a>
                             </li>
                         <?php elseif ($_SESSION['user']['role'] === 'admin'): ?>
                             <li class="nav-item">
-                                <a class="nav-link" href="/build_mate/admin/dashboard">Admin</a>
+                                <a class="nav-link" href="<?= \App\View::url('/admin/dashboard') ?>">Admin</a>
                             </li>
                         <?php endif; ?>
                     <?php endif; ?>
@@ -75,7 +75,7 @@
                         }
                         ?>
                         <li class="nav-item">
-                            <a class="nav-link wishlist-badge" href="/build_mate/wishlist" title="My Wishlist">
+                            <a class="nav-link wishlist-badge" href="<?= \App\View::url('/wishlist') ?>" title="My Wishlist">
                                 <i class="bi bi-heart"></i>
                                 <span class="wishlist-count" id="wishlistCount"><?= $wishlistCount ?></span>
                             </a>
@@ -83,7 +83,7 @@
                     <?php endif; ?>
                     <?php if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'supplier'): ?>
                         <li class="nav-item">
-                            <a class="nav-link cart-badge" href="/build_mate/cart">
+                            <a class="nav-link cart-badge" href="<?= \App\View::url('/cart') ?>">
                                 <i class="bi bi-cart"></i>
                                 <span class="cart-count" id="cartCount"><?= count($_SESSION['cart'] ?? []) ?></span>
                             </a>
@@ -95,13 +95,13 @@
                                 <?= \App\View::e($_SESSION['user']['name']) ?>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="/build_mate/orders">My Orders</a></li>
-                                <li><a class="dropdown-item" href="/build_mate/wishlist">
+                                <li><a class="dropdown-item" href="<?= \App\View::url('/orders') ?>">My Orders</a></li>
+                                <li><a class="dropdown-item" href="<?= \App\View::url('/wishlist') ?>">
                                     <i class="bi bi-heart"></i> My Wishlist
                                 </a></li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li>
-                                    <form method="POST" action="/build_mate/logout/" style="display: inline;">
+                                    <form method="POST" action="<?= \App\View::url('/logout/') ?>" style="display: inline;">
                                         <?= \App\Csrf::field() ?>
                                         <button type="submit" class="dropdown-item">Logout</button>
                                     </form>
@@ -110,10 +110,10 @@
                         </li>
                     <?php else: ?>
                         <li class="nav-item">
-                            <a class="nav-link" href="/build_mate/login">Login</a>
+                            <a class="nav-link" href="<?= \App\View::url('/login') ?>">Login</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/build_mate/register">Register</a>
+                            <a class="nav-link" href="<?= \App\View::url('/register') ?>">Register</a>
                         </li>
                     <?php endif; ?>
                 </ul>
@@ -146,25 +146,25 @@
                 <div class="col-md-2 mb-4 mb-md-0">
                     <h6 class="mb-3">Company</h6>
                     <ul class="list-unstyled">
-                        <li><a href="/build_mate/" class="text-decoration-none">About</a></li>
-                        <li><a href="/build_mate/" class="text-decoration-none">Contact</a></li>
-                        <li><a href="/build_mate/" class="text-decoration-none">Careers</a></li>
+                        <li><a href="<?= \App\View::url('/') ?>" class="text-decoration-none">About</a></li>
+                        <li><a href="<?= \App\View::url('/') ?>" class="text-decoration-none">Contact</a></li>
+                        <li><a href="<?= \App\View::url('/') ?>" class="text-decoration-none">Careers</a></li>
                     </ul>
                 </div>
                 <div class="col-md-3 mb-4 mb-md-0">
                     <h6 class="mb-3">Support</h6>
                     <ul class="list-unstyled">
-                        <li><a href="/build_mate/" class="text-decoration-none">Help Center</a></li>
-                        <li><a href="/build_mate/" class="text-decoration-none">Privacy Policy</a></li>
-                        <li><a href="/build_mate/" class="text-decoration-none">Terms of Service</a></li>
+                        <li><a href="<?= \App\View::url('/') ?>" class="text-decoration-none">Help Center</a></li>
+                        <li><a href="<?= \App\View::url('/') ?>" class="text-decoration-none">Privacy Policy</a></li>
+                        <li><a href="<?= \App\View::url('/') ?>" class="text-decoration-none">Terms of Service</a></li>
                     </ul>
                 </div>
                 <div class="col-md-3">
                     <h6 class="mb-3">Resources</h6>
                     <ul class="list-unstyled">
-                        <li><a href="/build_mate/" class="text-decoration-none">Buyer Guide</a></li>
-                        <li><a href="/build_mate/" class="text-decoration-none">Supplier Guide</a></li>
-                        <li><a href="/build_mate/security.txt" class="text-decoration-none">Data Protection</a></li>
+                        <li><a href="<?= \App\View::url('/') ?>" class="text-decoration-none">Buyer Guide</a></li>
+                        <li><a href="<?= \App\View::url('/') ?>" class="text-decoration-none">Supplier Guide</a></li>
+                        <li><a href="<?= \App\View::url('/security.txt') ?>" class="text-decoration-none">Data Protection</a></li>
                     </ul>
                 </div>
             </div>
@@ -214,7 +214,7 @@
         
         // Update cart count
         function updateCartCount() {
-            fetch('/build_mate/api/search?query=')
+            fetch('<?= \App\View::url('/api/search?query=') ?>')
                 .then(() => {
                     // Cart count would be updated via session
                 });
