@@ -129,9 +129,9 @@ class AuthController extends Controller
             ob_end_clean();
         }
 
-        // (debug header removed)
-        header('Location: ' . $redirect, true, 302);
-        exit;
+        // Use redirect method which handles base path automatically
+        $this->redirect($redirect);
+        return;
     }
     
     /**
