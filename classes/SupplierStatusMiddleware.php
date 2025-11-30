@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App;
 
+use App\View;
+
 /**
  * Middleware to check supplier status and block access if pending/rejected
  */
