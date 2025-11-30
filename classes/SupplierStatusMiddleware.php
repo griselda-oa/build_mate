@@ -17,7 +17,7 @@ class SupplierStatusMiddleware
     {
         // Get user from session
         if (!isset($_SESSION['user'])) {
-            header('Location: ' . \App\View::url('/login'));
+            header('Location: ' . View::url('/login'));
             exit;
         }
         
@@ -45,7 +45,7 @@ class SupplierStatusMiddleware
             }
             
             if (!$isAllowed) {
-                header('Location: ' . \App\View::url('/supplier/kyc'));
+                header('Location: ' . View::url('/supplier/kyc'));
                 exit;
             }
             return true;
@@ -68,14 +68,14 @@ class SupplierStatusMiddleware
         // If pending, redirect to pending dashboard (except for allowed paths)
         if ($kycStatus === 'pending' && !$isAllowed) {
             $_SESSION['flash'] = ['type' => 'info', 'message' => 'Your supplier account is pending approval. Please wait for admin review.'];
-            header('Location: /build_mate/supplier/pending');
+            header('Location: ' . View::url('/supplier/pending'));
             exit;
         }
         
         // If rejected, redirect to KYC page
         if ($kycStatus === 'rejected' && !$isAllowed) {
             $_SESSION['flash'] = ['type' => 'error', 'message' => 'Your supplier application was rejected. Please contact support.'];
-            header('Location: /build_mate/supplier/kyc');
+            header('Location: ' . View::url('/supplier/kyc'));
             exit;
         }
         
