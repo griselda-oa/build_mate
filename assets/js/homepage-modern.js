@@ -208,7 +208,7 @@ function addToCart(productId) {
     const csrfToken = document.querySelector('meta[name="csrf-token"]')?.content || '';
     
     // Make AJAX request to add to cart
-    fetch(`/build_mate/cart/add/${productId}`, {
+    fetch(window.buildUrl(`/cart/add/${productId}`), {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -252,13 +252,13 @@ function addToCart(productId) {
     .catch(error => {
         console.error('Error:', error);
         // Fallback to page navigation
-        window.location.href = `/build_mate/cart/add/${productId}`;
+        window.location.href = window.buildUrl(`/cart/add/${productId}`);
     });
 }
 
 // Quick View Function
 function quickView(productId) {
-    window.location.href = `/build_mate/product/${productId}`;
+    window.location.href = window.buildUrl(`/product/${productId}`);
 }
 
 // Smooth Scroll for anchor links

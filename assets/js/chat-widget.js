@@ -222,7 +222,7 @@ class ChatWidget {
             }
             
             // Send to API
-            const response = await fetch('/build_mate/api/chat/send', {
+            const response = await fetch(window.buildUrl('/api/chat/send'), {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -278,7 +278,7 @@ class ChatWidget {
         }
         
         try {
-            const response = await fetch(`/build_mate/api/chat/history?session_id=${this.sessionId}`);
+            const response = await fetch(`${window.buildUrl('/api/chat/history')}?session_id=${this.sessionId}`);
             
             // Check if response is JSON
             const contentType = response.headers.get('content-type');
@@ -408,7 +408,7 @@ class ChatWidget {
         }
 
         if (lowerMessage.includes('supplier') && context.page !== 'supplier') {
-            return 'To become a supplier:\n• Visit /build_mate/supplier/apply\n• Complete the application form\n• Submit KYC documents\n• Wait for admin approval (24-48 hours)\n• Start listing products once approved\n\nWant to know more about the process?';
+            return `To become a supplier:\n• Visit ${window.buildUrl('/supplier/apply')}\n• Complete the application form\n• Submit KYC documents\n• Wait for admin approval (24-48 hours)\n• Start listing products once approved\n\nWant to know more about the process?`;
         }
 
         // Default response

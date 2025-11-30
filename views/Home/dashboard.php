@@ -5,7 +5,7 @@
         <div class="container">
             <!-- Back Button - Positioned in hero section -->
             <div class="catalog-back-button">
-                <a href="/build_mate/" class="back-button back-button-hero">
+                <a href="<?= \App\View::url('/') ?>" class="back-button back-button-hero">
                     <i class="bi bi-arrow-left"></i>
                     <span>Back to Home</span>
                 </a>
@@ -43,7 +43,7 @@
                         $adImage = $ad['image_url'] ?? $ad['product_image'] ?? '';
                         // Make path absolute if relative
                         if (!empty($adImage) && !preg_match('/^https?:\/\//', $adImage)) {
-                            if (strpos($adImage, '/build_mate/') !== 0) {
+                            if (strpos($adImage, '<?= \App\View::url('/') ?>') !== 0) {
                                 $adImage = '/build_mate' . (strpos($adImage, '/') === 0 ? '' : '/') . $adImage;
                             }
                         }
@@ -51,7 +51,7 @@
                         $productSlug = $ad['product_slug'] ?? '';
                         ?>
                         <div class="ad-banner-slide <?= $index === 0 ? 'active' : '' ?>" data-slide="<?= $index ?>">
-                            <a href="/build_mate/product/<?= \App\View::e($productSlug) ?>" class="ad-banner-link-modern">
+                            <a href="<?= \App\View::url('/') ?>product/<?= \App\View::e($productSlug) ?>" class="ad-banner-link-modern">
                                 <div class="ad-banner-content-modern">
                                     <?php if (!empty($adImage)): ?>
                                         <?php if ($isVideo): ?>
@@ -112,7 +112,7 @@
             <div class="recent-orders-section mb-5">
                 <div class="orders-header-modern">
                     <h3><i class="bi bi-truck"></i> My Recent Orders & Tracking</h3>
-                    <a href="/build_mate/orders" class="view-all-orders-btn">
+                    <a href="<?= \App\View::url('/') ?>orders" class="view-all-orders-btn">
                         View All Orders
                         <i class="bi bi-arrow-right"></i>
                     </a>
@@ -160,12 +160,12 @@
                                 </div>
                             </div>
                             <div class="order-card-actions-dashboard">
-                                <a href="/build_mate/orders/<?= $order['id'] ?>" class="btn-view-order">
+                                <a href="<?= \App\View::url('/') ?>orders/<?= $order['id'] ?>" class="btn-view-order">
                                     <i class="bi bi-eye"></i>
                                     View Details
                                 </a>
                                 <?php if ($isPaid): ?>
-                                    <a href="/build_mate/orders/<?= $order['id'] ?>/track-delivery" class="btn-track-order">
+                                    <a href="<?= \App\View::url('/') ?>orders/<?= $order['id'] ?>/track-delivery" class="btn-track-order">
                                         <i class="bi bi-truck"></i>
                                         Track Delivery
                                     </a>
@@ -193,7 +193,7 @@
                             Clear All
                         </button>
                     </div>
-                    <form method="GET" action="/build_mate/dashboard" id="filterForm">
+                    <form method="GET" action="<?= \App\View::url('/') ?>dashboard" id="filterForm">
                         <!-- Search (hidden since we have horizontal search) -->
                         <input type="hidden" 
                                id="q" 
@@ -266,7 +266,7 @@
                             <i class="bi bi-check-circle"></i>
                             Apply Filters
                         </button>
-                        <a href="/build_mate/dashboard" class="filter-reset-btn-modern">
+                        <a href="<?= \App\View::url('/') ?>dashboard" class="filter-reset-btn-modern">
                             <i class="bi bi-x-circle"></i>
                             Reset
                         </a>
@@ -281,7 +281,7 @@
                         <strong><?= count($products) ?></strong> product<?= count($products) !== 1 ? 's' : '' ?> found
                     </div>
                     <div class="view-options">
-                        <a href="/build_mate/catalog" class="view-all-link">
+                        <a href="<?= \App\View::url('/') ?>catalog" class="view-all-link">
                             <i class="bi bi-grid"></i>
                             View Full Catalog
                         </a>
@@ -319,13 +319,13 @@
                         </div>
                         <h4>No products found</h4>
                         <p>Try adjusting your filters or search terms</p>
-                        <a href="/build_mate/dashboard" class="btn-modern-primary">Clear Filters</a>
+                        <a href="<?= \App\View::url('/') ?>dashboard" class="btn-modern-primary">Clear Filters</a>
                     </div>
                 <?php else: ?>
                     <div class="products-grid-modern">
                         <?php foreach ($products as $product): ?>
                             <div class="product-card-ultra-modern">
-                                <a href="/build_mate/product/<?= \App\View::e($product['slug']) ?>" class="product-link-modern">
+                                <a href="<?= \App\View::url('/') ?>product/<?= \App\View::e($product['slug']) ?>" class="product-link-modern">
                                     <div class="product-image-wrapper-modern">
                                         <?php if (!empty($product['image_url'])): ?>
                                             <img src="<?= \App\View::e($product['image_url']) ?>" 

@@ -9,7 +9,9 @@
     <link rel="stylesheet" href="<?= \App\View::asset('assets/css/bootstrap-icons-fallback.css') ?>">
     <link rel="stylesheet" href="<?= \App\View::asset('assets/css/main.css') ?>">
     <link rel="stylesheet" href="<?= \App\View::asset('assets/css/chat-widget.css') ?>">
+    <script src="<?= \App\View::asset('assets/js/base-path.js') ?>"></script>
     <meta name="csrf-token" content="<?= \App\Csrf::token() ?>">
+    <meta name="base-path" content="<?= \App\View::basePath() ?>">
     <!-- Fallback: Check if CSS loads -->
     <script>
         window.addEventListener('load', function() {

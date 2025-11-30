@@ -17,10 +17,10 @@ if (file_exists($modernHomepage)) {
             <h1>Faster, Fairer, and More Affordable Building</h1>
             <p>Ghana's trusted marketplace connecting buyers and verified suppliers in one transparent ecosystem.</p>
             <div class="hero-actions">
-                <a href="/build_mate/catalog" class="btn btn-light btn-lg">
+                <a href="<?= \App\View::url('/') ?>catalog" class="btn btn-light btn-lg">
                     <i class="bi bi-cart"></i> Shop Now
                 </a>
-                <a href="/build_mate/register" class="btn btn-outline-light btn-lg">
+                <a href="<?= \App\View::url('/') ?>register" class="btn btn-outline-light btn-lg">
                     <i class="bi bi-person-plus"></i> Sign Up
                 </a>
             </div>
@@ -33,7 +33,7 @@ if (file_exists($modernHomepage)) {
             <h1>Verified Suppliers, Trusted Quality</h1>
             <p>All suppliers are thoroughly vetted. Shop with confidence knowing you're dealing with trusted partners.</p>
             <div class="hero-actions">
-                <a href="/build_mate/catalog" class="btn btn-light btn-lg">
+                <a href="<?= \App\View::url('/') ?>catalog" class="btn btn-light btn-lg">
                     <i class="bi bi-shield-check"></i> Browse Verified Products
                 </a>
             </div>
@@ -46,7 +46,7 @@ if (file_exists($modernHomepage)) {
             <h1>Secure Payments, Tracked Delivery</h1>
             <p>Your payment is held securely by Paystack until delivery. Real-time tracking from purchase to your door.</p>
             <div class="hero-actions">
-                <a href="/build_mate/catalog" class="btn btn-light btn-lg">
+                <a href="<?= \App\View::url('/') ?>catalog" class="btn btn-light btn-lg">
                     <i class="bi bi-truck"></i> Start Shopping
                 </a>
             </div>
@@ -89,7 +89,7 @@ if (file_exists($modernHomepage)) {
                     $icon = $categoryIcons[$category['name']] ?? 'bi-box';
             ?>
             <div class="col-6 col-md-4 col-lg-2">
-                <a href="/build_mate/catalog?cat=<?= $category['id'] ?>" class="category-card-link">
+                <a href="<?= \App\View::url('/') ?>catalog?cat=<?= $category['id'] ?>" class="category-card-link">
                     <div class="category-card">
                         <div class="category-icon">
                             <i class="bi <?= $icon ?>"></i>
@@ -112,7 +112,7 @@ if (file_exists($modernHomepage)) {
                 foreach ($fallbackCategories as $category):
             ?>
             <div class="col-6 col-md-4 col-lg-2">
-                <a href="/build_mate/catalog" class="category-card-link">
+                <a href="<?= \App\View::url('/') ?>catalog" class="category-card-link">
                     <div class="category-card">
                         <div class="category-icon">
                             <i class="bi <?= $category['icon'] ?>"></i>
@@ -183,7 +183,7 @@ if (file_exists($modernHomepage)) {
                     <?php endif; ?>
                     <div class="product-body">
                         <h6 class="product-title">
-                            <a href="/build_mate/product/<?= \App\View::e($product['slug']) ?>">
+                            <a href="<?= \App\View::url('/') ?>product/<?= \App\View::e($product['slug']) ?>">
                                 <?= \App\View::e($product['name']) ?>
                             </a>
                         </h6>
@@ -196,14 +196,14 @@ if (file_exists($modernHomepage)) {
                         <?php endif; ?>
                     </div>
                     <div class="product-footer">
-                        <a href="/build_mate/product/<?= \App\View::e($product['slug']) ?>" class="btn btn-sm btn-primary w-100">View Details</a>
+                        <a href="<?= \App\View::url('/') ?>product/<?= \App\View::e($product['slug']) ?>" class="btn btn-sm btn-primary w-100">View Details</a>
                     </div>
                 </div>
             </div>
             <?php endforeach; ?>
         </div>
         <div class="text-center mt-5">
-            <a href="/build_mate/catalog" class="btn btn-outline-primary btn-lg">View All Products</a>
+            <a href="<?= \App\View::url('/') ?>catalog" class="btn btn-outline-primary btn-lg">View All Products</a>
         </div>
     </div>
 </section>
@@ -271,7 +271,7 @@ if (file_exists($modernHomepage)) {
     <div class="container text-center">
         <h2 class="cta-title">Ready to Build Better?</h2>
         <p class="cta-subtitle">Join thousands of buyers and suppliers who trust Build Mate</p>
-        <a href="/build_mate/register" class="btn btn-light btn-lg px-5 py-3" style="position: relative; z-index: 1;">Get Started Today</a>
+        <a href="<?= \App\View::url('/') ?>register" class="btn btn-light btn-lg px-5 py-3" style="position: relative; z-index: 1;">Get Started Today</a>
     </div>
 </section>
 

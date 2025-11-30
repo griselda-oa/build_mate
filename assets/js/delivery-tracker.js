@@ -177,7 +177,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Fetch updated status via AJAX
             const orderId = tracker.dataset.orderId;
             if (orderId) {
-                fetch(`/build_mate/orders/${orderId}/status`, {
+                fetch(window.buildUrl(`/orders/${orderId}/status`), {
                     headers: {
                         'X-Requested-With': 'XMLHttpRequest'
                     }

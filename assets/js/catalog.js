@@ -462,7 +462,7 @@ async function addToCart(productId) {
         // Get CSRF token from meta tag
         const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '';
         
-        const response = await fetch(`/build_mate/cart/add/${productId}/`, {
+        const response = await fetch(window.buildUrl(`/cart/add/${productId}/`), {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

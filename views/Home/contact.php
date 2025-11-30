@@ -7,7 +7,7 @@ $title = $title ?? 'Contact Us';
 
 <div class="container my-5">
     <div class="mb-3">
-        <a href="/build_mate/" class="back-button">
+        <a href="<?= \App\View::url('/') ?>" class="back-button">
             <i class="bi bi-arrow-left"></i>
             <span>Back to Home</span>
         </a>
@@ -107,7 +107,7 @@ $title = $title ?? 'Contact Us';
                     </h5>
                 </div>
                 <div class="card-body">
-                    <form id="contact-form" method="POST" action="/build_mate/contact">
+                    <form id="contact-form" method="POST" action="<?= \App\View::url('/') ?>contact">
                         <?= \App\Csrf::field() ?>
                         <div class="mb-3">
                             <label for="name" class="form-label">Your Name</label>
@@ -201,7 +201,7 @@ document.addEventListener('DOMContentLoaded', function() {
         'hi': 'Hi there! What can I assist you with?',
         'help': 'I can help you with:\n• Product inquiries\n• Order tracking\n• Supplier applications\n• Account issues\n• Payment questions\n\nWhat do you need help with?',
         'order': 'For order inquiries, please provide your order number or contact our support team at support@buildmate.com or call +233 596 211 352.',
-        'supplier': 'To become a supplier, visit our supplier application page at /build_mate/supplier/apply. You\'ll need to submit your business documents for verification.',
+        'supplier': 'To become a supplier, visit our supplier application page at <?= \App\View::url('/') ?>supplier/apply. You\'ll need to submit your business documents for verification.',
         'payment': 'We accept payments via Paystack. All transactions are secure and encrypted. If you have payment issues, contact support@buildmate.com.',
         'default': 'Thank you for your message! Our support team will get back to you soon. For immediate assistance, please call +233 596 211 352 or email support@buildmate.com.'
     };

@@ -181,7 +181,7 @@ class AuthController extends Controller
         
         if (!empty($errors)) {
             $this->setFlash('error', implode(', ', $errors));
-            $this->redirect('/build_mate/register');
+            $this->redirect('/register');
         }
         
         $userModel = new User();
@@ -189,7 +189,7 @@ class AuthController extends Controller
         // Check if email exists
         if ($userModel->findByEmail($email)) {
             $this->setFlash('error', 'Email already registered');
-            $this->redirect('/build_mate/register');
+            $this->redirect('/register');
         }
         
         // Create user
@@ -213,7 +213,7 @@ class AuthController extends Controller
         Security::log('user_registered', $userId, ['role' => $role]);
         
         $this->setFlash('success', 'Registration successful. Please login.');
-        $this->redirect('/build_mate/login');
+        $this->redirect('/login');
     }
     
     /**
@@ -224,7 +224,7 @@ class AuthController extends Controller
         $userId = Auth::user()['id'] ?? null;
         Security::log('logout', $userId);
         Auth::logout();
-        $this->redirect('/build_mate/');
+        $this->redirect('/');
     }
 }
 

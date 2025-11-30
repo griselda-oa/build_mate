@@ -583,7 +583,7 @@
         })
         .then(data => {
             // Redirect to pending dashboard
-            window.location.href = '/build_mate/supplier/pending';
+            window.location.href = window.buildUrl('/supplier/pending');
         })
         .catch(error => {
             console.error('Error:', error);
