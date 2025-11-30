@@ -57,3 +57,38 @@ class Security
     }
 }
 
+
+    {
+        $filename = preg_replace('/[^a-zA-Z0-9._-]/', '_', $filename);
+        return substr($filename, 0, 255);
+    }
+}
+
+
+    {
+        $filename = preg_replace('/[^a-zA-Z0-9._-]/', '_', $filename);
+        return substr($filename, 0, 255);
+    }
+}
+
+
+    {
+        $filename = preg_replace('/[^a-zA-Z0-9._-]/', '_', $filename);
+        return substr($filename, 0, 255);
+    }
+}
+
+
+    {
+        $filename = preg_replace('/[^a-zA-Z0-9._-]/', '_', $filename);
+        return substr($filename, 0, 255);
+    }
+}
+
+
+    {
+        $filename = preg_replace('/[^a-zA-Z0-9._-]/', '_', $filename);
+        return substr($filename, 0, 255);
+    }
+}
+

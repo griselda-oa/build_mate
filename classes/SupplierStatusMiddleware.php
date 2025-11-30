@@ -17,7 +17,7 @@ class SupplierStatusMiddleware
     {
         // Get user from session
         if (!isset($_SESSION['user'])) {
-            header('Location: /build_mate/login');
+            header('Location: ' . \App\View::url('/login'));
             exit;
         }
         
@@ -45,7 +45,7 @@ class SupplierStatusMiddleware
             }
             
             if (!$isAllowed) {
-                header('Location: /build_mate/supplier/kyc');
+                header('Location: ' . \App\View::url('/supplier/kyc'));
                 exit;
             }
             return true;

@@ -182,3 +182,518 @@ class View
     }
 }
 
+
+        }
+        
+        try {
+            require $file;
+        } catch (\Throwable $e) {
+            ob_end_clean();
+            error_log("Error rendering view {$view}: " . $e->getMessage());
+            error_log("Stack trace: " . $e->getTraceAsString());
+            throw $e;
+        }
+        
+        return ob_get_clean();
+    }
+    
+    /**
+     * Escape output
+     */
+    public static function e(?string $value): string
+    {
+        return htmlspecialchars((string)$value, ENT_QUOTES, 'UTF-8');
+    }
+    
+    /**
+     * Get base path for assets and links
+     * Detects /~username/build_mate or /build_mate dynamically
+     */
+    public static function basePath(): string
+    {
+        static $basePath = null;
+        
+        if ($basePath !== null) {
+            return $basePath;
+        }
+        
+        $requestUri = $_SERVER['REQUEST_URI'] ?? '/';
+        $scriptName = $_SERVER['SCRIPT_NAME'] ?? '/index.php';
+        $scriptDir = dirname($scriptName);
+        
+        // Priority 1: Check REQUEST_URI for server path: /~username/build_mate
+        if (preg_match('#^/~[^/]+/build_mate#', $requestUri)) {
+            $basePath = preg_replace('#^(/~[^/]+/build_mate).*#', '$1', $requestUri);
+        }
+        // Priority 2: Check REQUEST_URI for localhost path: /build_mate
+        elseif (strpos($requestUri, '/build_mate') === 0) {
+            $basePath = '/build_mate';
+        }
+        // Priority 3: Check SCRIPT_NAME for server path (more reliable for redirects)
+        elseif (preg_match('#^/~[^/]+/build_mate#', $scriptName)) {
+            $basePath = preg_replace('#^(/~[^/]+/build_mate).*#', '$1', $scriptName);
+        }
+        // Priority 4: Check SCRIPT_NAME for localhost path
+        elseif (strpos($scriptName, '/build_mate') !== false) {
+            $basePath = '/build_mate';
+        }
+        // Priority 5: Use script directory if it contains build_mate
+        elseif ($scriptDir !== '/' && $scriptDir !== '.' && strpos($scriptDir, 'build_mate') !== false) {
+            $basePath = $scriptDir;
+        }
+        // Priority 6: Handle server root: /~username (fallback)
+        elseif (preg_match('#^/~[^/]+#', $requestUri)) {
+            $basePath = preg_replace('#^(/~[^/]+).*#', '$1', $requestUri) . '/build_mate';
+        }
+        // Priority 7: Use script directory as fallback
+        elseif ($scriptDir !== '/' && $scriptDir !== '.') {
+            $basePath = $scriptDir;
+        }
+        // Priority 8: Default fallback
+        else {
+            $basePath = '/build_mate';
+        }
+        
+        error_log("View::basePath() detected: '{$basePath}' from REQUEST_URI: '{$requestUri}', SCRIPT_NAME: '{$scriptName}'");
+        
+        return $basePath;
+    }
+    
+    /**
+     * Generate asset URL (CSS, JS, images)
+     */
+    public static function asset(string $path): string
+    {
+        $base = self::basePath();
+        // Remove leading slash from path if present
+        $path = ltrim($path, '/');
+        return rtrim($base, '/') . '/' . $path;
+    }
+    
+    /**
+     * Generate URL for routes
+     */
+    public static function url(string $path = '/'): string
+    {
+        $base = self::basePath();
+        // Remove leading slash from path if present
+        $path = ltrim($path, '/');
+        if ($path === '') {
+            return rtrim($base, '/') . '/';
+        }
+        return rtrim($base, '/') . '/' . $path;
+    }
+}
+
+
+        }
+        
+        try {
+            require $file;
+        } catch (\Throwable $e) {
+            ob_end_clean();
+            error_log("Error rendering view {$view}: " . $e->getMessage());
+            error_log("Stack trace: " . $e->getTraceAsString());
+            throw $e;
+        }
+        
+        return ob_get_clean();
+    }
+    
+    /**
+     * Escape output
+     */
+    public static function e(?string $value): string
+    {
+        return htmlspecialchars((string)$value, ENT_QUOTES, 'UTF-8');
+    }
+    
+    /**
+     * Get base path for assets and links
+     * Detects /~username/build_mate or /build_mate dynamically
+     */
+    public static function basePath(): string
+    {
+        static $basePath = null;
+        
+        if ($basePath !== null) {
+            return $basePath;
+        }
+        
+        $requestUri = $_SERVER['REQUEST_URI'] ?? '/';
+        $scriptName = $_SERVER['SCRIPT_NAME'] ?? '/index.php';
+        $scriptDir = dirname($scriptName);
+        
+        // Priority 1: Check REQUEST_URI for server path: /~username/build_mate
+        if (preg_match('#^/~[^/]+/build_mate#', $requestUri)) {
+            $basePath = preg_replace('#^(/~[^/]+/build_mate).*#', '$1', $requestUri);
+        }
+        // Priority 2: Check REQUEST_URI for localhost path: /build_mate
+        elseif (strpos($requestUri, '/build_mate') === 0) {
+            $basePath = '/build_mate';
+        }
+        // Priority 3: Check SCRIPT_NAME for server path (more reliable for redirects)
+        elseif (preg_match('#^/~[^/]+/build_mate#', $scriptName)) {
+            $basePath = preg_replace('#^(/~[^/]+/build_mate).*#', '$1', $scriptName);
+        }
+        // Priority 4: Check SCRIPT_NAME for localhost path
+        elseif (strpos($scriptName, '/build_mate') !== false) {
+            $basePath = '/build_mate';
+        }
+        // Priority 5: Use script directory if it contains build_mate
+        elseif ($scriptDir !== '/' && $scriptDir !== '.' && strpos($scriptDir, 'build_mate') !== false) {
+            $basePath = $scriptDir;
+        }
+        // Priority 6: Handle server root: /~username (fallback)
+        elseif (preg_match('#^/~[^/]+#', $requestUri)) {
+            $basePath = preg_replace('#^(/~[^/]+).*#', '$1', $requestUri) . '/build_mate';
+        }
+        // Priority 7: Use script directory as fallback
+        elseif ($scriptDir !== '/' && $scriptDir !== '.') {
+            $basePath = $scriptDir;
+        }
+        // Priority 8: Default fallback
+        else {
+            $basePath = '/build_mate';
+        }
+        
+        error_log("View::basePath() detected: '{$basePath}' from REQUEST_URI: '{$requestUri}', SCRIPT_NAME: '{$scriptName}'");
+        
+        return $basePath;
+    }
+    
+    /**
+     * Generate asset URL (CSS, JS, images)
+     */
+    public static function asset(string $path): string
+    {
+        $base = self::basePath();
+        // Remove leading slash from path if present
+        $path = ltrim($path, '/');
+        return rtrim($base, '/') . '/' . $path;
+    }
+    
+    /**
+     * Generate URL for routes
+     */
+    public static function url(string $path = '/'): string
+    {
+        $base = self::basePath();
+        // Remove leading slash from path if present
+        $path = ltrim($path, '/');
+        if ($path === '') {
+            return rtrim($base, '/') . '/';
+        }
+        return rtrim($base, '/') . '/' . $path;
+    }
+}
+
+
+        }
+        
+        try {
+            require $file;
+        } catch (\Throwable $e) {
+            ob_end_clean();
+            error_log("Error rendering view {$view}: " . $e->getMessage());
+            error_log("Stack trace: " . $e->getTraceAsString());
+            throw $e;
+        }
+        
+        return ob_get_clean();
+    }
+    
+    /**
+     * Escape output
+     */
+    public static function e(?string $value): string
+    {
+        return htmlspecialchars((string)$value, ENT_QUOTES, 'UTF-8');
+    }
+    
+    /**
+     * Get base path for assets and links
+     * Detects /~username/build_mate or /build_mate dynamically
+     */
+    public static function basePath(): string
+    {
+        static $basePath = null;
+        
+        if ($basePath !== null) {
+            return $basePath;
+        }
+        
+        $requestUri = $_SERVER['REQUEST_URI'] ?? '/';
+        $scriptName = $_SERVER['SCRIPT_NAME'] ?? '/index.php';
+        $scriptDir = dirname($scriptName);
+        
+        // Priority 1: Check REQUEST_URI for server path: /~username/build_mate
+        if (preg_match('#^/~[^/]+/build_mate#', $requestUri)) {
+            $basePath = preg_replace('#^(/~[^/]+/build_mate).*#', '$1', $requestUri);
+        }
+        // Priority 2: Check REQUEST_URI for localhost path: /build_mate
+        elseif (strpos($requestUri, '/build_mate') === 0) {
+            $basePath = '/build_mate';
+        }
+        // Priority 3: Check SCRIPT_NAME for server path (more reliable for redirects)
+        elseif (preg_match('#^/~[^/]+/build_mate#', $scriptName)) {
+            $basePath = preg_replace('#^(/~[^/]+/build_mate).*#', '$1', $scriptName);
+        }
+        // Priority 4: Check SCRIPT_NAME for localhost path
+        elseif (strpos($scriptName, '/build_mate') !== false) {
+            $basePath = '/build_mate';
+        }
+        // Priority 5: Use script directory if it contains build_mate
+        elseif ($scriptDir !== '/' && $scriptDir !== '.' && strpos($scriptDir, 'build_mate') !== false) {
+            $basePath = $scriptDir;
+        }
+        // Priority 6: Handle server root: /~username (fallback)
+        elseif (preg_match('#^/~[^/]+#', $requestUri)) {
+            $basePath = preg_replace('#^(/~[^/]+).*#', '$1', $requestUri) . '/build_mate';
+        }
+        // Priority 7: Use script directory as fallback
+        elseif ($scriptDir !== '/' && $scriptDir !== '.') {
+            $basePath = $scriptDir;
+        }
+        // Priority 8: Default fallback
+        else {
+            $basePath = '/build_mate';
+        }
+        
+        error_log("View::basePath() detected: '{$basePath}' from REQUEST_URI: '{$requestUri}', SCRIPT_NAME: '{$scriptName}'");
+        
+        return $basePath;
+    }
+    
+    /**
+     * Generate asset URL (CSS, JS, images)
+     */
+    public static function asset(string $path): string
+    {
+        $base = self::basePath();
+        // Remove leading slash from path if present
+        $path = ltrim($path, '/');
+        return rtrim($base, '/') . '/' . $path;
+    }
+    
+    /**
+     * Generate URL for routes
+     */
+    public static function url(string $path = '/'): string
+    {
+        $base = self::basePath();
+        // Remove leading slash from path if present
+        $path = ltrim($path, '/');
+        if ($path === '') {
+            return rtrim($base, '/') . '/';
+        }
+        return rtrim($base, '/') . '/' . $path;
+    }
+}
+
+
+        }
+        
+        try {
+            require $file;
+        } catch (\Throwable $e) {
+            ob_end_clean();
+            error_log("Error rendering view {$view}: " . $e->getMessage());
+            error_log("Stack trace: " . $e->getTraceAsString());
+            throw $e;
+        }
+        
+        return ob_get_clean();
+    }
+    
+    /**
+     * Escape output
+     */
+    public static function e(?string $value): string
+    {
+        return htmlspecialchars((string)$value, ENT_QUOTES, 'UTF-8');
+    }
+    
+    /**
+     * Get base path for assets and links
+     * Detects /~username/build_mate or /build_mate dynamically
+     */
+    public static function basePath(): string
+    {
+        static $basePath = null;
+        
+        if ($basePath !== null) {
+            return $basePath;
+        }
+        
+        $requestUri = $_SERVER['REQUEST_URI'] ?? '/';
+        $scriptName = $_SERVER['SCRIPT_NAME'] ?? '/index.php';
+        $scriptDir = dirname($scriptName);
+        
+        // Priority 1: Check REQUEST_URI for server path: /~username/build_mate
+        if (preg_match('#^/~[^/]+/build_mate#', $requestUri)) {
+            $basePath = preg_replace('#^(/~[^/]+/build_mate).*#', '$1', $requestUri);
+        }
+        // Priority 2: Check REQUEST_URI for localhost path: /build_mate
+        elseif (strpos($requestUri, '/build_mate') === 0) {
+            $basePath = '/build_mate';
+        }
+        // Priority 3: Check SCRIPT_NAME for server path (more reliable for redirects)
+        elseif (preg_match('#^/~[^/]+/build_mate#', $scriptName)) {
+            $basePath = preg_replace('#^(/~[^/]+/build_mate).*#', '$1', $scriptName);
+        }
+        // Priority 4: Check SCRIPT_NAME for localhost path
+        elseif (strpos($scriptName, '/build_mate') !== false) {
+            $basePath = '/build_mate';
+        }
+        // Priority 5: Use script directory if it contains build_mate
+        elseif ($scriptDir !== '/' && $scriptDir !== '.' && strpos($scriptDir, 'build_mate') !== false) {
+            $basePath = $scriptDir;
+        }
+        // Priority 6: Handle server root: /~username (fallback)
+        elseif (preg_match('#^/~[^/]+#', $requestUri)) {
+            $basePath = preg_replace('#^(/~[^/]+).*#', '$1', $requestUri) . '/build_mate';
+        }
+        // Priority 7: Use script directory as fallback
+        elseif ($scriptDir !== '/' && $scriptDir !== '.') {
+            $basePath = $scriptDir;
+        }
+        // Priority 8: Default fallback
+        else {
+            $basePath = '/build_mate';
+        }
+        
+        error_log("View::basePath() detected: '{$basePath}' from REQUEST_URI: '{$requestUri}', SCRIPT_NAME: '{$scriptName}'");
+        
+        return $basePath;
+    }
+    
+    /**
+     * Generate asset URL (CSS, JS, images)
+     */
+    public static function asset(string $path): string
+    {
+        $base = self::basePath();
+        // Remove leading slash from path if present
+        $path = ltrim($path, '/');
+        return rtrim($base, '/') . '/' . $path;
+    }
+    
+    /**
+     * Generate URL for routes
+     */
+    public static function url(string $path = '/'): string
+    {
+        $base = self::basePath();
+        // Remove leading slash from path if present
+        $path = ltrim($path, '/');
+        if ($path === '') {
+            return rtrim($base, '/') . '/';
+        }
+        return rtrim($base, '/') . '/' . $path;
+    }
+}
+
+
+        }
+        
+        try {
+            require $file;
+        } catch (\Throwable $e) {
+            ob_end_clean();
+            error_log("Error rendering view {$view}: " . $e->getMessage());
+            error_log("Stack trace: " . $e->getTraceAsString());
+            throw $e;
+        }
+        
+        return ob_get_clean();
+    }
+    
+    /**
+     * Escape output
+     */
+    public static function e(?string $value): string
+    {
+        return htmlspecialchars((string)$value, ENT_QUOTES, 'UTF-8');
+    }
+    
+    /**
+     * Get base path for assets and links
+     * Detects /~username/build_mate or /build_mate dynamically
+     */
+    public static function basePath(): string
+    {
+        static $basePath = null;
+        
+        if ($basePath !== null) {
+            return $basePath;
+        }
+        
+        $requestUri = $_SERVER['REQUEST_URI'] ?? '/';
+        $scriptName = $_SERVER['SCRIPT_NAME'] ?? '/index.php';
+        $scriptDir = dirname($scriptName);
+        
+        // Priority 1: Check REQUEST_URI for server path: /~username/build_mate
+        if (preg_match('#^/~[^/]+/build_mate#', $requestUri)) {
+            $basePath = preg_replace('#^(/~[^/]+/build_mate).*#', '$1', $requestUri);
+        }
+        // Priority 2: Check REQUEST_URI for localhost path: /build_mate
+        elseif (strpos($requestUri, '/build_mate') === 0) {
+            $basePath = '/build_mate';
+        }
+        // Priority 3: Check SCRIPT_NAME for server path (more reliable for redirects)
+        elseif (preg_match('#^/~[^/]+/build_mate#', $scriptName)) {
+            $basePath = preg_replace('#^(/~[^/]+/build_mate).*#', '$1', $scriptName);
+        }
+        // Priority 4: Check SCRIPT_NAME for localhost path
+        elseif (strpos($scriptName, '/build_mate') !== false) {
+            $basePath = '/build_mate';
+        }
+        // Priority 5: Use script directory if it contains build_mate
+        elseif ($scriptDir !== '/' && $scriptDir !== '.' && strpos($scriptDir, 'build_mate') !== false) {
+            $basePath = $scriptDir;
+        }
+        // Priority 6: Handle server root: /~username (fallback)
+        elseif (preg_match('#^/~[^/]+#', $requestUri)) {
+            $basePath = preg_replace('#^(/~[^/]+).*#', '$1', $requestUri) . '/build_mate';
+        }
+        // Priority 7: Use script directory as fallback
+        elseif ($scriptDir !== '/' && $scriptDir !== '.') {
+            $basePath = $scriptDir;
+        }
+        // Priority 8: Default fallback
+        else {
+            $basePath = '/build_mate';
+        }
+        
+        error_log("View::basePath() detected: '{$basePath}' from REQUEST_URI: '{$requestUri}', SCRIPT_NAME: '{$scriptName}'");
+        
+        return $basePath;
+    }
+    
+    /**
+     * Generate asset URL (CSS, JS, images)
+     */
+    public static function asset(string $path): string
+    {
+        $base = self::basePath();
+        // Remove leading slash from path if present
+        $path = ltrim($path, '/');
+        return rtrim($base, '/') . '/' . $path;
+    }
+    
+    /**
+     * Generate URL for routes
+     */
+    public static function url(string $path = '/'): string
+    {
+        $base = self::basePath();
+        // Remove leading slash from path if present
+        $path = ltrim($path, '/');
+        if ($path === '') {
+            return rtrim($base, '/') . '/';
+        }
+        return rtrim($base, '/') . '/' . $path;
+    }
+}
+

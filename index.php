@@ -305,3 +305,58 @@ try {
 
 $router = Router::getInstance();
 $router->dispatch();
+
+
+// Load routes and dispatch
+try {
+    require_once __DIR__ . '/settings/routes.php';
+} catch (\Throwable $e) {
+    die('<h1>Error Loading Routes</h1><p>' . htmlspecialchars($e->getMessage()) . '</p><pre>' . htmlspecialchars($e->getTraceAsString()) . '</pre>');
+}
+
+$router = Router::getInstance();
+$router->dispatch();
+
+
+// Load routes and dispatch
+try {
+    require_once __DIR__ . '/settings/routes.php';
+} catch (\Throwable $e) {
+    die('<h1>Error Loading Routes</h1><p>' . htmlspecialchars($e->getMessage()) . '</p><pre>' . htmlspecialchars($e->getTraceAsString()) . '</pre>');
+}
+
+$router = Router::getInstance();
+$router->dispatch();
+
+
+// Load routes and dispatch
+try {
+    require_once __DIR__ . '/settings/routes.php';
+} catch (\Throwable $e) {
+    die('<h1>Error Loading Routes</h1><p>' . htmlspecialchars($e->getMessage()) . '</p><pre>' . htmlspecialchars($e->getTraceAsString()) . '</pre>');
+}
+
+$router = Router::getInstance();
+$router->dispatch();
+
+
+// Load routes and dispatch
+try {
+    require_once __DIR__ . '/settings/routes.php';
+} catch (\Throwable $e) {
+    die('<h1>Error Loading Routes</h1><p>' . htmlspecialchars($e->getMessage()) . '</p><pre>' . htmlspecialchars($e->getTraceAsString()) . '</pre>');
+}
+
+$router = Router::getInstance();
+$router->dispatch();
+
+
+// Load routes and dispatch
+try {
+    require_once __DIR__ . '/settings/routes.php';
+} catch (\Throwable $e) {
+    die('<h1>Error Loading Routes</h1><p>' . htmlspecialchars($e->getMessage()) . '</p><pre>' . htmlspecialchars($e->getTraceAsString()) . '</pre>');
+}
+
+$router = Router::getInstance();
+$router->dispatch();

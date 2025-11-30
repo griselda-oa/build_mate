@@ -186,3 +186,48 @@ class Router
     }
 }
 
+
+        
+        // Add anchors
+        $regex = '#^' . $regex . '$#';
+        
+        return $regex;
+    }
+}
+
+
+        
+        // Add anchors
+        $regex = '#^' . $regex . '$#';
+        
+        return $regex;
+    }
+}
+
+
+        
+        // Add anchors
+        $regex = '#^' . $regex . '$#';
+        
+        return $regex;
+    }
+}
+
+
+        
+        // Add anchors
+        $regex = '#^' . $regex . '$#';
+        
+        return $regex;
+    }
+}
+
+
+        
+        // Add anchors
+        $regex = '#^' . $regex . '$#';
+        
+        return $regex;
+    }
+}
+

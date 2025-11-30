@@ -486,3 +486,33 @@ class ProductController extends Controller
     }
 }
 
+
+            'flash' => $this->getFlash()
+        ]);
+    }
+}
+
+
+            'flash' => $this->getFlash()
+        ]);
+    }
+}
+
+
+            'flash' => $this->getFlash()
+        ]);
+    }
+}
+
+
+            'flash' => $this->getFlash()
+        ]);
+    }
+}
+
+
+            'flash' => $this->getFlash()
+        ]);
+    }
+}
+
