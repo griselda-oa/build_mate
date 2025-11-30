@@ -60,7 +60,7 @@ APP_URL=http://169.239.251.102:442/~griselda.owusu/build_mate
 
 DB_HOST=localhost
 DB_PORT=3306
-DB_NAME=buildmate_db
+DB_NAME=ecommerce_2025A_griselda_owusu
 DB_USER=griselda.owusu
 DB_PASS=Jytc1101$
 
@@ -107,10 +107,12 @@ Privileges: ALL (SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, ALTER, INDEX)
 Thank you!
 ```
 
-### Option B: Check for Existing Database
-1. In phpMyAdmin, look at the left sidebar
-2. Check if you already have a database (might be named `griselda_owusu_buildmate` or similar)
-3. If one exists, use that name in your `.env` file instead of `buildmate_db`
+### Option B: Use Existing Database ✅ (YOUR CASE)
+**Your existing database:** `ecommerce_2025A_griselda_owusu`
+
+1. Use this database name in your `.env` file (see Step 5 below)
+2. Select this database in phpMyAdmin before importing
+3. Import the SQL file into this database
 
 ### Option C: Check for Database Creation Tool
 Some hosting providers have a control panel (cPanel, Plesk, etc.) where you can create databases. Check:
@@ -145,7 +147,7 @@ Some hosting providers have a control panel (cPanel, Plesk, etc.) where you can 
 - Or use SSH to import:
 ```bash
 cd ~/public_html/build_mate
-mysql -u griselda.owusu -p'Jytc1101$' buildmate_db < db/complete_database_no_create.sql
+mysql -u griselda.owusu -p'Jytc1101$' ecommerce_2025A_griselda_owusu < db/complete_database_no_create.sql
 ```
 
 **Then import additional migrations (in order):**
