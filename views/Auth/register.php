@@ -82,7 +82,7 @@
             </form>
 
             <div class="auth-footer">
-                <p>Already have an account? <a href="/build_mate/login">Sign in here</a></p>
+                <p>Already have an account? <a href="<?= \App\View::url('/login') ?>">Sign in here</a></p>
             </div>
         </div>
     </div>
