@@ -44,12 +44,24 @@ composer install --no-dev --optimize-autoloader
 ## Step 5: Configure Environment
 
 ```bash
-# Copy example file
+# SSH into server first (if not already connected)
+ssh -C griselda.owusu@169.239.251.102 -p 422
+
+# Navigate to project directory
+cd ~/public_html/build_mate
+
+# Copy example file (if .env doesn't exist)
 cp .env.example .env
 
-# Edit .env file
+# Edit .env file with nano
 nano .env
 ```
+
+**How to use nano:**
+1. Use arrow keys to navigate
+2. Edit the values you need (especially `DB_NAME=ecommerce_2025A_griselda_owusu`)
+3. To save: Press `Ctrl + X`, then `Y`, then `Enter`
+4. To cancel without saving: Press `Ctrl + X`, then `N`
 
 **Update these values in .env:**
 
