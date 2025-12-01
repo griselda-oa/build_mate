@@ -1,4 +1,4 @@
-/vendor/
+# /vendor/ - included for servers without Composer
 .env
 .env.bak
 /storage/uploads/*
