@@ -30,11 +30,7 @@ class HomeController extends Controller
             $categories = [];
         }
         
-        // Check if modern homepage exists
-        $modernHomepage = __DIR__ . '/../views/Home/index-modern.php';
-        $viewFile = file_exists($modernHomepage) ? 'Home/index-modern' : 'Home/index';
-        
-        echo $this->view->render($viewFile, [
+        echo $this->view->render('Home/index-modern', [
             'featured' => $featured,
             'categories' => $categories,
             'flash' => $this->getFlash()

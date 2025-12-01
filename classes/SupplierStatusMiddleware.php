@@ -89,14 +89,3 @@ class SupplierStatusMiddleware
         return false; // Should not reach here, but just in case
     }
 }
-
-
-
-
-
-
-
-
-
-
-

@@ -521,5 +521,3 @@
         </div>
     </div>
 </div>
-
-<script src="<?= \App\View::asset('assets/js/kyc-form.js') ?>"></script>

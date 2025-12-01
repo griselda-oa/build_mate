@@ -383,4 +383,3 @@ class AdvertisementController extends Controller
         }
     }
 }
-

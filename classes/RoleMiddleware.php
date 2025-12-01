@@ -39,4 +39,3 @@ class RoleMiddleware
         return true;
     }
 }
-

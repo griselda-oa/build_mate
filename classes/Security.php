@@ -75,4 +75,3 @@ class Security
         return substr($filename, 0, 255);
     }
 }
-

@@ -1249,4 +1249,3 @@ document.addEventListener('DOMContentLoaded', function() {
 <!-- Include Catalog CSS for consistent styling -->
 <link rel="stylesheet" href="<?= \App\View::asset('assets/css/catalog.css?v=' . filemtime(__DIR__ . '/../../assets/css/catalog.css')) ?>">
 <link rel="stylesheet" href="<?= \App\View::asset('assets/css/ad-banner.css') ?>">
-

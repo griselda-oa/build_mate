@@ -78,18 +78,3 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-
-                const priceCents = parseInt(el.dataset.priceCents);
-                const currentCurrency = el.dataset.currency || 'GHS';
-                
-                if (currency === 'USD' && currentCurrency === 'GHS') {
-                    const usdPrice = (priceCents / 100) / rate;
-                    el.textContent = '$' + usdPrice.toFixed(2);
-                } else if (currency === 'GHS' && currentCurrency === 'GHS') {
-                    const ghsPrice = priceCents / 100;
-                    el.textContent = '₵' + ghsPrice.toFixed(2);
-                }
-            });
-        });
-    }
-});
