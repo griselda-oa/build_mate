@@ -111,11 +111,6 @@ $router->get('/supplier/advertisements/create', [AdvertisementController::class,
 $router->post('/supplier/advertisements/create', [AdvertisementController::class, 'submit'], [AuthMiddleware::class, RoleMiddleware::class . ':supplier', CsrfMiddleware::class]);
 $router->post('/supplier/advertisements/payment/initialize', [AdvertisementController::class, 'initializePayment'], [AuthMiddleware::class, RoleMiddleware::class . ':supplier', CsrfMiddleware::class]);
 $router->get('/supplier/advertisements/payment/callback', [AdvertisementController::class, 'paymentCallback']); // No auth required for callback
-// Premium subscription routes (using PremiumController)
-$router->get('/supplier/premium/upgrade', [PremiumController::class, 'upgrade'], [AuthMiddleware::class, RoleMiddleware::class . ':supplier']);
-$router->post('/supplier/premium/initialize', [PremiumController::class, 'initializePayment'], [AuthMiddleware::class, RoleMiddleware::class . ':supplier', CsrfMiddleware::class]);
-$router->get('/supplier/premium/callback', [PremiumController::class, 'paymentCallback'], [AuthMiddleware::class, RoleMiddleware::class . ':supplier']);
-$router->get('/supplier/premium/status', [PremiumController::class, 'status'], [AuthMiddleware::class, RoleMiddleware::class . ':supplier']);
 
 // Logistics routes
 $router->get('/logistics/dashboard', [LogisticsController::class, 'dashboard'], [AuthMiddleware::class, RoleMiddleware::class . ':logistics']);
@@ -145,12 +140,7 @@ $router->post('/admin/mark-delivered-with-photo', [AdminController::class, 'mark
 $router->get('/admin/chat', [AdminController::class, 'chat'], [AuthMiddleware::class, RoleMiddleware::class . ':admin']);
 $router->get('/admin/chat/sessions', [AdminController::class, 'chatSessions'], [AuthMiddleware::class, RoleMiddleware::class . ':admin']);
 $router->get('/admin/chat/session/{session_id}', [AdminController::class, 'chatSessionDetail'], [AuthMiddleware::class, RoleMiddleware::class . ':admin']);
-// Admin premium management
-$router->get('/admin/premium', [AdminController::class, 'premium'], [AuthMiddleware::class, RoleMiddleware::class . ':admin']);
-$router->post('/admin/premium/{id}/downgrade', [AdminController::class, 'downgradeSupplier'], [AuthMiddleware::class, RoleMiddleware::class . ':admin', CsrfMiddleware::class]);
-$router->post('/admin/advertisements/{id}/approve', [AdminController::class, 'approveAdvertisement'], [AuthMiddleware::class, RoleMiddleware::class . ':admin', CsrfMiddleware::class]);
-$router->post('/admin/advertisements/{id}/reject', [AdminController::class, 'rejectAdvertisement'], [AuthMiddleware::class, RoleMiddleware::class . ':admin', CsrfMiddleware::class]);
-// Admin premium management routes
+// Admin premium and advertisement management
 $router->get('/admin/premium', [AdminController::class, 'premium'], [AuthMiddleware::class, RoleMiddleware::class . ':admin']);
 $router->post('/admin/premium/{id}/downgrade', [AdminController::class, 'downgradeSupplier'], [AuthMiddleware::class, RoleMiddleware::class . ':admin', CsrfMiddleware::class]);
 $router->post('/admin/advertisements/{id}/approve', [AdminController::class, 'approveAdvertisement'], [AuthMiddleware::class, RoleMiddleware::class . ':admin', CsrfMiddleware::class]);

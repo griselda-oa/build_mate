@@ -89,38 +89,30 @@ class View
     
     /**
      * Get base path for URLs
+     * Dynamically detects the application's base path
      */
     public static function basePath(): string
     {
         // Try to detect from SCRIPT_NAME first (most reliable)
         if (isset($_SERVER['SCRIPT_NAME'])) {
             $scriptPath = dirname($_SERVER['SCRIPT_NAME']);
-            // Handle dirname() returning '.' or empty
-            if ($scriptPath === '.' || $scriptPath === '') {
-                // Check if script name contains /build_mate/
-                if (strpos($_SERVER['SCRIPT_NAME'], '/build_mate/') !== false) {
-                    return '/build_mate/';
-                }
-                // Otherwise fall through to default
-            } elseif ($scriptPath === '/') {
+            
+            // Normalize the path
+            if ($scriptPath === '.' || $scriptPath === '\\' || empty($scriptPath)) {
                 return '/';
-            } else {
-                // Ensure it starts with / and ends with /
-                $basePath = '/' . ltrim($scriptPath, '/');
-                return rtrim($basePath, '/') . '/';
             }
+            
+            if ($scriptPath === '/') {
+                return '/';
+            }
+            
+            // Ensure it starts with / and ends with /
+            $basePath = '/' . trim($scriptPath, '/') . '/';
+            return $basePath;
         }
         
-        // Fallback: try REQUEST_URI
-        if (isset($_SERVER['REQUEST_URI'])) {
-            $requestUri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-            if ($requestUri && strpos($requestUri, '/build_mate/') === 0) {
-                return '/build_mate/';
-            }
-        }
-        
-        // Default fallback
-        return '/build_mate/';
+        // Default fallback for root deployment
+        return '/';
     }
     
     /**

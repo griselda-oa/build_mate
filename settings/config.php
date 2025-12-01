@@ -70,5 +70,9 @@ return [
         'max_tokens' => (int)($_ENV['OPENAI_MAX_TOKENS'] ?? 500),
         'temperature' => (float)($_ENV['OPENAI_TEMPERATURE'] ?? 0.7),
     ],
+    
+    'session' => [
+        'path' => __DIR__ . '/../storage/sessions',
+    ],
 ];
 

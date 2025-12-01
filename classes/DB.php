@@ -99,10 +99,12 @@ class DB
                     
                     $errorMsg = "Database connection failed. ";
                     if (strpos($lastError->getMessage(), 'Access denied') !== false) {
-                    $errorMsg .= "MySQL root password is set but none of the common passwords worked.\n\n";
-                    $errorMsg .= "QUICK FIX:\n";
-                    $errorMsg .= "Visit: http://localhost/build_mate/FIX_DATABASE.php\n";
-                    $errorMsg .= "This page has step-by-step instructions to fix your MySQL password.";
+                        $errorMsg .= "MySQL authentication failed. Please check your database credentials in the .env file.\n\n";
+                        $errorMsg .= "Common fixes:\n";
+                        $errorMsg .= "1. Verify DB_USER and DB_PASS in your .env file\n";
+                        $errorMsg .= "2. For XAMPP, try DB_PASS=(empty) or DB_PASS=root\n";
+                        $errorMsg .= "3. Ensure MySQL is running in XAMPP Control Panel\n";
+                        $errorMsg .= "4. Check phpMyAdmin to verify your credentials";
                     } elseif (strpos($lastError->getMessage(), 'Permission denied') !== false) {
                         $errorMsg .= "MySQL may not be running. Check XAMPP Control Panel and ensure MySQL is started.";
                     } elseif (strpos($lastError->getMessage(), 'Unknown database') !== false) {

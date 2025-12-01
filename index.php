@@ -220,10 +220,17 @@ if (session_status() === PHP_SESSION_NONE) {
                (!empty($_SERVER['SERVER_PORT']) && (int)$_SERVER['SERVER_PORT'] === 443);
 
     // Detect base path dynamically for session cookie
-    // Set session cookie path for localhost
+    $sessionCookiePath = '/';
+    if (isset($_SERVER['SCRIPT_NAME'])) {
+        $scriptPath = dirname($_SERVER['SCRIPT_NAME']);
+        if ($scriptPath !== '.' && $scriptPath !== '\\' && !empty($scriptPath) && $scriptPath !== '/') {
+            $sessionCookiePath = '/' . trim($scriptPath, '/') . '/';
+        }
+    }
+    
     session_set_cookie_params([
         'lifetime' => 0, // Session cookie (expires when browser closes)
-        'path' => '/build_mate',
+        'path' => $sessionCookiePath,
         'domain' => '',
         'secure' => ($isProduction && $isHttps),
         'httponly' => true,
@@ -235,18 +242,18 @@ if (session_status() === PHP_SESSION_NONE) {
     ini_set('session.gc_maxlifetime', '86400'); // 24 hours
     
     // Use project storage directory for sessions (ensure it exists and is writable)
-    // Prefer `settings/core.php` session path if provided (user-created core.php)
+    // Load from config.php instead of core.php
     $sessionPath = __DIR__ . '/storage/sessions';
-    $coreConfigFile = __DIR__ . '/settings/core.php';
-    if (file_exists($coreConfigFile)) {
+    $configFile = __DIR__ . '/settings/config.php';
+    if (file_exists($configFile)) {
         try {
-            $coreCfg = require $coreConfigFile;
-            if (isset($coreCfg['session']['path']) && !empty($coreCfg['session']['path'])) {
-                $sessionPath = $coreCfg['session']['path'];
+            $cfg = require $configFile;
+            if (isset($cfg['session']['path']) && !empty($cfg['session']['path'])) {
+                $sessionPath = $cfg['session']['path'];
             }
         } catch (\Throwable $e) {
-            // Ignore faulty core.php — fall back to default
-            error_log('Failed to load settings/core.php: ' . $e->getMessage());
+            // Ignore faulty config.php — fall back to default
+            error_log('Failed to load settings/config.php: ' . $e->getMessage());
         }
     }
     if (!is_dir($sessionPath)) {

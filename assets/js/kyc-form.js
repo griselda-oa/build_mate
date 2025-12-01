@@ -641,7 +641,7 @@
         // Ensure buildUrl is available
         if (typeof window.buildUrl !== 'function') {
             // Fallback: create buildUrl if not available
-            const basePath = document.querySelector('meta[name="base-path"]')?.content || '/build_mate/';
+            const basePath = document.querySelector('meta[name="base-path"]')?.content || '/';
             window.buildUrl = function(path) {
                 path = path ? path.toString().replace(/^\/+/, '') : '';
                 const base = basePath.endsWith('/') ? basePath : basePath + '/';

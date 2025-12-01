@@ -65,10 +65,15 @@ class Router
         $method = $_SERVER['REQUEST_METHOD'];
         $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
         
-        // Remove base path from URI
-        // Handle localhost path: /build_mate
-        if (strpos($uri, '/build_mate') === 0) {
-            $uri = substr($uri, strlen('/build_mate'));
+        // Dynamically detect and remove base path from URI
+        $basePath = $this->getBasePath();
+        if ($basePath !== '/' && strpos($uri, $basePath) === 0) {
+            $uri = substr($uri, strlen($basePath));
+        }
+        
+        // Ensure URI starts with /
+        if (empty($uri) || $uri[0] !== '/') {
+            $uri = '/' . $uri;
         }
         
         // Handle /index.php as root
@@ -157,6 +162,28 @@ class Router
         http_response_code(404);
         $view = new View();
         echo $view->render('Errors/404', [], 'main');
+    }
+    
+    /**
+     * Get base path from SCRIPT_NAME
+     */
+    private function getBasePath(): string
+    {
+        if (!isset($_SERVER['SCRIPT_NAME'])) {
+            return '/';
+        }
+        
+        $scriptPath = dirname($_SERVER['SCRIPT_NAME']);
+        
+        // Normalize the path
+        if ($scriptPath === '.' || $scriptPath === '\\' || empty($scriptPath)) {
+            return '/';
+        }
+        
+        // Ensure it starts with / and ends with /
+        $basePath = '/' . trim($scriptPath, '/');
+        
+        return $basePath === '/' ? '/' : $basePath . '/';
     }
     
     /**

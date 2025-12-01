@@ -5,19 +5,24 @@ DirectoryIndex index.php
 <IfModule mod_rewrite.c>
     RewriteEngine On
     
-    # Set RewriteBase for localhost
-    RewriteBase /build_mate/
+    # Set RewriteBase - this will work for both root and subdirectory deployments
+    # For root deployment (domain.com), this stays as /
+    # For subdirectory (domain.com/subfolder), change to /subfolder/
+    RewriteBase /
     
     # Allow assets (CSS, JS, images) to be served directly
-    RewriteCond %{REQUEST_URI} ^/build_mate/assets/
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_URI} assets/
     RewriteRule ^(.*)$ - [L]
     
     # Allow storage/uploads to be served directly (for uploaded images/files)
-    RewriteCond %{REQUEST_URI} ^/build_mate/storage/uploads/
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_URI} storage/uploads/
     RewriteRule ^(.*)$ - [L]
     
     # Allow storage/invoices to be served directly
-    RewriteCond %{REQUEST_URI} ^/build_mate/storage/invoices/
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_URI} storage/invoices/
     RewriteRule ^(.*)$ - [L]
     
     # If file exists, serve it
