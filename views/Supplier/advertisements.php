@@ -6,7 +6,7 @@
         <!-- Back Button -->
         <div class="mb-4">
             <a href="<?= \App\View::url('/supplier/dashboard') ?>" class="back-button">
-                <i class="bi bi-arrow-left"></i>
+                <i class="icon-arrow-left"></i>
                 <span>Back to Dashboard</span>
             </a>
         </div>
@@ -20,7 +20,7 @@
         <!-- Create New Button -->
         <div style="margin-bottom: 2rem;">
             <a href="<?= \App\View::url('/supplier/advertisements/create') ?>" class="btn" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; padding: 0.75rem 2rem; border-radius: 8px; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem;">
-                <i class="bi bi-plus-circle"></i> Create New Advertisement
+                <i class="icon-plus-circle"></i> Create New Advertisement
             </a>
         </div>
 
@@ -32,7 +32,7 @@
                     <h3 style="color: #1F2937; margin-bottom: 0.5rem;">No Advertisements Yet</h3>
                     <p style="color: #6B7280; margin-bottom: 1.5rem;">Create your first advertisement to promote your products</p>
                     <a href="<?= \App\View::url('/supplier/advertisements/create') ?>" class="btn" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; padding: 0.75rem 2rem; border-radius: 8px; font-weight: 600; text-decoration: none;">
-                        <i class="bi bi-plus-circle"></i> Create Advertisement
+                        <i class="icon-plus-circle"></i> Create Advertisement
                     </a>
                 </div>
             </div>
@@ -63,7 +63,7 @@
                                         </div>
                                         <?php if ($ad['clicks'] > 0 || $ad['impressions'] > 0): ?>
                                             <div style="color: #6B7280; font-size: 0.875rem; margin-top: 0.5rem;">
-                                                <i class="bi bi-eye"></i> <?= $ad['impressions'] ?? 0 ?> impressions | 
+                                                <i class="icon-eye"></i> <?= $ad['impressions'] ?? 0 ?> impressions | 
                                                 <i class="bi bi-cursor"></i> <?= $ad['clicks'] ?? 0 ?> clicks
                                             </div>
                                         <?php endif; ?>

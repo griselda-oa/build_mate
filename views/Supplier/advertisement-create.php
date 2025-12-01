@@ -7,7 +7,7 @@
         <!-- Back Button -->
         <div class="mb-4">
             <a href="<?= \App\View::url('/supplier/dashboard') ?>" class="back-button">
-                <i class="bi bi-arrow-left"></i>
+                <i class="icon-arrow-left"></i>
                 <span>Back to Dashboard</span>
             </a>
         </div>
@@ -29,7 +29,7 @@
         <div class="ad-payment-section" id="paymentSection">
             <div class="ad-payment-card">
                 <div class="ad-payment-header">
-                    <i class="bi bi-star-fill"></i>
+                    <i class="icon-star-fill"></i>
                     <h3>Create Sponsored Advertisement</h3>
                 </div>
                 <div class="ad-payment-body">
@@ -68,7 +68,7 @@
                                 <strong>No products found.</strong> You need to create at least one product before you can create an advertisement.
                                 <br><br>
                                 <a href="<?= \App\View::url('/supplier/products') ?>" class="btn btn-primary">
-                                    <i class="bi bi-plus-circle"></i> Create Your First Product
+                                    <i class="icon-plus-circle"></i> Create Your First Product
                                 </a>
                             </div>
                         <?php else: ?>

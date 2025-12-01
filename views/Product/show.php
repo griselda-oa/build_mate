@@ -3,7 +3,7 @@
         <!-- Back Button and Breadcrumb Container -->
         <div class="product-navigation-header">
             <a href="<?= \App\View::url('/catalog') ?>" class="back-button">
-                <i class="bi bi-arrow-left"></i>
+                <i class="icon-arrow-left"></i>
                 <span>Back to Catalog</span>
             </a>
             <nav aria-label="breadcrumb" class="product-breadcrumb">
@@ -104,11 +104,11 @@
                         <?= \App\Csrf::field() ?>
                         <div class="quantity-selector-modern">
                             <label class="quantity-label">
-                                <i class="bi bi-cart-plus"></i> Quantity
+                                <i class="icon-cart-plus"></i> Quantity
                             </label>
                             <div class="quantity-controls">
                                 <button type="button" class="qty-btn qty-decrease" onclick="decreaseQty()">
-                                    <i class="bi bi-dash"></i>
+                                    <i class="icon-dash"></i>
                                 </button>
                                 <input type="number" 
                                        class="qty-input" 
@@ -119,7 +119,7 @@
                                        max="<?= $product['stock'] ?>"
                                        readonly>
                                 <button type="button" class="qty-btn qty-increase" onclick="increaseQty()">
-                                    <i class="bi bi-plus"></i>
+                                    <i class="icon-plus"></i>
                                 </button>
                             </div>
         </div>
@@ -146,7 +146,7 @@
                             <button type="submit" 
                                     class="add-to-cart-btn-modern" 
                                     id="addToCartBtn">
-                                <i class="bi bi-cart-plus-fill"></i>
+                                <i class="icon-cart-plus-fill"></i>
                                 <span>Add to Cart</span>
                             </button>
                         <?php else: ?>
@@ -162,7 +162,7 @@
                         <?php if (!$cannotPurchase): ?>
                             <div class="purchase-actions">
                                 <button type="button" class="action-btn-secondary" onclick="addToWishlist()" id="wishlistBtn">
-                                    <i class="bi bi-heart<?= ($isInWishlist ?? false) ? '-fill' : '' ?>"></i> 
+                                    <i class="icon-heart<?= ($isInWishlist ?? false) ? '-fill' : '' ?>"></i> 
                                     <span><?= ($isInWishlist ?? false) ? 'Saved' : 'Save for Later' ?></span>
                                 </button>
                                 <button type="button" class="action-btn-secondary" onclick="shareProduct()">
@@ -176,7 +176,7 @@
                 <!-- Quick Info -->
                 <div class="quick-info-modern">
                     <div class="info-item">
-                        <i class="bi bi-truck"></i>
+                        <i class="icon-truck"></i>
                         <div>
                             <strong>Fast Delivery</strong>
                             <small>Available in your area</small>
@@ -216,7 +216,7 @@
             </li>
             <li class="nav-item">
                 <button class="nav-link-modern" data-bs-toggle="tab" data-bs-target="#reviews" type="button">
-                    <i class="bi bi-star"></i> Reviews
+                    <i class="icon-star"></i> Reviews
                 </button>
             </li>
         </ul>
@@ -258,7 +258,7 @@
                                     <span class="rating-number"><?= number_format($reviewStats['average_rating'], 1) ?></span>
                                     <div class="rating-stars-large">
                                         <?php for ($i = 1; $i <= 5; $i++): ?>
-                                            <i class="bi bi-star<?= $i <= round($reviewStats['average_rating']) ? '-fill' : '' ?>"></i>
+                                            <i class="icon-star<?= $i <= round($reviewStats['average_rating']) ? '-fill' : '' ?>"></i>
                                         <?php endfor; ?>
                                     </div>
                                     <span class="review-count-text">Based on <?= $reviewStats['total_reviews'] ?> review<?= $reviewStats['total_reviews'] !== 1 ? 's' : '' ?></span>
@@ -311,7 +311,7 @@
                                         <?php for ($i = 5; $i >= 1; $i--): ?>
                                             <input type="radio" name="rating" value="<?= $i ?>" id="rating<?= $i ?>" required>
                                             <label for="rating<?= $i ?>" class="star-label-input">
-                                                <i class="bi bi-star"></i>
+                                                <i class="icon-star"></i>
                                             </label>
                                         <?php endfor; ?>
                                     </div>
@@ -373,7 +373,7 @@
                                         </div>
                                         <div class="review-rating">
                                             <?php for ($i = 1; $i <= 5; $i++): ?>
-                                                <i class="bi bi-star<?= $i <= $review['rating'] ? '-fill' : '' ?>"></i>
+                                                <i class="icon-star<?= $i <= $review['rating'] ? '-fill' : '' ?>"></i>
                                             <?php endfor; ?>
                                         </div>
                                     </div>

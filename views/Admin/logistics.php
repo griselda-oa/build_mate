@@ -6,7 +6,7 @@
         <!-- Back Button -->
         <div class="mb-4">
             <a href="<?= \App\View::url('/admin/dashboard') ?>" class="back-button">
-                <i class="bi bi-arrow-left"></i>
+                <i class="icon-arrow-left"></i>
                 <span>Back to Dashboard</span>
             </a>
         </div>
@@ -77,7 +77,7 @@
                          style="margin-bottom: 1.5rem;">
                         <div class="section-header-modern">
                             <h3 class="section-title-modern">
-                                <i class="bi bi-truck"></i>
+                                <i class="icon-truck"></i>
                                 Delivery #<?= $delivery['id'] ?> - Order #<?= $delivery['order_id'] ?>
                             </h3>
                             <span class="badge" style="background: <?= $delivery['vehicle_type'] === 'truck' ? '#F59E0B' : '#3B82F6' ?>; color: white;">
@@ -133,7 +133,7 @@
                             <div class="mt-4 pt-4 border-top">
                                 <?php if ($delivery['status'] === 'ready_for_pickup'): ?>
                                     <button class="btn btn-primary" onclick="updateDeliveryStatus(<?= $delivery['id'] ?>, 'picked_up')">
-                                        <i class="bi bi-box-seam"></i> Mark as Picked Up
+                                        <i class="icon-box-seam"></i> Mark as Picked Up
                                     </button>
                                     <textarea id="notes-<?= $delivery['id'] ?>" 
                                               class="form-control mt-2" 
@@ -142,7 +142,7 @@
                                 
                                 <?php elseif ($delivery['status'] === 'picked_up'): ?>
                                     <button class="btn btn-primary" onclick="updateDeliveryStatus(<?= $delivery['id'] ?>, 'in_transit')">
-                                        <i class="bi bi-truck"></i> Mark as In Transit
+                                        <i class="icon-truck"></i> Mark as In Transit
                                     </button>
                                     <p class="text-muted mt-2 small">This will generate and send a delivery code to the buyer</p>
                                     <textarea id="notes-<?= $delivery['id'] ?>" 

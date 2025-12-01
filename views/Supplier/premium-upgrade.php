@@ -6,7 +6,7 @@
         <!-- Back Button -->
         <div class="mb-4">
             <a href="<?= \App\View::url('/supplier/dashboard') ?>" class="back-button">
-                <i class="bi bi-arrow-left"></i>
+                <i class="icon-arrow-left"></i>
                 <span>Back to Dashboard</span>
             </a>
         </div>
@@ -22,7 +22,7 @@
             <div class="section-card-modern" style="background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%); border: none;">
                 <div style="text-align: center; padding: 2rem;">
                     <div style="font-size: 4rem; color: white; margin-bottom: 1rem;">
-                        <i class="bi bi-star-fill"></i>
+                        <i class="icon-star-fill"></i>
                     </div>
                     <h2 style="color: white; margin-bottom: 1rem;">You're Already Premium!</h2>
                     <p style="color: rgba(255, 255, 255, 0.9); margin-bottom: 1.5rem;">
@@ -36,7 +36,7 @@
                             <i class="bi bi-megaphone"></i> Create Advertisement
                         </a>
                         <a href="<?= \App\View::url('/supplier/dashboard') ?>" class="btn" style="background: rgba(255, 255, 255, 0.2); color: white; border: 2px solid white; padding: 0.75rem 2rem; border-radius: 8px; font-weight: 600; text-decoration: none;">
-                            <i class="bi bi-arrow-left"></i> Back to Dashboard
+                            <i class="icon-arrow-left"></i> Back to Dashboard
                         </a>
                     </div>
                 </div>
@@ -62,7 +62,7 @@
                 
                 <div class="stat-card-modern" style="text-align: center; padding: 2rem;">
                     <div style="font-size: 3rem; color: #F59E0B; margin-bottom: 1rem;">
-                        <i class="bi bi-star-fill"></i>
+                        <i class="icon-star-fill"></i>
                     </div>
                     <h3 style="margin-bottom: 0.5rem;">Premium Badge</h3>
                     <p style="color: #6B7280; font-size: 0.875rem;">Display a premium badge on all your products to build trust</p>
@@ -81,7 +81,7 @@
             <div class="section-card-modern" style="max-width: 600px; margin: 0 auto 2rem;">
                 <div style="text-align: center; padding: 2rem;">
                     <div style="font-size: 4rem; color: #667eea; margin-bottom: 1rem;">
-                        <i class="bi bi-star"></i>
+                        <i class="icon-star"></i>
                     </div>
                     <h2 style="margin-bottom: 0.5rem;">Premium Plan</h2>
                     <div style="font-size: 3rem; font-weight: 700; color: #667eea; margin-bottom: 0.5rem;">

@@ -93,7 +93,7 @@
                         <i class="bi bi-lock-fill"></i>
                     </div>
                     <div class="card-icon locked-icon">
-                        <i class="bi bi-box-seam"></i>
+                        <i class="icon-box-seam"></i>
                     </div>
                     <h3 class="card-title">Products Management</h3>
                     <p class="card-description">
@@ -150,7 +150,7 @@
                     <div class="timeline-step" id="timelineStep3">
                         <div class="step-number">3</div>
                         <div class="step-icon">
-                            <i class="bi bi-cart-check"></i>
+                            <i class="icon-cart-check"></i>
                         </div>
                         <h4 class="step-title">Start Selling</h4>
                         <p class="step-description">

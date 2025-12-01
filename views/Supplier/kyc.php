@@ -6,7 +6,7 @@
         <div class="container">
             <div class="header-content">
                 <a href="<?= \App\View::url('/') ?>" class="logo-link">
-                    <i class="bi bi-hammer"></i> Build Mate
+                    <i class="icon-hammer"></i> Build Mate
                 </a>
                 <div class="progress-indicator" id="progressIndicator">
                     <span class="progress-text">Step <span id="currentStep">1</span> of 4</span>
@@ -176,7 +176,7 @@
 
                             <div class="step-actions">
                                 <button type="button" class="btn-secondary" onclick="prevStep()">
-                                    <i class="bi bi-arrow-left"></i> Back to Business Info
+                                    <i class="icon-arrow-left"></i> Back to Business Info
                                 </button>
                                 <button type="button" class="btn-primary" onclick="nextStep()">
                                     Continue to Documents <i class="bi bi-arrow-right"></i>
@@ -308,7 +308,7 @@
 
                             <div class="step-actions">
                                 <button type="button" class="btn-secondary" onclick="prevStep()">
-                                    <i class="bi bi-arrow-left"></i> Back to Contact Info
+                                    <i class="icon-arrow-left"></i> Back to Contact Info
                                 </button>
                                 <button type="button" class="btn-primary" onclick="nextStep()">
                                     Continue to Review <i class="bi bi-arrow-right"></i>
@@ -434,7 +434,7 @@
                 
                             <div class="step-actions">
                                 <button type="button" class="btn-secondary" onclick="prevStep()">
-                                    <i class="bi bi-arrow-left"></i> Back to Documents
+                                    <i class="icon-arrow-left"></i> Back to Documents
                                 </button>
                                 <button type="submit" class="btn-primary btn-submit" id="submitBtn">
                                     <span class="btn-text">Submit Application for Review</span>
@@ -478,16 +478,16 @@
                             </h3>
                             <ul class="sidebar-list">
                                 <li>
-                                    <i class="bi bi-star"></i> Verified badge on products
+                                    <i class="icon-star"></i> Verified badge on products
                                 </li>
                                 <li>
-                                    <i class="bi bi-star"></i> Priority in search results
+                                    <i class="icon-star"></i> Priority in search results
                                 </li>
                                 <li>
-                                    <i class="bi bi-star"></i> Access to bulk order tools
+                                    <i class="icon-star"></i> Access to bulk order tools
                                 </li>
                                 <li>
-                                    <i class="bi bi-star"></i> Payment protection
+                                    <i class="icon-star"></i> Payment protection
                                 </li>
                             </ul>
                         </div>

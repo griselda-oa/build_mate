@@ -2,7 +2,7 @@
 
 <div class="mb-3">
     <a href="<?= \App\View::url('/') ?>" class="back-button">
-        <i class="bi bi-arrow-left"></i>
+        <i class="icon-arrow-left"></i>
         <span>Back to Home</span>
     </a>
 </div>

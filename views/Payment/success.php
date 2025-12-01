@@ -45,7 +45,7 @@
             <!-- Delivery Tracking Card -->
             <div class="delivery-tracking-card-modern">
                 <div class="delivery-tracking-header-modern">
-                    <i class="bi bi-truck-flatbed"></i>
+                    <i class="icon-truck-flatbed"></i>
                     <div>
                         <h4 class="mb-0">Track Your Delivery</h4>
                         <p class="mb-0">Monitor your order in real-time</p>
@@ -54,7 +54,7 @@
                 <div class="delivery-tracking-body-modern">
                     <p>Your order is being prepared and will be delivered to your address. You can track the delivery status and see driver information once your order is dispatched.</p>
                     <a href="<?= \App\View::url('/orders/<?= $order['id'] ?>/track-delivery') ?>" class="btn-track-delivery-modern">
-                        <i class="bi bi-truck"></i>
+                        <i class="icon-truck"></i>
                         <span>Track Delivery Now</span>
                         <i class="bi bi-arrow-right"></i>
                     </a>
@@ -63,15 +63,15 @@
             
             <div class="success-actions-modern">
                 <a href="<?= \App\View::url('/orders/<?= $order['id'] ?>') ?>" class="btn-primary-modern">
-                    <i class="bi bi-eye"></i>
+                    <i class="icon-eye"></i>
                     View Order Details
                 </a>
                 <a href="<?= \App\View::url('/orders/<?= $order['id'] ?>/track-delivery') ?>" class="btn-secondary-modern">
-                    <i class="bi bi-truck"></i>
+                    <i class="icon-truck"></i>
                     Track Delivery
                 </a>
                 <a href="<?= \App\View::url('/catalog') ?>" class="btn-outline-modern">
-                    <i class="bi bi-arrow-left"></i>
+                    <i class="icon-arrow-left"></i>
                     Continue Shopping
                 </a>
             </div>

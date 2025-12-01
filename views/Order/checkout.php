@@ -4,7 +4,7 @@
     <div class="checkout-header-modern mb-5">
         <div class="container">
             <a href="<?= \App\View::url('/cart') ?>" class="back-button-modern">
-                <i class="bi bi-arrow-left"></i>
+                <i class="icon-arrow-left"></i>
                 <span>Back to Cart</span>
             </a>
             <h1 class="checkout-title-modern">
@@ -27,7 +27,7 @@
     <!-- Delivery Notice Banner -->
     <div class="container mb-4">
         <div class="delivery-notice-modern">
-            <i class="bi bi-truck-flatbed"></i>
+            <i class="icon-truck-flatbed"></i>
             <div>
                 <strong>Delivery Notice:</strong> We currently deliver to <strong>Greater Accra</strong> and <strong>Ashanti Region</strong> only. 
                 <span class="text-muted">Stay tuned for expansion!</span>
@@ -231,7 +231,7 @@
                                 <span>Secure Payment</span>
                             </div>
                             <div class="trust-item-modern">
-                                <i class="bi bi-truck"></i>
+                                <i class="icon-truck"></i>
                                 <span>Tracked Delivery</span>
                             </div>
                         </div>

@@ -6,7 +6,7 @@
             <!-- Back Button - Positioned in hero section -->
             <div class="catalog-back-button">
                 <a href="<?= \App\View::url('/') ?>" class="back-button back-button-hero">
-                    <i class="bi bi-arrow-left"></i>
+                    <i class="icon-arrow-left"></i>
                     <span>Back to Home</span>
                 </a>
             </div>
@@ -16,7 +16,7 @@
             <!-- Quick Search Bar -->
             <div class="quick-search-wrapper">
                 <div class="quick-search">
-                    <i class="bi bi-search"></i>
+                    <i class="icon-search"></i>
                     <input type="text" 
                            id="quickSearch" 
                            class="quick-search-input" 
@@ -79,7 +79,7 @@
                                     <div class="ad-banner-overlay-modern">
                                         <div class="ad-banner-text-modern">
                                             <span class="ad-banner-badge-modern">
-                                                <i class="bi bi-star-fill"></i> Sponsored
+                                                <i class="icon-star-fill"></i> Sponsored
                                             </span>
                                             <?php if (!empty($ad['title'])): ?>
                                                 <h3 class="ad-banner-title-modern"><?= \App\View::e($ad['title']) ?></h3>
@@ -112,7 +112,7 @@
             <!-- Recent Orders & Tracking Section -->
             <div class="recent-orders-section mb-5">
                 <div class="orders-header-modern">
-                    <h3><i class="bi bi-truck"></i> My Recent Orders & Tracking</h3>
+                    <h3><i class="icon-truck"></i> My Recent Orders & Tracking</h3>
                     <a href="<?= \App\View::url('/') ?>orders" class="view-all-orders-btn">
                         View All Orders
                         <i class="bi bi-arrow-right"></i>
@@ -156,18 +156,18 @@
                                     <strong><?= \App\Money::format($order['total_cents'], $order['currency'] ?? 'GHS') ?></strong>
                                 </div>
                                 <div class="order-items-count-dashboard">
-                                    <i class="bi bi-box"></i>
+                                    <i class="icon-box"></i>
                                     <?= $order['item_count'] ?? 0 ?> item<?= ($order['item_count'] ?? 0) !== 1 ? 's' : '' ?>
                                 </div>
                             </div>
                             <div class="order-card-actions-dashboard">
                                 <a href="<?= \App\View::url('/') ?>orders/<?= $order['id'] ?>" class="btn-view-order">
-                                    <i class="bi bi-eye"></i>
+                                    <i class="icon-eye"></i>
                                     View Details
                                 </a>
                                 <?php if ($isPaid): ?>
                                     <a href="<?= \App\View::url('/') ?>orders/<?= $order['id'] ?>/track-delivery" class="btn-track-order">
-                                        <i class="bi bi-truck"></i>
+                                        <i class="icon-truck"></i>
                                         Track Delivery
                                     </a>
                                 <?php endif; ?>
@@ -352,7 +352,7 @@
                                         <?php endif; ?>
                                         <div class="product-overlay-modern">
                                             <span class="view-details-modern">
-                                                <i class="bi bi-eye"></i>
+                                                <i class="icon-eye"></i>
                                                 View Details
                                             </span>
                                         </div>

@@ -27,7 +27,7 @@ if ($orderStatus === 'placed' && ($order['status'] ?? '') === 'shipped') {
 <div class="container">
     <div class="mb-4">
         <a href="<?= \App\View::url('/admin/orders') ?>" class="admin-back-btn">
-            <i class="bi bi-arrow-left"></i> Back to Orders
+            <i class="icon-arrow-left"></i> Back to Orders
         </a>
     </div>
 
@@ -124,7 +124,7 @@ if ($orderStatus === 'placed' && ($order['status'] ?? '') === 'shipped') {
     <!-- Editable Delivery Tracker -->
     <div class="admin-tracker-card">
         <div class="admin-tracker-header">
-            <i class="bi bi-truck"></i>
+            <i class="icon-truck"></i>
             <h5>Order Tracking (Admin - Click to Update)</h5>
                 </div>
         <div class="admin-tracker-body">
@@ -150,7 +150,7 @@ if ($orderStatus === 'placed' && ($order['status'] ?? '') === 'shipped') {
                     <!-- Step 1: Order Placed (Always completed) -->
                     <div class="tracker-step step completed locked">
                         <div class="tracker-step-icon">
-                            <i class="bi bi-cart-check-fill"></i>
+                            <i class="icon-cart-check-fill"></i>
                                 </div>
                         <div class="tracker-step-label">Order Placed</div>
                         <div class="tracker-step-time">
@@ -243,7 +243,7 @@ if ($orderStatus === 'placed' && ($order['status'] ?? '') === 'shipped') {
                          data-new-status="out_for_delivery"
                          <?= $canClickOutForDelivery ? 'title="Click to mark as Out for Delivery"' : 'title="Out for Delivery"' ?>>
                         <div class="tracker-step-icon">
-                            <i class="bi bi-truck"></i>
+                            <i class="icon-truck"></i>
                 </div>
                         <div class="tracker-step-label">Out for Delivery</div>
                         <div class="tracker-step-time">

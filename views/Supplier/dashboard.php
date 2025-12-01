@@ -7,7 +7,7 @@
         <!-- Back Button -->
         <div class="mb-4">
             <a href="<?= \App\View::url('/') ?>" class="back-button">
-                <i class="bi bi-arrow-left"></i>
+                <i class="icon-arrow-left"></i>
                 <span>Back to Home</span>
             </a>
         </div>
@@ -27,7 +27,7 @@
                 <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
                     <div style="display: flex; align-items: center; gap: 1rem;">
                         <div style="font-size: 2rem;">
-                            <i class="bi bi-star-fill" style="color: white;"></i>
+                            <i class="icon-star-fill" style="color: white;"></i>
                         </div>
                         <div>
                             <div style="font-weight: 700; color: white; font-size: 1.25rem;">Premium Supplier</div>
@@ -55,7 +55,7 @@
                 <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
                     <div style="display: flex; align-items: center; gap: 1rem;">
                         <div style="font-size: 2rem;">
-                            <i class="bi bi-star" style="color: white;"></i>
+                            <i class="icon-star" style="color: white;"></i>
                         </div>
                         <div>
                             <div style="font-weight: 700; color: white; font-size: 1.25rem;">Upgrade to Premium</div>
@@ -75,7 +75,7 @@
         <div class="stats-grid-modern">
             <div class="stat-card-modern">
                 <div class="stat-icon-modern products">
-                    <i class="bi bi-box-seam"></i>
+                    <i class="icon-box-seam"></i>
                 </div>
                 <div class="stat-value-modern"><?= $stats['total_products'] ?? 0 ?></div>
                 <div class="stat-label-modern">Total Products</div>
@@ -83,7 +83,7 @@
 
             <div class="stat-card-modern">
                 <div class="stat-icon-modern orders">
-                    <i class="bi bi-cart-check"></i>
+                    <i class="icon-cart-check"></i>
                 </div>
                 <div class="stat-value-modern"><?= $stats['total_orders'] ?? 0 ?></div>
                 <div class="stat-label-modern">Total Orders</div>
@@ -161,7 +161,7 @@
             <div class="section-card-modern">
                 <div class="section-header-modern">
                     <h3 class="section-title-modern">
-                        <i class="bi bi-box-seam"></i>
+                        <i class="icon-box-seam"></i>
                         Recent Products
                     </h3>
                     <a href="<?= \App\View::url('/supplier/products') ?>" class="section-action-btn">
@@ -195,7 +195,7 @@
             <div class="section-card-modern">
                 <div class="section-header-modern">
                     <h3 class="section-title-modern">
-                        <i class="bi bi-cart-check"></i>
+                        <i class="icon-cart-check"></i>
                         Recent Orders
                     </h3>
                     <a href="<?= \App\View::url('/supplier/orders') ?>" class="section-action-btn">
@@ -238,7 +238,7 @@
         <!-- Action Buttons -->
         <div class="dashboard-actions-modern">
             <a href="<?= \App\View::url('/supplier/products') ?>" class="action-btn-modern">
-                <i class="bi bi-plus-circle"></i>
+                <i class="icon-plus-circle"></i>
                 <span>Add New Product</span>
             </a>
             <a href="<?= \App\View::url('/supplier/orders') ?>" class="action-btn-modern secondary">
@@ -252,7 +252,7 @@
                 </a>
             <?php else: ?>
                 <a href="<?= \App\View::url('/supplier/premium/upgrade') ?>" class="action-btn-modern" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border: none;">
-                    <i class="bi bi-star"></i>
+                    <i class="icon-star"></i>
                     <span>Upgrade to Premium</span>
                 </a>
             <?php endif; ?>

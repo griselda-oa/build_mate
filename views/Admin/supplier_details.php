@@ -6,7 +6,7 @@
         <div class="admin-details-header">
             <h2>Supplier Details: <?= \App\View::e($supplier['business_name'] ?? 'N/A') ?></h2>
             <a href="<?= \App\View::url('/admin/suppliers') ?>" class="btn btn-outline-secondary">
-                <i class="bi bi-arrow-left"></i> Back to Suppliers
+                <i class="icon-arrow-left"></i> Back to Suppliers
             </a>
         </div>
 
@@ -120,7 +120,7 @@
                                             </div>
                                         </div>
                                         <a href="<?= \App\View::url('/storage/uploads/' . $doc['file_path']) ?>" target="_blank" class="btn btn-sm btn-primary">
-                                            <i class="bi bi-eye"></i> View Document
+                                            <i class="icon-eye"></i> View Document
                                         </a>
                                     </div>
                                 <?php endforeach; ?>

@@ -1,6 +1,6 @@
 <div class="mb-3">
     <a href="<?= \App\View::url('/catalog') ?>" class="back-button">
-        <i class="bi bi-arrow-left"></i>
+        <i class="icon-arrow-left"></i>
         <span>Continue Shopping</span>
     </a>
 </div>

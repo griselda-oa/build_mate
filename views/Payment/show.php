@@ -4,7 +4,7 @@
     <div class="payment-header-modern mb-5">
         <div class="container">
             <a href="<?= \App\View::url('/checkout') ?>" class="back-button-modern">
-                <i class="bi bi-arrow-left"></i>
+                <i class="icon-arrow-left"></i>
                 <span>Back to Checkout</span>
             </a>
             <h1 class="payment-title-modern">

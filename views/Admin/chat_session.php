@@ -16,7 +16,7 @@ $title = $title ?? 'Chat Session Details';
             </p>
         </div>
         <a href="<?= \App\View::url('/admin/chat') ?>" class="btn btn-outline-secondary">
-            <i class="bi bi-arrow-left"></i> Back to Chat Management
+            <i class="icon-arrow-left"></i> Back to Chat Management
         </a>
     </div>
 

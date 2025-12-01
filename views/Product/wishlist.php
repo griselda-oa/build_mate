@@ -1,10 +1,10 @@
 <div class="container my-5">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h1 class="h3 mb-0">
-            <i class="bi bi-heart-fill text-danger"></i> My Wishlist
+            <i class="icon-heart-fill text-danger"></i> My Wishlist
         </h1>
         <a href="<?= \App\View::url('/catalog') ?>" class="btn btn-outline-primary">
-            <i class="bi bi-arrow-left"></i> Continue Shopping
+            <i class="icon-arrow-left"></i> Continue Shopping
         </a>
     </div>
     
@@ -21,11 +21,11 @@
     
     <?php if (empty($wishlistItems)): ?>
         <div class="text-center py-5">
-            <i class="bi bi-heart" style="font-size: 4rem; color: #ccc; margin-bottom: 1rem;"></i>
+            <i class="icon-heart" style="font-size: 4rem; color: #ccc; margin-bottom: 1rem;"></i>
             <h3 class="text-muted">Your wishlist is empty</h3>
             <p class="text-muted">Start adding products you love to your wishlist!</p>
             <a href="<?= \App\View::url('/catalog') ?>" class="btn btn-primary mt-3">
-                <i class="bi bi-search"></i> Browse Products
+                <i class="icon-search"></i> Browse Products
             </a>
         </div>
     <?php else: ?>
@@ -48,7 +48,7 @@
                             <button class="btn btn-sm btn-danger position-absolute top-0 end-0 m-2" 
                                     onclick="removeFromWishlist(<?= $item['product_id'] ?>, this)"
                                     style="border-radius: 50%; width: 35px; height: 35px; padding: 0;">
-                                <i class="bi bi-heart-fill"></i>
+                                <i class="icon-heart-fill"></i>
                             </button>
                         </div>
                         <div class="card-body d-flex flex-column">
@@ -76,7 +76,7 @@
                                 </div>
                                 <div class="d-grid gap-2">
                                     <a href="<?= \App\View::url('/product/' . \App\View::e($item['slug'])) ?>" class="btn btn-primary">
-                                        <i class="bi bi-eye"></i> View Details
+                                        <i class="icon-eye"></i> View Details
                                     </a>
                                     <?php if ($item['stock'] > 0): ?>
                                         <?php 
@@ -87,11 +87,11 @@
                                         ?>
                                         <?php if (!$cannotPurchase): ?>
                                         <button class="btn btn-outline-primary" onclick="addToCartFromWishlist(<?= $item['product_id'] ?>)">
-                                            <i class="bi bi-cart-plus"></i> Add to Cart
+                                            <i class="icon-cart-plus"></i> Add to Cart
                                         </button>
                                         <?php else: ?>
                                             <button class="btn btn-outline-secondary" disabled title="<?= $isAdmin ? 'Admins cannot purchase products' : 'Suppliers cannot purchase products' ?>">
-                                                <i class="bi bi-cart-x"></i> Not Available
+                                                <i class="icon-cart-x"></i> Not Available
                                             </button>
                                         <?php endif; ?>
                                     <?php endif; ?>
@@ -136,13 +136,13 @@ async function removeFromWishlist(productId, btn) {
         } else {
             showNotification(data.message || 'Failed to remove', 'error');
             btn.disabled = false;
-            btn.innerHTML = '<i class="bi bi-heart-fill"></i>';
+            btn.innerHTML = '<i class="icon-heart-fill"></i>';
         }
     } catch (error) {
         console.error('Error:', error);
         showNotification('Network error. Please try again.', 'error');
         btn.disabled = false;
-        btn.innerHTML = '<i class="bi bi-heart-fill"></i>';
+        btn.innerHTML = '<i class="icon-heart-fill"></i>';
     }
 }
 

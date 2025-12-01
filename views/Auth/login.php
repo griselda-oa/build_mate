@@ -7,7 +7,7 @@
     <div class="auth-container">
         <div class="auth-card">
             <div class="auth-header">
-                <h1><i class="bi bi-box-arrow-in-right"></i> Welcome Back</h1>
+                <h1><i class="icon-box-arrow-in-right"></i> Welcome Back</h1>
                 <p>Sign in to your Build Mate account</p>
             </div>
 
@@ -52,7 +52,7 @@
                 </div>
 
                 <button type="submit" class="btn-auth-primary">
-                    <i class="bi bi-box-arrow-in-right"></i> Sign In
+                    <i class="icon-box-arrow-in-right"></i> Sign In
                 </button>
             </form>
 
@@ -216,7 +216,7 @@
     <div class="auth-container">
         <div class="auth-card">
             <div class="auth-header">
-                <h1><i class="bi bi-box-arrow-in-right"></i> Welcome Back</h1>
+                <h1><i class="icon-box-arrow-in-right"></i> Welcome Back</h1>
                 <p>Sign in to your Build Mate account</p>
             </div>
 
@@ -261,7 +261,7 @@
                 </div>
 
                 <button type="submit" class="btn-auth-primary">
-                    <i class="bi bi-box-arrow-in-right"></i> Sign In
+                    <i class="icon-box-arrow-in-right"></i> Sign In
                 </button>
             </form>
 
@@ -423,7 +423,7 @@
     <div class="auth-container">
         <div class="auth-card">
             <div class="auth-header">
-                <h1><i class="bi bi-box-arrow-in-right"></i> Welcome Back</h1>
+                <h1><i class="icon-box-arrow-in-right"></i> Welcome Back</h1>
                 <p>Sign in to your Build Mate account</p>
             </div>
 
@@ -468,7 +468,7 @@
                 </div>
 
                 <button type="submit" class="btn-auth-primary">
-                    <i class="bi bi-box-arrow-in-right"></i> Sign In
+                    <i class="icon-box-arrow-in-right"></i> Sign In
                 </button>
             </form>
 
@@ -632,7 +632,7 @@
     <div class="auth-container">
         <div class="auth-card">
             <div class="auth-header">
-                <h1><i class="bi bi-box-arrow-in-right"></i> Welcome Back</h1>
+                <h1><i class="icon-box-arrow-in-right"></i> Welcome Back</h1>
                 <p>Sign in to your Build Mate account</p>
             </div>
 
@@ -677,7 +677,7 @@
                 </div>
 
                 <button type="submit" class="btn-auth-primary">
-                    <i class="bi bi-box-arrow-in-right"></i> Sign In
+                    <i class="icon-box-arrow-in-right"></i> Sign In
                 </button>
             </form>
 

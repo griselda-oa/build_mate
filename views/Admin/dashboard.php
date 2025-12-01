@@ -115,7 +115,7 @@
                                         <a href="<?= \App\View::url('/admin/orders/' . $order['id']) ?>" 
                                            class="admin-action-btn primary" 
                                            style="padding: 0.5rem 1rem; font-size: 0.875rem;">
-                                            <i class="bi bi-eye"></i> View
+                                            <i class="icon-eye"></i> View
                                         </a>
                                     </td>
                                 </tr>

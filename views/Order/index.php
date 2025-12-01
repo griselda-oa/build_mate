@@ -4,7 +4,7 @@
     <div class="buyer-orders-container">
         <!-- Back Button -->
         <a href="<?= \App\View::url('/') ?>" class="buyer-back-btn">
-            <i class="bi bi-arrow-left"></i>
+            <i class="icon-arrow-left"></i>
             <span>Back to Home</span>
         </a>
 
@@ -59,7 +59,7 @@
                 <h3 class="buyer-empty-state-title">No Orders Yet</h3>
                 <p class="buyer-empty-state-text">You haven't placed any orders yet. Start shopping to see your orders here!</p>
                 <a href="<?= \App\View::url('/catalog') ?>" class="buyer-empty-state-link">
-                    <i class="bi bi-cart"></i> Start Shopping
+                    <i class="icon-cart"></i> Start Shopping
                 </a>
             </div>
         <?php else: ?>
@@ -148,12 +148,12 @@
                                     <div class="buyer-order-actions">
                                         <a href="<?= \App\View::url('/orders/' . $order['id']) ?>" 
                                            class="buyer-action-btn view">
-                                            <i class="bi bi-eye"></i> View
+                                            <i class="icon-eye"></i> View
                                         </a>
                                         <?php if ($isPaid): ?>
                                             <a href="<?= \App\View::url('/orders/' . $order['id'] . '/track-delivery') ?>" 
                                                class="buyer-action-btn track">
-                                                <i class="bi bi-truck"></i> Track Delivery
+                                                <i class="icon-truck"></i> Track Delivery
                                             </a>
                                         <?php endif; ?>
                                     </div>

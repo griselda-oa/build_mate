@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= isset($title) ? \App\View::e($title) . ' - ' : '' ?>Build Mate Ghana</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Bootstrap Icons: Load fallback directly since CDN may not be accessible -->
-    <link rel="stylesheet" href="<?= \App\View::asset('assets/css/bootstrap-icons-fallback.css') ?>">
+    <!-- Lightweight CSS Framework (replaces Bootstrap ~150KB with ~15KB) -->
+    <link rel="stylesheet" href="<?= \App\View::asset('assets/css/lightweight-framework.css') ?>">
+    <link rel="stylesheet" href="<?= \App\View::asset('assets/css/icons.css') ?>">
     <link rel="stylesheet" href="<?= \App\View::asset('assets/css/main.css') ?>">
     <link rel="stylesheet" href="<?= \App\View::asset('assets/css/chat-widget.css') ?>">
     <script src="<?= \App\View::asset('assets/js/base-path.js') ?>"></script>
@@ -28,7 +28,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
         <div class="container">
             <a class="navbar-brand" href="<?= \App\View::url('/') ?>">
-                <i class="bi bi-hammer"></i> Build Mate Ghana
+                <i class="icon-hammer"></i> Build Mate Ghana
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -76,7 +76,7 @@
                         ?>
                         <li class="nav-item">
                             <a class="nav-link wishlist-badge" href="<?= \App\View::url('/wishlist') ?>" title="My Wishlist">
-                                <i class="bi bi-heart"></i>
+                                <i class="icon-heart"></i>
                                 <span class="wishlist-count" id="wishlistCount"><?= $wishlistCount ?></span>
                             </a>
                         </li>
@@ -84,7 +84,7 @@
                     <?php if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'supplier'): ?>
                         <li class="nav-item">
                             <a class="nav-link cart-badge" href="<?= \App\View::url('/cart') ?>">
-                                <i class="bi bi-cart"></i>
+                                <i class="icon-cart"></i>
                                 <span class="cart-count" id="cartCount"><?= count($_SESSION['cart'] ?? []) ?></span>
                             </a>
                         </li>
@@ -97,7 +97,7 @@
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="<?= \App\View::url('/orders') ?>">My Orders</a></li>
                                 <li><a class="dropdown-item" href="<?= \App\View::url('/wishlist') ?>">
-                                    <i class="bi bi-heart"></i> My Wishlist
+                                    <i class="icon-heart"></i> My Wishlist
                                 </a></li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li>
@@ -139,7 +139,7 @@
             <div class="row">
                 <div class="col-md-4 mb-4 mb-md-0">
                     <h5 class="mb-3">
-                        <i class="bi bi-hammer"></i> Build Mate Ghana
+                        <i class="icon-hammer"></i> Build Mate Ghana
                     </h5>
                     <p>Ghana's trusted construction materials marketplace. Connect with verified suppliers, secure Paystack payments, and tracked delivery.</p>
                 </div>
@@ -173,7 +173,8 @@
         </div>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Lightweight Components (replaces Bootstrap JS ~58KB with ~3KB) -->
+    <script src="<?= \App\View::asset('assets/js/lightweight-components.js') ?>"></script>
     <script src="<?= \App\View::asset('assets/js/main.js') ?>?v=<?= time() ?>"></script>
     <script src="<?= \App\View::asset('assets/js/chat-widget.js') ?>?v=<?= time() ?>"></script>
     <script>

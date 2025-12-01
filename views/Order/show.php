@@ -4,7 +4,7 @@
     <div class="order-detail-hero">
         <div class="container">
             <a href="<?= \App\View::url('/orders') ?>" class="back-btn-hero">
-                <i class="bi bi-arrow-left"></i>
+                <i class="icon-arrow-left"></i>
                 <span>Back to Orders</span>
             </a>
             <div class="order-hero-content">
@@ -37,7 +37,7 @@
                 <!-- Order Items Card -->
                 <div class="order-card-modern">
                     <div class="order-card-header">
-                        <h3><i class="bi bi-box-seam"></i> Order Items</h3>
+                        <h3><i class="icon-box-seam"></i> Order Items</h3>
                         <span class="item-count-badge"><?= count($order['items']) ?> <?= count($order['items']) === 1 ? 'item' : 'items' ?></span>
                     </div>
                     <div class="order-card-body">
@@ -79,7 +79,7 @@
                 <div class="delivery-tracker-modern">
                 <div class="delivery-tracker">
                     <div class="delivery-tracker-header">
-                        <h3><i class="bi bi-truck"></i> Delivery Tracking</h3>
+                        <h3><i class="icon-truck"></i> Delivery Tracking</h3>
                         <?php
                         $orderStatus = $order['status'] ?? 'placed';
                         
@@ -119,7 +119,7 @@
                         <!-- Step 1: Order Placed (Always completed, locked) -->
                         <div class="tracker-step step completed locked" data-step="placed" title="Order Placed - Cannot be changed">
                             <div class="tracker-step-icon">
-                                <i class="bi bi-cart-check-fill"></i>
+                                <i class="icon-cart-check-fill"></i>
                             </div>
                             <div class="tracker-step-label">Order Placed</div>
                             <div class="tracker-step-time">
@@ -202,7 +202,7 @@
                              data-new-status="out_for_delivery"
                              <?= $canClickOutForDelivery ? 'title="Click to mark as Out for Delivery"' : 'title="Out for Delivery - Only admin/logistics can update"' ?>>
                             <div class="tracker-step-icon">
-                                <i class="bi bi-truck"></i>
+                                <i class="icon-truck"></i>
                             </div>
                             <div class="tracker-step-label">Out for Delivery</div>
                             <div class="tracker-step-time">

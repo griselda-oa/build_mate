@@ -5,12 +5,12 @@
         <div class="container">
             <div class="tracking-hero-content-ultra">
                 <a href="<?= \App\View::url('/orders/<?= $order['id'] ?>') ?>" class="back-btn-ultra">
-                    <i class="bi bi-arrow-left"></i>
+                    <i class="icon-arrow-left"></i>
                     <span>Back</span>
                 </a>
                 <div class="tracking-hero-text-ultra">
                     <div class="tracking-badge-ultra">
-                        <i class="bi bi-truck"></i>
+                        <i class="icon-truck"></i>
                         <span>Live Tracking</span>
                     </div>
                     <h1 class="tracking-title-ultra">Track Your Delivery</h1>
@@ -33,7 +33,7 @@
         <!-- Modern Horizontal Delivery Tracker -->
         <div class="delivery-tracker">
             <div class="delivery-tracker-header">
-                <h3><i class="bi bi-truck"></i> Delivery Tracking</h3>
+                <h3><i class="icon-truck"></i> Delivery Tracking</h3>
                 <?php
                 // Get order status - normalize old statuses to new ones
                 $rawStatus = $order['status'] ?? 'placed';
@@ -96,7 +96,7 @@
                 <!-- Step 1: Order Placed -->
                 <div class="tracker-step step" data-step="placed">
                     <div class="tracker-step-icon">
-                        <i class="bi bi-cart-check-fill"></i>
+                        <i class="icon-cart-check-fill"></i>
                     </div>
                     <div class="tracker-step-label">Order Placed</div>
                     <div class="tracker-step-time">
@@ -142,7 +142,7 @@
                 <!-- Step 4: Out for Delivery -->
                 <div class="tracker-step step" data-step="out_for_delivery">
                     <div class="tracker-step-icon">
-                        <i class="bi bi-truck"></i>
+                        <i class="icon-truck"></i>
                     </div>
                     <div class="tracker-step-label">Out for Delivery</div>
                     <div class="tracker-step-time">
@@ -175,7 +175,7 @@
         <?php if ($delivery && $delivery['status'] === 'in_transit' && !($delivery['confirmed_by_buyer'] ?? 0)): ?>
         <div class="confirm-delivery-card" style="background: white; border-radius: 20px; padding: 2rem; margin: 2rem 0; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
             <h3 style="color: #8B4513; margin-bottom: 1rem;">
-                <i class="bi bi-box-seam"></i> Received Your Order?
+                <i class="icon-box-seam"></i> Received Your Order?
             </h3>
             <p style="color: #6B7280; margin-bottom: 1.5rem;">
                 When the delivery arrives, you'll receive a 6-digit delivery code. Enter it here to confirm delivery:
@@ -252,7 +252,7 @@
                 View Full Order Details
             </a>
             <a href="<?= \App\View::url('/orders') ?>" class="btn-modern btn-secondary-modern">
-                <i class="bi bi-arrow-left"></i>
+                <i class="icon-arrow-left"></i>
                 Back to Orders
             </a>
         </div>

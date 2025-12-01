@@ -1,6 +1,6 @@
 <div class="mb-3">
     <a href="<?= \App\View::url('/logistics/dashboard') ?>" class="back-button">
-        <i class="bi bi-arrow-left"></i>
+        <i class="icon-arrow-left"></i>
         <span>Back to Dashboard</span>
     </a>
 </div>

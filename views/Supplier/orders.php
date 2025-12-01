@@ -6,7 +6,7 @@
         <!-- Back Button -->
         <div class="mb-4">
             <a href="<?= \App\View::url('/supplier/dashboard') ?>" class="back-button">
-                <i class="bi bi-arrow-left"></i>
+                <i class="icon-arrow-left"></i>
                 <span>Back to Dashboard</span>
             </a>
         </div>
@@ -99,7 +99,7 @@
                                                 <a href="<?= \App\View::url('/orders/' . $order['id']) ?>" 
                                                    class="btn btn-sm" 
                                                    style="background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%); color: white; border: none; border-radius: 8px; padding: 0.5rem 1rem;">
-                                                    <i class="bi bi-eye"></i> View
+                                                    <i class="icon-eye"></i> View
                                                 </a>
                                                 <?php
                                                 $currentStatus = $order['status'] ?? 'placed';
@@ -130,12 +130,12 @@
                                                 
                                                 <?php elseif ($deliveryStatus === 'picked_up'): ?>
                                                     <span class="item-badge-modern processing">
-                                                        <i class="bi bi-box-seam"></i> Picked Up by Logistics
+                                                        <i class="icon-box-seam"></i> Picked Up by Logistics
                                                     </span>
                                                 
                                                 <?php elseif ($deliveryStatus === 'in_transit'): ?>
                                                     <span class="item-badge-modern out_for_delivery">
-                                                        <i class="bi bi-truck"></i> In Transit
+                                                        <i class="icon-truck"></i> In Transit
                                                     </span>
                                                 
                                                 <?php elseif ($deliveryStatus === 'delivered'): ?>

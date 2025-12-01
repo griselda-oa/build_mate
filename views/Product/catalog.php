@@ -5,7 +5,7 @@
             <!-- Back Button - Positioned in hero section -->
             <div class="catalog-back-button">
                 <a href="<?= \App\View::url('/') ?>" class="back-button back-button-hero">
-                    <i class="bi bi-arrow-left"></i>
+                    <i class="icon-arrow-left"></i>
                     <span>Back to Home</span>
                 </a>
             </div>
@@ -27,7 +27,7 @@
             <!-- Quick Search Bar -->
             <div class="quick-search-wrapper">
                 <div class="quick-search">
-                    <i class="bi bi-search"></i>
+                    <i class="icon-search"></i>
                     <input type="text" 
                            id="quickSearch" 
                            class="quick-search-input" 
@@ -63,7 +63,7 @@
                         <!-- Search -->
                         <div class="filter-section-modern">
                             <label class="filter-label-modern">
-                                <i class="bi bi-search"></i> Search
+                                <i class="icon-search"></i> Search
                             </label>
                             <input type="text" 
                                    class="filter-input-modern" 
@@ -161,7 +161,7 @@
                     <div class="sponsored-section-modern">
                         <div class="sponsored-header-modern">
                             <div class="sponsored-title-wrapper">
-                                <i class="bi bi-star-fill"></i>
+                                <i class="icon-star-fill"></i>
                                 <h2 class="sponsored-title-modern">Sponsored Products</h2>
                                 <span class="sponsored-badge-modern">Premium Ads</span>
                             </div>
@@ -210,7 +210,7 @@
                                             <?php endif; ?>
                                             <div class="sponsored-badge-overlay-modern">
                                                 <span class="sponsored-label-modern">
-                                                    <i class="bi bi-star-fill"></i> Sponsored
+                                                    <i class="icon-star-fill"></i> Sponsored
                                                 </span>
                                             </div>
                                         </div>
@@ -332,7 +332,7 @@
                                         <div class="product-badges-sleek">
                                     <?php if ($isAdvertised): ?>
                                                 <span class="badge-sleek sponsored-sleek">
-                                                    <i class="bi bi-star-fill"></i> Sponsored
+                                                    <i class="icon-star-fill"></i> Sponsored
                                                 </span>
                                     <?php endif; ?>
                                     <?php if ($product['verified'] ?? false): ?>
@@ -355,7 +355,7 @@
                                         <!-- Quick Actions -->
                                         <div class="product-actions-sleek">
                                             <button class="action-btn-sleek" onclick="event.preventDefault(); window.location.href=window.buildUrl('/product/<?= \App\View::e($product['slug']) ?>')">
-                                                <i class="bi bi-eye"></i>
+                                                <i class="icon-eye"></i>
                                             </button>
                                             <?php 
                                             $user = \App\Auth::check() ? \App\Auth::user() : null;
@@ -366,7 +366,7 @@
                                             if (!$cannotPurchase): 
                                             ?>
                                                 <button class="action-btn-sleek" onclick="event.preventDefault(); addToCart(<?= $product['id'] ?>)">
-                                                    <i class="bi bi-cart-plus"></i>
+                                                    <i class="icon-cart-plus"></i>
                                                 </button>
                                             <?php endif; ?>
                                             <?php if (\App\Auth::check() && !$cannotPurchase): ?>
@@ -376,7 +376,7 @@
                                                 ?>
                                                 <button class="action-btn-sleek wishlist-btn-catalog <?= $isInWishlist ? 'in-wishlist' : '' ?>" 
                                                         onclick="event.preventDefault(); toggleWishlistCatalog(<?= $product['id'] ?>, this)">
-                                                    <i class="bi bi-heart<?= $isInWishlist ? '-fill' : '' ?>"></i>
+                                                    <i class="icon-heart<?= $isInWishlist ? '-fill' : '' ?>"></i>
                                                 </button>
                                             <?php endif; ?>
                                         </div>
@@ -439,12 +439,12 @@ async function toggleWishlistCatalog(productId, btn) {
         if (data.success) {
             if (action === 'add') {
                 btn.classList.add('in-wishlist');
-                icon.className = 'bi bi-heart-fill';
+                icon.className = 'icon-heart-fill';
                 showNotification('Added to wishlist!', 'success');
                 updateWishlistCount(1);
             } else {
                 btn.classList.remove('in-wishlist');
-                icon.className = 'bi bi-heart';
+                icon.className = 'icon-heart';
                 showNotification('Removed from wishlist', 'info');
                 updateWishlistCount(-1);
             }

@@ -142,7 +142,7 @@
                             </div>
                         <?php endif; ?>
                         <button class="quick-view-btn" onclick="quickView(<?= $product['id'] ?>)">
-                            <i class="bi bi-eye"></i>
+                            <i class="icon-eye"></i>
                         </button>
                     </div>
                     <div class="product-card-body">
@@ -163,11 +163,11 @@
                         ?>
                         <?php if (!$cannotPurchase): ?>
                             <button class="add-to-cart-btn-modern" onclick="addToCart(<?= $product['id'] ?>)">
-                                <i class="bi bi-cart-plus"></i> Add to Cart
+                                <i class="icon-cart-plus"></i> Add to Cart
                             </button>
                         <?php else: ?>
                             <button class="add-to-cart-btn-modern" disabled style="opacity: 0.5; cursor: not-allowed;" title="<?= $isAdmin ? 'Admins cannot purchase products' : 'Suppliers cannot purchase products' ?>">
-                                <i class="bi bi-cart-x"></i> Not Available
+                                <i class="icon-cart-x"></i> Not Available
                             </button>
                         <?php endif; ?>
                     </div>
@@ -241,11 +241,11 @@
             <div class="testimonials-track" id="testimonialsTrack">
                 <div class="testimonial-card-modern">
                     <div class="testimonial-stars">
-                        <i class="bi bi-star-fill"></i>
-                        <i class="bi bi-star-fill"></i>
-                        <i class="bi bi-star-fill"></i>
-                        <i class="bi bi-star-fill"></i>
-                        <i class="bi bi-star-fill"></i>
+                        <i class="icon-star-fill"></i>
+                        <i class="icon-star-fill"></i>
+                        <i class="icon-star-fill"></i>
+                        <i class="icon-star-fill"></i>
+                        <i class="icon-star-fill"></i>
                     </div>
                     <p class="testimonial-text">"Build Mate transformed how we source materials. The Paystack secure payment system gives us peace of mind, and delivery tracking is excellent."</p>
                     <div class="testimonial-author">
@@ -255,11 +255,11 @@
                 </div>
                 <div class="testimonial-card-modern">
                     <div class="testimonial-stars">
-                        <i class="bi bi-star-fill"></i>
-                        <i class="bi bi-star-fill"></i>
-                        <i class="bi bi-star-fill"></i>
-                        <i class="bi bi-star-fill"></i>
-                        <i class="bi bi-star-fill"></i>
+                        <i class="icon-star-fill"></i>
+                        <i class="icon-star-fill"></i>
+                        <i class="icon-star-fill"></i>
+                        <i class="icon-star-fill"></i>
+                        <i class="icon-star-fill"></i>
                     </div>
                     <p class="testimonial-text">"As a supplier, Build Mate helped us reach more customers while maintaining our reputation. The verification badge increased our sales significantly."</p>
                     <div class="testimonial-author">
@@ -269,11 +269,11 @@
                 </div>
                 <div class="testimonial-card-modern">
                     <div class="testimonial-stars">
-                        <i class="bi bi-star-fill"></i>
-                        <i class="bi bi-star-fill"></i>
-                        <i class="bi bi-star-fill"></i>
-                        <i class="bi bi-star-fill"></i>
-                        <i class="bi bi-star-fill"></i>
+                        <i class="icon-star-fill"></i>
+                        <i class="icon-star-fill"></i>
+                        <i class="icon-star-fill"></i>
+                        <i class="icon-star-fill"></i>
+                        <i class="icon-star-fill"></i>
                     </div>
                     <p class="testimonial-text">"Transparent pricing and reliable delivery. We saved 20% on our last project thanks to Build Mate's competitive marketplace."</p>
                     <div class="testimonial-author">

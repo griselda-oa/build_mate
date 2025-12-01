@@ -128,7 +128,7 @@
                                                 </form>
                                             <?php endif; ?>
                                             <a href="<?= \App\View::url('/admin/suppliers/' . $supplier['id']) ?>" class="supplier-action-btn view">
-                                                <i class="bi bi-eye"></i> View
+                                                <i class="icon-eye"></i> View
                                             </a>
                                             <form method="POST" 
                                                   action="<?= \App\View::url('/admin/suppliers/' . $supplier['id'] . '/delete') ?>" 
