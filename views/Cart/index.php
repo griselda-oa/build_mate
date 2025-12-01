@@ -28,7 +28,7 @@
                     <?php foreach ($products as $product): ?>
                         <tr>
                             <td>
-                                <a href="<?= \App\View::url('/product/<?= \App\View::e($product['slug']) ?>') ?>">
+                                <a href="<?= \App\View::url('/product/' . \App\View::e($product['slug'])) ?>">
                                     <?= \App\View::e($product['name']) ?>
                                 </a>
                             </td>
@@ -36,7 +36,7 @@
                                 <?= \App\Money::format($product['price_cents'], $product['currency']) ?>
                             </td>
                             <td>
-                                <form method="POST" action="/build_mate/cart/update/" class="d-inline">
+                                <form method="POST" action="<?= \App\View::url('/cart/update/') ?>" class="d-inline">
                                     <?= \App\Csrf::field() ?>
                                     <input type="hidden" name="product_id" value="<?= $product['id'] ?>">
                                     <input type="number" name="qty" value="<?= $product['qty'] ?>" min="1" max="<?= $product['stock'] ?>" class="form-control form-control-sm" style="width: 80px; display: inline-block;" onchange="this.form.submit()">
@@ -46,7 +46,7 @@
                                 <?= \App\Money::format($product['price_cents'] * $product['qty'], $product['currency']) ?>
                             </td>
                             <td>
-                                <form method="POST" action="/build_mate/cart/remove/<?= $product['id'] ?>/" class="d-inline">
+                                <form method="POST" action="<?= \App\View::url('/cart/remove/' . $product['id'] . '/') ?>" class="d-inline">
                                     <?= \App\Csrf::field() ?>
                                     <button type="submit" class="btn btn-sm btn-danger">Remove</button>
                                 </form>

@@ -1,6 +1,6 @@
 <!-- Modern Supplier Dashboard -->
-<link rel="stylesheet" href="<?= \App\View::asset('assets/css/supplier-dashboard.css">
-<link rel="stylesheet" href="<?= \App\View::asset('assets/css/ad-banner.css">
+<link rel="stylesheet" href="<?= \App\View::asset('assets/css/supplier-dashboard.css') ?>">
+<link rel="stylesheet" href="<?= \App\View::asset('assets/css/ad-banner.css') ?>">
 
 <div class="supplier-dashboard-page">
     <div class="container">
@@ -178,7 +178,7 @@
                     <?php else: ?>
                         <div class="items-list-modern">
                             <?php foreach (array_slice($products, 0, 5) as $product): ?>
-                                <a href="<?= \App\View::url('/product/<?= \App\View::e($product['slug'] ?? '') ?>') ?>" class="item-modern" style="text-decoration: none; color: inherit;">
+                                <a href="<?= \App\View::url('/product/' . \App\View::e($product['slug'] ?? '')) ?>" class="item-modern" style="text-decoration: none; color: inherit;">
                                     <span class="item-name-modern"><?= \App\View::e($product['name']) ?></span>
                                     <span class="item-badge-modern <?= $product['verified'] ? 'verified' : 'pending' ?>">
                                         <i class="bi bi-<?= $product['verified'] ? 'check-circle-fill' : 'clock' ?>"></i>
@@ -212,7 +212,7 @@
                     <?php else: ?>
                         <div class="items-list-modern">
                             <?php foreach (array_slice($orders, 0, 5) as $order): ?>
-                                <a href="<?= \App\View::url('/orders/<?= $order['id'] ?>') ?>" class="item-modern" style="text-decoration: none; color: inherit;">
+                                <a href="<?= \App\View::url('/orders/' . $order['id']) ?>" class="item-modern" style="text-decoration: none; color: inherit;">
                                     <div style="flex: 1;">
                                         <div class="item-name-modern">
                                             <?= \App\Money::format($order['total_cents'] ?? 0, $order['currency'] ?? 'GHS') ?>

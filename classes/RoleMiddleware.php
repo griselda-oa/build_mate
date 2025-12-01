@@ -14,7 +14,7 @@ class RoleMiddleware
     public function handle(string $role): bool
     {
         if (!Auth::check()) {
-            header('Location: /build_mate/login');
+            header('Location: ' . \App\View::url('/login'));
             exit;
         }
         
@@ -23,7 +23,7 @@ class RoleMiddleware
             // Just verify the user has admin role, no additional email check needed
             if (!Auth::hasRole('admin')) {
                 http_response_code(403);
-                $view = new \App\Core\View();
+                $view = new \App\View();
                 echo $view->render('Errors/403', [], 'main');
                 exit;
             }
@@ -31,7 +31,7 @@ class RoleMiddleware
         
         if (!Auth::hasRole($role)) {
             http_response_code(403);
-            $view = new \App\Core\View();
+            $view = new \App\View();
             echo $view->render('Errors/403', [], 'main');
             exit;
         }

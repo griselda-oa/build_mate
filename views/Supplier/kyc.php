@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="<?= \App\View::asset('assets/css/kyc-application.css">
+<link rel="stylesheet" href="<?= \App\View::asset('assets/css/kyc-application.css') ?>">
 
 <div class="kyc-application-form">
     <!-- Form Header -->
@@ -27,7 +27,7 @@
             <div class="form-layout">
                 <!-- Main Form Area (60%) -->
                 <div class="form-main">
-                    <form id="kycForm" method="POST" action="/build_mate/supplier/kyc/" enctype="multipart/form-data" class="multi-step-form">
+                    <form id="kycForm" method="POST" action="<?= \App\View::url('/supplier/kyc/') ?>" enctype="multipart/form-data" class="multi-step-form">
             <?= \App\Csrf::field() ?>
                 
                         <!-- Step 1: Business Information -->

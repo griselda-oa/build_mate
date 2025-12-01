@@ -147,6 +147,9 @@ try {
     if (file_exists(__DIR__ . '/classes/Advertisement.php')) {
         require_once __DIR__ . '/classes/Advertisement.php';
     }
+    if (file_exists(__DIR__ . '/classes/OpenAIService.php')) {
+        require_once __DIR__ . '/classes/OpenAIService.php';
+    }
 } catch (\Throwable $e) {
     // If Composer platform check failed (PHP version mismatch), show a friendly message
     $msg = $e->getMessage();
@@ -217,24 +220,14 @@ if (session_status() === PHP_SESSION_NONE) {
                (!empty($_SERVER['SERVER_PORT']) && (int)$_SERVER['SERVER_PORT'] === 443);
 
     // Detect base path dynamically for session cookie
-    $requestUri = $_SERVER['REQUEST_URI'] ?? '/';
-    $basePath = '';
-    if (preg_match('#^/~[^/]+/build_mate#', $requestUri)) {
-        $basePath = preg_replace('#^(/~[^/]+/build_mate).*#', '$1', $requestUri);
-    } elseif (strpos($requestUri, '/build_mate') === 0) {
-        $basePath = '/build_mate';
-    } elseif (preg_match('#^/~[^/]+#', $requestUri)) {
-        $basePath = preg_replace('#^(/~[^/]+).*#', '$1', $requestUri);
-    }
-    
+    // Set session cookie path for localhost
     session_set_cookie_params([
         'lifetime' => 0, // Session cookie (expires when browser closes)
-        // Use detected base path
-        'path' => $basePath ?: '/',
+        'path' => '/build_mate',
         'domain' => '',
         'secure' => ($isProduction && $isHttps),
         'httponly' => true,
-        'samesite' => 'Lax' // Changed from Strict to Lax for redirects
+        'samesite' => 'Lax'
     ]);
     
     // Additional session settings
@@ -266,9 +259,6 @@ if (session_status() === PHP_SESSION_NONE) {
     
     session_start();
     
-    // Debug: Log session start
-    $cookieParams = session_get_cookie_params();
-    error_log("SESSION STARTED - ID: " . session_id() . ", Status: " . session_status() . ", Save path: " . ini_get('session.save_path') . ", Cookie path: " . $cookieParams['path']);
 
     // Compatibility shim: normalize legacy flat session keys into standardized $_SESSION['user']
     if (!isset($_SESSION['user'])) {
@@ -295,61 +285,6 @@ if (session_status() === PHP_SESSION_NONE) {
         }
     }
 }
-
-// Load routes and dispatch
-try {
-    require_once __DIR__ . '/settings/routes.php';
-} catch (\Throwable $e) {
-    die('<h1>Error Loading Routes</h1><p>' . htmlspecialchars($e->getMessage()) . '</p><pre>' . htmlspecialchars($e->getTraceAsString()) . '</pre>');
-}
-
-$router = Router::getInstance();
-$router->dispatch();
-
-
-// Load routes and dispatch
-try {
-    require_once __DIR__ . '/settings/routes.php';
-} catch (\Throwable $e) {
-    die('<h1>Error Loading Routes</h1><p>' . htmlspecialchars($e->getMessage()) . '</p><pre>' . htmlspecialchars($e->getTraceAsString()) . '</pre>');
-}
-
-$router = Router::getInstance();
-$router->dispatch();
-
-
-// Load routes and dispatch
-try {
-    require_once __DIR__ . '/settings/routes.php';
-} catch (\Throwable $e) {
-    die('<h1>Error Loading Routes</h1><p>' . htmlspecialchars($e->getMessage()) . '</p><pre>' . htmlspecialchars($e->getTraceAsString()) . '</pre>');
-}
-
-$router = Router::getInstance();
-$router->dispatch();
-
-
-// Load routes and dispatch
-try {
-    require_once __DIR__ . '/settings/routes.php';
-} catch (\Throwable $e) {
-    die('<h1>Error Loading Routes</h1><p>' . htmlspecialchars($e->getMessage()) . '</p><pre>' . htmlspecialchars($e->getTraceAsString()) . '</pre>');
-}
-
-$router = Router::getInstance();
-$router->dispatch();
-
-
-// Load routes and dispatch
-try {
-    require_once __DIR__ . '/settings/routes.php';
-} catch (\Throwable $e) {
-    die('<h1>Error Loading Routes</h1><p>' . htmlspecialchars($e->getMessage()) . '</p><pre>' . htmlspecialchars($e->getTraceAsString()) . '</pre>');
-}
-
-$router = Router::getInstance();
-$router->dispatch();
-
 
 // Load routes and dispatch
 try {

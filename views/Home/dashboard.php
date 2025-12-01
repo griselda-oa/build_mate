@@ -43,8 +43,9 @@
                         $adImage = $ad['image_url'] ?? $ad['product_image'] ?? '';
                         // Make path absolute if relative
                         if (!empty($adImage) && !preg_match('/^https?:\/\//', $adImage)) {
-                            if (strpos($adImage, '<?= \App\View::url('/') ?>') !== 0) {
-                                $adImage = '/build_mate' . (strpos($adImage, '/') === 0 ? '' : '/') . $adImage;
+                            $basePath = \App\View::basePath();
+                            if (strpos($adImage, $basePath) !== 0) {
+                                $adImage = $basePath . ltrim($adImage, '/');
                             }
                         }
                         $isVideo = !empty($adImage) && preg_match('/\.(mp4|mov|webm)$/i', $adImage);
@@ -62,10 +63,10 @@
                                                    autoplay
                                                    onmouseover="this.play()"
                                                    onmouseout="this.pause()">
-                                                <source src="<?= \App\View::e($adImage) ?>" type="video/<?= pathinfo($adImage, PATHINFO_EXTENSION) === 'mov' ? 'quicktime' : pathinfo($adImage, PATHINFO_EXTENSION) ?>">
+                                                <source src="<?= \App\View::image($adImage) ?>" type="video/<?= pathinfo($adImage, PATHINFO_EXTENSION) === 'mov' ? 'quicktime' : pathinfo($adImage, PATHINFO_EXTENSION) ?>">
                                             </video>
                                         <?php else: ?>
-                                            <img src="<?= \App\View::e($adImage) ?>" 
+                                            <img src="<?= \App\View::image($adImage) ?>" 
                                                  class="ad-banner-media-modern" 
                                                  alt="<?= \App\View::e($ad['title'] ?? $ad['product_name'] ?? 'Advertisement') ?>"
                                                  loading="lazy">
@@ -328,7 +329,7 @@
                                 <a href="<?= \App\View::url('/') ?>product/<?= \App\View::e($product['slug']) ?>" class="product-link-modern">
                                     <div class="product-image-wrapper-modern">
                                         <?php if (!empty($product['image_url'])): ?>
-                                            <img src="<?= \App\View::e($product['image_url']) ?>" 
+                                            <img src="<?= \App\View::image($product['image_url']) ?>" 
                                                  class="product-image-ultra-modern" 
                                                  alt="<?= \App\View::e($product['name']) ?>"
                                                  loading="lazy">
@@ -1246,6 +1247,6 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 <!-- Include Catalog CSS for consistent styling -->
-<link rel="stylesheet" href="<?= \App\View::asset('assets/css/catalog.css?v=<?= filemtime(__DIR__ . '/../../assets/css/catalog.css') ?>">
-<link rel="stylesheet" href="<?= \App\View::asset('assets/css/ad-banner.css">
+<link rel="stylesheet" href="<?= \App\View::asset('assets/css/catalog.css?v=' . filemtime(__DIR__ . '/../../assets/css/catalog.css')) ?>">
+<link rel="stylesheet" href="<?= \App\View::asset('assets/css/ad-banner.css') ?>">
 

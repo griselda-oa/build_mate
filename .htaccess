@@ -5,38 +5,19 @@ DirectoryIndex index.php
 <IfModule mod_rewrite.c>
     RewriteEngine On
     
-    # Detect base path dynamically
-    # For server: /~griselda.owusu/build_mate or /~griselda.owusu
-    # For localhost: /build_mate
-    RewriteCond %{REQUEST_URI} ^/~([^/]+)(/build_mate)?(/.*)?$
-    RewriteRule ^ - [E=BASE_PATH:/~%1/build_mate]
-    
-    RewriteCond %{REQUEST_URI} ^/build_mate(/.*)?$
-    RewriteRule ^ - [E=BASE_PATH:/build_mate]
-    
-    RewriteCond %{ENV:BASE_PATH} ^$
-    RewriteRule ^ - [E=BASE_PATH:]
-    
-    # Set RewriteBase dynamically
-    RewriteCond %{ENV:BASE_PATH} ^(/[^/]+/build_mate)$
-    RewriteRule ^ - [E=REWRITE_BASE:%1/]
-    
-    RewriteCond %{ENV:BASE_PATH} ^(/build_mate)$
-    RewriteRule ^ - [E=REWRITE_BASE:%1/]
-    
-    RewriteCond %{ENV:REWRITE_BASE} ^$
-    RewriteRule ^ - [E=REWRITE_BASE:/]
+    # Set RewriteBase for localhost
+    RewriteBase /build_mate/
     
     # Allow assets (CSS, JS, images) to be served directly
-    RewriteCond %{REQUEST_URI} ^(/~[^/]+)?(/build_mate)?/assets/
+    RewriteCond %{REQUEST_URI} ^/build_mate/assets/
     RewriteRule ^(.*)$ - [L]
     
     # Allow storage/uploads to be served directly (for uploaded images/files)
-    RewriteCond %{REQUEST_URI} ^(/~[^/]+)?(/build_mate)?/storage/uploads/
+    RewriteCond %{REQUEST_URI} ^/build_mate/storage/uploads/
     RewriteRule ^(.*)$ - [L]
     
     # Allow storage/invoices to be served directly
-    RewriteCond %{REQUEST_URI} ^(/~[^/]+)?(/build_mate)?/storage/invoices/
+    RewriteCond %{REQUEST_URI} ^/build_mate/storage/invoices/
     RewriteRule ^(.*)$ - [L]
     
     # If file exists, serve it
@@ -61,125 +42,30 @@ Options -Indexes
     Header set X-XSS-Protection "1; mode=block"
 </IfModule>
 
-    RewriteCond %{REQUEST_URI} ^(/~[^/]+)?(/build_mate)?/storage/invoices/
-    RewriteRule ^(.*)$ - [L]
-    
-    # If file exists, serve it
-    RewriteCond %{REQUEST_FILENAME} -f
-    RewriteRule ^(.*)$ - [L]
-    
-    # If directory exists, serve it
-    RewriteCond %{REQUEST_FILENAME} -d
-    RewriteRule ^(.*)$ - [L]
-    
-    # Everything else goes to index.php
-    RewriteRule ^(.*)$ index.php [L,QSA]
-</IfModule>
-
-# Prevent directory listing
-Options -Indexes
-
-# Security headers
 <IfModule mod_headers.c>
     Header set X-Content-Type-Options "nosniff"
     Header set X-Frame-Options "SAMEORIGIN"
     Header set X-XSS-Protection "1; mode=block"
 </IfModule>
 
-    RewriteCond %{REQUEST_URI} ^(/~[^/]+)?(/build_mate)?/storage/invoices/
-    RewriteRule ^(.*)$ - [L]
-    
-    # If file exists, serve it
-    RewriteCond %{REQUEST_FILENAME} -f
-    RewriteRule ^(.*)$ - [L]
-    
-    # If directory exists, serve it
-    RewriteCond %{REQUEST_FILENAME} -d
-    RewriteRule ^(.*)$ - [L]
-    
-    # Everything else goes to index.php
-    RewriteRule ^(.*)$ index.php [L,QSA]
-</IfModule>
-
-# Prevent directory listing
-Options -Indexes
-
-# Security headers
 <IfModule mod_headers.c>
     Header set X-Content-Type-Options "nosniff"
     Header set X-Frame-Options "SAMEORIGIN"
     Header set X-XSS-Protection "1; mode=block"
 </IfModule>
 
-    RewriteCond %{REQUEST_URI} ^(/~[^/]+)?(/build_mate)?/storage/invoices/
-    RewriteRule ^(.*)$ - [L]
-    
-    # If file exists, serve it
-    RewriteCond %{REQUEST_FILENAME} -f
-    RewriteRule ^(.*)$ - [L]
-    
-    # If directory exists, serve it
-    RewriteCond %{REQUEST_FILENAME} -d
-    RewriteRule ^(.*)$ - [L]
-    
-    # Everything else goes to index.php
-    RewriteRule ^(.*)$ index.php [L,QSA]
-</IfModule>
-
-# Prevent directory listing
-Options -Indexes
-
-# Security headers
 <IfModule mod_headers.c>
     Header set X-Content-Type-Options "nosniff"
     Header set X-Frame-Options "SAMEORIGIN"
     Header set X-XSS-Protection "1; mode=block"
 </IfModule>
 
-    RewriteCond %{REQUEST_URI} ^(/~[^/]+)?(/build_mate)?/storage/invoices/
-    RewriteRule ^(.*)$ - [L]
-    
-    # If file exists, serve it
-    RewriteCond %{REQUEST_FILENAME} -f
-    RewriteRule ^(.*)$ - [L]
-    
-    # If directory exists, serve it
-    RewriteCond %{REQUEST_FILENAME} -d
-    RewriteRule ^(.*)$ - [L]
-    
-    # Everything else goes to index.php
-    RewriteRule ^(.*)$ index.php [L,QSA]
-</IfModule>
-
-# Prevent directory listing
-Options -Indexes
-
-# Security headers
 <IfModule mod_headers.c>
     Header set X-Content-Type-Options "nosniff"
     Header set X-Frame-Options "SAMEORIGIN"
     Header set X-XSS-Protection "1; mode=block"
 </IfModule>
 
-    RewriteCond %{REQUEST_URI} ^(/~[^/]+)?(/build_mate)?/storage/invoices/
-    RewriteRule ^(.*)$ - [L]
-    
-    # If file exists, serve it
-    RewriteCond %{REQUEST_FILENAME} -f
-    RewriteRule ^(.*)$ - [L]
-    
-    # If directory exists, serve it
-    RewriteCond %{REQUEST_FILENAME} -d
-    RewriteRule ^(.*)$ - [L]
-    
-    # Everything else goes to index.php
-    RewriteRule ^(.*)$ index.php [L,QSA]
-</IfModule>
-
-# Prevent directory listing
-Options -Indexes
-
-# Security headers
 <IfModule mod_headers.c>
     Header set X-Content-Type-Options "nosniff"
     Header set X-Frame-Options "SAMEORIGIN"

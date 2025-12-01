@@ -65,18 +65,10 @@ class Router
         $method = $_SERVER['REQUEST_METHOD'];
         $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
         
-        // Remove base path from URI dynamically
-        // Handle server path: /~griselda.owusu/build_mate
-        if (preg_match('#^/~[^/]+/build_mate(/.*)?$#', $uri, $matches)) {
-            $uri = $matches[1] ?? '/';
-        }
+        // Remove base path from URI
         // Handle localhost path: /build_mate
-        elseif (strpos($uri, '/build_mate') === 0) {
+        if (strpos($uri, '/build_mate') === 0) {
             $uri = substr($uri, strlen('/build_mate'));
-        }
-        // Handle server root: /~griselda.owusu
-        elseif (preg_match('#^/~[^/]+(/.*)?$#', $uri, $matches)) {
-            $uri = $matches[1] ?? '/';
         }
         
         // Handle /index.php as root
@@ -85,7 +77,10 @@ class Router
         }
         
         // Remove trailing slash (except for root)
-        $uri = rtrim($uri, '/') ?: '/';
+        // But keep trailing slash for routes that might need it
+        if ($uri !== '/') {
+            $uri = rtrim($uri, '/');
+        }
         
         // Check if this is an invoice download route (skip security headers)
         $isInvoiceRoute = preg_match('#/orders/\d+/invoice\.pdf#', $uri);
@@ -185,49 +180,3 @@ class Router
         return $regex;
     }
 }
-
-
-        
-        // Add anchors
-        $regex = '#^' . $regex . '$#';
-        
-        return $regex;
-    }
-}
-
-
-        
-        // Add anchors
-        $regex = '#^' . $regex . '$#';
-        
-        return $regex;
-    }
-}
-
-
-        
-        // Add anchors
-        $regex = '#^' . $regex . '$#';
-        
-        return $regex;
-    }
-}
-
-
-        
-        // Add anchors
-        $regex = '#^' . $regex . '$#';
-        
-        return $regex;
-    }
-}
-
-
-        
-        // Add anchors
-        $regex = '#^' . $regex . '$#';
-        
-        return $regex;
-    }
-}
-

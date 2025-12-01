@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="<?= \App\View::asset('assets/css/pending-dashboard.css">
+<link rel="stylesheet" href="<?= \App\View::asset('assets/css/pending-dashboard.css') ?>">
 
 <div class="pending-dashboard">
     <!-- Hero Section -->

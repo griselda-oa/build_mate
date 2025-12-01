@@ -1,6 +1,6 @@
 <!-- Create Advertisement Page -->
-<link rel="stylesheet" href="<?= \App\View::asset('assets/css/supplier-dashboard.css">
-<link rel="stylesheet" href="<?= \App\View::asset('assets/css/advertisement-form.css">
+<link rel="stylesheet" href="<?= \App\View::asset('assets/css/supplier-dashboard.css') ?>">
+<link rel="stylesheet" href="<?= \App\View::asset('assets/css/advertisement-form.css') ?>">
 
 <div class="supplier-dashboard-page">
     <div class="container">
@@ -52,7 +52,7 @@
 
         <!-- Advertisement Form (Hidden until payment is complete) -->
         <div class="ad-form-container" id="adFormContainer" style="display: none;">
-            <form method="POST" action="/build_mate/supplier/advertisements/create" id="adForm" enctype="multipart/form-data">
+            <form method="POST" action="<?= \App\View::url('/supplier/advertisements/create') ?>" id="adForm" enctype="multipart/form-data">
                 <?= \App\Csrf::field() ?>
                 <input type="hidden" name="payment_reference" id="paymentReference" value="">
                 
@@ -62,16 +62,27 @@
                         <label class="ad-form-label">
                             Select Product <span class="required">*</span>
                         </label>
-                        <div class="ad-product-select-wrapper">
-                            <select name="product_id" class="ad-form-select" id="productSelect" required>
-                                <option value="">-- Choose a product --</option>
-                                <?php foreach ($products as $product): ?>
-                                    <option value="<?= $product['id'] ?>" data-image="<?= \App\View::e($product['image_url'] ?? '') ?>">
-                                        <?= \App\View::e($product['name']) ?> - <?= \App\Money::format($product['price_cents'] ?? 0, $product['currency'] ?? 'GHS') ?>
-                                    </option>
-                                <?php endforeach; ?>
-                            </select>
-                        </div>
+                        <?php if (empty($products)): ?>
+                            <div class="alert alert-warning">
+                                <i class="bi bi-exclamation-triangle"></i>
+                                <strong>No products found.</strong> You need to create at least one product before you can create an advertisement.
+                                <br><br>
+                                <a href="<?= \App\View::url('/supplier/products') ?>" class="btn btn-primary">
+                                    <i class="bi bi-plus-circle"></i> Create Your First Product
+                                </a>
+                            </div>
+                        <?php else: ?>
+                            <div class="ad-product-select-wrapper">
+                                <select name="product_id" class="ad-form-select" id="productSelect" required>
+                                    <option value="">-- Choose a product --</option>
+                                    <?php foreach ($products as $product): ?>
+                                        <option value="<?= $product['id'] ?>" data-image="<?= \App\View::e($product['image_url'] ?? '') ?>">
+                                            <?= \App\View::e($product['name']) ?> - <?= \App\Money::format($product['price_cents'] ?? 0, $product['currency'] ?? 'GHS') ?>
+                                        </option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                        <?php endif; ?>
                     </div>
 
                     <!-- Title -->

@@ -37,16 +37,31 @@ class AdvertisementController extends Controller
             return;
         }
         
+        // Check if supplier is approved (required to create products and ads)
+        if (($supplier['kyc_status'] ?? NULL) !== 'approved') {
+            $this->setFlash('error', 'Your supplier account must be approved before you can create advertisements. Please complete your KYC application and wait for admin approval.');
+            $this->redirect('/supplier/dashboard');
+            return;
+        }
+        
         // No premium check needed - each ad requires separate payment
         $productModel = new Product();
         $products = $productModel->getBySupplier($supplier['id']);
+        
+        // Log for debugging
+        error_log("AdvertisementController::create - Supplier ID: {$supplier['id']}, Products found: " . count($products));
+        
+        // Check if supplier has products
+        if (empty($products)) {
+            $this->setFlash('warning', 'You need to create at least one product before you can create an advertisement. <a href="' . \App\View::url('/supplier/products') . '">Create a product</a>');
+        }
         
         $adModel = new Advertisement();
         $existingAds = $adModel->getBySupplier($supplier['id']);
         
         echo $this->view->render('Supplier/advertisement-create', [
             'supplier' => $supplier,
-            'products' => $products,
+            'products' => $products ?? [],
             'existingAds' => $existingAds,
             'flash' => $this->getFlash()
         ]);
@@ -248,7 +263,13 @@ class AdvertisementController extends Controller
         $reference = 'AD-' . $supplier['id'] . '-' . time();
         
         $config = require __DIR__ . '/../settings/config.php';
-        $appUrl = rtrim($config['app_url'] ?? 'http://localhost/build_mate', '/');
+        // Use View::url() to get the correct base URL dynamically
+        $baseUrl = \App\View::basePath();
+        $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
+        $host = $_SERVER['HTTP_HOST'] ?? 'localhost';
+        $appUrl = $protocol . '://' . $host . rtrim($baseUrl, '/');
+        
+        error_log("AdvertisementController::initializePayment - Callback URL: " . $appUrl . '/supplier/advertisements/payment/callback');
         
         // Prepare payment data for Paystack
         $paymentData = [
@@ -289,39 +310,75 @@ class AdvertisementController extends Controller
     {
         $reference = $_GET['reference'] ?? '';
         
-        if (empty($reference) || !str_starts_with($reference, 'AD-')) {
-            $this->setFlash('error', 'Invalid payment reference');
+        error_log("AdvertisementController::paymentCallback - Reference: " . $reference);
+        error_log("AdvertisementController::paymentCallback - GET params: " . print_r($_GET, true));
+        
+        if (empty($reference)) {
+            error_log("AdvertisementController::paymentCallback - No reference provided");
+            $this->setFlash('error', 'Invalid payment reference. No reference provided.');
             $this->redirect('/supplier/advertisements/create');
             return;
+        }
+        
+        // Check if reference starts with AD- (advertisement) or handle other formats
+        if (!str_starts_with($reference, 'AD-')) {
+            error_log("AdvertisementController::paymentCallback - Reference doesn't start with AD-: " . $reference);
+            // Try to extract from query string if it's in a different format
+            if (isset($_GET['ref'])) {
+                $reference = $_GET['ref'];
+            } else {
+                $this->setFlash('error', 'Invalid payment reference format.');
+                $this->redirect('/supplier/advertisements/create');
+                return;
+            }
         }
         
         $paystackService = new PaystackService();
         
         try {
+            error_log("AdvertisementController::paymentCallback - Verifying transaction: " . $reference);
             $verification = $paystackService->verifyTransaction($reference);
             
-            if ($verification['status'] && $verification['data']['status'] === 'success') {
-                // Extract supplier ID from reference
+            error_log("AdvertisementController::paymentCallback - Verification response: " . json_encode($verification));
+            
+            if ($verification['status'] && isset($verification['data']) && $verification['data']['status'] === 'success') {
+                // Extract supplier ID from reference (format: AD-{supplierId}-{timestamp})
                 $parts = explode('-', $reference);
                 $supplierId = (int)($parts[1] ?? 0);
                 
+                error_log("AdvertisementController::paymentCallback - Extracted supplier ID: " . $supplierId);
+                
                 if ($supplierId > 0) {
-                    // Store payment reference in session or pass it to the form
+                    // Store payment reference in session
                     $_SESSION['ad_payment_reference'] = $reference;
                     $_SESSION['ad_payment_verified'] = true;
+                    $_SESSION['ad_payment_amount'] = $verification['data']['amount'] ?? 25000;
+                    $_SESSION['ad_payment_timestamp'] = time();
                     
+                    error_log("AdvertisementController::paymentCallback - Payment verified successfully for supplier: " . $supplierId);
                     $this->setFlash('success', 'Payment successful! You can now create your advertisement.');
                     $this->redirect('/supplier/advertisements/create?payment=success&ref=' . urlencode($reference));
                     return;
+                } else {
+                    error_log("AdvertisementController::paymentCallback - Invalid supplier ID extracted from reference");
+                    $this->setFlash('error', 'Invalid payment reference. Could not extract supplier information.');
+                    $this->redirect('/supplier/advertisements/create');
+                    return;
                 }
+            } else {
+                // Log the actual verification response for debugging
+                $verificationStatus = $verification['status'] ?? 'unknown';
+                $dataStatus = $verification['data']['status'] ?? 'unknown';
+                error_log("AdvertisementController::paymentCallback - Verification failed. Status: {$verificationStatus}, Data status: {$dataStatus}");
+                error_log("AdvertisementController::paymentCallback - Full response: " . json_encode($verification));
+                
+                $this->setFlash('error', 'Payment verification failed. Status: ' . ($dataStatus !== 'unknown' ? $dataStatus : 'verification failed') . '. Please try again or contact support.');
+                $this->redirect('/supplier/advertisements/create');
             }
-            
-            // If verification failed or status is not success
-            $this->setFlash('error', 'Payment verification failed. Please try again or contact support.');
-            $this->redirect('/supplier/advertisements/create');
         } catch (\Exception $e) {
-            error_log("Advertisement payment callback error: " . $e->getMessage());
-            $this->setFlash('error', 'An error occurred during payment verification. Please contact support.');
+            error_log("AdvertisementController::paymentCallback - Exception: " . $e->getMessage());
+            error_log("AdvertisementController::paymentCallback - Stack trace: " . $e->getTraceAsString());
+            $this->setFlash('error', 'Payment verification error: ' . $e->getMessage() . '. Please contact support.');
             $this->redirect('/supplier/advertisements/create');
         }
     }

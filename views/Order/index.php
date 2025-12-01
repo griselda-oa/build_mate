@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="<?= \App\View::asset('assets/css/buyer-orders.css">
+<link rel="stylesheet" href="<?= \App\View::asset('assets/css/buyer-orders.css') ?>">
 
 <div class="buyer-orders-page">
     <div class="buyer-orders-container">
@@ -146,12 +146,12 @@
                                 </td>
                                 <td data-label="Actions">
                                     <div class="buyer-order-actions">
-                                        <a href="<?= \App\View::url('/orders/<?= $order['id'] ?>') ?>" 
+                                        <a href="<?= \App\View::url('/orders/' . $order['id']) ?>" 
                                            class="buyer-action-btn view">
                                             <i class="bi bi-eye"></i> View
                                         </a>
                                         <?php if ($isPaid): ?>
-                                            <a href="<?= \App\View::url('/orders/<?= $order['id'] ?>/track-delivery') ?>" 
+                                            <a href="<?= \App\View::url('/orders/' . $order['id'] . '/track-delivery') ?>" 
                                                class="buyer-action-btn track">
                                                 <i class="bi bi-truck"></i> Track Delivery
                                             </a>

@@ -132,7 +132,7 @@
                 <div class="product-card-modern">
                     <div class="product-image-wrapper">
                         <?php if (!empty($product['image_url'])): ?>
-                            <img src="<?= \App\View::e($product['image_url']) ?>" 
+                            <img src="<?= \App\View::image($product['image_url']) ?>" 
                                  alt="<?= \App\View::e($product['name']) ?>" 
                                  class="product-image-modern"
                                  loading="lazy">

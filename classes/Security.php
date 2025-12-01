@@ -19,6 +19,24 @@ class Security
         try {
             $db = DB::getInstance();
             
+            // Check if audit_logs table exists
+            $tableCheck = $db->query("SHOW TABLES LIKE 'audit_logs'");
+            if ($tableCheck->rowCount() === 0) {
+                error_log("Security::log() - audit_logs table does not exist");
+                return;
+            }
+            
+            // If user_id is provided, verify it exists in users table
+            if ($userId !== null) {
+                $userCheck = $db->prepare("SELECT id FROM users WHERE id = ? LIMIT 1");
+                $userCheck->execute([$userId]);
+                if ($userCheck->rowCount() === 0) {
+                    // User doesn't exist, set to NULL to avoid foreign key constraint violation
+                    error_log("Security::log() - User ID {$userId} does not exist, setting to NULL");
+                    $userId = null;
+                }
+            }
+            
             $stmt = $db->prepare("
                 INSERT INTO audit_logs (user_id, action, ip, ua, meta, created_at)
                 VALUES (?, ?, ?, ?, ?, NOW())
@@ -32,10 +50,11 @@ class Security
                 json_encode($meta)
             ]);
         } catch (\PDOException $e) {
-            // Log to error log if audit_logs table doesn't exist
-            // This prevents the application from crashing if the table is missing
+            // Log the error but don't break the application
             error_log("Security::log() failed: " . $e->getMessage());
-            // Silently fail - don't break the application if audit logging fails
+        } catch (\Exception $e) {
+            // Log any other errors
+            error_log("Security::log() error: " . $e->getMessage());
         }
     }
     
@@ -51,41 +70,6 @@ class Security
      * Sanitize filename
      */
     public static function sanitizeFilename(string $filename): string
-    {
-        $filename = preg_replace('/[^a-zA-Z0-9._-]/', '_', $filename);
-        return substr($filename, 0, 255);
-    }
-}
-
-
-    {
-        $filename = preg_replace('/[^a-zA-Z0-9._-]/', '_', $filename);
-        return substr($filename, 0, 255);
-    }
-}
-
-
-    {
-        $filename = preg_replace('/[^a-zA-Z0-9._-]/', '_', $filename);
-        return substr($filename, 0, 255);
-    }
-}
-
-
-    {
-        $filename = preg_replace('/[^a-zA-Z0-9._-]/', '_', $filename);
-        return substr($filename, 0, 255);
-    }
-}
-
-
-    {
-        $filename = preg_replace('/[^a-zA-Z0-9._-]/', '_', $filename);
-        return substr($filename, 0, 255);
-    }
-}
-
-
     {
         $filename = preg_replace('/[^a-zA-Z0-9._-]/', '_', $filename);
         return substr($filename, 0, 255);

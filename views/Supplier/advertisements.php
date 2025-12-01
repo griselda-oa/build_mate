@@ -1,5 +1,5 @@
 <!-- My Advertisements Page -->
-<link rel="stylesheet" href="<?= \App\View::asset('assets/css/supplier-dashboard.css">
+<link rel="stylesheet" href="<?= \App\View::asset('assets/css/supplier-dashboard.css') ?>">
 
 <div class="supplier-dashboard-page">
     <div class="container">
@@ -54,7 +54,7 @@
                                             <?= \App\View::e($ad['title'] ?? $ad['product_name'] ?? 'Untitled Ad') ?>
                                         </div>
                                         <div style="color: #6B7280; font-size: 0.875rem; margin-bottom: 0.5rem;">
-                                            Product: <a href="<?= \App\View::url('/product/<?= \App\View::e($ad['product_slug'] ?? '') ?>') ?>" style="color: #667eea; text-decoration: none;"><?= \App\View::e($ad['product_name'] ?? 'N/A') ?></a>
+                                            Product: <a href="<?= \App\View::url('/product/' . \App\View::e($ad['product_slug'] ?? '')) ?>" style="color: #667eea; text-decoration: none;"><?= \App\View::e($ad['product_name'] ?? 'N/A') ?></a>
                                         </div>
                                         <div class="item-date-modern">
                                             <i class="bi bi-calendar"></i>

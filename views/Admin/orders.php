@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="<?= \App\View::asset('assets/css/admin-orders.css">
+<link rel="stylesheet" href="<?= \App\View::asset('assets/css/admin-orders.css') ?>">
 
 <div class="admin-orders-page">
     <div class="container">
@@ -64,7 +64,7 @@
                                     ?>
                                 </td>
                                 <td>
-                                    <a href="<?= \App\View::url('/admin/orders/<?= $order['id'] ?>') ?>" class="btn-view-update" onclick="event.stopPropagation(); return true;">
+                                    <a href="<?= \App\View::url('/admin/orders/' . $order['id']) ?>" class="btn-view-update" onclick="event.stopPropagation(); return true;">
                                         <i class="bi bi-eye"></i> View & Update
                                     </a>
                                 </td>

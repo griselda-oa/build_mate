@@ -18,13 +18,12 @@ abstract class Controller
     
     /**
      * Redirect to URL
-     * Automatically handles base path for relative URLs
      */
     protected function redirect(string $url, int $code = 302): void
     {
         // If URL is relative (starts with / but not //), prepend base path
         if (strpos($url, '/') === 0 && strpos($url, '//') !== 0) {
-            $url = View::url($url);
+            $url = \App\View::url($url);
         }
         header("Location: {$url}", true, $code);
         exit;
@@ -112,66 +111,11 @@ abstract class Controller
      */
     protected function redirectBack(): void
     {
-        $referer = $_SERVER['HTTP_REFERER'] ?? View::url('/');
-        // If referer is from same domain, use it as-is, otherwise redirect to home
-        if (!empty($referer) && strpos($referer, $_SERVER['HTTP_HOST'] ?? '') !== false) {
-            $this->redirect($referer);
-        } else {
-            $this->redirect('/');
-        }
+        $referer = $_SERVER['HTTP_REFERER'] ?? \App\View::url('/');
+        $this->redirect($referer);
     }
     
     /**
-     * Check if request is AJAX
-     */
-    protected function isAjax(): bool
-    {
-        return !empty($_SERVER['HTTP_X_REQUESTED_WITH']) && 
-               strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest';
-    }
-}
-
-
-     * Check if request is AJAX
-     */
-    protected function isAjax(): bool
-    {
-        return !empty($_SERVER['HTTP_X_REQUESTED_WITH']) && 
-               strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest';
-    }
-}
-
-
-     * Check if request is AJAX
-     */
-    protected function isAjax(): bool
-    {
-        return !empty($_SERVER['HTTP_X_REQUESTED_WITH']) && 
-               strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest';
-    }
-}
-
-
-     * Check if request is AJAX
-     */
-    protected function isAjax(): bool
-    {
-        return !empty($_SERVER['HTTP_X_REQUESTED_WITH']) && 
-               strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest';
-    }
-}
-
-
-     * Check if request is AJAX
-     */
-    protected function isAjax(): bool
-    {
-        return !empty($_SERVER['HTTP_X_REQUESTED_WITH']) && 
-               strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest';
-    }
-}
-
-
      * Check if request is AJAX
      */
     protected function isAjax(): bool

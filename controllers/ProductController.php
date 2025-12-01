@@ -278,6 +278,10 @@ class ProductController extends Controller
         $sentimentScore = 0.500;
         
         try {
+            // Ensure OpenAIService is loaded
+            if (!class_exists('\App\OpenAIService')) {
+                require_once __DIR__ . '/../classes/OpenAIService.php';
+            }
             $openAIService = new \App\OpenAIService();
             $sentimentResult = $openAIService->analyzeSentiment($reviewText, $rating);
             $sentimentLabel = $sentimentResult['label'];
@@ -485,34 +489,3 @@ class ProductController extends Controller
         ]);
     }
 }
-
-
-            'flash' => $this->getFlash()
-        ]);
-    }
-}
-
-
-            'flash' => $this->getFlash()
-        ]);
-    }
-}
-
-
-            'flash' => $this->getFlash()
-        ]);
-    }
-}
-
-
-            'flash' => $this->getFlash()
-        ]);
-    }
-}
-
-
-            'flash' => $this->getFlash()
-        ]);
-    }
-}
-

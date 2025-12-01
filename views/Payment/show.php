@@ -168,7 +168,7 @@
 <?php endif; ?>
 
 <!-- Payment Styles -->
-<link rel="stylesheet" href="<?= \App\View::asset('assets/css/payment-modern.css?v=<?= time() ?>">
+<link rel="stylesheet" href="<?= \App\View::asset('assets/css/payment-modern.css?v=' . time()) ?>">
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {

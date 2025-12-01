@@ -35,7 +35,7 @@
                     <div class="card h-100 shadow-sm">
                         <div class="position-relative">
                             <?php if (!empty($item['image_url'])): ?>
-                                <img src="<?= \App\View::e($item['image_url']) ?>" 
+                                <img src="<?= \App\View::image($item['image_url']) ?>" 
                                      class="card-img-top" 
                                      alt="<?= \App\View::e($item['name']) ?>"
                                      style="height: 200px; object-fit: cover;"
@@ -53,7 +53,7 @@
                         </div>
                         <div class="card-body d-flex flex-column">
                             <h5 class="card-title">
-                                <a href="<?= \App\View::url('/product/<?= \App\View::e($item['slug']) ?>') ?>" class="text-decoration-none">
+                                <a href="<?= \App\View::url('/product/' . \App\View::e($item['slug'])) ?>" class="text-decoration-none">
                                     <?= \App\View::e($item['name']) ?>
                                 </a>
                             </h5>
@@ -75,7 +75,7 @@
                                     <?php endif; ?>
                                 </div>
                                 <div class="d-grid gap-2">
-                                    <a href="<?= \App\View::url('/product/<?= \App\View::e($item['slug']) ?>') ?>" class="btn btn-primary">
+                                    <a href="<?= \App\View::url('/product/' . \App\View::e($item['slug'])) ?>" class="btn btn-primary">
                                         <i class="bi bi-eye"></i> View Details
                                     </a>
                                     <?php if ($item['stock'] > 0): ?>

@@ -187,7 +187,7 @@
                                         <div class="sponsored-image-modern">
                                             <?php if (!empty($adImage)): ?>
                                                 <?php if ($isVideo): ?>
-                                                    <video src="<?= \App\View::e($adImage) ?>" 
+                                                    <video src="<?= \App\View::image($adImage) ?>" 
                                                            class="sponsored-media-modern" 
                                                            muted
                                                            loop
@@ -198,7 +198,7 @@
                                                            onerror="console.error('Video load error:', this.src)">
                                                     </video>
                                                 <?php else: ?>
-                                                    <img src="<?= \App\View::e($adImage) ?>" 
+                                                    <img src="<?= \App\View::image($adImage) ?>" 
                                                          class="sponsored-media-modern" 
                                                          alt="<?= \App\View::e($product['name']) ?>"
                                                          loading="lazy">
@@ -301,7 +301,7 @@
                                     <div class="product-image-sleek">
                                     <?php if (!empty($displayImage)): ?>
                                         <?php if ($isVideo): ?>
-                                            <video src="<?= \App\View::e($displayImage) ?>" 
+                                            <video src="<?= \App\View::image($displayImage) ?>" 
                                                    class="product-img" 
                                                    muted
                                                    loop
@@ -311,7 +311,7 @@
                                                    onerror="this.onerror=null; this.style.display='none'; this.nextElementSibling.style.display='flex';">
                                             </video>
                                         <?php else: ?>
-                                            <img src="<?= \App\View::e($displayImage) ?>" 
+                                            <img src="<?= \App\View::image($displayImage) ?>" 
                                                  class="product-img" 
                                                  alt="<?= \App\View::e($product['name']) ?>"
                                                  loading="lazy"

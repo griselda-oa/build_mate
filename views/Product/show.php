@@ -10,7 +10,7 @@
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="<?= \App\View::url('/') ?>">Home</a></li>
                     <li class="breadcrumb-item"><a href="<?= \App\View::url('/catalog') ?>">Catalog</a></li>
-                    <li class="breadcrumb-item"><a href="<?= \App\View::url('/catalog?cat=<?= $product['category_id'] ?>') ?>"><?= \App\View::e($product['category_name'] ?? '') ?></a></li>
+                    <li class="breadcrumb-item"><a href="<?= \App\View::url('/catalog?cat=' . $product['category_id']) ?>"><?= \App\View::e($product['category_name'] ?? '') ?></a></li>
                     <li class="breadcrumb-item active" aria-current="page"><?= \App\View::e($product['name']) ?></li>
                 </ol>
             </nav>
@@ -23,7 +23,7 @@
             <div class="product-image-gallery">
                 <div class="main-image-wrapper">
         <?php if (!empty($product['image_url'])): ?>
-                        <img src="<?= \App\View::e($product['image_url']) ?>" 
+                        <img src="<?= \App\View::image($product['image_url']) ?>" 
                              class="main-product-image" 
                              alt="<?= \App\View::e($product['name']) ?>"
                              id="mainProductImage"
@@ -430,14 +430,14 @@
         <button class="zoom-close-btn" onclick="closeImageZoom()">
             <i class="bi bi-x-lg"></i>
         </button>
-        <img src="<?= !empty($product['image_url']) ? \App\View::e($product['image_url']) : '' ?>" 
+        <img src="<?= !empty($product['image_url']) ? \App\View::image($product['image_url']) : '' ?>" 
              class="zoomed-image" 
              alt="<?= \App\View::e($product['name']) ?>">
     </div>
 </div>
 
 <!-- Include Product Detail Styles -->
-<link rel="stylesheet" href="<?= \App\View::asset('assets/css/product-detail.css">
+<link rel="stylesheet" href="<?= \App\View::asset('assets/css/product-detail.css') ?>">
 
 <script>
 // Quantity Controls

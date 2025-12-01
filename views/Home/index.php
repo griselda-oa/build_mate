@@ -175,7 +175,7 @@ if (file_exists($modernHomepage)) {
             <div class="col-6 col-md-4 col-lg-2">
                 <div class="product-card">
                     <?php if (!empty($product['image_url'])): ?>
-                        <img src="<?= \App\View::e($product['image_url']) ?>" class="product-image" alt="<?= \App\View::e($product['name']) ?>">
+                        <img src="<?= \App\View::image($product['image_url']) ?>" class="product-image" alt="<?= \App\View::e($product['name']) ?>">
                     <?php else: ?>
                         <div class="product-image-placeholder">
                             <i class="bi bi-image"></i>

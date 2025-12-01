@@ -90,7 +90,22 @@ class AuthController extends Controller
             // Redirect to role-specific dashboard
             switch ($user['role']) {
                 case 'supplier':
-                    $redirect = '/supplier/dashboard';
+                    // Check if supplier has filled KYC form
+                    $supplierModel = new \App\Supplier();
+                    $supplier = $supplierModel->findByUserId($user['id']);
+                    if (!$supplier || empty($supplier['business_registration']) || $supplier['kyc_status'] === NULL) {
+                        // No KYC submitted yet - redirect to KYC form
+                        $redirect = '/supplier/kyc';
+                    } elseif ($supplier['kyc_status'] === 'pending') {
+                        // KYC submitted but not approved - show pending page
+                        $redirect = '/supplier/pending';
+                    } elseif ($supplier['kyc_status'] === 'approved') {
+                        // Approved - go to dashboard
+                        $redirect = '/supplier/dashboard';
+                    } else {
+                        // Rejected or other status - go to KYC to resubmit
+                        $redirect = '/supplier/kyc';
+                    }
                     break;
                 case 'logistics':
                     $redirect = '/logistics/dashboard';
@@ -201,12 +216,13 @@ class AuthController extends Controller
         ]);
         
         // Create supplier record if role is supplier
+        // Don't set kyc_status to 'pending' yet - they need to fill the KYC form first
         if ($role === 'supplier') {
             $supplierModel = new \App\Supplier();
             $supplierModel->create([
                 'user_id' => $userId,
                 'business_name' => $name,
-                'kyc_status' => 'pending'
+                'kyc_status' => NULL  // No KYC submitted yet
             ]);
         }
         

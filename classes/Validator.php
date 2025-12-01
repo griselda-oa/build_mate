@@ -93,28 +93,69 @@ class Validator
             'pdf' => 'application/pdf'
         ];
         
+        // Normalize allowedTypes - convert extensions to MIME types if needed
+        $normalizedAllowedTypes = [];
+        foreach ($allowedTypes as $type) {
+            $type = strtolower(trim($type));
+            // If it's an extension, convert to MIME type
+            if (isset($extensionToMime[$type])) {
+                $normalizedAllowedTypes[] = $extensionToMime[$type];
+            } else {
+                // Assume it's already a MIME type
+                $normalizedAllowedTypes[] = $type;
+            }
+        }
+        $normalizedAllowedTypes = array_unique($normalizedAllowedTypes);
+        
         // Check if extension is valid
         $expectedMime = $extensionToMime[$ext] ?? null;
         
-        // Validate: Check if MIME type is in allowed list AND matches expected MIME for extension
-        $isValidMime = false;
-        if ($mimeType && in_array($mimeType, $allowedTypes)) {
-            // If we have expected MIME, verify it matches
-            if ($expectedMime) {
-                // Accept both 'image/jpeg' and 'image/jpg' for jpg/jpeg files
+        // Validate: Check both extension and MIME type
+        $isValid = false;
+        
+        // First, check if extension is allowed
+        if ($expectedMime && in_array($expectedMime, $normalizedAllowedTypes)) {
+            // Extension maps to an allowed MIME type
+            if ($mimeType) {
+                // If we have a detected MIME type, verify it matches the expected MIME
+                // Be flexible with jpg/jpeg variations
                 if ($mimeType === $expectedMime || 
                     ($ext === 'jpg' && $mimeType === 'image/jpeg') ||
                     ($ext === 'jpeg' && $mimeType === 'image/jpeg')) {
-                    $isValidMime = true;
+                    $isValid = true;
+                } else {
+                    // MIME type doesn't match extension - this could be a security issue
+                    // (e.g., Word doc renamed to .pdf)
+                    // Only accept if the detected MIME is also in the allowed list
+                    // AND we're confident it's safe (same category)
+                    $mimeCategory = explode('/', $mimeType)[0] ?? '';
+                    $expectedCategory = explode('/', $expectedMime)[0] ?? '';
+                    if (in_array($mimeType, $normalizedAllowedTypes) && $mimeCategory === $expectedCategory) {
+                        $isValid = true;
+                    }
                 }
             } else {
-                // No expected MIME mapping, just check if it's in allowed types
-                $isValidMime = true;
+                // No MIME type detected, but extension is valid - accept it
+                $isValid = true;
             }
+        } else if ($mimeType && in_array($mimeType, $normalizedAllowedTypes)) {
+            // Extension not in allowed list, but MIME type is
+            // This is less secure, but accept it if MIME type is clearly valid
+            $isValid = true;
         }
         
-        if (!$isValidMime) {
-            $errors[] = 'Invalid file type. Allowed: ' . implode(', ', $allowedTypes) . 
+        if (!$isValid) {
+            // Build user-friendly allowed list
+            $allowedExtensions = [];
+            foreach ($normalizedAllowedTypes as $mime) {
+                $ext = array_search($mime, $extensionToMime);
+                if ($ext) {
+                    $allowedExtensions[] = $ext;
+                }
+            }
+            $allowedList = implode(', ', array_unique($allowedExtensions));
+            
+            $errors[] = 'Invalid file type. Allowed: ' . $allowedList . 
                        ($mimeType ? " (Detected: {$mimeType})" : '') . 
                        ($ext ? " (Extension: .{$ext})" : '');
         }

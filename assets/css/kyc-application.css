@@ -31,19 +31,19 @@
 
 .kyc-application-form {
     min-height: 100vh;
-    background: linear-gradient(to bottom, #fafbfc, #ffffff);
+    background: linear-gradient(135deg, #FFFBF0 0%, #FFFFFF 50%, #F9FAFB 100%);
     padding-bottom: 60px;
 }
 
 /* Form Header */
 .form-header {
-    background: white;
-    border-bottom: 1px solid var(--gray-200);
+    background: linear-gradient(135deg, #FFFFFF 0%, #FFFBF0 100%);
+    border-bottom: 2px solid var(--primary-light);
     padding: 20px 0;
     position: sticky;
     top: 0;
     z-index: 100;
-    box-shadow: var(--shadow-sm);
+    box-shadow: var(--shadow-md);
 }
 
 .header-content {
@@ -58,11 +58,19 @@
 .logo-link {
     font-size: 20px;
     font-weight: 700;
-    color: var(--primary);
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     text-decoration: none;
     display: flex;
     align-items: center;
     gap: 8px;
+    transition: transform 0.3s ease;
+}
+
+.logo-link:hover {
+    transform: scale(1.05);
 }
 
 .logo-link i {
@@ -95,9 +103,10 @@
 }
 
 .progress-dots .dot.active {
-    background: var(--primary);
+    background: var(--primary-gradient);
     width: 24px;
     border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(184, 134, 11, 0.4);
 }
 
 .progress-dots .dot.completed {
@@ -120,10 +129,11 @@
 
 /* Form Main */
 .form-main {
-    background: white;
-    border-radius: 20px;
+    background: var(--bg-primary);
+    border-radius: var(--radius-lg);
     padding: 48px;
-    box-shadow: var(--shadow-md);
+    box-shadow: var(--shadow-lg);
+    border: 1px solid rgba(184, 134, 11, 0.1);
 }
 
 .multi-step-form {
@@ -191,7 +201,10 @@
 
 .step-title i {
     font-size: 36px;
-    color: var(--primary);
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .step-description {
@@ -243,8 +256,9 @@
 .form-textarea:focus {
     outline: none;
     border-color: var(--primary);
-    box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+    box-shadow: 0 0 0 4px rgba(184, 134, 11, 0.15), 0 4px 12px rgba(184, 134, 11, 0.1);
     transform: translateY(-2px);
+    background: var(--bg-accent);
 }
 
 .form-input.error,
@@ -352,15 +366,17 @@
 
 .upload-area:hover {
     border-color: var(--primary);
-    background: var(--gray-100);
+    background: var(--bg-accent);
     transform: scale(1.01);
+    box-shadow: var(--shadow-md);
 }
 
 .upload-area.drag-over {
     border-color: var(--primary);
     border-style: solid;
-    background: rgba(102, 126, 234, 0.05);
+    background: var(--bg-accent);
     transform: scale(1.02);
+    box-shadow: var(--shadow-lg);
 }
 
 .file-input {
@@ -372,6 +388,7 @@
     opacity: 0;
     cursor: pointer;
     z-index: 1;
+    pointer-events: auto;
 }
 
 .upload-content {
@@ -509,13 +526,16 @@
 
 .btn-primary {
     background: var(--primary-gradient);
-    color: white;
-    box-shadow: var(--shadow-md);
+    color: var(--text-white);
+    box-shadow: var(--shadow-primary);
+    font-weight: 700;
+    letter-spacing: 0.5px;
 }
 
 .btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-lg);
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-xl);
+    background: var(--primary-gradient-light);
 }
 
 .btn-primary:active {
@@ -529,14 +549,18 @@
 }
 
 .btn-secondary {
-    background: white;
+    background: var(--bg-primary);
     color: var(--text-primary);
     border: 2px solid var(--gray-300);
+    font-weight: 600;
 }
 
 .btn-secondary:hover {
     border-color: var(--primary);
     color: var(--primary);
+    background: var(--bg-accent);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
 }
 
 .btn-submit {
@@ -635,7 +659,8 @@
 
 .checkbox-group:has(.form-checkbox:checked) {
     border-color: var(--primary);
-    background: rgba(102, 126, 234, 0.05);
+    background: var(--bg-accent);
+    box-shadow: var(--shadow-sm);
 }
 
 .form-checkbox {
@@ -796,13 +821,14 @@
 
 /* Info Box */
 .info-box {
-    background: rgba(102, 126, 234, 0.05);
-    border: 1px solid rgba(102, 126, 234, 0.2);
+    background: var(--bg-accent);
+    border: 2px solid var(--primary-light);
     border-radius: var(--radius);
     padding: 16px;
     display: flex;
     align-items: flex-start;
     gap: 12px;
+    box-shadow: var(--shadow-sm);
 }
 
 .info-box i {
@@ -879,4 +905,126 @@
         justify-content: center;
     }
 }
+
+
+
+    .btn-secondary {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+
+
+    .btn-secondary {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+
+
+    .btn-secondary {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+
+
+    .btn-secondary {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+
+
+    .btn-secondary {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+
+
+    .btn-secondary {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+
+
+    .btn-secondary {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+
+
+    .btn-primary,
+    .btn-secondary {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+
+
+    .btn-secondary {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+
+
+    .btn-secondary {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+
+
+    .btn-secondary {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+
+
+    .btn-secondary {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+
+
+    .btn-secondary {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+
+
+    .btn-secondary {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+
+
+    .btn-secondary {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
 

@@ -99,8 +99,13 @@ class PaymentController extends Controller
         $userModel = new \App\User();
         $buyer = $userModel->find($user['id']);
         
-        $config = require __DIR__ . '/../settings/config.php';
-        $appUrl = rtrim($config['app_url'] ?? 'http://localhost/build_mate', '/');
+        // Use View::url() to get the correct base URL dynamically
+        $baseUrl = \App\View::basePath();
+        $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
+        $host = $_SERVER['HTTP_HOST'] ?? 'localhost';
+        $appUrl = $protocol . '://' . $host . rtrim($baseUrl, '/');
+        
+        error_log("PaymentController::initialize - Callback URL: " . $appUrl . '/payment/callback');
         
         // Prepare payment data
         $paymentData = [
@@ -496,8 +501,8 @@ class PaymentController extends Controller
             
             // Redirect to order detail page (which includes tracking)
             error_log("Redirecting to order detail page: /orders/{$orderId}. Final cart check: " . (empty($_SESSION['cart']) ? 'EMPTY ✓' : 'NOT EMPTY ✗'));
-            header("Location: /orders/{$orderId}", true, 302);
-            exit;
+            $this->redirect('/orders/' . $orderId);
+            return;
         } catch (\Exception $e) {
             $db->rollBack();
             error_log("Payment processing error: " . $e->getMessage());

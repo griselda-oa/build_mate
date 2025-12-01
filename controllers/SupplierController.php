@@ -40,8 +40,31 @@ class SupplierController extends Controller
      */
     public function pending(): void
     {
+        $user = $this->user();
+        $supplierModel = new Supplier();
+        $supplier = $supplierModel->findByUserId($user['id']);
+        
+        if (!$supplier) {
+            $this->setFlash('error', 'Supplier profile not found');
+            $this->redirect('/supplier/kyc');
+            return;
+        }
+        
+        // Only show pending page if KYC form was actually submitted
+        if ($supplier['kyc_status'] !== 'pending') {
+            if (empty($supplier['business_registration']) || $supplier['kyc_status'] === NULL) {
+                $this->setFlash('info', 'Please complete your supplier application form first.');
+                $this->redirect('/supplier/kyc');
+            } else {
+                // If rejected or other status, redirect appropriately
+                $this->redirect('/supplier/kyc');
+            }
+            return;
+        }
+        
         echo $this->view->render('Supplier/pending', [
-            'title' => 'Application Pending Review'
+            'title' => 'Application Pending Review',
+            'supplier' => $supplier
         ]);
     }
     
@@ -56,8 +79,35 @@ class SupplierController extends Controller
         
         if (!$supplier) {
             $this->setFlash('error', 'Supplier profile not found');
-            // Redirect to KYC/setup page instead of redirecting to the same dashboard page
             $this->redirect('/supplier/kyc');
+            return;
+        }
+        
+        // Check if KYC form is filled
+        if (empty($supplier['business_registration']) || $supplier['kyc_status'] === NULL) {
+            $this->setFlash('info', 'Please complete your supplier application form first.');
+            $this->redirect('/supplier/kyc');
+            return;
+        }
+        
+        // Check if KYC is pending approval
+        if ($supplier['kyc_status'] === 'pending') {
+            $this->redirect('/supplier/pending');
+            return;
+        }
+        
+        // Check if KYC is rejected
+        if ($supplier['kyc_status'] === 'rejected') {
+            $this->setFlash('warning', 'Your application was rejected. Please update your information and resubmit.');
+            $this->redirect('/supplier/kyc');
+            return;
+        }
+        
+        // Only allow access if approved
+        if ($supplier['kyc_status'] !== 'approved') {
+            $this->setFlash('error', 'Your supplier account is not approved yet.');
+            $this->redirect('/supplier/pending');
+            return;
         }
         
         $products = $supplierModel->getRecentProducts($supplier['id'], 5);
@@ -70,11 +120,18 @@ class SupplierController extends Controller
         $sentimentScore = (float)($supplier['sentiment_score'] ?? 1.0);
         $performanceWarnings = (int)($supplier['performance_warnings'] ?? 0);
         
-        // Get active advertisements for banner
+        // Get only this supplier's advertisements (not all active ads)
         $advertisements = [];
         try {
             $adModel = new \App\Advertisement();
-            $advertisements = $adModel->getActive();
+            $advertisements = $adModel->getBySupplier($supplier['id']);
+            // Only show active ads
+            $advertisements = array_filter($advertisements, function($ad) {
+                $now = date('Y-m-d H:i:s');
+                return $ad['status'] === 'active' 
+                    && $ad['start_date'] <= $now 
+                    && ($ad['end_date'] === null || $ad['end_date'] >= $now);
+            });
             $advertisements = array_slice($advertisements, 0, 5);
         } catch (\Exception $e) {
             error_log("Error fetching advertisements: " . $e->getMessage());
@@ -113,13 +170,19 @@ class SupplierController extends Controller
      */
     public function submitKyc(): void
     {
+        $isAjax = $this->isAjax();
         $user = $this->user();
         $supplierModel = new Supplier();
         $supplier = $supplierModel->findByUserId($user['id']);
         
         if (!$supplier) {
+            if ($isAjax) {
+                $this->json(['success' => false, 'error' => 'Supplier profile not found']);
+                return;
+            }
             $this->setFlash('error', 'Supplier profile not found');
             $this->redirect('/supplier/kyc');
+            return;
         }
         
         $config = require __DIR__ . '/../settings/config.php';
@@ -142,6 +205,10 @@ class SupplierController extends Controller
         }
         
         if (empty($filesToUpload)) {
+            if ($isAjax) {
+                $this->json(['success' => false, 'error' => 'Please upload at least one document']);
+                return;
+            }
             $this->setFlash('error', 'Please upload at least one document');
             $this->redirect('/supplier/kyc');
             return;
@@ -156,11 +223,21 @@ class SupplierController extends Controller
                 $errorMessage = count($uniqueErrors) === 1 
                     ? $uniqueErrors[0] 
                     : implode('. ', $uniqueErrors);
+                if ($isAjax) {
+                    $this->json(['success' => false, 'error' => $errorMessage]);
+                    return;
+                }
                 $this->setFlash('error', $errorMessage);
                 $this->redirect('/supplier/kyc');
                 return;
             }
         } catch (\Exception $e) {
+            error_log('KYC submission error: ' . $e->getMessage());
+            error_log('Stack trace: ' . $e->getTraceAsString());
+            if ($isAjax) {
+                $this->json(['success' => false, 'error' => 'Upload error: ' . $e->getMessage()]);
+                return;
+            }
             $this->setFlash('error', 'Upload error: ' . $e->getMessage());
             $this->redirect('/supplier/kyc');
             return;
@@ -168,6 +245,10 @@ class SupplierController extends Controller
         
         // Only proceed if we have successfully uploaded files
         if (empty($uploadResult['results'])) {
+            if ($isAjax) {
+                $this->json(['success' => false, 'error' => 'No files were successfully uploaded. Please try again.']);
+                return;
+            }
             $this->setFlash('error', 'No files were successfully uploaded. Please try again.');
             $this->redirect('/supplier/kyc');
             return;
@@ -183,25 +264,92 @@ class SupplierController extends Controller
             ];
         }
         
-        // Update supplier info
-        $updateData = [
-            'business_name' => Validator::sanitize($_POST['business_name'] ?? $supplier['business_name']),
-            'business_registration' => Validator::sanitize($_POST['reg_number'] ?? ''),
-            'address' => Validator::sanitize($_POST['address'] ?? ''),
-            'kyc_status' => 'pending'
-        ];
+        // Validate required fields
+        $businessName = Validator::sanitize($_POST['business_name'] ?? '');
+        $businessRegistration = Validator::sanitize($_POST['reg_number'] ?? '');
+        $address = Validator::sanitize($_POST['address'] ?? '');
+        $city = Validator::sanitize($_POST['city'] ?? '');
+        $region = Validator::sanitize($_POST['region'] ?? '');
         
-        $supplierModel->update($supplier['id'], $updateData);
-        
-        // Save documents using model
-        if (!empty($documents)) {
-            $kycDocumentModel = new KycDocument();
-            $kycDocumentModel->createMultiple($supplier['id'], $documents);
+        $errors = [];
+        if (empty($businessName) || strlen($businessName) < 2) {
+            $errors[] = 'Business name is required and must be at least 2 characters';
+        }
+        if (empty($businessRegistration)) {
+            $errors[] = 'Company registration number is required';
+        }
+        if (empty($address) || strlen($address) < 10) {
+            $errors[] = 'Business address is required and must be at least 10 characters';
+        }
+        if (empty($city) || strlen($city) < 2) {
+            $errors[] = 'City is required';
+        }
+        if (empty($region)) {
+            $errors[] = 'Region is required';
         }
         
-        Security::log('kyc_submitted', $user['id'], ['supplier_id' => $supplier['id']]);
-        $this->setFlash('success', 'Application submitted successfully! Your supplier profile is under review.');
-        $this->redirect('/supplier/pending');
+        if (!empty($errors)) {
+            if ($isAjax) {
+                $this->json(['success' => false, 'error' => implode('. ', $errors)]);
+                return;
+            }
+            $this->setFlash('error', implode('. ', $errors));
+            $this->redirect('/supplier/kyc');
+            return;
+        }
+        
+        try {
+            // Update supplier info - only set to pending if all required fields are filled
+            $updateData = [
+                'business_name' => $businessName,
+                'business_registration' => $businessRegistration,
+                'address' => $address,
+                'kyc_status' => 'pending'  // Only set to pending after form is submitted
+            ];
+            
+            // Add city and region if columns exist (check first to avoid errors)
+            try {
+                $db = \App\DB::getInstance();
+                $stmt = $db->query("SHOW COLUMNS FROM suppliers LIKE 'city'");
+                if ($stmt->rowCount() > 0) {
+                    $updateData['city'] = $city;
+                }
+                $stmt = $db->query("SHOW COLUMNS FROM suppliers LIKE 'region'");
+                if ($stmt->rowCount() > 0) {
+                    $updateData['region'] = $region;
+                }
+            } catch (\Exception $e) {
+                // Columns don't exist, skip them
+                error_log('City/region columns not found in suppliers table: ' . $e->getMessage());
+            }
+            
+            $supplierModel->update($supplier['id'], $updateData);
+            
+            // Save documents using model
+            if (!empty($documents)) {
+                $kycDocumentModel = new KycDocument();
+                $kycDocumentModel->createMultiple($supplier['id'], $documents);
+            }
+            
+            Security::log('kyc_submitted', $user['id'], ['supplier_id' => $supplier['id']]);
+            
+            if ($isAjax) {
+                $this->json(['success' => true, 'message' => 'Application submitted successfully! Your supplier profile is under review.', 'redirect' => '/supplier/pending']);
+                return;
+            }
+            
+            $this->setFlash('success', 'Application submitted successfully! Your supplier profile is under review.');
+            $this->redirect('/supplier/pending');
+        } catch (\Exception $e) {
+            error_log('KYC submission database error: ' . $e->getMessage());
+            error_log('Stack trace: ' . $e->getTraceAsString());
+            if ($isAjax) {
+                $this->json(['success' => false, 'error' => 'Database error: ' . $e->getMessage()]);
+                return;
+            }
+            $this->setFlash('error', 'An error occurred while saving your application. Please try again.');
+            $this->redirect('/supplier/kyc');
+        }
     }
     
     /**
@@ -216,6 +364,22 @@ class SupplierController extends Controller
         if (!$supplier) {
             $this->setFlash('error', 'Supplier profile not found');
             $this->redirect('/supplier/kyc');
+            return;
+        }
+        
+        // Check if supplier is approved - only approved suppliers can manage products
+        if ($supplier['kyc_status'] !== 'approved') {
+            if (empty($supplier['business_registration']) || $supplier['kyc_status'] === NULL) {
+                $this->setFlash('error', 'Please complete your supplier application form first.');
+                $this->redirect('/supplier/kyc');
+            } elseif ($supplier['kyc_status'] === 'pending') {
+                $this->setFlash('error', 'Your supplier application is pending approval. You cannot manage products until you are approved.');
+                $this->redirect('/supplier/pending');
+            } else {
+                $this->setFlash('error', 'Your supplier account is not approved. Please contact support.');
+                $this->redirect('/supplier/dashboard');
+            }
+            return;
         }
         
         $productModel = new Product();
@@ -258,6 +422,22 @@ class SupplierController extends Controller
         if (!$supplier) {
             $this->setFlash('error', 'Supplier profile not found');
             $this->redirect('/supplier/kyc');
+            return;
+        }
+        
+        // Check if supplier is approved - only approved suppliers can upload products
+        if ($supplier['kyc_status'] !== 'approved') {
+            if (empty($supplier['business_registration']) || $supplier['kyc_status'] === NULL) {
+                $this->setFlash('error', 'Please complete your supplier application form first.');
+                $this->redirect('/supplier/kyc');
+            } elseif ($supplier['kyc_status'] === 'pending') {
+                $this->setFlash('error', 'Your supplier application is pending approval. You cannot upload products until you are approved.');
+                $this->redirect('/supplier/pending');
+            } else {
+                $this->setFlash('error', 'Your supplier account is not approved. Please contact support.');
+                $this->redirect('/supplier/dashboard');
+            }
+            return;
         }
         
         $name = Validator::sanitize($_POST['name'] ?? '', 255);

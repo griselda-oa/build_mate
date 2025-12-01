@@ -1,5 +1,5 @@
-<link rel="stylesheet" href="<?= \App\View::asset('assets/css/admin-dashboard.css">
-<link rel="stylesheet" href="<?= \App\View::asset('assets/css/ad-banner.css">
+<link rel="stylesheet" href="<?= \App\View::asset('assets/css/admin-dashboard.css') ?>">
+<link rel="stylesheet" href="<?= \App\View::asset('assets/css/ad-banner.css') ?>">
 
 <div class="admin-dashboard-page">
     <div class="admin-dashboard-container">
@@ -112,7 +112,7 @@
                                         <span class="admin-order-date"><?= date('M d, Y', strtotime($order['created_at'])) ?></span>
                                     </td>
                                     <td data-label="Action">
-                                        <a href="<?= \App\View::url('/admin/orders/<?= $order['id'] ?>') ?>" 
+                                        <a href="<?= \App\View::url('/admin/orders/' . $order['id']) ?>" 
                                            class="admin-action-btn primary" 
                                            style="padding: 0.5rem 1rem; font-size: 0.875rem;">
                                             <i class="bi bi-eye"></i> View

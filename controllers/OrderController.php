@@ -178,8 +178,8 @@ class OrderController extends Controller
             
             // Redirect to payment page
             error_log("🔄 Redirecting to payment page: /payment/" . $orderId);
-            header("Location: /payment/" . $orderId, true, 302);
-            exit;
+            $this->redirect('/payment/' . $orderId);
+            return;
         } catch (\Exception $e) {
             error_log("❌ ERROR in processCheckout: " . $e->getMessage());
             error_log("File: " . $e->getFile() . " Line: " . $e->getLine());
@@ -191,8 +191,8 @@ class OrderController extends Controller
                 ob_end_clean();
             }
             
-            header("Location: /checkout", true, 302);
-            exit;
+            $this->redirect('/checkout');
+            return;
         }
     }
     
