@@ -110,7 +110,7 @@
                         </li>
                     <?php else: ?>
                         <li class="nav-item">
-                            <a class="nav-link" href="../Auth/login.php">Login</a>
+                            <a class="nav-link" href="../Auth/login.php">Login uddnfoanfa</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="../Auth/register.php">Register</a>
