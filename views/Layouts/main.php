@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= isset($title) ? \App\View::e($title) . ' - ' : '' ?>Build Mate   oooo Ghana</title>
+    <title><?= isset($title) ? \App\View::e($title) . ' - ' : '' ?>Build Mate Ghana</title>
     <!-- Lightweight CSS Framework (replaces Bootstrap ~150KB with ~15KB) -->
     <link rel="stylesheet" href="<?= \App\View::asset('assets/css/lightweight-framework.css') ?>">
     <link rel="stylesheet" href="<?= \App\View::asset('assets/css/icons.css') ?>">
@@ -28,7 +28,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
         <div class="container">
             <a class="navbar-brand" href="../../index.php">
-                <i class="icon-hammer"></i> Build kvluv Mate Ghana
+                <i class="icon-hammer"></i> Build Mate Ghana
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -110,10 +110,10 @@
                         </li>
                     <?php else: ?>
                         <li class="nav-item">
-                            <a class="nav-link" href="../Auth/login.php">Login uddnfoanfa</a>
+                            <a class="nav-link" href="views/Auth/login.php">Login </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="../Auth/register.php">Register</a>
+                            <a class="nav-link" href="views/Auth/register.php">Register</a>
                         </li>
                     <?php endif; ?>
                 </ul>
