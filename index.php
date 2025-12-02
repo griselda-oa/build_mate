@@ -69,7 +69,7 @@ set_exception_handler(function ($exception) {
             </style>
         </head>
         <body>
-            <h1>Hello World</h1>
+         
             <div class="error-box">
                 <div class="icon">🔌</div>
                 <h1>Database Connection Failed</h1>
