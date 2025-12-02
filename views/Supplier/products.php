@@ -62,7 +62,7 @@
                     </td>
                     <td>
                         <button class="btn btn-sm btn-primary" onclick="editProduct(<?= htmlspecialchars(json_encode($product)) ?>)">Edit</button>
-                        <form method="POST" action="/build_mate/supplier/products/<?= $product['id'] ?>/delete/" class="d-inline">
+                        <form method="POST" action="<?= \App\View::url('supplier/products/' . $product['id'] . '/delete') ?>" class="d-inline">
                             <?= \App\Csrf::field() ?>
                             <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
                         </form>
@@ -81,7 +81,7 @@
                 <h5 class="modal-title">Add Product</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
-            <form method="POST" action="/build_mate/supplier/products/" id="productForm" enctype="multipart/form-data">
+            <form method="POST" action="<?= \App\View::url('supplier/products') ?>" id="productForm" enctype="multipart/form-data">
                 <?= \App\Csrf::field() ?>
                 <div class="modal-body">
                     <div class="mb-3">
@@ -208,7 +208,7 @@ document.getElementById('image_url')?.addEventListener('input', function(e) {
 
 <script>
 function editProduct(product) {
-    document.getElementById('productForm').action = '/build_mate/supplier/products/' + product.id + '/update';
+    document.getElementById('productForm').action = buildUrl('supplier/products/' + product.id + '/update');
     document.getElementById('name').value = product.name;
     document.getElementById('category_id').value = product.category_id;
     document.getElementById('description').value = product.description || '';

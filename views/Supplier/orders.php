@@ -200,7 +200,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 const formData = new FormData();
                 formData.append('status', newStatus);
                 
-                const response = await fetch(`/build_mate/supplier/orders/${orderId}/update-status`, {
+                const response = await fetch(buildUrl(`supplier/orders/${orderId}/update-status`), {
                     method: 'POST',
                     headers: {
                         'X-CSRF-TOKEN': csrfToken,
@@ -244,7 +244,7 @@ document.addEventListener('DOMContentLoaded', function() {
             try {
                 const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '';
                 
-                const response = await fetch(`/build_mate/supplier/orders/${orderId}/mark-ready`, {
+                const response = await fetch(buildUrl(`supplier/orders/${orderId}/mark-ready`), {
                     method: 'POST',
                     headers: {
                         'X-CSRF-TOKEN': csrfToken,

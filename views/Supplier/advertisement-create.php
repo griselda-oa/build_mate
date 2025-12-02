@@ -174,7 +174,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const csrfInput = document.querySelector('input[name="csrf_token"]');
             const csrfToken = csrfMeta?.getAttribute('content') || csrfInput?.value || '';
             
-            fetch('/build_mate/supplier/advertisements/payment/initialize', {
+            fetch(buildUrl('supplier/advertisements/payment/initialize'), {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

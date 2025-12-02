@@ -178,7 +178,7 @@ $title = $title ?? 'Chat Management';
 
 <script>
 function refreshSessions() {
-    fetch('/build_mate/admin/chat/sessions')
+    fetch(buildUrl('admin/chat/sessions'))
         .then(response => response.json())
         .then(data => {
             if (data.success) {

@@ -39,7 +39,7 @@
                                      class="card-img-top" 
                                      alt="<?= \App\View::e($item['name']) ?>"
                                      style="height: 200px; object-fit: cover;"
-                                     onerror="this.onerror=null;this.src='/build_mate/assets/images/placeholder.png';">
+                                     onerror="this.onerror=null;this.src='<?= \App\View::asset('assets/images/placeholder.png') ?>';">
                             <?php else: ?>
                                 <div class="card-img-top bg-light d-flex align-items-center justify-content-center" style="height: 200px;">
                                     <i class="bi bi-image" style="font-size: 3rem; color: #ccc;"></i>
@@ -112,7 +112,7 @@ async function removeFromWishlist(productId, btn) {
     btn.innerHTML = '<span class="spinner-border spinner-border-sm"></span>';
     
     try {
-        const response = await fetch('/build_mate/product/wishlist/remove', {
+        const response = await fetch(buildUrl('product/wishlist/remove'), {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -148,7 +148,7 @@ async function removeFromWishlist(productId, btn) {
 
 async function addToCartFromWishlist(productId) {
     try {
-        const response = await fetch(`/build_mate/cart/add/${productId}/`, {
+        const response = await fetch(buildUrl(`cart/add/${productId}`), {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

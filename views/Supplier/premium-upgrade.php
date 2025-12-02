@@ -188,7 +188,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 formData.append('csrf_token', csrfToken);
             }
             
-            fetch('/build_mate/supplier/premium/initialize', {
+            fetch(buildUrl('supplier/premium/initialize'), {
                 method: 'POST',
                 headers: {
                     'X-Requested-With': 'XMLHttpRequest'

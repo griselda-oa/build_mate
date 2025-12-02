@@ -30,7 +30,7 @@ class Invoice extends Model
         } catch (\PDOException $e) {
             // Table doesn't exist, return null
             if (strpos($e->getMessage(), "doesn't exist") !== false) {
-                error_log("Invoices table doesn't exist yet. Run migration: /build_mate/run_invoices_migration_web.php");
+                error_log("Invoices table doesn't exist yet. Please import the database schema.");
                 return null;
             }
             throw $e;
@@ -113,7 +113,7 @@ class Invoice extends Model
         // Ensure directory exists and is writable
         if (!is_dir($invoicePath)) {
             if (!mkdir($invoicePath, 0755, true)) {
-                throw new \Exception("Failed to create invoices directory: {$invoicePath}. Visit /build_mate/fix_invoice_permissions.php to fix.");
+                throw new \Exception("Failed to create invoices directory: {$invoicePath}. Please check directory permissions.");
             }
         }
         
@@ -133,7 +133,7 @@ class Invoice extends Model
             }
             
             if (!$fixed) {
-                throw new \Exception("Invoices directory is not writable: {$invoicePath}. Please visit /build_mate/fix_invoice_permissions.php to fix permissions, or run: chmod -R 777 {$invoicePath}");
+                throw new \Exception("Invoices directory is not writable: {$invoicePath}. Please run: chmod -R 775 {$invoicePath}");
             }
         }
         
@@ -160,7 +160,7 @@ class Invoice extends Model
         // Write PDF file with error handling
         $result = @file_put_contents($filePath, $dompdf->output());
         if ($result === false) {
-            throw new \Exception("Failed to write invoice PDF to: {$filePath}. Please check directory permissions. Visit /build_mate/fix_invoice_permissions.php to fix.");
+            throw new \Exception("Failed to write invoice PDF to: {$filePath}. Please check directory permissions.");
         }
         
         // Save invoice record (if table exists)
@@ -173,7 +173,7 @@ class Invoice extends Model
         } catch (\PDOException $e) {
             // Table doesn't exist, but PDF was generated successfully
             if (strpos($e->getMessage(), "doesn't exist") !== false) {
-                error_log("Invoices table doesn't exist. PDF generated but not saved to database. Run migration: /build_mate/run_invoices_migration_web.php");
+                error_log("Invoices table doesn't exist. PDF generated but not saved to database. Please import the database schema.");
             } else {
                 // Re-throw other database errors
                 throw $e;

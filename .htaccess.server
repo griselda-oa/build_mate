@@ -5,9 +5,8 @@ DirectoryIndex index.php
 <IfModule mod_rewrite.c>
     RewriteEngine On
     
-    # Set base path for localhost
-    # For server, use .htaccess.server file instead
-    RewriteBase /build_mate/
+    # Set base path for server deployment
+    RewriteBase /~griselda.owusu/
     
     # Allow assets (CSS, JS, images) to be served directly
     RewriteCond %{REQUEST_FILENAME} -f
@@ -42,3 +41,4 @@ Options -Indexes
     Header set X-Frame-Options "SAMEORIGIN"
     Header set X-XSS-Protection "1; mode=block"
 </IfModule>
+

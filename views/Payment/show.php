@@ -192,7 +192,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             try {
                 // Initialize payment
-                const response = await fetch('/build_mate/payment/initialize', {
+                const response = await fetch(buildUrl('payment/initialize'), {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

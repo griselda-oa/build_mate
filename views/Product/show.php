@@ -100,7 +100,7 @@
 
                 <!-- Purchase Card -->
                 <div class="purchase-card-modern">
-                    <form method="POST" action="/build_mate/cart/add/<?= $product['id'] ?>/" id="addToCartForm">
+                    <form method="POST" action="<?= \App\View::url('cart/add/' . $product['id']) ?>" id="addToCartForm">
                         <?= \App\Csrf::field() ?>
                         <div class="quantity-selector-modern">
                             <label class="quantity-label">
@@ -301,7 +301,7 @@
                         
                         <!-- Review Form (Hidden by default) -->
                         <div class="review-form-modern" id="reviewForm" style="display: none;">
-                            <form method="POST" action="/build_mate/product/review" id="submitReviewForm">
+                            <form method="POST" action="<?= \App\View::url('product/review') ?>" id="submitReviewForm">
                                 <?= \App\Csrf::field() ?>
                                 <input type="hidden" name="product_id" value="<?= $product['id'] ?>">
                                 
@@ -526,7 +526,7 @@ async function addToWishlist() {
 }
 
 async function toggleWishlist(productId, action) {
-    const url = `/build_mate/product/wishlist/${action}`;
+    const url = buildUrl(`product/wishlist/${action}`);
     
     try {
         const response = await fetch(url, {
@@ -588,7 +588,7 @@ function shareProduct() {
 async function toggleWaitlist(productId) {
     const isInWaitlist = <?= ($isInWaitlist ?? false) ? 'true' : 'false' ?>;
     const action = isInWaitlist ? 'remove' : 'add';
-    const url = `/build_mate/product/waitlist/${action}`;
+    const url = buildUrl(`product/waitlist/${action}`);
     
     try {
         const response = await fetch(url, {

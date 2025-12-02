@@ -476,10 +476,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Admins/logistics can update to 'out_for_delivery' and 'delivered'
                 let endpoint = '';
                 if (newStatus === 'processing') {
-                    endpoint = `/build_mate/supplier/orders/${orderId}/update-status`;
+                    endpoint = buildUrl(`supplier/orders/${orderId}/update-status`);
                 } else if (newStatus === 'out_for_delivery' || newStatus === 'delivered') {
                     // Admin endpoint expects order_id in POST body, not URL
-                    endpoint = `/build_mate/admin/orders/${orderId}/update-status`;
+                    endpoint = buildUrl(`admin/orders/${orderId}/update-status`);
                     formData.append('order_id', orderId);
                 } else {
                     alert('✗ Invalid status update');

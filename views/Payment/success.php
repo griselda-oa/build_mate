@@ -97,7 +97,7 @@ const interval = setInterval(function() {
     }
     if (countdown <= 0) {
         clearInterval(interval);
-        window.location.href = '/build_mate/orders/<?= $order['id'] ?>/track-delivery';
+        window.location.href = buildUrl('orders/<?= $order['id'] ?>/track-delivery');
     }
 }, 1000);
 

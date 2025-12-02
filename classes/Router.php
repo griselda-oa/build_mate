@@ -165,10 +165,18 @@ class Router
     }
     
     /**
-     * Get base path from SCRIPT_NAME
+     * Get base path - uses APP_BASE_PATH from .env if set, otherwise auto-detects
      */
     private function getBasePath(): string
     {
+        // Check for explicit base path in .env (most reliable for deployment)
+        if (isset($_ENV['APP_BASE_PATH']) && !empty($_ENV['APP_BASE_PATH'])) {
+            $basePath = $_ENV['APP_BASE_PATH'];
+            // Ensure it starts with / and ends with /
+            $basePath = '/' . trim($basePath, '/');
+            return $basePath === '/' ? '/' : $basePath . '/';
+        }
+        
         if (!isset($_SERVER['SCRIPT_NAME'])) {
             return '/';
         }

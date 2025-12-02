@@ -374,7 +374,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 formData.append('order_id', orderId);
                 formData.append('status', newStatus);
 
-                const response = await fetch(`/build_mate/admin/orders/${orderId}/update-status`, {
+                const response = await fetch(buildUrl(`admin/orders/${orderId}/update-status`), {
         method: 'POST',
         headers: {
                         'X-CSRF-TOKEN': csrfToken,

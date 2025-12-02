@@ -420,7 +420,7 @@ async function toggleWishlistCatalog(productId, btn) {
     const icon = btn.querySelector('i');
     const isInWishlist = btn.classList.contains('in-wishlist');
     const action = isInWishlist ? 'remove' : 'add';
-    const url = `/build_mate/product/wishlist/${action}`;
+    const url = buildUrl(`product/wishlist/${action}`);
     
     btn.disabled = true;
     const originalClass = icon.className;

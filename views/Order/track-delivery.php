@@ -524,7 +524,7 @@ document.addEventListener('DOMContentLoaded', function() {
             try {
                 const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '';
                 
-                const response = await fetch(`/build_mate/orders/<?= $order['id'] ?>/confirm-delivery`, {
+                const response = await fetch(buildUrl(`orders/<?= $order['id'] ?>/confirm-delivery`), {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

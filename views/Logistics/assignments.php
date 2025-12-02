@@ -29,7 +29,7 @@
                     <td><?= $delivery['started_at'] ? date('M d, Y H:i', strtotime($delivery['started_at'])) : '-' ?></td>
                     <td>
                         <?php if ($delivery['status'] === 'queued'): ?>
-                            <form method="POST" action="/build_mate/logistics/orders/<?= $delivery['id'] ?>/start/" class="d-inline">
+                            <form method="POST" action="<?= \App\View::url('logistics/orders/' . $delivery['id'] . '/start') ?>" class="d-inline">
                                 <?= \App\Csrf::field() ?>
                                 <button type="submit" class="btn btn-sm btn-primary">Start Delivery</button>
                             </form>
@@ -44,7 +44,7 @@
                                             <h5 class="modal-title">Mark as Delivered</h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                         </div>
-                                        <form method="POST" action="/build_mate/logistics/orders/<?= $delivery['id'] ?>/delivered/" enctype="multipart/form-data">
+                                        <form method="POST" action="<?= \App\View::url('logistics/orders/' . $delivery['id'] . '/delivered') ?>" enctype="multipart/form-data">
                                             <?= \App\Csrf::field() ?>
                                             <div class="modal-body">
                                                 <div class="mb-3">

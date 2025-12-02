@@ -239,7 +239,7 @@ function updateDeliveryStatusAjax(deliveryId, newStatus, notes) {
     
     const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '';
     
-    fetch('/build_mate/admin/update-delivery-status', {
+    fetch(buildUrl('admin/update-delivery-status'), {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -286,7 +286,7 @@ function markDeliveredWithPhoto(event, deliveryId) {
     const originalText = btn.innerHTML;
     btn.innerHTML = '<span class="spinner-border spinner-border-sm"></span> Uploading...';
     
-    fetch('/build_mate/admin/mark-delivered-with-photo', {
+    fetch(buildUrl('admin/mark-delivered-with-photo'), {
         method: 'POST',
         body: formData
     })

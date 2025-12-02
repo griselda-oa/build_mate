@@ -63,11 +63,16 @@ class PaystackService
     {
         // If in mock mode or no keys, return mock response
         if (empty($this->secretKey) || empty($this->publicKey)) {
+            // Get base path from environment or default
+            $basePath = $_ENV['APP_BASE_PATH'] ?? '/';
+            $basePath = '/' . trim($basePath, '/');
+            $basePath = $basePath === '/' ? '/' : $basePath . '/';
+            
             return [
                 'status' => true,
                 'message' => 'Mock transaction initialized',
                 'data' => [
-                    'authorization_url' => '/build_mate/payment/mock-callback?reference=MOCK-' . bin2hex(random_bytes(8)),
+                    'authorization_url' => $basePath . 'payment/mock-callback?reference=MOCK-' . bin2hex(random_bytes(8)),
                     'access_code' => 'MOCK-' . bin2hex(random_bytes(8)),
                     'reference' => 'MOCK-' . bin2hex(random_bytes(8))
                 ]
