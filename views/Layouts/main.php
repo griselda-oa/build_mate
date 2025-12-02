@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= isset($title) ? \App\View::e($title) . ' - ' : '' ?>Build Mate Ghana</title>
     <!-- Lightweight CSS Framework (replaces Bootstrap ~150KB with ~15KB) -->
-    <link rel="stylesheet" href="<?= \App\View::relAsset('assets/css/lightweight-framework.css') ?>">
-    <link rel="stylesheet" href="<?= \App\View::relAsset('assets/css/icons.css') ?>">
-    <link rel="stylesheet" href="<?= \App\View::relAsset('assets/css/main.css') ?>">
-    <link rel="stylesheet" href="<?= \App\View::relAsset('assets/css/chat-widget.css') ?>">
-    <script src="<?= \App\View::relAsset('assets/js/base-path.js') ?>"></script>
+    <link rel="stylesheet" href="<?= \App\View::asset('assets/css/lightweight-framework.css') ?>">
+    <link rel="stylesheet" href="<?= \App\View::asset('assets/css/icons.css') ?>">
+    <link rel="stylesheet" href="<?= \App\View::asset('assets/css/main.css') ?>">
+    <link rel="stylesheet" href="<?= \App\View::asset('assets/css/chat-widget.css') ?>">
+    <script src="<?= \App\View::asset('assets/js/base-path.js') ?>"></script>
     <meta name="csrf-token" content="<?= \App\Csrf::token() ?>">
-    <meta name="route-depth" content="<?= $_SERVER['ROUTE_DEPTH'] ?? 0 ?>">
+    <meta name="base-path" content="<?= \App\View::basePath() ?>">
     <!-- Fallback: Check if CSS loads -->
     <script>
         window.addEventListener('load', function() {
@@ -27,7 +27,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
         <div class="container">
-            <a class="navbar-brand" href="<?= \App\View::relUrl('/') ?>">
+            <a class="navbar-brand" href="../../index.php">
                 <i class="icon-hammer"></i> Build Mate Ghana
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -36,23 +36,23 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="<?= \App\View::relUrl('/') ?>">Home</a>
+                        <a class="nav-link" href="../../index.php">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?= \App\View::relUrl('/catalog') ?>">Catalog</a>
+                        <a class="nav-link" href="<./views/Product/catalog.php">Catalog</a>
                     </li>
                     <?php if (isset($_SESSION['user'])): ?>
                         <?php if ($_SESSION['user']['role'] === 'supplier'): ?>
                             <li class="nav-item">
-                                <a class="nav-link" href="<?= \App\View::relUrl('/supplier/dashboard') ?>">Supplier Portal</a>
+                                <a class="nav-link" href="./views/Supplier/dashboard.php">Supplier Portal</a>
                             </li>
                         <?php elseif ($_SESSION['user']['role'] === 'logistics'): ?>
                             <li class="nav-item">
-                                <a class="nav-link" href="<?= \App\View::relUrl('/logistics/dashboard') ?>">Logistics</a>
+                                <a class="nav-link" href="./views/Logistics/dashboard.php">Logistics</a>
                             </li>
                         <?php elseif ($_SESSION['user']['role'] === 'admin'): ?>
                             <li class="nav-item">
-                                <a class="nav-link" href="<?= \App\View::relUrl('/admin/dashboard') ?>">Admin</a>
+                                <a class="nav-link" href="<?= \App\View::url('/admin/dashboard') ?>">Admin</a>
                             </li>
                         <?php endif; ?>
                     <?php endif; ?>
@@ -75,7 +75,7 @@
                         }
                         ?>
                         <li class="nav-item">
-                            <a class="nav-link wishlist-badge" href="<?= \App\View::relUrl('/wishlist') ?>" title="My Wishlist">
+                            <a class="nav-link wishlist-badge" href="<?= \App\View::url('/wishlist') ?>" title="My Wishlist">
                                 <i class="icon-heart"></i>
                                 <span class="wishlist-count" id="wishlistCount"><?= $wishlistCount ?></span>
                             </a>
@@ -83,7 +83,7 @@
                     <?php endif; ?>
                     <?php if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'supplier'): ?>
                         <li class="nav-item">
-                            <a class="nav-link cart-badge" href="<?= \App\View::relUrl('/cart') ?>">
+                            <a class="nav-link cart-badge" href="<?= \App\View::url('/cart') ?>">
                                 <i class="icon-cart"></i>
                                 <span class="cart-count" id="cartCount"><?= count($_SESSION['cart'] ?? []) ?></span>
                             </a>
@@ -95,13 +95,13 @@
                                 <?= \App\View::e($_SESSION['user']['name']) ?>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="<?= \App\View::relUrl('/orders') ?>">My Orders</a></li>
-                                <li><a class="dropdown-item" href="<?= \App\View::relUrl('/wishlist') ?>">
+                                <li><a class="dropdown-item" href="<?= \App\View::url('/orders') ?>">My Orders</a></li>
+                                <li><a class="dropdown-item" href="<?= \App\View::url('/wishlist') ?>">
                                     <i class="icon-heart"></i> My Wishlist
                                 </a></li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li>
-                                    <form method="POST" action="<?= \App\View::relUrl('/logout') ?>" style="display: inline;">
+                                    <form method="POST" action="<?= \App\View::url('/logout/') ?>" style="display: inline;">
                                         <?= \App\Csrf::field() ?>
                                         <button type="submit" class="dropdown-item">Logout</button>
                                     </form>
@@ -110,10 +110,10 @@
                         </li>
                     <?php else: ?>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?= \App\View::relUrl('/login') ?>">Login</a>
+                            <a class="nav-link" href="views/Auth/login.php">Login </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?= \App\View::relUrl('/register') ?>">Register</a>
+                            <a class="nav-link" href="views/Auth/register.php">Register</a>
                         </li>
                     <?php endif; ?>
                 </ul>
@@ -146,25 +146,25 @@
                 <div class="col-md-2 mb-4 mb-md-0">
                     <h6 class="mb-3">Company</h6>
                     <ul class="list-unstyled">
-                        <li><a href="<?= \App\View::relUrl('/') ?>" class="text-decoration-none">About</a></li>
-                        <li><a href="<?= \App\View::relUrl('/contact') ?>" class="text-decoration-none">Contact</a></li>
-                        <li><a href="<?= \App\View::relUrl('/') ?>" class="text-decoration-none">Careers</a></li>
+                        <li><a href="../../index.php" class="text-decoration-none">About</a></li>
+                        <li><a href="../../index.php" class="text-decoration-none">Contact</a></li>
+                        <li><a href="../../index.php" class="text-decoration-none">Careers</a></li>
                     </ul>
                 </div>
                 <div class="col-md-3 mb-4 mb-md-0">
                     <h6 class="mb-3">Support</h6>
                     <ul class="list-unstyled">
-                        <li><a href="<?= \App\View::relUrl('/') ?>" class="text-decoration-none">Help Center</a></li>
-                        <li><a href="<?= \App\View::relUrl('/') ?>" class="text-decoration-none">Privacy Policy</a></li>
-                        <li><a href="<?= \App\View::relUrl('/') ?>" class="text-decoration-none">Terms of Service</a></li>
+                        <li><a href="../../index.php" class="text-decoration-none">Help Center</a></li>
+                        <li><a href="../../index.php" class="text-decoration-none">Privacy Policy</a></li>
+                        <li><a href="../../index.php" class="text-decoration-none">Terms of Service</a></li>
                     </ul>
                 </div>
                 <div class="col-md-3">
                     <h6 class="mb-3">Resources</h6>
                     <ul class="list-unstyled">
-                        <li><a href="<?= \App\View::relUrl('/') ?>" class="text-decoration-none">Buyer Guide</a></li>
-                        <li><a href="<?= \App\View::relUrl('/') ?>" class="text-decoration-none">Supplier Guide</a></li>
-                        <li><a href="<?= \App\View::relUrl('/security.txt') ?>" class="text-decoration-none">Data Protection</a></li>
+                        <li><a href="../../index.php" class="text-decoration-none">Buyer Guide</a></li>
+                        <li><a href="../../index.php" class="text-decoration-none">Supplier Guide</a></li>
+                        <li><a href="<?= \App\View::url('/security.txt') ?>" class="text-decoration-none">Data Protection</a></li>
                     </ul>
                 </div>
             </div>
@@ -174,9 +174,9 @@
     </footer>
 
     <!-- Lightweight Components (replaces Bootstrap JS ~58KB with ~3KB) -->
-    <script src="<?= \App\View::relAsset('assets/js/lightweight-components.js') ?>"></script>
-    <script src="<?= \App\View::relAsset('assets/js/main.js') ?>?v=<?= time() ?>"></script>
-    <script src="<?= \App\View::relAsset('assets/js/chat-widget.js') ?>?v=<?= time() ?>"></script>
+    <script src="<?= \App\View::asset('assets/js/lightweight-components.js') ?>"></script>
+    <script src="<?= \App\View::asset('assets/js/main.js') ?>?v=<?= time() ?>"></script>
+    <script src="<?= \App\View::asset('assets/js/chat-widget.js') ?>?v=<?= time() ?>"></script>
     <script>
         // Currency conversion (client-side for demo)
         const usdToGhsRate = <?php 
@@ -215,7 +215,7 @@
         
         // Update cart count
         function updateCartCount() {
-            fetch(buildUrl('api/search?query='))
+            fetch('<?= \App\View::url('/api/search?query=') ?>')
                 .then(() => {
                     // Cart count would be updated via session
                 });
@@ -224,3 +224,4 @@
     <!-- Auto-refresh removed - was causing issues with form inputs -->
     </body>
 </html>
+

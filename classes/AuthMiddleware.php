@@ -19,7 +19,7 @@ class AuthMiddleware
         if (!Auth::check()) {
             error_log("AuthMiddleware - Auth::check() returned false, redirecting to login");
             $_SESSION['redirect_after_login'] = $_SERVER['REQUEST_URI'];
-            header('Location: ' . View::url('/login'));
+            header('Location: ' . View::url('.views/login'));
             exit;
         }
         

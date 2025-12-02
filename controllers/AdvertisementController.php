@@ -53,7 +53,7 @@ class AdvertisementController extends Controller
         
         // Check if supplier has products
         if (empty($products)) {
-            $this->setFlash('warning', 'You need to create at least one product before you can create an advertisement. <a href="' . \App\View::relUrl('/supplier/products') . '">Create a product</a>');
+            $this->setFlash('warning', 'You need to create at least one product before you can create an advertisement. <a href="' . \App\View::url('/supplier/products') . '">Create a product</a>');
         }
         
         $adModel = new Advertisement();

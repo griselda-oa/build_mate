@@ -6,8 +6,8 @@
     <title><?= $title ?? 'Build Mate - Authentication' ?></title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap Icons: Load fallback directly since CDN may not be accessible -->
-    <link rel="stylesheet" href="<?= \App\View::relAsset('assets/css/bootstrap-icons-fallback.css') ?>">
-    <link rel="stylesheet" href="<?= \App\View::relAsset('assets/css/main.css') ?>">
+    <link rel="stylesheet" href="<?= \App\View::asset('assets/css/bootstrap-icons-fallback.css') ?>">
+    <link rel="stylesheet" href="<?= \App\View::asset('assets/css/main.css') ?>">
     <style>
         body {
             margin: 0;

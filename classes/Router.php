@@ -87,14 +87,6 @@ class Router
             $uri = rtrim($uri, '/');
         }
         
-        // Calculate and store URL depth for relative path generation
-        $trimmedUri = trim($uri, '/');
-        if ($trimmedUri === '') {
-            $_SERVER['ROUTE_DEPTH'] = 0;
-        } else {
-            $_SERVER['ROUTE_DEPTH'] = substr_count($trimmedUri, '/') + 1;
-        }
-        
         // Check if this is an invoice download route (skip security headers)
         $isInvoiceRoute = preg_match('#/orders/\d+/invoice\.pdf#', $uri);
         
@@ -173,18 +165,10 @@ class Router
     }
     
     /**
-     * Get base path - uses APP_BASE_PATH from .env if set, otherwise auto-detects
+     * Get base path from SCRIPT_NAME
      */
     private function getBasePath(): string
     {
-        // Check for explicit base path in .env (most reliable for deployment)
-        if (isset($_ENV['APP_BASE_PATH']) && !empty($_ENV['APP_BASE_PATH'])) {
-            $basePath = $_ENV['APP_BASE_PATH'];
-            // Ensure it starts with / and ends with /
-            $basePath = '/' . trim($basePath, '/');
-            return $basePath === '/' ? '/' : $basePath . '/';
-        }
-        
         if (!isset($_SERVER['SCRIPT_NAME'])) {
             return '/';
         }

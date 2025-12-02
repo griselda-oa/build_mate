@@ -5,7 +5,7 @@
         <div class="container">
             <!-- Back Button - Positioned in hero section -->
             <div class="catalog-back-button">
-                <a href="<?= \App\View::relUrl('/') ?>" class="back-button back-button-hero">
+                <a href="<?= \App\View::url('/') ?>" class="back-button back-button-hero">
                     <i class="icon-arrow-left"></i>
                     <span>Back to Home</span>
                 </a>
@@ -52,7 +52,7 @@
                         $productSlug = $ad['product_slug'] ?? '';
                         ?>
                         <div class="ad-banner-slide <?= $index === 0 ? 'active' : '' ?>" data-slide="<?= $index ?>">
-                            <a href="<?= \App\View::relUrl('/') ?>product/<?= \App\View::e($productSlug) ?>" class="ad-banner-link-modern">
+                            <a href="<?= \App\View::url('/') ?>product/<?= \App\View::e($productSlug) ?>" class="ad-banner-link-modern">
                                 <div class="ad-banner-content-modern">
                                     <?php if (!empty($adImage)): ?>
                                         <?php if ($isVideo): ?>
@@ -63,10 +63,10 @@
                                                    autoplay
                                                    onmouseover="this.play()"
                                                    onmouseout="this.pause()">
-                                                <source src="<?= \App\View::relImage($adImage) ?>" type="video/<?= pathinfo($adImage, PATHINFO_EXTENSION) === 'mov' ? 'quicktime' : pathinfo($adImage, PATHINFO_EXTENSION) ?>">
+                                                <source src="<?= \App\View::image($adImage) ?>" type="video/<?= pathinfo($adImage, PATHINFO_EXTENSION) === 'mov' ? 'quicktime' : pathinfo($adImage, PATHINFO_EXTENSION) ?>">
                                             </video>
                                         <?php else: ?>
-                                            <img src="<?= \App\View::relImage($adImage) ?>" 
+                                            <img src="<?= \App\View::image($adImage) ?>" 
                                                  class="ad-banner-media-modern" 
                                                  alt="<?= \App\View::e($ad['title'] ?? $ad['product_name'] ?? 'Advertisement') ?>"
                                                  loading="lazy">
@@ -113,7 +113,7 @@
             <div class="recent-orders-section mb-5">
                 <div class="orders-header-modern">
                     <h3><i class="icon-truck"></i> My Recent Orders & Tracking</h3>
-                    <a href="<?= \App\View::relUrl('/') ?>orders" class="view-all-orders-btn">
+                    <a href="<?= \App\View::url('/') ?>orders" class="view-all-orders-btn">
                         View All Orders
                         <i class="bi bi-arrow-right"></i>
                     </a>
@@ -161,12 +161,12 @@
                                 </div>
                             </div>
                             <div class="order-card-actions-dashboard">
-                                <a href="<?= \App\View::relUrl('/') ?>orders/<?= $order['id'] ?>" class="btn-view-order">
+                                <a href="<?= \App\View::url('/') ?>orders/<?= $order['id'] ?>" class="btn-view-order">
                                     <i class="icon-eye"></i>
                                     View Details
                                 </a>
                                 <?php if ($isPaid): ?>
-                                    <a href="<?= \App\View::relUrl('/') ?>orders/<?= $order['id'] ?>/track-delivery" class="btn-track-order">
+                                    <a href="<?= \App\View::url('/') ?>orders/<?= $order['id'] ?>/track-delivery" class="btn-track-order">
                                         <i class="icon-truck"></i>
                                         Track Delivery
                                     </a>
@@ -194,7 +194,7 @@
                             Clear All
                         </button>
                     </div>
-                    <form method="GET" action="<?= \App\View::relUrl('/') ?>dashboard" id="filterForm">
+                    <form method="GET" action="<?= \App\View::url('/') ?>dashboard" id="filterForm">
                         <!-- Search (hidden since we have horizontal search) -->
                         <input type="hidden" 
                                id="q" 
@@ -267,7 +267,7 @@
                             <i class="bi bi-check-circle"></i>
                             Apply Filters
                         </button>
-                        <a href="<?= \App\View::relUrl('/') ?>dashboard" class="filter-reset-btn-modern">
+                        <a href="<?= \App\View::url('/') ?>dashboard" class="filter-reset-btn-modern">
                             <i class="bi bi-x-circle"></i>
                             Reset
                         </a>
@@ -282,7 +282,7 @@
                         <strong><?= count($products) ?></strong> product<?= count($products) !== 1 ? 's' : '' ?> found
                     </div>
                     <div class="view-options">
-                        <a href="<?= \App\View::relUrl('/') ?>catalog" class="view-all-link">
+                        <a href="<?= \App\View::url('/') ?>catalog" class="view-all-link">
                             <i class="bi bi-grid"></i>
                             View Full Catalog
                         </a>
@@ -320,16 +320,16 @@
                         </div>
                         <h4>No products found</h4>
                         <p>Try adjusting your filters or search terms</p>
-                        <a href="<?= \App\View::relUrl('/') ?>dashboard" class="btn-modern-primary">Clear Filters</a>
+                        <a href="<?= \App\View::url('/') ?>dashboard" class="btn-modern-primary">Clear Filters</a>
                     </div>
                 <?php else: ?>
                     <div class="products-grid-modern">
                         <?php foreach ($products as $product): ?>
                             <div class="product-card-ultra-modern">
-                                <a href="<?= \App\View::relUrl('/') ?>product/<?= \App\View::e($product['slug']) ?>" class="product-link-modern">
+                                <a href="<?= \App\View::url('/') ?>product/<?= \App\View::e($product['slug']) ?>" class="product-link-modern">
                                     <div class="product-image-wrapper-modern">
                                         <?php if (!empty($product['image_url'])): ?>
-                                            <img src="<?= \App\View::relImage($product['image_url']) ?>" 
+                                            <img src="<?= \App\View::image($product['image_url']) ?>" 
                                                  class="product-image-ultra-modern" 
                                                  alt="<?= \App\View::e($product['name']) ?>"
                                                  loading="lazy">
@@ -1247,5 +1247,5 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 <!-- Include Catalog CSS for consistent styling -->
-<link rel="stylesheet" href="<?= \App\View::relAsset('assets/css/catalog.css?v=' . filemtime(__DIR__ . '/../../assets/css/catalog.css')) ?>">
-<link rel="stylesheet" href="<?= \App\View::relAsset('assets/css/ad-banner.css') ?>">
+<link rel="stylesheet" href="<?= \App\View::asset('assets/css/catalog.css?v=' . filemtime(__DIR__ . '/../../assets/css/catalog.css')) ?>">
+<link rel="stylesheet" href="<?= \App\View::asset('assets/css/ad-banner.css') ?>">
