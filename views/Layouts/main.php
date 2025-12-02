@@ -27,7 +27,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
         <div class="container">
-            <a class="navbar-brand" href="<?= \App\View::url('/') ?>">
+            <a class="navbar-brand" href="../../index.php">
                 <i class="icon-hammer"></i> Build Mate Ghana
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -36,7 +36,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="<?= \App\View::url('/') ?>">Home</a>
+                        <a class="nav-link" href="../../index.php">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="<?= \App\View::url('/catalog') ?>">Catalog</a>
@@ -110,10 +110,10 @@
                         </li>
                     <?php else: ?>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?= \App\View::url('/login') ?>">Login</a>
+                            <a class="nav-link" href="../Auth/login.php">Login</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?= \App\View::url('/register') ?>">Register</a>
+                            <a class="nav-link" href="../Auth/register.php">Register</a>
                         </li>
                     <?php endif; ?>
                 </ul>
@@ -146,24 +146,24 @@
                 <div class="col-md-2 mb-4 mb-md-0">
                     <h6 class="mb-3">Company</h6>
                     <ul class="list-unstyled">
-                        <li><a href="<?= \App\View::url('/') ?>" class="text-decoration-none">About</a></li>
-                        <li><a href="<?= \App\View::url('/') ?>" class="text-decoration-none">Contact</a></li>
-                        <li><a href="<?= \App\View::url('/') ?>" class="text-decoration-none">Careers</a></li>
+                        <li><a href="../../index.php" class="text-decoration-none">About</a></li>
+                        <li><a href="../../index.php" class="text-decoration-none">Contact</a></li>
+                        <li><a href="../../index.php" class="text-decoration-none">Careers</a></li>
                     </ul>
                 </div>
                 <div class="col-md-3 mb-4 mb-md-0">
                     <h6 class="mb-3">Support</h6>
                     <ul class="list-unstyled">
-                        <li><a href="<?= \App\View::url('/') ?>" class="text-decoration-none">Help Center</a></li>
-                        <li><a href="<?= \App\View::url('/') ?>" class="text-decoration-none">Privacy Policy</a></li>
-                        <li><a href="<?= \App\View::url('/') ?>" class="text-decoration-none">Terms of Service</a></li>
+                        <li><a href="../../index.php" class="text-decoration-none">Help Center</a></li>
+                        <li><a href="../../index.php" class="text-decoration-none">Privacy Policy</a></li>
+                        <li><a href="../../index.php" class="text-decoration-none">Terms of Service</a></li>
                     </ul>
                 </div>
                 <div class="col-md-3">
                     <h6 class="mb-3">Resources</h6>
                     <ul class="list-unstyled">
-                        <li><a href="<?= \App\View::url('/') ?>" class="text-decoration-none">Buyer Guide</a></li>
-                        <li><a href="<?= \App\View::url('/') ?>" class="text-decoration-none">Supplier Guide</a></li>
+                        <li><a href="../../index.php" class="text-decoration-none">Buyer Guide</a></li>
+                        <li><a href="../../index.php" class="text-decoration-none">Supplier Guide</a></li>
                         <li><a href="<?= \App\View::url('/security.txt') ?>" class="text-decoration-none">Data Protection</a></li>
                     </ul>
                 </div>
