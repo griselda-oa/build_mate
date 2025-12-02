@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= isset($title) ? \App\View::e($title) . ' - ' : '' ?>Build Mate Ghana</title>
+    <title><?= isset($title) ? \App\View::e($title) . ' - ' : '' ?>Build Mate   oooo Ghana</title>
     <!-- Lightweight CSS Framework (replaces Bootstrap ~150KB with ~15KB) -->
     <link rel="stylesheet" href="<?= \App\View::asset('assets/css/lightweight-framework.css') ?>">
     <link rel="stylesheet" href="<?= \App\View::asset('assets/css/icons.css') ?>">
