@@ -8,7 +8,7 @@
         <div class="hero-slide-content">
             <h1>Build Your Dreams with Quality Materials</h1>
             <p>Connect with Ghana's verified construction suppliers</p>
-            <a href="<?= \App\View::url('views/Product/catalog') ?>" class="hero-cta-button pulse">Shop Now</a>
+            <a href="<?= \App\View::url('views/Product/catalog.php') ?>" class="hero-cta-button pulse">Shop Now</a>
         </div>
     </div>
     
