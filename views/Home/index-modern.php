@@ -6,7 +6,7 @@
     <div class="hero-slide-modern active" style="background-image: url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1920&q=80');">
         <div class="hero-slide-overlay"></div>
         <div class="hero-slide-content">
-            <h1>Build Your Dreams with Quality Materials</h1>
+            <h1>Build Your Dreamszzzz with Quality Materials</h1>
             <p>Connect with Ghana's verified construction suppliers</p>
             <a href="<?= \App\View::url('/catalog') ?>" class="hero-cta-button pulse">Shop Now</a>
         </div>
