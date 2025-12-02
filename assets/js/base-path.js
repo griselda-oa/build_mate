@@ -28,3 +28,4 @@
     console.log('Base path set to:', window.BASE_PATH);
 })();
 
+
