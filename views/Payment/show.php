@@ -3,7 +3,7 @@
     <!-- Header -->
     <div class="payment-header-modern mb-5">
         <div class="container">
-            <a href="<?= \App\View::url('/checkout') ?>" class="back-button-modern">
+            <a href="<?= \App\View::relUrl('/checkout') ?>" class="back-button-modern">
                 <i class="icon-arrow-left"></i>
                 <span>Back to Checkout</span>
             </a>
@@ -168,7 +168,7 @@
 <?php endif; ?>
 
 <!-- Payment Styles -->
-<link rel="stylesheet" href="<?= \App\View::asset('assets/css/payment-modern.css?v=' . time()) ?>">
+<link rel="stylesheet" href="<?= \App\View::relAsset('assets/css/payment-modern.css?v=' . time()) ?>">
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {

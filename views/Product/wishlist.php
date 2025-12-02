@@ -3,7 +3,7 @@
         <h1 class="h3 mb-0">
             <i class="icon-heart-fill text-danger"></i> My Wishlist
         </h1>
-        <a href="<?= \App\View::url('/catalog') ?>" class="btn btn-outline-primary">
+        <a href="<?= \App\View::relUrl('/catalog') ?>" class="btn btn-outline-primary">
             <i class="icon-arrow-left"></i> Continue Shopping
         </a>
     </div>
@@ -24,7 +24,7 @@
             <i class="icon-heart" style="font-size: 4rem; color: #ccc; margin-bottom: 1rem;"></i>
             <h3 class="text-muted">Your wishlist is empty</h3>
             <p class="text-muted">Start adding products you love to your wishlist!</p>
-            <a href="<?= \App\View::url('/catalog') ?>" class="btn btn-primary mt-3">
+            <a href="<?= \App\View::relUrl('/catalog') ?>" class="btn btn-primary mt-3">
                 <i class="icon-search"></i> Browse Products
             </a>
         </div>
@@ -35,11 +35,11 @@
                     <div class="card h-100 shadow-sm">
                         <div class="position-relative">
                             <?php if (!empty($item['image_url'])): ?>
-                                <img src="<?= \App\View::image($item['image_url']) ?>" 
+                                <img src="<?= \App\View::relImage($item['image_url']) ?>" 
                                      class="card-img-top" 
                                      alt="<?= \App\View::e($item['name']) ?>"
                                      style="height: 200px; object-fit: cover;"
-                                     onerror="this.onerror=null;this.src='<?= \App\View::asset('assets/images/placeholder.png') ?>';">
+                                     onerror="this.onerror=null;this.src='<?= \App\View::relAsset('assets/images/placeholder.png') ?>';">
                             <?php else: ?>
                                 <div class="card-img-top bg-light d-flex align-items-center justify-content-center" style="height: 200px;">
                                     <i class="bi bi-image" style="font-size: 3rem; color: #ccc;"></i>
@@ -53,7 +53,7 @@
                         </div>
                         <div class="card-body d-flex flex-column">
                             <h5 class="card-title">
-                                <a href="<?= \App\View::url('/product/' . \App\View::e($item['slug'])) ?>" class="text-decoration-none">
+                                <a href="<?= \App\View::relUrl('/product/' . \App\View::e($item['slug'])) ?>" class="text-decoration-none">
                                     <?= \App\View::e($item['name']) ?>
                                 </a>
                             </h5>
@@ -75,7 +75,7 @@
                                     <?php endif; ?>
                                 </div>
                                 <div class="d-grid gap-2">
-                                    <a href="<?= \App\View::url('/product/' . \App\View::e($item['slug'])) ?>" class="btn btn-primary">
+                                    <a href="<?= \App\View::relUrl('/product/' . \App\View::e($item['slug'])) ?>" class="btn btn-primary">
                                         <i class="icon-eye"></i> View Details
                                     </a>
                                     <?php if ($item['stock'] > 0): ?>

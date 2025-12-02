@@ -4,7 +4,7 @@
         <div class="container">
             <!-- Back Button - Positioned in hero section -->
             <div class="catalog-back-button">
-                <a href="<?= \App\View::url('/') ?>" class="back-button back-button-hero">
+                <a href="<?= \App\View::relUrl('/') ?>" class="back-button back-button-hero">
                     <i class="icon-arrow-left"></i>
                     <span>Back to Home</span>
                 </a>
@@ -59,7 +59,7 @@
                         </button>
                     </div>
                     
-                    <form method="GET" action="<?= \App\View::url('/catalog') ?>" id="filterForm">
+                    <form method="GET" action="<?= \App\View::relUrl('/catalog') ?>" id="filterForm">
                         <!-- Search -->
                         <div class="filter-section-modern">
                             <label class="filter-label-modern">
@@ -183,11 +183,11 @@
                                 $isVideo = !empty($adImage) && preg_match('/\.(mp4|mov|webm)$/i', $adImage);
                                 ?>
                                 <div class="sponsored-card-modern">
-                                    <a href="<?= \App\View::url('/product/' . $product['slug']) ?>" class="sponsored-link-modern">
+                                    <a href="<?= \App\View::relUrl('/product/' . $product['slug']) ?>" class="sponsored-link-modern">
                                         <div class="sponsored-image-modern">
                                             <?php if (!empty($adImage)): ?>
                                                 <?php if ($isVideo): ?>
-                                                    <video src="<?= \App\View::image($adImage) ?>" 
+                                                    <video src="<?= \App\View::relImage($adImage) ?>" 
                                                            class="sponsored-media-modern" 
                                                            muted
                                                            loop
@@ -198,7 +198,7 @@
                                                            onerror="console.error('Video load error:', this.src)">
                                                     </video>
                                                 <?php else: ?>
-                                                    <img src="<?= \App\View::image($adImage) ?>" 
+                                                    <img src="<?= \App\View::relImage($adImage) ?>" 
                                                          class="sponsored-media-modern" 
                                                          alt="<?= \App\View::e($product['name']) ?>"
                                                          loading="lazy">
@@ -297,11 +297,11 @@
                             $isVideo = $adData && !empty($adData['image_url']) && preg_match('/\.(mp4|mov|webm)$/i', $adData['image_url']);
                             ?>
                             <div class="product-card-sleek <?= $isAdvertised ? 'advertised-product' : '' ?>">
-                                <a href="<?= \App\View::url('/product/' . $product['slug']) ?>" class="product-link-sleek">
+                                <a href="<?= \App\View::relUrl('/product/' . $product['slug']) ?>" class="product-link-sleek">
                                     <div class="product-image-sleek">
                                     <?php if (!empty($displayImage)): ?>
                                         <?php if ($isVideo): ?>
-                                            <video src="<?= \App\View::image($displayImage) ?>" 
+                                            <video src="<?= \App\View::relImage($displayImage) ?>" 
                                                    class="product-img" 
                                                    muted
                                                    loop
@@ -311,7 +311,7 @@
                                                    onerror="this.onerror=null; this.style.display='none'; this.nextElementSibling.style.display='flex';">
                                             </video>
                                         <?php else: ?>
-                                            <img src="<?= \App\View::image($displayImage) ?>" 
+                                            <img src="<?= \App\View::relImage($displayImage) ?>" 
                                                  class="product-img" 
                                                  alt="<?= \App\View::e($product['name']) ?>"
                                                  loading="lazy"
@@ -407,7 +407,7 @@
 </div>
 
 <!-- Include Catalog JavaScript -->
-<script src="<?= \App\View::asset('assets/js/catalog.js') ?>?v=<?= time() ?>"></script>
+<script src="<?= \App\View::relAsset('assets/js/catalog.js') ?>?v=<?= time() ?>"></script>
 
 <script>
 // Wishlist toggle for catalog
@@ -493,4 +493,4 @@ function showNotification(message, type) {
 </script>
 
 <!-- Catalog Styles -->
-<link rel="stylesheet" href="<?= \App\View::asset('assets/css/catalog.css') ?>">
+<link rel="stylesheet" href="<?= \App\View::relAsset('assets/css/catalog.css') ?>">

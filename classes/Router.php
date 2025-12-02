@@ -87,6 +87,14 @@ class Router
             $uri = rtrim($uri, '/');
         }
         
+        // Calculate and store URL depth for relative path generation
+        $trimmedUri = trim($uri, '/');
+        if ($trimmedUri === '') {
+            $_SERVER['ROUTE_DEPTH'] = 0;
+        } else {
+            $_SERVER['ROUTE_DEPTH'] = substr_count($trimmedUri, '/') + 1;
+        }
+        
         // Check if this is an invoice download route (skip security headers)
         $isInvoiceRoute = preg_match('#/orders/\d+/invoice\.pdf#', $uri);
         

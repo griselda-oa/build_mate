@@ -135,7 +135,7 @@ class View
     }
     
     /**
-     * Generate route URL
+     * Generate route URL (absolute with base path)
      */
     public static function url(string $path = '/'): string
     {
@@ -146,6 +146,47 @@ class View
             return $basePath;
         }
         return $basePath . $path;
+    }
+    
+    /**
+     * Generate relative route URL based on current URL depth
+     * Uses ../ notation to navigate from current page to target
+     */
+    public static function relUrl(string $path = '/'): string
+    {
+        $depth = $_SERVER['ROUTE_DEPTH'] ?? 0;
+        $path = ltrim($path, '/');
+        
+        if ($depth === 0) {
+            // At root level, use ./
+            return './' . $path;
+        }
+        
+        // Generate ../ for each level of depth
+        $prefix = str_repeat('../', $depth);
+        return $prefix . $path;
+    }
+    
+    /**
+     * Generate relative asset URL based on current URL depth
+     */
+    public static function relAsset(string $path): string
+    {
+        return self::relUrl($path);
+    }
+    
+    /**
+     * Generate relative image URL
+     * Handles both external URLs and local paths
+     */
+    public static function relImage(string $path): string
+    {
+        // If it's already a full URL (http/https), return as is
+        if (preg_match('/^https?:\/\//', $path)) {
+            return $path;
+        }
+        
+        return self::relUrl($path);
     }
     
     /**

@@ -23,7 +23,7 @@
                 </div>
             <?php endif; ?>
 
-            <form method="POST" action="<?= \App\View::url('/register') ?>" class="auth-form">
+            <form method="POST" action="<?= \App\View::relUrl('/register') ?>" class="auth-form">
                 <?= \App\Csrf::field() ?>
                 
                 <div class="form-group">
@@ -82,7 +82,7 @@
             </form>
 
             <div class="auth-footer">
-                <p>Already have an account? <a href="<?= \App\View::url('/login') ?>">Sign in here</a></p>
+                <p>Already have an account? <a href="<?= \App\View::relUrl('/login') ?>">Sign in here</a></p>
             </div>
         </div>
     </div>

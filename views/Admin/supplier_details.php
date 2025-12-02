@@ -1,11 +1,11 @@
 <!-- Admin Supplier Details Page -->
-<link rel="stylesheet" href="<?= \App\View::asset('assets/css/admin-supplier-details.css') ?>">
+<link rel="stylesheet" href="<?= \App\View::relAsset('assets/css/admin-supplier-details.css') ?>">
 
 <div class="admin-supplier-details-page">
     <div class="container">
         <div class="admin-details-header">
             <h2>Supplier Details: <?= \App\View::e($supplier['business_name'] ?? 'N/A') ?></h2>
-            <a href="<?= \App\View::url('/admin/suppliers') ?>" class="btn btn-outline-secondary">
+            <a href="<?= \App\View::relUrl('/admin/suppliers') ?>" class="btn btn-outline-secondary">
                 <i class="icon-arrow-left"></i> Back to Suppliers
             </a>
         </div>
@@ -119,7 +119,7 @@
                                                 <div class="document-name"><?= \App\View::e($doc['file_name']) ?></div>
                                             </div>
                                         </div>
-                                        <a href="<?= \App\View::url('/storage/uploads/' . $doc['file_path']) ?>" target="_blank" class="btn btn-sm btn-primary">
+                                        <a href="<?= \App\View::relUrl('/storage/uploads/' . $doc['file_path']) ?>" target="_blank" class="btn btn-sm btn-primary">
                                             <i class="icon-eye"></i> View Document
                                         </a>
                                     </div>
@@ -138,13 +138,13 @@
                     </div>
                     <div class="card-body">
                         <?php if (($supplier['kyc_status'] ?? NULL) === 'pending'): ?>
-                            <form method="POST" action="<?= \App\View::url('/admin/suppliers/' . $supplier['id'] . '/approve') ?>" class="mb-2">
+                            <form method="POST" action="<?= \App\View::relUrl('/admin/suppliers/' . $supplier['id'] . '/approve') ?>" class="mb-2">
                                 <?= \App\Csrf::field() ?>
                                 <button type="submit" class="btn btn-success w-100">
                                     <i class="bi bi-check-circle"></i> Approve Supplier
                                 </button>
                             </form>
-                            <form method="POST" action="<?= \App\View::url('/admin/suppliers/' . $supplier['id'] . '/reject') ?>">
+                            <form method="POST" action="<?= \App\View::relUrl('/admin/suppliers/' . $supplier['id'] . '/reject') ?>">
                                 <?= \App\Csrf::field() ?>
                                 <button type="submit" class="btn btn-danger w-100">
                                     <i class="bi bi-x-circle"></i> Reject Supplier
@@ -154,7 +154,7 @@
                             <div class="alert alert-success">
                                 <i class="bi bi-check-circle"></i> Supplier is Approved.
                             </div>
-                            <form method="POST" action="<?= \App\View::url('/admin/suppliers/' . $supplier['id'] . '/reject') ?>">
+                            <form method="POST" action="<?= \App\View::relUrl('/admin/suppliers/' . $supplier['id'] . '/reject') ?>">
                                 <?= \App\Csrf::field() ?>
                                 <button type="submit" class="btn btn-warning w-100">
                                     <i class="bi bi-x-circle"></i> Mark as Rejected
@@ -164,7 +164,7 @@
                             <div class="alert alert-danger">
                                 <i class="bi bi-x-circle"></i> Supplier is Rejected.
                             </div>
-                            <form method="POST" action="<?= \App\View::url('/admin/suppliers/' . $supplier['id'] . '/approve') ?>" class="mb-2">
+                            <form method="POST" action="<?= \App\View::relUrl('/admin/suppliers/' . $supplier['id'] . '/approve') ?>" class="mb-2">
                                 <?= \App\Csrf::field() ?>
                                 <button type="submit" class="btn btn-success w-100">
                                     <i class="bi bi-check-circle"></i> Approve Supplier

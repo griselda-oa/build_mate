@@ -1,5 +1,5 @@
-<link rel="stylesheet" href="<?= \App\View::asset('assets/css/admin-dashboard.css') ?>">
-<link rel="stylesheet" href="<?= \App\View::asset('assets/css/ad-banner.css') ?>">
+<link rel="stylesheet" href="<?= \App\View::relAsset('assets/css/admin-dashboard.css') ?>">
+<link rel="stylesheet" href="<?= \App\View::relAsset('assets/css/ad-banner.css') ?>">
 
 <div class="admin-dashboard-page">
     <div class="admin-dashboard-container">
@@ -112,7 +112,7 @@
                                         <span class="admin-order-date"><?= date('M d, Y', strtotime($order['created_at'])) ?></span>
                                     </td>
                                     <td data-label="Action">
-                                        <a href="<?= \App\View::url('/admin/orders/' . $order['id']) ?>" 
+                                        <a href="<?= \App\View::relUrl('/admin/orders/' . $order['id']) ?>" 
                                            class="admin-action-btn primary" 
                                            style="padding: 0.5rem 1rem; font-size: 0.875rem;">
                                             <i class="icon-eye"></i> View
@@ -128,13 +128,13 @@
 
         <!-- Action Buttons -->
         <div class="admin-action-buttons">
-            <a href="<?= \App\View::url('/admin/suppliers') ?>" class="admin-action-btn primary">
+            <a href="<?= \App\View::relUrl('/admin/suppliers') ?>" class="admin-action-btn primary">
                 <i class="bi bi-people"></i> Manage Suppliers
             </a>
-            <a href="<?= \App\View::url('/admin/orders') ?>" class="admin-action-btn primary">
+            <a href="<?= \App\View::relUrl('/admin/orders') ?>" class="admin-action-btn primary">
                 <i class="bi bi-list-ul"></i> View All Orders
             </a>
-            <a href="<?= \App\View::url('/admin/audit-logs') ?>" class="admin-action-btn secondary">
+            <a href="<?= \App\View::relUrl('/admin/audit-logs') ?>" class="admin-action-btn secondary">
                 <i class="bi bi-journal-text"></i> Audit Logs
             </a>
         </div>

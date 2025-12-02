@@ -1,11 +1,11 @@
 <!-- Modern Supplier Orders Page -->
-<link rel="stylesheet" href="<?= \App\View::asset('assets/css/supplier-dashboard.css') ?>">
+<link rel="stylesheet" href="<?= \App\View::relAsset('assets/css/supplier-dashboard.css') ?>">
 
 <div class="supplier-dashboard-page">
     <div class="container">
         <!-- Back Button -->
         <div class="mb-4">
-            <a href="<?= \App\View::url('/supplier/dashboard') ?>" class="back-button">
+            <a href="<?= \App\View::relUrl('/supplier/dashboard') ?>" class="back-button">
                 <i class="icon-arrow-left"></i>
                 <span>Back to Dashboard</span>
             </a>
@@ -96,7 +96,7 @@
                                         </td>
                                         <td style="padding: 1.25rem;">
                                             <div class="btn-group" role="group">
-                                                <a href="<?= \App\View::url('/orders/' . $order['id']) ?>" 
+                                                <a href="<?= \App\View::relUrl('/orders/' . $order['id']) ?>" 
                                                    class="btn btn-sm" 
                                                    style="background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%); color: white; border: none; border-radius: 8px; padding: 0.5rem 1rem;">
                                                     <i class="icon-eye"></i> View

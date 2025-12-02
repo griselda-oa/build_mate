@@ -1,11 +1,11 @@
 <!-- Admin Logistics Dashboard -->
-<link rel="stylesheet" href="<?= \App\View::asset('assets/css/supplier-dashboard.css">
+<link rel="stylesheet" href="<?= \App\View::relAsset('assets/css/supplier-dashboard.css">
 
 <div class="supplier-dashboard-page">
     <div class="container">
         <!-- Back Button -->
         <div class="mb-4">
-            <a href="<?= \App\View::url('/admin/dashboard') ?>" class="back-button">
+            <a href="<?= \App\View::relUrl('/admin/dashboard') ?>" class="back-button">
                 <i class="icon-arrow-left"></i>
                 <span>Back to Dashboard</span>
             </a>
@@ -182,7 +182,7 @@
                                     <?php endif; ?>
                                     <?php if ($delivery['delivery_photo']): ?>
                                         <div class="mt-2">
-                                            <a href="<?= \App\View::url('/storage/uploads/deliveries/<?= $delivery['delivery_photo'] ?>') ?>" 
+                                            <a href="<?= \App\View::relUrl('/storage/uploads/deliveries/<?= $delivery['delivery_photo'] ?>') ?>" 
                                                target="_blank" 
                                                class="btn btn-sm btn-outline-primary">
                                                 <i class="bi bi-image"></i> View Delivery Photo

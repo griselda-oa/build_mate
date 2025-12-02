@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="<?= \App\View::asset('assets/css/homepage-modern.css') ?>">
+<link rel="stylesheet" href="<?= \App\View::relAsset('assets/css/homepage-modern.css') ?>">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
 
 <!-- Hero Slideshow -->
@@ -6,9 +6,9 @@
     <div class="hero-slide-modern active" style="background-image: url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1920&q=80');">
         <div class="hero-slide-overlay"></div>
         <div class="hero-slide-content">
-            <h1>Build Your Dreamszzzz with Quality Materials</h1>
+            <h1>Build Your Dreams with Quality Materials</h1>
             <p>Connect with Ghana's verified construction suppliers</p>
-            <a href="<?= \App\View::url('/catalog') ?>" class="hero-cta-button pulse">Shop Now</a>
+            <a href="<?= \App\View::relUrl('/catalog') ?>" class="hero-cta-button pulse">Shop Now</a>
         </div>
     </div>
     
@@ -17,7 +17,7 @@
         <div class="hero-slide-content">
             <h1>Fast Delivery Across Ghana</h1>
             <p>From Accra to Tamale - We deliver nationwide</p>
-            <a href="<?= \App\View::url('/catalog') ?>" class="hero-cta-button">Explore Products</a>
+            <a href="<?= \App\View::relUrl('/catalog') ?>" class="hero-cta-button">Explore Products</a>
         </div>
     </div>
     
@@ -26,7 +26,7 @@
         <div class="hero-slide-content">
             <h1>Secure Paystack Payments</h1>
             <p>Pay safely with mobile money, cards, and bank transfers</p>
-            <a href="<?= \App\View::url('/catalog') ?>" class="hero-cta-button">Start Shopping</a>
+            <a href="<?= \App\View::relUrl('/catalog') ?>" class="hero-cta-button">Start Shopping</a>
         </div>
     </div>
     
@@ -110,7 +110,7 @@
                 <div class="category-card-content">
                     <h3><?= \App\View::e($cat['name']) ?></h3>
                     <span class="product-count"><?= $cat['count'] ?> products</span>
-                    <a href="<?= \App\View::url('/catalog?cat=' . $catId) ?>" class="category-browse-btn">Browse →</a>
+                    <a href="<?= \App\View::relUrl('/catalog?cat=' . $catId) ?>" class="category-browse-btn">Browse →</a>
                 </div>
             </div>
             <?php endforeach; ?>
@@ -132,7 +132,7 @@
                 <div class="product-card-modern">
                     <div class="product-image-wrapper">
                         <?php if (!empty($product['image_url'])): ?>
-                            <img src="<?= \App\View::image($product['image_url']) ?>" 
+                            <img src="<?= \App\View::relImage($product['image_url']) ?>" 
                                  alt="<?= \App\View::e($product['name']) ?>" 
                                  class="product-image-modern"
                                  loading="lazy">
@@ -317,8 +317,8 @@
         <h2 class="cta-title-modern">Ready to Start Your Next Project?</h2>
         <p class="cta-subtitle-modern">Browse thousands of quality construction materials from verified suppliers</p>
         <div class="cta-buttons">
-            <a href="<?= \App\View::url('/catalog') ?>" class="cta-btn-primary">Shop Now</a>
-            <a href="<?= \App\View::url('/register?role=supplier') ?>" class="cta-btn-secondary">Become a Supplier</a>
+            <a href="<?= \App\View::relUrl('/catalog') ?>" class="cta-btn-primary">Shop Now</a>
+            <a href="<?= \App\View::relUrl('/register?role=supplier') ?>" class="cta-btn-secondary">Become a Supplier</a>
         </div>
     </div>
 </section>
@@ -328,5 +328,5 @@
     <i class="bi bi-arrow-up"></i>
 </button>
 
-<script src="<?= \App\View::asset('assets/js/homepage-modern.js') ?>"></script>
+<script src="<?= \App\View::relAsset('assets/js/homepage-modern.js') ?>"></script>
 

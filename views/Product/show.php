@@ -2,15 +2,15 @@
     <div class="container">
         <!-- Back Button and Breadcrumb Container -->
         <div class="product-navigation-header">
-            <a href="<?= \App\View::url('/catalog') ?>" class="back-button">
+            <a href="<?= \App\View::relUrl('/catalog') ?>" class="back-button">
                 <i class="icon-arrow-left"></i>
                 <span>Back to Catalog</span>
             </a>
             <nav aria-label="breadcrumb" class="product-breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="<?= \App\View::url('/') ?>">Home</a></li>
-                    <li class="breadcrumb-item"><a href="<?= \App\View::url('/catalog') ?>">Catalog</a></li>
-                    <li class="breadcrumb-item"><a href="<?= \App\View::url('/catalog?cat=' . $product['category_id']) ?>"><?= \App\View::e($product['category_name'] ?? '') ?></a></li>
+                    <li class="breadcrumb-item"><a href="<?= \App\View::relUrl('/') ?>">Home</a></li>
+                    <li class="breadcrumb-item"><a href="<?= \App\View::relUrl('/catalog') ?>">Catalog</a></li>
+                    <li class="breadcrumb-item"><a href="<?= \App\View::relUrl('/catalog?cat=' . $product['category_id']) ?>"><?= \App\View::e($product['category_name'] ?? '') ?></a></li>
                     <li class="breadcrumb-item active" aria-current="page"><?= \App\View::e($product['name']) ?></li>
                 </ol>
             </nav>
@@ -23,7 +23,7 @@
             <div class="product-image-gallery">
                 <div class="main-image-wrapper">
         <?php if (!empty($product['image_url'])): ?>
-                        <img src="<?= \App\View::image($product['image_url']) ?>" 
+                        <img src="<?= \App\View::relImage($product['image_url']) ?>" 
                              class="main-product-image" 
                              alt="<?= \App\View::e($product['name']) ?>"
                              id="mainProductImage"
@@ -100,7 +100,7 @@
 
                 <!-- Purchase Card -->
                 <div class="purchase-card-modern">
-                    <form method="POST" action="<?= \App\View::url('cart/add/' . $product['id']) ?>" id="addToCartForm">
+                    <form method="POST" action="<?= \App\View::relUrl('cart/add/' . $product['id']) ?>" id="addToCartForm">
                         <?= \App\Csrf::field() ?>
                         <div class="quantity-selector-modern">
                             <label class="quantity-label">
@@ -301,7 +301,7 @@
                         
                         <!-- Review Form (Hidden by default) -->
                         <div class="review-form-modern" id="reviewForm" style="display: none;">
-                            <form method="POST" action="<?= \App\View::url('product/review') ?>" id="submitReviewForm">
+                            <form method="POST" action="<?= \App\View::relUrl('product/review') ?>" id="submitReviewForm">
                                 <?= \App\Csrf::field() ?>
                                 <input type="hidden" name="product_id" value="<?= $product['id'] ?>">
                                 
@@ -430,14 +430,14 @@
         <button class="zoom-close-btn" onclick="closeImageZoom()">
             <i class="bi bi-x-lg"></i>
         </button>
-        <img src="<?= !empty($product['image_url']) ? \App\View::image($product['image_url']) : '' ?>" 
+        <img src="<?= !empty($product['image_url']) ? \App\View::relImage($product['image_url']) : '' ?>" 
              class="zoomed-image" 
              alt="<?= \App\View::e($product['name']) ?>">
     </div>
 </div>
 
 <!-- Include Product Detail Styles -->
-<link rel="stylesheet" href="<?= \App\View::asset('assets/css/product-detail.css') ?>">
+<link rel="stylesheet" href="<?= \App\View::relAsset('assets/css/product-detail.css') ?>">
 
 <script>
 // Quantity Controls

@@ -4,6 +4,6 @@
     <?php if (isset($message)): ?>
         <p class="text-danger"><?= \App\View::e($message) ?></p>
     <?php endif; ?>
-    <a href="<?= \App\View::url('/') ?>" class="btn btn-primary">Go Home</a>
+    <a href="<?= \App\View::relUrl('/') ?>" class="btn btn-primary">Go Home</a>
 </div>
 

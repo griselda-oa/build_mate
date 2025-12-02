@@ -1,11 +1,11 @@
-<link rel="stylesheet" href="<?= \App\View::asset('assets/css/kyc-application.css') ?>">
+<link rel="stylesheet" href="<?= \App\View::relAsset('assets/css/kyc-application.css') ?>">
 
 <div class="kyc-application-form">
     <!-- Form Header -->
     <header class="form-header">
         <div class="container">
             <div class="header-content">
-                <a href="<?= \App\View::url('/') ?>" class="logo-link">
+                <a href="<?= \App\View::relUrl('/') ?>" class="logo-link">
                     <i class="icon-hammer"></i> Build Mate
                 </a>
                 <div class="progress-indicator" id="progressIndicator">
@@ -27,7 +27,7 @@
             <div class="form-layout">
                 <!-- Main Form Area (60%) -->
                 <div class="form-main">
-                    <form id="kycForm" method="POST" action="<?= \App\View::url('/supplier/kyc/') ?>" enctype="multipart/form-data" class="multi-step-form">
+                    <form id="kycForm" method="POST" action="<?= \App\View::relUrl('/supplier/kyc/') ?>" enctype="multipart/form-data" class="multi-step-form">
             <?= \App\Csrf::field() ?>
                 
                         <!-- Step 1: Business Information -->
@@ -409,7 +409,7 @@
                                                name="terms_agreement" 
                                                required>
                                         <label for="terms_agreement" class="checkbox-label">
-                                            I agree to Build Mate's <a href="<?= \App\View::url('/terms') ?>" target="_blank">Terms of Service</a> and <a href="<?= \App\View::url('/privacy') ?>" target="_blank">Privacy Policy</a>
+                                            I agree to Build Mate's <a href="<?= \App\View::relUrl('/terms') ?>" target="_blank">Terms of Service</a> and <a href="<?= \App\View::relUrl('/privacy') ?>" target="_blank">Privacy Policy</a>
                                             <span class="required">*</span>
                                         </label>
                                     </div>
@@ -498,7 +498,7 @@
                             <h3>
                                 <i class="bi bi-question-circle"></i> Need help?
                             </h3>
-                            <a href="<?= \App\View::url('/contact') ?>" class="btn-sidebar">
+                            <a href="<?= \App\View::relUrl('/contact') ?>" class="btn-sidebar">
                                 <i class="bi bi-chat-dots"></i> Chat with Support
                             </a>
                 </div>

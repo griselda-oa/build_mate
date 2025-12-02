@@ -1,12 +1,12 @@
 <!-- Modern Supplier Dashboard -->
-<link rel="stylesheet" href="<?= \App\View::asset('assets/css/supplier-dashboard.css') ?>">
-<link rel="stylesheet" href="<?= \App\View::asset('assets/css/ad-banner.css') ?>">
+<link rel="stylesheet" href="<?= \App\View::relAsset('assets/css/supplier-dashboard.css') ?>">
+<link rel="stylesheet" href="<?= \App\View::relAsset('assets/css/ad-banner.css') ?>">
 
 <div class="supplier-dashboard-page">
     <div class="container">
         <!-- Back Button -->
         <div class="mb-4">
-            <a href="<?= \App\View::url('/') ?>" class="back-button">
+            <a href="<?= \App\View::relUrl('/') ?>" class="back-button">
                 <i class="icon-arrow-left"></i>
                 <span>Back to Home</span>
             </a>
@@ -41,10 +41,10 @@
                         </div>
                     </div>
                     <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
-                        <a href="<?= \App\View::url('/supplier/advertisements/create') ?>" class="btn" style="background: white; color: #FFA500; border: none; padding: 0.75rem 1.5rem; border-radius: 8px; font-weight: 600; text-decoration: none;">
+                        <a href="<?= \App\View::relUrl('/supplier/advertisements/create') ?>" class="btn" style="background: white; color: #FFA500; border: none; padding: 0.75rem 1.5rem; border-radius: 8px; font-weight: 600; text-decoration: none;">
                             <i class="bi bi-megaphone"></i> Create Ad
                         </a>
-                        <a href="<?= \App\View::url('/supplier/advertisements') ?>" class="btn" style="background: rgba(255, 255, 255, 0.2); color: white; border: 2px solid white; padding: 0.75rem 1.5rem; border-radius: 8px; font-weight: 600; text-decoration: none;">
+                        <a href="<?= \App\View::relUrl('/supplier/advertisements') ?>" class="btn" style="background: rgba(255, 255, 255, 0.2); color: white; border: 2px solid white; padding: 0.75rem 1.5rem; border-radius: 8px; font-weight: 600; text-decoration: none;">
                             <i class="bi bi-list-ul"></i> My Ads
                         </a>
                     </div>
@@ -64,7 +64,7 @@
                             </div>
                         </div>
                     </div>
-                    <a href="<?= \App\View::url('/supplier/premium/upgrade') ?>" class="btn" style="background: white; color: #667eea; border: none; padding: 0.75rem 2rem; border-radius: 8px; font-weight: 700; text-decoration: none; font-size: 1rem;">
+                    <a href="<?= \App\View::relUrl('/supplier/premium/upgrade') ?>" class="btn" style="background: white; color: #667eea; border: none; padding: 0.75rem 2rem; border-radius: 8px; font-weight: 700; text-decoration: none; font-size: 1rem;">
                         <i class="bi bi-arrow-up-circle"></i> Upgrade Now
                     </a>
                 </div>
@@ -164,7 +164,7 @@
                         <i class="icon-box-seam"></i>
                         Recent Products
                     </h3>
-                    <a href="<?= \App\View::url('/supplier/products') ?>" class="section-action-btn">
+                    <a href="<?= \App\View::relUrl('/supplier/products') ?>" class="section-action-btn">
                         <i class="bi bi-gear"></i>
                         Manage
                     </a>
@@ -178,7 +178,7 @@
                     <?php else: ?>
                         <div class="items-list-modern">
                             <?php foreach (array_slice($products, 0, 5) as $product): ?>
-                                <a href="<?= \App\View::url('/product/' . \App\View::e($product['slug'] ?? '')) ?>" class="item-modern" style="text-decoration: none; color: inherit;">
+                                <a href="<?= \App\View::relUrl('/product/' . \App\View::e($product['slug'] ?? '')) ?>" class="item-modern" style="text-decoration: none; color: inherit;">
                                     <span class="item-name-modern"><?= \App\View::e($product['name']) ?></span>
                                     <span class="item-badge-modern <?= $product['verified'] ? 'verified' : 'pending' ?>">
                                         <i class="bi bi-<?= $product['verified'] ? 'check-circle-fill' : 'clock' ?>"></i>
@@ -198,7 +198,7 @@
                         <i class="icon-cart-check"></i>
                         Recent Orders
                     </h3>
-                    <a href="<?= \App\View::url('/supplier/orders') ?>" class="section-action-btn">
+                    <a href="<?= \App\View::relUrl('/supplier/orders') ?>" class="section-action-btn">
                         <i class="bi bi-arrow-right"></i>
                         View All
                     </a>
@@ -212,7 +212,7 @@
                     <?php else: ?>
                         <div class="items-list-modern">
                             <?php foreach (array_slice($orders, 0, 5) as $order): ?>
-                                <a href="<?= \App\View::url('/orders/' . $order['id']) ?>" class="item-modern" style="text-decoration: none; color: inherit;">
+                                <a href="<?= \App\View::relUrl('/orders/' . $order['id']) ?>" class="item-modern" style="text-decoration: none; color: inherit;">
                                     <div style="flex: 1;">
                                         <div class="item-name-modern">
                                             <?= \App\Money::format($order['total_cents'] ?? 0, $order['currency'] ?? 'GHS') ?>
@@ -237,26 +237,26 @@
 
         <!-- Action Buttons -->
         <div class="dashboard-actions-modern">
-            <a href="<?= \App\View::url('/supplier/products') ?>" class="action-btn-modern">
+            <a href="<?= \App\View::relUrl('/supplier/products') ?>" class="action-btn-modern">
                 <i class="icon-plus-circle"></i>
                 <span>Add New Product</span>
             </a>
-            <a href="<?= \App\View::url('/supplier/orders') ?>" class="action-btn-modern secondary">
+            <a href="<?= \App\View::relUrl('/supplier/orders') ?>" class="action-btn-modern secondary">
                 <i class="bi bi-list-ul"></i>
                 <span>View All Orders</span>
             </a>
             <?php if (isset($isPremium) && $isPremium): ?>
-                <a href="<?= \App\View::url('/supplier/advertisements/create') ?>" class="action-btn-modern" style="background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%); border: none;">
+                <a href="<?= \App\View::relUrl('/supplier/advertisements/create') ?>" class="action-btn-modern" style="background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%); border: none;">
                     <i class="bi bi-megaphone"></i>
                     <span>Create Advertisement</span>
                 </a>
             <?php else: ?>
-                <a href="<?= \App\View::url('/supplier/premium/upgrade') ?>" class="action-btn-modern" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border: none;">
+                <a href="<?= \App\View::relUrl('/supplier/premium/upgrade') ?>" class="action-btn-modern" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border: none;">
                     <i class="icon-star"></i>
                     <span>Upgrade to Premium</span>
                 </a>
             <?php endif; ?>
-            <a href="<?= \App\View::url('/supplier/kyc') ?>" class="action-btn-modern secondary">
+            <a href="<?= \App\View::relUrl('/supplier/kyc') ?>" class="action-btn-modern secondary">
                 <i class="bi bi-shield-check"></i>
                 <span>Manage KYC</span>
             </a>

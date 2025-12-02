@@ -23,7 +23,7 @@
                 </div>
             <?php endif; ?>
 
-            <form method="POST" action="<?= \App\View::url('/login') ?>" class="auth-form">
+            <form method="POST" action="<?= \App\View::relUrl('/login') ?>" class="auth-form">
                 <?= \App\Csrf::field() ?>
                 
                 <div class="form-group">
@@ -57,7 +57,7 @@
             </form>
 
             <div class="auth-footer">
-                <p>Don't have an account? <a href="<?= \App\View::url('/register') ?>">Sign up here</a></p>
+                <p>Don't have an account? <a href="<?= \App\View::relUrl('/register') ?>">Sign up here</a></p>
             </div>
         </div>
     </div>
@@ -232,7 +232,7 @@
                 </div>
             <?php endif; ?>
 
-            <form method="POST" action="<?= \App\View::url('/login') ?>" class="auth-form">
+            <form method="POST" action="<?= \App\View::relUrl('/login') ?>" class="auth-form">
                 <?= \App\Csrf::field() ?>
                 
                 <div class="form-group">
@@ -266,7 +266,7 @@
             </form>
 
             <div class="auth-footer">
-                <p>Don't have an account? <a href="<?= \App\View::url('/register') ?>">Sign up here</a></p>
+                <p>Don't have an account? <a href="<?= \App\View::relUrl('/register') ?>">Sign up here</a></p>
             </div>
         </div>
     </div>
@@ -439,7 +439,7 @@
                 </div>
             <?php endif; ?>
 
-            <form method="POST" action="<?= \App\View::url('/login') ?>" class="auth-form">
+            <form method="POST" action="<?= \App\View::relUrl('/login') ?>" class="auth-form">
                 <?= \App\Csrf::field() ?>
                 
                 <div class="form-group">
@@ -473,7 +473,7 @@
             </form>
 
             <div class="auth-footer">
-                <p>Don't have an account? <a href="<?= \App\View::url('/register') ?>">Sign up here</a></p>
+                <p>Don't have an account? <a href="<?= \App\View::relUrl('/register') ?>">Sign up here</a></p>
             </div>
         </div>
     </div>
@@ -648,7 +648,7 @@
                 </div>
             <?php endif; ?>
 
-            <form method="POST" action="<?= \App\View::url('/login') ?>" class="auth-form">
+            <form method="POST" action="<?= \App\View::relUrl('/login') ?>" class="auth-form">
                 <?= \App\Csrf::field() ?>
                 
                 <div class="form-group">
@@ -682,7 +682,7 @@
             </form>
 
             <div class="auth-footer">
-                <p>Don't have an account? <a href="<?= \App\View::url('/register') ?>">Sign up here</a></p>
+                <p>Don't have an account? <a href="<?= \App\View::relUrl('/register') ?>">Sign up here</a></p>
             </div>
         </div>
     </div>

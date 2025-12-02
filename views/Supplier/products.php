@@ -1,5 +1,5 @@
 <div class="mb-3">
-    <a href="<?= \App\View::url('/supplier/dashboard') ?>" class="back-button">
+    <a href="<?= \App\View::relUrl('/supplier/dashboard') ?>" class="back-button">
         <i class="icon-arrow-left"></i>
         <span>Back to Dashboard</span>
     </a>
@@ -62,7 +62,7 @@
                     </td>
                     <td>
                         <button class="btn btn-sm btn-primary" onclick="editProduct(<?= htmlspecialchars(json_encode($product)) ?>)">Edit</button>
-                        <form method="POST" action="<?= \App\View::url('supplier/products/' . $product['id'] . '/delete') ?>" class="d-inline">
+                        <form method="POST" action="<?= \App\View::relUrl('supplier/products/' . $product['id'] . '/delete') ?>" class="d-inline">
                             <?= \App\Csrf::field() ?>
                             <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
                         </form>
@@ -81,7 +81,7 @@
                 <h5 class="modal-title">Add Product</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
-            <form method="POST" action="<?= \App\View::url('supplier/products') ?>" id="productForm" enctype="multipart/form-data">
+            <form method="POST" action="<?= \App\View::relUrl('supplier/products') ?>" id="productForm" enctype="multipart/form-data">
                 <?= \App\Csrf::field() ?>
                 <div class="modal-body">
                     <div class="mb-3">

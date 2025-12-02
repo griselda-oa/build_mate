@@ -26,7 +26,7 @@ if ($orderStatus === 'placed' && ($order['status'] ?? '') === 'shipped') {
 <div class="admin-order-details-page">
 <div class="container">
     <div class="mb-4">
-        <a href="<?= \App\View::url('/admin/orders') ?>" class="admin-back-btn">
+        <a href="<?= \App\View::relUrl('/admin/orders') ?>" class="admin-back-btn">
             <i class="icon-arrow-left"></i> Back to Orders
         </a>
     </div>
@@ -318,8 +318,8 @@ if ($orderStatus === 'placed' && ($order['status'] ?? '') === 'shipped') {
         </div>
     </div>
 
-<link rel="stylesheet" href="<?= \App\View::asset('assets/css/admin-order-details.css') ?>?v=<?= time() ?>">
-<link rel="stylesheet" href="<?= \App\View::asset('assets/css/delivery-tracker.css') ?>?v=<?= time() ?>">
+<link rel="stylesheet" href="<?= \App\View::relAsset('assets/css/admin-order-details.css') ?>?v=<?= time() ?>">
+<link rel="stylesheet" href="<?= \App\View::relAsset('assets/css/delivery-tracker.css') ?>?v=<?= time() ?>">
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {

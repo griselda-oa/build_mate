@@ -1,5 +1,5 @@
 <div class="mb-3">
-    <a href="<?= \App\View::url('/catalog') ?>" class="back-button">
+    <a href="<?= \App\View::relUrl('/catalog') ?>" class="back-button">
         <i class="icon-arrow-left"></i>
         <span>Continue Shopping</span>
     </a>
@@ -9,7 +9,7 @@
 
 <?php if (empty($products)): ?>
     <div class="alert alert-info">
-        <p>Your cart is empty. <a href="<?= \App\View::url('/catalog') ?>">Browse products</a></p>
+        <p>Your cart is empty. <a href="<?= \App\View::relUrl('/catalog') ?>">Browse products</a></p>
     </div>
 <?php else: ?>
     <div class="row">
@@ -28,7 +28,7 @@
                     <?php foreach ($products as $product): ?>
                         <tr>
                             <td>
-                                <a href="<?= \App\View::url('/product/' . \App\View::e($product['slug'])) ?>">
+                                <a href="<?= \App\View::relUrl('/product/' . \App\View::e($product['slug'])) ?>">
                                     <?= \App\View::e($product['name']) ?>
                                 </a>
                             </td>
@@ -36,7 +36,7 @@
                                 <?= \App\Money::format($product['price_cents'], $product['currency']) ?>
                             </td>
                             <td>
-                                <form method="POST" action="<?= \App\View::url('/cart/update/') ?>" class="d-inline">
+                                <form method="POST" action="<?= \App\View::relUrl('/cart/update/') ?>" class="d-inline">
                                     <?= \App\Csrf::field() ?>
                                     <input type="hidden" name="product_id" value="<?= $product['id'] ?>">
                                     <input type="number" name="qty" value="<?= $product['qty'] ?>" min="1" max="<?= $product['stock'] ?>" class="form-control form-control-sm" style="width: 80px; display: inline-block;" onchange="this.form.submit()">
@@ -46,7 +46,7 @@
                                 <?= \App\Money::format($product['price_cents'] * $product['qty'], $product['currency']) ?>
                             </td>
                             <td>
-                                <form method="POST" action="<?= \App\View::url('/cart/remove/' . $product['id'] . '/') ?>" class="d-inline">
+                                <form method="POST" action="<?= \App\View::relUrl('/cart/remove/' . $product['id'] . '/') ?>" class="d-inline">
                                     <?= \App\Csrf::field() ?>
                                     <button type="submit" class="btn btn-sm btn-danger">Remove</button>
                                 </form>
@@ -62,7 +62,7 @@
                     <h5>Order Summary</h5>
                     <hr>
                     <p><strong>Total:</strong> <span data-price-cents="<?= $total ?>" data-currency="GHS"><?= \App\Money::format($total, 'GHS') ?></span></p>
-                    <a href="<?= \App\View::url('/checkout') ?>" class="btn btn-primary w-100">Proceed to Checkout</a>
+                    <a href="<?= \App\View::relUrl('/checkout') ?>" class="btn btn-primary w-100">Proceed to Checkout</a>
                 </div>
             </div>
         </div>

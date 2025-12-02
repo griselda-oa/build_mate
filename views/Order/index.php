@@ -1,9 +1,9 @@
-<link rel="stylesheet" href="<?= \App\View::asset('assets/css/buyer-orders.css') ?>">
+<link rel="stylesheet" href="<?= \App\View::relAsset('assets/css/buyer-orders.css') ?>">
 
 <div class="buyer-orders-page">
     <div class="buyer-orders-container">
         <!-- Back Button -->
-        <a href="<?= \App\View::url('/') ?>" class="buyer-back-btn">
+        <a href="<?= \App\View::relUrl('/') ?>" class="buyer-back-btn">
             <i class="icon-arrow-left"></i>
             <span>Back to Home</span>
         </a>
@@ -12,19 +12,19 @@
         <div class="buyer-orders-header">
             <h1 class="buyer-orders-title">My Orders</h1>
             <div class="buyer-filter-tabs">
-                <a href="<?= \App\View::url('/orders') ?>" 
+                <a href="<?= \App\View::relUrl('/orders') ?>" 
                    class="buyer-filter-tab <?= !isset($_GET['status']) ? 'active' : '' ?>">
                     All
                 </a>
-                <a href="<?= \App\View::url('/orders?status=pending') ?>" 
+                <a href="<?= \App\View::relUrl('/orders?status=pending') ?>" 
                    class="buyer-filter-tab <?= ($_GET['status'] ?? '') === 'pending' ? 'active' : '' ?>">
                     Pending
                 </a>
-                <a href="<?= \App\View::url('/orders?status=processing') ?>" 
+                <a href="<?= \App\View::relUrl('/orders?status=processing') ?>" 
                    class="buyer-filter-tab <?= ($_GET['status'] ?? '') === 'processing' ? 'active' : '' ?>">
                     Processing
                 </a>
-                <a href="<?= \App\View::url('/orders?status=delivered') ?>" 
+                <a href="<?= \App\View::relUrl('/orders?status=delivered') ?>" 
                    class="buyer-filter-tab <?= ($_GET['status'] ?? '') === 'delivered' ? 'active' : '' ?>">
                     Delivered
                 </a>
@@ -58,7 +58,7 @@
                 </div>
                 <h3 class="buyer-empty-state-title">No Orders Yet</h3>
                 <p class="buyer-empty-state-text">You haven't placed any orders yet. Start shopping to see your orders here!</p>
-                <a href="<?= \App\View::url('/catalog') ?>" class="buyer-empty-state-link">
+                <a href="<?= \App\View::relUrl('/catalog') ?>" class="buyer-empty-state-link">
                     <i class="icon-cart"></i> Start Shopping
                 </a>
             </div>
@@ -146,12 +146,12 @@
                                 </td>
                                 <td data-label="Actions">
                                     <div class="buyer-order-actions">
-                                        <a href="<?= \App\View::url('/orders/' . $order['id']) ?>" 
+                                        <a href="<?= \App\View::relUrl('/orders/' . $order['id']) ?>" 
                                            class="buyer-action-btn view">
                                             <i class="icon-eye"></i> View
                                         </a>
                                         <?php if ($isPaid): ?>
-                                            <a href="<?= \App\View::url('/orders/' . $order['id'] . '/track-delivery') ?>" 
+                                            <a href="<?= \App\View::relUrl('/orders/' . $order['id'] . '/track-delivery') ?>" 
                                                class="buyer-action-btn track">
                                                 <i class="icon-truck"></i> Track Delivery
                                             </a>

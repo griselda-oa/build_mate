@@ -3,7 +3,7 @@
     <!-- Hero Header -->
     <div class="order-detail-hero">
         <div class="container">
-            <a href="<?= \App\View::url('/orders') ?>" class="back-btn-hero">
+            <a href="<?= \App\View::relUrl('/orders') ?>" class="back-btn-hero">
                 <i class="icon-arrow-left"></i>
                 <span>Back to Orders</span>
             </a>
@@ -46,9 +46,9 @@
                                 <div class="order-item-modern">
                                     <div class="item-image-wrapper">
                                         <?php if (!empty($item['image_path'])): ?>
-                                            <img src="<?= \App\View::image($item['image_path']) ?>" 
+                                            <img src="<?= \App\View::relImage($item['image_path']) ?>" 
                                                  alt="<?= \App\View::e($item['product_name']) ?>"
-                                                 onerror="this.src='<?= \App\View::asset('assets/images/placeholder.png') ?>'">
+                                                 onerror="this.src='<?= \App\View::relAsset('assets/images/placeholder.png') ?>'">
                                         <?php else: ?>
                                             <div class="item-placeholder">
                                                 <i class="bi bi-image"></i>
@@ -57,7 +57,7 @@
                                     </div>
                                     <div class="item-details">
                                         <h4 class="item-name">
-                                            <a href="<?= \App\View::url('/product/' . \App\View::e($item['product_slug'] ?? '')) ?>">
+                                            <a href="<?= \App\View::relUrl('/product/' . \App\View::e($item['product_slug'] ?? '')) ?>">
                                                 <?= \App\View::e($item['product_name']) ?>
                                             </a>
                                         </h4>
@@ -294,7 +294,7 @@
                         </div>
                         <div class="order-card-body">
                             <p>Please confirm that you have received your order. This will release Paystack funds to the supplier.</p>
-                            <form method="POST" action="<?= \App\View::url('/orders/' . $order['id'] . '/confirm-delivery/') ?>">
+                            <form method="POST" action="<?= \App\View::relUrl('/orders/' . $order['id'] . '/confirm-delivery/') ?>">
                                 <?= \App\Csrf::field() ?>
                                 <button type="submit" class="btn-action-primary">
                                     <i class="bi bi-check-circle"></i>
@@ -362,7 +362,7 @@
                             </div>
                         <?php endif; ?>
                         <div class="summary-actions">
-                            <a href="<?= \App\View::url('/orders/' . $order['id'] . '/invoice.pdf') ?>" class="btn-action-outline">
+                            <a href="<?= \App\View::relUrl('/orders/' . $order['id'] . '/invoice.pdf') ?>" class="btn-action-outline">
                                 <i class="bi bi-download"></i>
                                 Download Invoice
                             </a>
@@ -374,7 +374,7 @@
                 <div class="support-card">
                     <h4><i class="bi bi-headset"></i> Need Help?</h4>
                     <p>Have questions about your order?</p>
-                    <a href="<?= \App\View::url('/contact') ?>" class="btn-action-outline">
+                    <a href="<?= \App\View::relUrl('/contact') ?>" class="btn-action-outline">
                         <i class="bi bi-envelope"></i>
                         Contact Support
                     </a>
@@ -385,10 +385,10 @@
 </div>
 
 <!-- Order Detail Styles -->
-<link rel="stylesheet" href="<?= \App\View::asset('assets/css/order-detail.css?v=' . time()) ?>">
-<link rel="stylesheet" href="<?= \App\View::asset('assets/css/delivery-tracker.css?v=' . time()) ?>">
-<link rel="stylesheet" href="<?= \App\View::asset('assets/css/order-tracking.css?v=' . time()) ?>">
-<script src="<?= \App\View::asset('assets/js/delivery-tracker.js?v=' . time()) ?>"></script>
+<link rel="stylesheet" href="<?= \App\View::relAsset('assets/css/order-detail.css?v=' . time()) ?>">
+<link rel="stylesheet" href="<?= \App\View::relAsset('assets/css/delivery-tracker.css?v=' . time()) ?>">
+<link rel="stylesheet" href="<?= \App\View::relAsset('assets/css/order-tracking.css?v=' . time()) ?>">
+<script src="<?= \App\View::relAsset('assets/js/delivery-tracker.js?v=' . time()) ?>"></script>
 <script>
 // Initialize tracker with current order status
 document.addEventListener('DOMContentLoaded', function() {

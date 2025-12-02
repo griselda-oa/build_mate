@@ -1,11 +1,11 @@
 <!-- Premium Upgrade Page -->
-<link rel="stylesheet" href="<?= \App\View::asset('assets/css/supplier-dashboard.css') ?>">
+<link rel="stylesheet" href="<?= \App\View::relAsset('assets/css/supplier-dashboard.css') ?>">
 
 <div class="supplier-dashboard-page">
     <div class="container">
         <!-- Back Button -->
         <div class="mb-4">
-            <a href="<?= \App\View::url('/supplier/dashboard') ?>" class="back-button">
+            <a href="<?= \App\View::relUrl('/supplier/dashboard') ?>" class="back-button">
                 <i class="icon-arrow-left"></i>
                 <span>Back to Dashboard</span>
             </a>
@@ -32,10 +32,10 @@
                         <?php endif; ?>
                     </p>
                     <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-                        <a href="<?= \App\View::url('/supplier/advertisements/create') ?>" class="btn" style="background: white; color: #FFA500; padding: 0.75rem 2rem; border-radius: 8px; font-weight: 600; text-decoration: none;">
+                        <a href="<?= \App\View::relUrl('/supplier/advertisements/create') ?>" class="btn" style="background: white; color: #FFA500; padding: 0.75rem 2rem; border-radius: 8px; font-weight: 600; text-decoration: none;">
                             <i class="bi bi-megaphone"></i> Create Advertisement
                         </a>
-                        <a href="<?= \App\View::url('/supplier/dashboard') ?>" class="btn" style="background: rgba(255, 255, 255, 0.2); color: white; border: 2px solid white; padding: 0.75rem 2rem; border-radius: 8px; font-weight: 600; text-decoration: none;">
+                        <a href="<?= \App\View::relUrl('/supplier/dashboard') ?>" class="btn" style="background: rgba(255, 255, 255, 0.2); color: white; border: 2px solid white; padding: 0.75rem 2rem; border-radius: 8px; font-weight: 600; text-decoration: none;">
                             <i class="icon-arrow-left"></i> Back to Dashboard
                         </a>
                     </div>

@@ -4,7 +4,7 @@
     <div class="tracking-hero-ultra">
         <div class="container">
             <div class="tracking-hero-content-ultra">
-                <a href="<?= \App\View::url('/orders/<?= $order['id'] ?>') ?>" class="back-btn-ultra">
+                <a href="<?= \App\View::relUrl('/orders/<?= $order['id'] ?>') ?>" class="back-btn-ultra">
                     <i class="icon-arrow-left"></i>
                     <span>Back</span>
                 </a>
@@ -241,17 +241,17 @@
             </form>
             
             <p style="color: #92400E; font-size: 0.875rem; margin-top: 1rem;">
-                If you have NOT received your order, please <a href="<?= \App\View::url('/contact') ?>" style="color: #92400E; font-weight: 700;">contact support</a>.
+                If you have NOT received your order, please <a href="<?= \App\View::relUrl('/contact') ?>" style="color: #92400E; font-weight: 700;">contact support</a>.
             </p>
         </div>
         <?php endif; ?>
         
         <div class="order-actions-card">
-            <a href="<?= \App\View::url('/orders/<?= $order['id'] ?>') ?>" class="btn-modern btn-primary-modern">
+            <a href="<?= \App\View::relUrl('/orders/<?= $order['id'] ?>') ?>" class="btn-modern btn-primary-modern">
                 <i class="bi bi-receipt"></i>
                 View Full Order Details
             </a>
-            <a href="<?= \App\View::url('/orders') ?>" class="btn-modern btn-secondary-modern">
+            <a href="<?= \App\View::relUrl('/orders') ?>" class="btn-modern btn-secondary-modern">
                 <i class="icon-arrow-left"></i>
                 Back to Orders
             </a>
@@ -266,7 +266,7 @@
                 <h2>Preparing Your Delivery</h2>
                 <p>Your order has been confirmed and payment received. Delivery information will be available shortly.</p>
                 <div class="empty-actions-ultra">
-                    <a href="<?= \App\View::url('/orders/<?= $order['id'] ?>') ?>" class="btn-ultra btn-primary-ultra">
+                    <a href="<?= \App\View::relUrl('/orders/<?= $order['id'] ?>') ?>" class="btn-ultra btn-primary-ultra">
                         <i class="bi bi-receipt"></i>
                         View Order Details
                     </a>
@@ -479,14 +479,14 @@ function initDeliveryMapUltra() {
 <?php endif; ?>
 
 <!-- Modern Delivery Tracker Styles -->
-<link rel="stylesheet" href="<?= \App\View::asset('assets/css/delivery-tracker.css?v=<?= time() ?>">
+<link rel="stylesheet" href="<?= \App\View::relAsset('assets/css/delivery-tracker.css?v=<?= time() ?>">
 <!-- Order Tracking Timeline Styles -->
-<link rel="stylesheet" href="<?= \App\View::asset('assets/css/order-tracking.css?v=<?= time() ?>">
+<link rel="stylesheet" href="<?= \App\View::relAsset('assets/css/order-tracking.css?v=<?= time() ?>">
 <!-- Ultra Modern Tracking Styles -->
-<link rel="stylesheet" href="<?= \App\View::asset('assets/css/tracking-ultra.css?v=<?= time() ?>">
+<link rel="stylesheet" href="<?= \App\View::relAsset('assets/css/tracking-ultra.css?v=<?= time() ?>">
 
 <!-- Delivery Tracker JavaScript -->
-<script src="<?= \App\View::asset('assets/js/delivery-tracker.js') ?>?v=<?= time() ?> ?>"></script>
+<script src="<?= \App\View::relAsset('assets/js/delivery-tracker.js') ?>?v=<?= time() ?> ?>"></script>
 <script>
 // Initialize tracker with current order status
 document.addEventListener('DOMContentLoaded', function() {

@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="<?= \App\View::asset('assets/css/admin-suppliers.css') ?>">
+<link rel="stylesheet" href="<?= \App\View::relAsset('assets/css/admin-suppliers.css') ?>">
 
 <div class="admin-suppliers-page">
     <div class="admin-suppliers-container">
@@ -114,24 +114,24 @@
                                     <td>
                                         <div class="supplier-actions">
                                             <?php if ($supplier['kyc_status'] === 'pending'): ?>
-                                                <form method="POST" action="<?= \App\View::url('/admin/suppliers/' . $supplier['id'] . '/approve') ?>" class="d-inline">
+                                                <form method="POST" action="<?= \App\View::relUrl('/admin/suppliers/' . $supplier['id'] . '/approve') ?>" class="d-inline">
                                                     <?= \App\Csrf::field() ?>
                                                     <button type="submit" class="supplier-action-btn approve">
                                                         <i class="bi bi-check-circle"></i> Approve
                                                     </button>
                                                 </form>
-                                                <form method="POST" action="<?= \App\View::url('/admin/suppliers/' . $supplier['id'] . '/reject') ?>" class="d-inline">
+                                                <form method="POST" action="<?= \App\View::relUrl('/admin/suppliers/' . $supplier['id'] . '/reject') ?>" class="d-inline">
                                                     <?= \App\Csrf::field() ?>
                                                     <button type="submit" class="supplier-action-btn reject">
                                                         <i class="bi bi-x-circle"></i> Reject
                                                     </button>
                                                 </form>
                                             <?php endif; ?>
-                                            <a href="<?= \App\View::url('/admin/suppliers/' . $supplier['id']) ?>" class="supplier-action-btn view">
+                                            <a href="<?= \App\View::relUrl('/admin/suppliers/' . $supplier['id']) ?>" class="supplier-action-btn view">
                                                 <i class="icon-eye"></i> View
                                             </a>
                                             <form method="POST" 
-                                                  action="<?= \App\View::url('/admin/suppliers/' . $supplier['id'] . '/delete') ?>" 
+                                                  action="<?= \App\View::relUrl('/admin/suppliers/' . $supplier['id'] . '/delete') ?>" 
                                                   class="d-inline"
                                                   onsubmit="return confirm('Are you sure you want to delete this supplier? This will permanently delete the supplier and ALL their products. This action cannot be undone.');">
                                                 <?= \App\Csrf::field() ?>

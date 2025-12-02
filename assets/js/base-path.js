@@ -1,31 +1,39 @@
 /**
- * Build URL with dynamic base path
- * Gets base path from meta tag set by PHP
+ * Build URL with relative paths based on route depth
+ * Gets route depth from meta tag set by PHP
  */
 (function() {
-    // Get base path from meta tag
-    function getBasePath() {
-        const meta = document.querySelector('meta[name="base-path"]');
+    // Get route depth from meta tag
+    function getRouteDepth() {
+        const meta = document.querySelector('meta[name="route-depth"]');
         if (meta && meta.content) {
-            let path = meta.content;
-            // Ensure it ends with /
-            return path.endsWith('/') ? path : path + '/';
+            return parseInt(meta.content, 10) || 0;
         }
-        return '/';
+        return 0;
     }
     
-    // Global base path variable
-    window.BASE_PATH = getBasePath();
+    // Generate relative path prefix based on depth
+    function getRelativePrefix() {
+        const depth = getRouteDepth();
+        if (depth === 0) {
+            return './';
+        }
+        return '../'.repeat(depth);
+    }
     
-    // Build URL function - use this instead of hardcoded paths
+    // Global route depth variable
+    window.ROUTE_DEPTH = getRouteDepth();
+    
+    // Global relative prefix
+    window.REL_PREFIX = getRelativePrefix();
+    
+    // Build URL function - generates relative URLs
     window.buildUrl = function(path) {
         // Remove leading slash from path if present
         path = path ? path.toString().replace(/^\/+/, '') : '';
-        return window.BASE_PATH + path;
+        return window.REL_PREFIX + path;
     };
     
     // Log for debugging (remove in production)
-    console.log('Base path set to:', window.BASE_PATH);
+    console.log('Route depth:', window.ROUTE_DEPTH, 'Prefix:', window.REL_PREFIX);
 })();
-
-

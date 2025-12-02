@@ -1,12 +1,12 @@
 <!-- Create Advertisement Page -->
-<link rel="stylesheet" href="<?= \App\View::asset('assets/css/supplier-dashboard.css') ?>">
-<link rel="stylesheet" href="<?= \App\View::asset('assets/css/advertisement-form.css') ?>">
+<link rel="stylesheet" href="<?= \App\View::relAsset('assets/css/supplier-dashboard.css') ?>">
+<link rel="stylesheet" href="<?= \App\View::relAsset('assets/css/advertisement-form.css') ?>">
 
 <div class="supplier-dashboard-page">
     <div class="container">
         <!-- Back Button -->
         <div class="mb-4">
-            <a href="<?= \App\View::url('/supplier/dashboard') ?>" class="back-button">
+            <a href="<?= \App\View::relUrl('/supplier/dashboard') ?>" class="back-button">
                 <i class="icon-arrow-left"></i>
                 <span>Back to Dashboard</span>
             </a>
@@ -52,7 +52,7 @@
 
         <!-- Advertisement Form (Hidden until payment is complete) -->
         <div class="ad-form-container" id="adFormContainer" style="display: none;">
-            <form method="POST" action="<?= \App\View::url('/supplier/advertisements/create') ?>" id="adForm" enctype="multipart/form-data">
+            <form method="POST" action="<?= \App\View::relUrl('/supplier/advertisements/create') ?>" id="adForm" enctype="multipart/form-data">
                 <?= \App\Csrf::field() ?>
                 <input type="hidden" name="payment_reference" id="paymentReference" value="">
                 
@@ -67,7 +67,7 @@
                                 <i class="bi bi-exclamation-triangle"></i>
                                 <strong>No products found.</strong> You need to create at least one product before you can create an advertisement.
                                 <br><br>
-                                <a href="<?= \App\View::url('/supplier/products') ?>" class="btn btn-primary">
+                                <a href="<?= \App\View::relUrl('/supplier/products') ?>" class="btn btn-primary">
                                     <i class="icon-plus-circle"></i> Create Your First Product
                                 </a>
                             </div>
@@ -129,7 +129,7 @@
                         <i class="bi bi-lightning-fill"></i>
                         <span>Create Advertisement</span>
                     </button>
-                    <a href="<?= \App\View::url('/supplier/dashboard') ?>" class="ad-btn ad-btn-secondary">
+                    <a href="<?= \App\View::relUrl('/supplier/dashboard') ?>" class="ad-btn ad-btn-secondary">
                         <i class="bi bi-x-circle"></i>
                         <span>Cancel</span>
                     </a>
@@ -139,7 +139,7 @@
     </div>
 </div>
 
-<script src="<?= \App\View::asset('assets/js/advertisement-form.js') ?>"></script>
+<script src="<?= \App\View::relAsset('assets/js/advertisement-form.js') ?>"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     // Check if payment was successful (from callback)

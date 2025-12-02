@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="<?= \App\View::asset('assets/css/pending-dashboard.css') ?>">
+<link rel="stylesheet" href="<?= \App\View::relAsset('assets/css/pending-dashboard.css') ?>">
 
 <div class="pending-dashboard">
     <!-- Hero Section -->
@@ -14,10 +14,10 @@
                     We'll notify you within 24-48 hours.
                 </p>
                 <div class="hero-actions" id="heroActions">
-                    <a href="<?= \App\View::url('/') ?>" class="btn-glass btn-glass-light">
+                    <a href="<?= \App\View::relUrl('/') ?>" class="btn-glass btn-glass-light">
                         <i class="bi bi-house"></i> Back to Home
                     </a>
-                    <a href="<?= \App\View::url('/contact') ?>" class="btn-glass btn-glass-dark">
+                    <a href="<?= \App\View::relUrl('/contact') ?>" class="btn-glass btn-glass-dark">
                         <i class="bi bi-headset"></i> Contact Support
                     </a>
                 </div>
@@ -84,7 +84,7 @@
                         We're validating your company info and documents.
                     </p>
                     <span class="card-badge active-badge">In Progress</span>
-                    <a href="<?= \App\View::url('/supplier/kyc') ?>" class="card-link">View Status →</a>
+                    <a href="<?= \App\View::relUrl('/supplier/kyc') ?>" class="card-link">View Status →</a>
                 </div>
 
                 <!-- Card 2: Product Upload (Locked) -->
@@ -172,7 +172,7 @@
                     <a href="mailto:support@buildmate.com" class="btn-support">
                         <i class="bi bi-envelope"></i> Email Support
                     </a>
-                    <a href="<?= \App\View::url('/contact') ?>" class="btn-support btn-support-primary">
+                    <a href="<?= \App\View::relUrl('/contact') ?>" class="btn-support btn-support-primary">
                         <i class="bi bi-chat-dots"></i> Live Chat
                     </a>
                 </div>
@@ -184,4 +184,4 @@
     </section>
 </div>
 
-<script src="<?= \App\View::asset('assets/js/pending-animations.js') ?>"></script>
+<script src="<?= \App\View::relAsset('assets/js/pending-animations.js') ?>"></script>

@@ -21,7 +21,7 @@ $advertisements = $advertisements ?? [];
                 $productSlug = $ad['product_slug'] ?? '';
                 ?>
                 <div class="ad-banner-slide <?= $index === 0 ? 'active' : '' ?>" data-slide="<?= $index ?>">
-                    <a href="<?= \App\View::url('/product/<?= \App\View::e($productSlug) ?>') ?>" class="ad-banner-link-modern">
+                    <a href="<?= \App\View::relUrl('/product/<?= \App\View::e($productSlug) ?>') ?>" class="ad-banner-link-modern">
                         <div class="ad-banner-content-modern">
                             <?php if (!empty($adImage)): ?>
                                 <?php if ($isVideo): ?>
@@ -32,10 +32,10 @@ $advertisements = $advertisements ?? [];
                                            autoplay
                                            onmouseover="this.play()"
                                            onmouseout="this.pause()">
-                                        <source src="<?= \App\View::image($adImage) ?>" type="video/<?= pathinfo($adImage, PATHINFO_EXTENSION) === 'mov' ? 'quicktime' : pathinfo($adImage, PATHINFO_EXTENSION) ?>">
+                                        <source src="<?= \App\View::relImage($adImage) ?>" type="video/<?= pathinfo($adImage, PATHINFO_EXTENSION) === 'mov' ? 'quicktime' : pathinfo($adImage, PATHINFO_EXTENSION) ?>">
                                     </video>
                                 <?php else: ?>
-                                    <img src="<?= \App\View::image($adImage) ?>" 
+                                    <img src="<?= \App\View::relImage($adImage) ?>" 
                                          class="ad-banner-media-modern" 
                                          alt="<?= \App\View::e($ad['title'] ?? $ad['product_name'] ?? 'Advertisement') ?>"
                                          loading="lazy">
