@@ -1,0 +1,44 @@
+# Set index file
+DirectoryIndex index.php
+
+# Route ALL requests to index.php
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    
+    # Set base path for localhost
+    # For server, use .htaccess.server file instead
+    RewriteBase /build_mate/
+    
+    # Allow assets (CSS, JS, images) to be served directly
+    RewriteCond %{REQUEST_FILENAME} -f
+    RewriteRule ^assets/ - [L]
+    
+    # Allow storage/uploads to be served directly (for uploaded images/files)
+    RewriteCond %{REQUEST_FILENAME} -f
+    RewriteRule ^storage/uploads/ - [L]
+    
+    # Allow storage/invoices to be served directly
+    RewriteCond %{REQUEST_FILENAME} -f
+    RewriteRule ^storage/invoices/ - [L]
+    
+    # If file exists, serve it
+    RewriteCond %{REQUEST_FILENAME} -f
+    RewriteRule ^ - [L]
+    
+    # If directory exists, serve it
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^ - [L]
+    
+    # Everything else goes to index.php
+    RewriteRule ^ index.php [L]
+</IfModule>
+
+# Prevent directory listing
+Options -Indexes
+
+# Security headers
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set X-XSS-Protection "1; mode=block"
+</IfModule>

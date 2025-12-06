@@ -1,0 +1,30 @@
+DEBUGGING CUSTOMER ORDER VIEW - 404 ERROR
+
+Current Status:
+✅ OrderController.php - Fixed (has type casting)
+✅ PaymentController.php - Fixed  
+✅ .htaccess - Correct
+✅ Admin order view - Works
+❌ Customer order view - 404
+
+Routes in routes.php:
+- /orders/{id} → OrderController::show() [AuthMiddleware]
+- /admin/orders/{id} → AdminOrderController::show() [AuthMiddleware, RoleMiddleware:admin]
+
+Possible Causes:
+1. Router not matching /orders/{id} pattern for customers
+2. AuthMiddleware redirecting before reaching controller
+3. Error in OrderController::show() causing 404 fallback
+4. View file missing (views/Order/show.php)
+
+Next Steps to Debug:
+1. Check if views/Order/show.php exists on server
+2. Check server error logs for actual error
+3. Test with error_reporting enabled
+4. Check if Router class is uploaded correctly
+
+Files to verify on server:
+- controllers/OrderController.php ✅ (confirmed fixed)
+- views/Order/show.php (?)
+- classes/Router.php (?)
+- .htaccess ✅ (confirmed correct)

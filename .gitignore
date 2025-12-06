@@ -1,0 +1,45 @@
+# Dependencies (install via composer on each environment)
+/vendor/
+composer.lock
+
+# Environment configuration (different per environment)
+.env
+.env.bak
+
+# Storage directories (user uploads, generated files)
+/storage/uploads/*
+/storage/invoices/*
+/storage/logs/*
+/storage/sessions/*
+!/storage/uploads/.gitkeep
+!/storage/invoices/.gitkeep
+!/storage/logs/.gitkeep
+!/storage/sessions/.gitkeep
+
+# Development and testing files
+/dev/
+fix_*.php
+fix_*.sh
+run_*.php
+check_*.php
+analyze_*.php
+mark_*.php
+quick_*.php
+create_*.php
+test_*.php
+debug_*.php
+*.log
+
+# System files
+.DS_Store
+.htaccess.local
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# IDE files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace

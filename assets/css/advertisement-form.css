@@ -1,0 +1,429 @@
+/* Modern Advertisement Form Styles */
+
+.ad-form-container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.ad-form-card {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    padding: 2.5rem;
+    margin-bottom: 2rem;
+}
+
+.ad-form-section {
+    margin-bottom: 2rem;
+}
+
+.ad-form-section:last-child {
+    margin-bottom: 0;
+}
+
+.ad-form-label {
+    display: block;
+    font-weight: 600;
+    color: #1F2937;
+    margin-bottom: 0.75rem;
+    font-size: 0.9375rem;
+}
+
+.ad-form-label .required {
+    color: #EF4444;
+    margin-left: 0.25rem;
+}
+
+.ad-form-input,
+.ad-form-select,
+.ad-form-textarea {
+    width: 100%;
+    padding: 0.875rem 1rem;
+    border: 2px solid #E5E7EB;
+    border-radius: 12px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: white;
+}
+
+.ad-form-input:focus,
+.ad-form-select:focus,
+.ad-form-textarea:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.ad-form-textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+/* File Upload Area */
+.ad-upload-area {
+    border: 2px dashed #D1D5DB;
+    border-radius: 12px;
+    padding: 2rem;
+    text-align: center;
+    background: #F9FAFB;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.ad-upload-area:hover {
+    border-color: #667eea;
+    background: #F3F4F6;
+}
+
+.ad-upload-area.dragover {
+    border-color: #667eea;
+    background: linear-gradient(135deg, #DBEAFE 0%, #BFDBFE 100%);
+    transform: scale(1.02);
+}
+
+.ad-upload-icon {
+    font-size: 3rem;
+    color: #9CA3AF;
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+}
+
+.ad-upload-area:hover .ad-upload-icon {
+    color: #667eea;
+    transform: scale(1.1);
+}
+
+.ad-upload-text {
+    color: #6B7280;
+    font-size: 0.9375rem;
+    margin-bottom: 0.5rem;
+}
+
+.ad-upload-hint {
+    color: #9CA3AF;
+    font-size: 0.8125rem;
+}
+
+.ad-file-input {
+    display: none;
+}
+
+/* Preview Area */
+.ad-preview-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.ad-preview-item {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    background: #F9FAFB;
+}
+
+.ad-preview-item img,
+.ad-preview-item video {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+}
+
+.ad-preview-remove {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    background: rgba(239, 68, 68, 0.9);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 1.125rem;
+}
+
+.ad-preview-remove:hover {
+    background: #EF4444;
+    transform: scale(1.1);
+}
+
+.ad-preview-info {
+    padding: 0.75rem;
+    background: white;
+    font-size: 0.8125rem;
+    color: #6B7280;
+    word-break: break-all;
+}
+
+/* Form Actions */
+.ad-form-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid #E5E7EB;
+}
+
+.ad-btn {
+    padding: 0.875rem 2rem;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    border: none;
+    flex: 1;
+    justify-content: center;
+}
+
+.ad-btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.ad-btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.ad-btn-secondary {
+    background: #F3F4F6;
+    color: #1F2937;
+    border: 2px solid #E5E7EB;
+}
+
+.ad-btn-secondary:hover {
+    background: #E5E7EB;
+}
+
+/* Loading State */
+.ad-btn-loading {
+    opacity: 0.7;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.ad-btn-loading .ad-btn-spinner {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Payment Section Styles */
+.ad-payment-section {
+    max-width: 900px;
+    margin: 0 auto 2rem;
+}
+
+.ad-payment-card {
+    background: linear-gradient(135deg, #8B4513 0%, #A0522D 50%, #CD853F 100%);
+    border-radius: 24px;
+    box-shadow: 0 20px 60px rgba(139, 69, 19, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+    padding: 3.5rem 2.5rem;
+    text-align: center;
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.ad-payment-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+    animation: shimmer 3s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    50% { transform: translate(-10%, -10%) rotate(180deg); }
+}
+
+.ad-payment-header {
+    margin-bottom: 2.5rem;
+    position: relative;
+    z-index: 1;
+}
+
+.ad-payment-header i {
+    font-size: 4rem;
+    margin-bottom: 1.5rem;
+    display: block;
+    color: #FFD700;
+    text-shadow: 0 4px 12px rgba(255, 215, 0, 0.4);
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+.ad-payment-header h3 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0;
+    color: white;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    letter-spacing: 0.5px;
+}
+
+.ad-payment-body {
+    margin-top: 2.5rem;
+    position: relative;
+    z-index: 1;
+}
+
+.ad-payment-amount {
+    font-size: 4rem;
+    font-weight: 800;
+    margin: 0 0 0.75rem;
+    color: #FFD700;
+    text-shadow: 0 4px 16px rgba(255, 215, 0, 0.5);
+    letter-spacing: -1px;
+    line-height: 1;
+}
+
+.ad-payment-amount::before {
+    content: '₵';
+    font-size: 2.5rem;
+    vertical-align: top;
+    margin-right: 0.25rem;
+}
+
+.ad-payment-description {
+    font-size: 1.125rem;
+    opacity: 0.95;
+    margin-bottom: 2.5rem;
+    color: rgba(255, 255, 255, 0.95);
+    font-weight: 500;
+    line-height: 2;
+}
+
+.ad-payment-description i {
+    color: #FFD700;
+    margin-right: 0.5rem;
+    font-size: 1rem;
+}
+
+.ad-payment-card .ad-btn-primary {
+    background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+    color: #8B4513;
+    font-weight: 700;
+    padding: 1.25rem 3.5rem;
+    font-size: 1.125rem;
+    min-width: 280px;
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(255, 215, 0, 0.4), 0 0 0 2px rgba(255, 255, 255, 0.2) inset;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    overflow: hidden;
+}
+
+.ad-payment-card .ad-btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s ease;
+}
+
+.ad-payment-card .ad-btn-primary:hover::before {
+    left: 100%;
+}
+
+.ad-payment-card .ad-btn-primary:hover {
+    background: linear-gradient(135deg, #FFA500 0%, #FFD700 100%);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 32px rgba(255, 215, 0, 0.5), 0 0 0 2px rgba(255, 255, 255, 0.3) inset;
+}
+
+.ad-payment-card .ad-btn-primary:active {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4);
+}
+
+.ad-payment-card .ad-btn-primary i {
+    margin-right: 0.75rem;
+    font-size: 1.25rem;
+}
+
+/* Product Select Styling */
+.ad-product-select-wrapper {
+    position: relative;
+}
+
+.ad-product-select-wrapper::after {
+    content: '▼';
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: #6B7280;
+    font-size: 0.75rem;
+}
+
+/* Character Counter */
+.ad-char-counter {
+    text-align: right;
+    font-size: 0.75rem;
+    color: #9CA3AF;
+    margin-top: 0.25rem;
+}
+
+.ad-char-counter.warning {
+    color: #F59E0B;
+}
+
+.ad-char-counter.error {
+    color: #EF4444;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .ad-form-card {
+        padding: 1.5rem;
+    }
+    
+    .ad-preview-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .ad-form-actions {
+        flex-direction: column;
+    }
+}
+
