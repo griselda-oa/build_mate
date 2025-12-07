@@ -1,0 +1,118 @@
+===============================================
+CRITICAL: UPLOAD THESE 7 FILES TO PRODUCTION
+===============================================
+
+Your production server: hc.cetplus.com
+Path: /home/xxxafmdz/hc.cetplus.com/build_mate/
+
+FILES TO UPLOAD (copy from local to production):
+------------------------------------------------
+
+1. controllers/OrderController.php
+   → Fixes: Order view (404 error), track delivery, confirm delivery
+   → Error: "404 when clicking View Details on orders"
+
+2. controllers/SupplierController.php
+   → Fixes: Supplier dashboard, products, orders
+   → Error: "Supplier dashboard crashes"
+
+3. controllers/ProductController.php
+   → Fixes: Product details page, reviews, wishlist
+   → Error: "Product page shows 404"
+
+4. controllers/PaymentController.php
+   → Fixes: Payment page, checkout redirect
+   → Error: "Checkout redirects to /orders instead of payment"
+
+5. classes/View.php
+   → Fixes: URL generation with APP_BASE_PATH
+   → Feature: Better production URL handling
+
+6. views/Home/dashboard.php
+   → Fixes: Order links in customer dashboard
+   → Error: "View Details button shows 404"
+
+7. views/Home/index-new.php
+   → Fixes: Sidebar navigation (Admin/Orders/Supplier links)
+   → Feature: Role-based menu items
+
+===============================================
+HOW TO UPLOAD (Choose ONE method):
+===============================================
+
+METHOD 1: FTP/SFTP (Recommended)
+---------------------------------
+1. Open FileZilla or your FTP client
+2. Connect to hc.cetplus.com
+3. Navigate to: /home/xxxafmdz/hc.cetplus.com/build_mate/
+4. Upload each file to its corresponding folder
+5. Overwrite existing files when prompted
+
+METHOD 2: cPanel File Manager
+------------------------------
+1. Login to cPanel
+2. Go to File Manager
+3. Navigate to: /home/xxxafmdz/hc.cetplus.com/build_mate/
+4. Upload each file (click Upload button)
+5. Confirm overwrite
+
+METHOD 3: Git (if repository exists)
+-------------------------------------
+# On local machine:
+cd /Applications/XAMPP/xamppfiles/htdocs/build_mate
+git add controllers/*.php classes/View.php views/Home/*.php
+git commit -m "Fix type casting errors for PHP 8"
+git push
+
+# On production server:
+cd /home/xxxafmdz/hc.cetplus.com/build_mate
+git pull
+
+===============================================
+VERIFICATION AFTER UPLOAD:
+===============================================
+
+Test these URLs to confirm fixes:
+1. https://hc.cetplus.com/build_mate/orders/2
+   → Should show order details (not 404)
+
+2. https://hc.cetplus.com/build_mate/checkout
+   → Fill form and submit
+   → Should redirect to payment page (not /orders)
+
+3. https://hc.cetplus.com/build_mate/product/any-slug
+   → Should show product page with reviews
+
+4. https://hc.cetplus.com/build_mate/supplier/dashboard
+   → Should load without errors
+
+5. https://hc.cetplus.com/build_mate/dashboard
+   → Click "View Details" on any order
+   → Should show order details (not 404)
+
+===============================================
+IMPORTANT NOTES:
+===============================================
+
+✓ All fixes are COMPLETE on your local machine
+✓ Files are ready at: /Applications/XAMPP/xamppfiles/htdocs/build_mate/
+✓ No database changes needed
+✓ No .env changes needed
+✗ Files NOT yet on production server - MUST UPLOAD!
+
+After uploading, clear browser cache and test.
+
+===============================================
+ROOT CAUSE OF ALL ERRORS:
+===============================================
+
+PHP 8 strict type checking + PDO returns string IDs
+= Type mismatch errors (int expected, string given)
+
+Solution: Cast all IDs to (int) inside methods
+
+Example fix:
+  Before: public function show(int $id)
+  After:  public function show($id) { $id = (int)$id; }
+
+===============================================

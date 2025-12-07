@@ -1,0 +1,236 @@
+/* Modern Horizontal Delivery Tracker */
+.delivery-tracker-modern {
+    margin-bottom: 2rem;
+}
+
+.delivery-tracker {
+    background: white;
+    border-radius: 16px;
+    padding: 2.5rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    margin-bottom: 0;
+}
+
+.delivery-tracker-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.delivery-tracker-header h3 {
+    margin: 0;
+    color: #8B4513;
+    font-size: 1.5rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.delivery-tracker-header h3 i {
+    font-size: 1.75rem;
+}
+
+.tracker-steps {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    position: relative;
+    padding: 1rem 0;
+}
+
+.tracker-steps::before {
+    content: '';
+    position: absolute;
+    top: 2.5rem;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: #e9ecef;
+    z-index: 0;
+}
+
+.tracker-step {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+    padding: 0 0.5rem;
+}
+
+/* Make steps clickable for suppliers/admins */
+.tracker-step.clickable {
+    cursor: pointer;
+}
+
+.tracker-step.clickable:hover .tracker-step-icon {
+    transform: scale(1.15);
+    box-shadow: 0 4px 20px rgba(139, 69, 19, 0.5);
+    border-color: #8B4513;
+}
+
+.tracker-step.clickable:hover .tracker-step-label {
+    color: #8B4513;
+    font-weight: 700;
+}
+
+.tracker-step.clickable:active .tracker-step-icon {
+    transform: scale(1.05);
+}
+
+/* Locked steps (can't be clicked) */
+.tracker-step.locked {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.tracker-step.completed.locked {
+    opacity: 1;
+    cursor: default;
+}
+
+.tracker-step-icon {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.75rem;
+    background: white;
+    border: 3px solid #e9ecef;
+    color: #9CA3AF;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    margin-bottom: 1rem;
+    position: relative;
+    z-index: 2;
+}
+
+.tracker-step.active .tracker-step-icon {
+    background: #8B4513;
+    border-color: #8B4513;
+    color: white;
+    transform: scale(1.1);
+    box-shadow: 0 4px 20px rgba(139, 69, 19, 0.4);
+}
+
+.tracker-step.completed .tracker-step-icon {
+    background: #10B981;
+    border-color: #10B981;
+    color: white;
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+}
+
+.tracker-step.pending .tracker-step-icon {
+    background: white;
+    border-color: #e9ecef;
+    color: #9CA3AF;
+    opacity: 0.6;
+}
+
+.tracker-step-label {
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-align: center;
+    margin-bottom: 0.5rem;
+    color: #333;
+    transition: color 0.3s ease;
+}
+
+.tracker-step.active .tracker-step-label {
+    color: #8B4513;
+    font-weight: 700;
+}
+
+.tracker-step.completed .tracker-step-label {
+    color: #10B981;
+}
+
+.tracker-step.pending .tracker-step-label {
+    color: #9CA3AF;
+    opacity: 0.6;
+}
+
+.tracker-step-time {
+    font-size: 0.85rem;
+    color: #666;
+    text-align: center;
+    min-height: 1.5rem;
+}
+
+.tracker-step.active .tracker-step-time {
+    color: #8B4513;
+    font-weight: 500;
+}
+
+.tracker-step.completed .tracker-step-time {
+    color: #10B981;
+}
+
+.tracker-step.pending .tracker-step-time {
+    color: #9CA3AF;
+    opacity: 0.5;
+}
+
+/* Progress line */
+.tracker-progress-line {
+    position: absolute;
+    top: 2.5rem;
+    left: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #10B981 0%, #8B4513 100%);
+    z-index: 1;
+    transition: width 0.6s ease;
+    border-radius: 2px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .delivery-tracker {
+        padding: 1.5rem;
+    }
+    
+    .tracker-steps {
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+    
+    .tracker-steps::before {
+        display: none;
+    }
+    
+    .tracker-progress-line {
+        display: none;
+    }
+    
+    .tracker-step {
+        flex: 0 0 calc(50% - 0.5rem);
+        margin-bottom: 1.5rem;
+    }
+    
+    .tracker-step-icon {
+        width: 3.5rem;
+        height: 3.5rem;
+        font-size: 1.5rem;
+    }
+    
+    .tracker-step-label {
+        font-size: 0.85rem;
+    }
+    
+    .tracker-step-time {
+        font-size: 0.75rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .tracker-step {
+        flex: 0 0 100%;
+    }
+}
+

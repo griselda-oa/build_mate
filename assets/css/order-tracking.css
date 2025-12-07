@@ -1,0 +1,422 @@
+/* Order Timeline Container */
+.order-timeline-container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.order-timeline-card {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    margin-bottom: 2rem;
+}
+
+.timeline-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.timeline-header h3 {
+    margin: 0;
+    color: #8B4513;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.timeline-steps {
+    position: relative;
+    padding-left: 2rem;
+}
+
+.timeline-steps::before {
+    content: '';
+    position: absolute;
+    left: 0.75rem;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: #e9ecef;
+    border-radius: 2px;
+}
+
+.timeline-step {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+    padding-bottom: 2.5rem;
+    padding-left: 1.5rem;
+}
+
+.timeline-step:last-child {
+    padding-bottom: 0;
+}
+
+.timeline-marker {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+    border: 4px solid white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 2;
+    background: white;
+}
+
+.timeline-step.timeline-completed .timeline-marker {
+    background: #10B981;
+    color: white;
+    border-color: #10B981;
+}
+
+.timeline-step.timeline-current .timeline-marker {
+    background: #8B4513;
+    color: white;
+    border-color: #8B4513;
+    animation: pulse 2s infinite;
+}
+
+.timeline-step.timeline-pending .timeline-marker {
+    background: #e9ecef;
+    color: #6c757d;
+    border-color: #e9ecef;
+    opacity: 0.5;
+}
+
+.timeline-content {
+    flex: 1;
+    padding-top: 0.25rem;
+}
+
+.timeline-content h4 {
+    margin: 0 0 0.5rem 0;
+    color: #333;
+    font-size: 1.1rem;
+}
+
+.timeline-step.timeline-completed .timeline-content h4 {
+    color: #10B981;
+}
+
+.timeline-step.timeline-current .timeline-content h4 {
+    color: #8B4513;
+    font-weight: 600;
+}
+
+.timeline-step.timeline-pending .timeline-content h4 {
+    color: #6c757d;
+    opacity: 0.6;
+}
+
+.timeline-time {
+    font-size: 0.9rem;
+    color: #666;
+    margin: 0.25rem 0 0.5rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.timeline-time.estimated {
+    color: #F59E0B;
+    font-style: italic;
+}
+
+.timeline-description {
+    margin: 0;
+    color: #666;
+    font-size: 0.95rem;
+}
+
+.timeline-step.timeline-pending .timeline-description {
+    opacity: 0.6;
+}
+
+.order-actions-card {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.btn-modern {
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-primary-modern {
+    background: #8B4513;
+    color: white;
+}
+
+.btn-primary-modern:hover {
+    background: #6B3410;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(139, 69, 19, 0.3);
+}
+
+.btn-secondary-modern {
+    background: #f0f0f0;
+    color: #333;
+}
+
+.btn-secondary-modern:hover {
+    background: #e0e0e0;
+    transform: translateY(-2px);
+}
+
+.status-badge-modern {
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.status-badge-modern.status-pending {
+    background: #F59E0B;
+    color: white;
+}
+
+.status-badge-modern.status-payment_confirmed {
+    background: #3B82F6;
+    color: white;
+}
+
+.status-badge-modern.status-processing {
+    background: #3B82F6;
+    color: white;
+}
+
+.status-badge-modern.status-shipped {
+    background: #8B5CF6;
+    color: white;
+}
+
+.status-badge-modern.status-out_for_delivery {
+    background: #3B82F6;
+    color: white;
+}
+
+.status-badge-modern.status-delivered {
+    background: #10B981;
+    color: white;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 2px 8px rgba(139, 69, 19, 0.3);
+    }
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 4px 16px rgba(139, 69, 19, 0.5);
+    }
+}
+
+/* Order Tracking Timeline Styles */
+
+.order-tracking-timeline {
+    position: relative;
+    padding: 2rem 0;
+}
+
+.order-tracking-timeline::before {
+    content: '';
+    position: absolute;
+    left: 1.5rem;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: #e9ecef;
+    border-radius: 2px;
+    z-index: 0;
+}
+
+.timeline-stage {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+    padding-bottom: 2.5rem;
+    z-index: 1;
+}
+
+.timeline-stage:last-child {
+    padding-bottom: 0;
+}
+
+.timeline-stage-icon {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+    border: 4px solid white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 2;
+}
+
+/* Completed Stage */
+.timeline-stage.completed .timeline-stage-icon {
+    background: #10B981;
+    color: white;
+    border-color: white;
+}
+
+.timeline-stage.completed {
+    opacity: 1;
+}
+
+/* Current Stage */
+.timeline-stage.current .timeline-stage-icon {
+    background: #8B4513;
+    color: white;
+    border-color: white;
+    transform: scale(1.15);
+    box-shadow: 0 4px 15px rgba(139, 69, 19, 0.4);
+    animation: pulse-current 2s infinite;
+}
+
+.timeline-stage.current {
+    opacity: 1;
+    transform: scale(1.02);
+}
+
+@keyframes pulse-current {
+    0%, 100% {
+        box-shadow: 0 4px 15px rgba(139, 69, 19, 0.4);
+    }
+    50% {
+        box-shadow: 0 4px 25px rgba(139, 69, 19, 0.6);
+    }
+}
+
+/* Pending Stage */
+.timeline-stage.pending .timeline-stage-icon {
+    background: #e9ecef;
+    color: #9CA3AF;
+    border-color: white;
+}
+
+.timeline-stage.pending {
+    opacity: 0.5;
+}
+
+.timeline-stage-content {
+    flex: 1;
+    padding-top: 0.5rem;
+}
+
+.timeline-stage-title {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #2c3e50;
+}
+
+.timeline-stage.completed .timeline-stage-title {
+    color: #10B981;
+}
+
+.timeline-stage.current .timeline-stage-title {
+    color: #8B4513;
+    font-size: 1.15rem;
+}
+
+.timeline-stage.pending .timeline-stage-title {
+    color: #9CA3AF;
+}
+
+.timeline-stage-desc {
+    margin: 0 0 0.75rem 0;
+    font-size: 0.9rem;
+    color: #6c757d;
+}
+
+.timeline-stage-time {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: #6c757d;
+    font-weight: 500;
+}
+
+.timeline-stage.completed .timeline-stage-time {
+    color: #10B981;
+}
+
+.timeline-stage.current .timeline-stage-time {
+    color: #8B4513;
+    font-weight: 600;
+}
+
+.timeline-stage-time.estimated {
+    color: #F59E0B;
+}
+
+.timeline-placeholder {
+    text-align: center;
+    padding: 3rem 2rem;
+    color: #6c757d;
+}
+
+.timeline-placeholder i {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    opacity: 0.5;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .order-tracking-timeline {
+        padding-left: 0;
+    }
+    
+    .order-tracking-timeline::before {
+        left: 1.25rem;
+    }
+    
+    .timeline-stage-icon {
+        width: 2.5rem;
+        height: 2.5rem;
+        font-size: 1.25rem;
+    }
+    
+    .timeline-stage {
+        gap: 1rem;
+    }
+    
+    .timeline-stage-content {
+        padding-top: 0.25rem;
+    }
+}
+
